@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Sid;
+namespace Icecave\Siphon;
 
 use Eloquent\Phony\Phpunit\Phony;
 use GuzzleHttp\ClientInterface;

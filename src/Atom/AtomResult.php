@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Sid\Atom;
+namespace Icecave\Siphon\Atom;
 
 use Countable;
 use Icecave\Chrono\DateTime;

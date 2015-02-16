@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Sid\Atom;
+namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
 use PHPUnit_Framework_TestCase;

@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Sid\Schedule;
+namespace Icecave\Siphon\Schedule;
 
 class Schedule
 {

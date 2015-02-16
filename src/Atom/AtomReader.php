@@ -1,8 +1,8 @@
 <?php
-namespace Icecave\Sid\Atom;
+namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
-use Icecave\Sid\XmlReaderInterface;
+use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
 class AtomReader implements AtomReaderInterface

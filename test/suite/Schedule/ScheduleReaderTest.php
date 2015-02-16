@@ -1,10 +1,10 @@
 <?php
-namespace Icecave\Sid\Schedule;
+namespace Icecave\Siphon\Schedule;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
-use Icecave\Sid\XmlReaderInterface;
+use Icecave\Siphon\XmlReaderInterface;
 use PHPUnit_Framework_TestCase;
 
 class ScheduleReaderTest extends PHPUnit_Framework_TestCase

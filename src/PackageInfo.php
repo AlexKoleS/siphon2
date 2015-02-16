@@ -1,8 +1,8 @@
 <?php
-namespace Icecave\Sid;
+namespace Icecave\Siphon;
 
 class PackageInfo
 {
-    const NAME    = 'Sid';
+    const NAME    = 'Siphon';
     const VERSION = '0.0.0';
 }

@@ -1,9 +1,9 @@
 <?php
-namespace Icecave\Sid\Schedule;
+namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
-use Icecave\Sid\XmlReaderInterface;
+use Icecave\Siphon\XmlReaderInterface;
 use SimpleXMLElement;
 
 class ScheduleReader implements ScheduleReaderInterface

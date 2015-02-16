@@ -1,5 +1,5 @@
 {
-    "name": "icecave/sid",
+    "name": "icecave/siphon",
     "description": "A client for SDI XML feeds.",
     "keywords": [
         "sports",
@@ -8,7 +8,7 @@
         "feed",
         "sdi"
     ],
-    "homepage": "https://github.com/IcecaveStudios/sid",
+    "homepage": "https://github.com/IcecaveStudios/siphon",
     "license": "MIT",
     "authors": [
         {
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Icecave\\Sid\\": "src"
+            "Icecave\\Siphon\\": "src"
         }
     },
     "extra": {
