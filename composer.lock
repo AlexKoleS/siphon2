@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "afe6eacfaec82fd80781bbde35c1d26e",
+    "hash": "0be574e0b188ad4a1ede9dcae0fa8fba",
     "packages": [
         {
             "name": "eloquent/enumeration",
@@ -215,16 +215,16 @@
         },
         {
             "name": "icecave/chrono",
-            "version": "1.0.2",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IcecaveStudios/chrono.git",
-                "reference": "8a1ecb00af41ef3dfe3de1c62859f01dd8309be9"
+                "reference": "c9a42cf591657b7920729ec379165c863f2dccd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IcecaveStudios/chrono/zipball/8a1ecb00af41ef3dfe3de1c62859f01dd8309be9",
-                "reference": "8a1ecb00af41ef3dfe3de1c62859f01dd8309be9",
+                "url": "https://api.github.com/repos/IcecaveStudios/chrono/zipball/c9a42cf591657b7920729ec379165c863f2dccd1",
+                "reference": "c9a42cf591657b7920729ec379165c863f2dccd1",
                 "shasum": ""
             },
             "require": {
@@ -273,7 +273,7 @@
                 "time",
                 "timer"
             ],
-            "time": "2014-11-10 07:56:04"
+            "time": "2015-02-16 03:21:30"
         },
         {
             "name": "icecave/isolator",
@@ -1789,7 +1789,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "icecave/chrono": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
