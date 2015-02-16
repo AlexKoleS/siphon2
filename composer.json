@@ -21,7 +21,7 @@
         "php": ">=5.5",
         "eloquent/enumeration": "~5",
         "guzzlehttp/guzzle": "~5",
-        "icecave/chrono": "~1@dev"
+        "icecave/chrono": "~1.0.3"
     },
     "require-dev": {
         "eloquent/phony": "~0.2.0",
