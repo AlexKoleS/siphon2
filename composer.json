@@ -1,0 +1,40 @@
+{
+    "name": "icecave/sid",
+    "description": "A client for SDI XML feeds.",
+    "keywords": [
+        "sports",
+        "direct",
+        "xml",
+        "feed",
+        "sdi"
+    ],
+    "homepage": "https://github.com/IcecaveStudios/sid",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Harris",
+            "email": "james.harris@icecave.com.au",
+            "homepage": "https://github.com/jmalloc"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "eloquent/enumeration": "~5",
+        "guzzlehttp/guzzle": "~5",
+        "icecave/chrono": "~1"
+    },
+    "require-dev": {
+        "eloquent/phony": "~0.2.0",
+        "icecave/archer": "~1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Icecave\\Sid\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.1.x-dev"
+        }
+    }
+}
