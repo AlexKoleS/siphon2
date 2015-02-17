@@ -5,6 +5,9 @@ use Icecave\Chrono\DateTime;
 use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
+/**
+ * Client for reading atom feeds.
+ */
 class AtomReader implements AtomReaderInterface
 {
     public function __construct(XmlReaderInterface $xmlReader)
@@ -29,7 +32,7 @@ class AtomReader implements AtomReaderInterface
         $order = SORT_ASC
     ) {
         $xml = $this->xmlReader->read(
-            'Atom',
+            '/Atom',
             $this->buildParameters(
                 $threshold,
                 $feed,

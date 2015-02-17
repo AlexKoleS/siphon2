@@ -3,6 +3,9 @@ namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
 
+/**
+ * Client for reading atom feeds.
+ */
 interface AtomReaderInterface
 {
     /**

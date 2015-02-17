@@ -37,7 +37,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             ->xmlReader
             ->read
             ->calledWith(
-                'Atom',
+                '/Atom',
                 [
                     'newerThan' => '1970-01-01T00:00:00+00:00',
                     'maxCount'  => 5000,
@@ -80,7 +80,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             ->xmlReader
             ->read
             ->calledWith(
-                'Atom',
+                '/Atom',
                 [
                     'newerThan' => '1970-01-01T00:00:00+00:00',
                     'maxCount'  => 5000,
@@ -117,7 +117,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             ->xmlReader
             ->read
             ->calledWith(
-                'Atom',
+                '/Atom',
                 [
                     'newerThan' => '1970-01-01T00:00:00+00:00',
                     'maxCount'  => 1,
@@ -139,7 +139,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             ->xmlReader
             ->read
             ->calledWith(
-                'Atom',
+                '/Atom',
                 [
                     'newerThan' => '1970-01-01T00:00:00+00:00',
                     'maxCount'  => 1,
