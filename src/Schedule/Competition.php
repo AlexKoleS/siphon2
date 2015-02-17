@@ -3,8 +3,18 @@ namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\DateTime;
 
+/**
+ * A sports competition (ie, "event" / "game" / "match" / etc).
+ */
 class Competition
 {
+    /**
+     * @param string $id The competition ID.
+     * @param CompetitionStatus $status The status of the competition.
+     * @param DateTime $startTime The time at which the competition begins.
+     * @param string $homeTeamId The ID of the home team.
+     * @param string $awayTeamId The ID of the away team.
+     */
     public function __construct(
         $id,
         CompetitionStatus $status,
