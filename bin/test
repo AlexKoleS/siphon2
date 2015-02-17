@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+error_reporting(-1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$urlBuilder = new Icecave\Siphon\UrlBuilder($_SERVER['argv'][1]);
+$httpClient = new GuzzleHttp\Client;
+$xmlReader  = new Icecave\Siphon\XmlReader($urlBuilder, $httpClient);
+$atomReader = new Icecave\Siphon\Atom\AtomReader($xmlReader);
+$clock      = new Icecave\Chrono\Clock\SystemClock;
+
+$result = $atomReader->read(
+    $clock->localDateTime()->subtract(100),
+    '/livescores'
+);
+
+var_dump($result);
+
