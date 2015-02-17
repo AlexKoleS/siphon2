@@ -15,6 +15,8 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
             '<id>',
             CompetitionStatus::IN_PROGRESS(),
             $this->startTime,
+            '<sport>',
+            '<league>',
             '<home>',
             '<away>'
         );
@@ -41,6 +43,22 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $this->startTime,
             $this->competition->startTime()
+        );
+    }
+
+    public function testSport()
+    {
+        $this->assertSame(
+            '<sport>',
+            $this->competition->sport()
+        );
+    }
+
+    public function testLeague()
+    {
+        $this->assertSame(
+            '<league>',
+            $this->competition->league()
         );
     }
 

@@ -52,6 +52,8 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
                 '/sport/baseball/competition:294647',
                 CompetitionStatus::SCHEDULED(),
                 DateTime::fromIsoString('2010-04-27T20:40:00-04:00'),
+                'baseball',
+                'MLB',
                 '/sport/baseball/team:2956',
                 '/sport/baseball/team:2968'
             )
@@ -62,6 +64,8 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
                 '/sport/baseball/competition:293835',
                 CompetitionStatus::SCHEDULED(),
                 DateTime::fromIsoString('2010-04-27T22:05:00-04:00'),
+                'baseball',
+                'MLB',
                 '/sport/baseball/team:2979',
                 '/sport/baseball/team:2980'
             )
@@ -72,6 +76,8 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
                 '/sport/baseball/competition:295678',
                 CompetitionStatus::SCHEDULED(),
                 DateTime::fromIsoString('2010-04-27T22:15:00-04:00'),
+                'baseball',
+                'MLB',
                 '/sport/baseball/team:2962',
                 '/sport/baseball/team:2958'
             )

@@ -6,6 +6,9 @@ use Icecave\Chrono\DateTime;
 use Icecave\Siphon\XmlReaderInterface;
 use SimpleXMLElement;
 
+/**
+ * Client for reading schedule feeds.
+ */
 class ScheduleReader implements ScheduleReaderInterface
 {
     public function __construct(XmlReaderInterface $xmlReader)
@@ -13,18 +16,32 @@ class ScheduleReader implements ScheduleReaderInterface
         $this->xmlReader = $xmlReader;
     }
 
+    /**
+     * Read a schedule feed.
+     *
+     * @param string $sport The sport (eg, baseball, football, etc)
+     * @param string $league The league (eg, MLB, NFL, etc)
+     *
+     * @return Schedule
+     */
     public function read($sport, $league)
     {
+        $sport  = strtolower($sport);
+        $league = strtoupper($league);
+
         $xml = $this
             ->xmlReader
             ->read(
                 sprintf(
                     '/sport/v2/%s/%s/schedule/schedule_%s.xml',
-                    strtolower($sport),
-                    strtoupper($league),
-                    strtoupper($league)
+                    $sport,
+                    $league,
+                    $league
                 )
-            )->xpath('team-sport-content/league-content/season-content');
+            )
+            ->{'team-sport-content'}
+            ->{'league-content'}
+            ->{'season-content'};
 
         $schedule = new Schedule;
 
@@ -34,7 +51,11 @@ class ScheduleReader implements ScheduleReaderInterface
 
             foreach ($element->competition as $competitionElement) {
                 $season->add(
-                    $this->createCompetition($competitionElement)
+                    $this->createCompetition(
+                        $sport,
+                        $league,
+                        $competitionElement
+                    )
                 );
             }
         }
@@ -60,8 +81,11 @@ class ScheduleReader implements ScheduleReaderInterface
         );
     }
 
-    private function createCompetition(SimpleXMLElement $element)
-    {
+    private function createCompetition(
+        $sport,
+        $league,
+        SimpleXMLElement $element
+    ) {
         $status = CompetitionStatus::memberByValue(
             strval($element->{'result-scope'}->{'competition-status'})
         );
@@ -74,6 +98,8 @@ class ScheduleReader implements ScheduleReaderInterface
             strval($element->id),
             $status,
             $startTime,
+            $sport,
+            $league,
             strval($element->{'home-team-content'}->{'team'}->{'id'}),
             strval($element->{'away-team-content'}->{'team'}->{'id'})
         );

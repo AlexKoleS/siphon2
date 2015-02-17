@@ -12,6 +12,8 @@ class Competition
      * @param string $id The competition ID.
      * @param CompetitionStatus $status The status of the competition.
      * @param DateTime $startTime The time at which the competition begins.
+     * @param string $sport The sport (eg, baseball, football, etc).
+     * @param string $league The league (eg, MLB, NFL, etc).
      * @param string $homeTeamId The ID of the home team.
      * @param string $awayTeamId The ID of the away team.
      */
@@ -19,12 +21,16 @@ class Competition
         $id,
         CompetitionStatus $status,
         DateTime $startTime,
+        $sport,
+        $league,
         $homeTeamId,
         $awayTeamId
     ) {
         $this->id         = $id;
         $this->status     = $status;
         $this->startTime  = $startTime;
+        $this->sport      = $sport;
+        $this->league     = $league;
         $this->homeTeamId = $homeTeamId;
         $this->awayTeamId = $awayTeamId;
     }
@@ -60,6 +66,26 @@ class Competition
     }
 
     /**
+     * Get the sport.
+     *
+     * @return string The sport (eg, baseball, football, etc).
+     */
+    public function sport()
+    {
+        return $this->sport;
+    }
+
+    /**
+     * Get the league.
+     *
+     * @return string The league (eg, MLB, NFL, etc).
+     */
+    public function league()
+    {
+        return $this->league;
+    }
+
+    /**
      * Get the ID of the home team.
      *
      * @return string The home team ID.
@@ -82,6 +108,8 @@ class Competition
     private $id;
     private $status;
     private $startTime;
+    private $sport;
+    private $league;
     private $homeTeamId;
     private $awayTeamId;
 }
