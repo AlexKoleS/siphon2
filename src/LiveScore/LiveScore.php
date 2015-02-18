@@ -1,14 +1,14 @@
 <?php
 namespace Icecave\Siphon\LiveScore;
 
-use Icecave\Chrono\TimeSpan\TimeSpanInterface;
+use Icecave\Chrono\TimeSpan\Duration;
 
 class LiveScore
 {
     /**
-     * @param TimeSpanInterface $gameClock The game clock.
+     * @param Duration|null $gameClock The game clock.
      */
-    public function __construct(TimeSpanInterface $gameClock)
+    public function __construct(Duration $gameClock = null)
     {
         $this->gameClock = $gameClock;
         $this->scopes    = [];
@@ -17,7 +17,7 @@ class LiveScore
     /**
      * Get the current game clock time.
      *
-     * @return TimeSpanInterface
+     * @return Duration|null The current game clock, or null if the game does not use a clock.
      */
     public function gameClock()
     {

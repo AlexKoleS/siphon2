@@ -2,14 +2,14 @@
 namespace Icecave\Siphon\LiveScore;
 
 use Eloquent\Phony\Phpunit\Phony;
-use Icecave\Chrono\TimeSpan\TimeSpanInterface;
+use Icecave\Chrono\TimeSpan\Duration;
 use PHPUnit_Framework_TestCase;
 
 class LiveScoreTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->gameClock = Phony::mock(TimeSpanInterface::class);
+        $this->gameClock = Phony::fullMock(Duration::class);
         $this->scope1    = Phony::fullMock(Scope::class);
         $this->scope2    = Phony::fullMock(Scope::class);
 
@@ -22,6 +22,15 @@ class LiveScoreTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->gameClock->mock(),
+            $this->liveScore->gameClock()
+        );
+    }
+
+    public function testGameClockNull()
+    {
+        $this->liveScore = new LiveScore;
+
+        $this->assertNull(
             $this->liveScore->gameClock()
         );
     }
