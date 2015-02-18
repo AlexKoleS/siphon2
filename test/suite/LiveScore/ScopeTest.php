@@ -8,7 +8,7 @@ class ScopeTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->scope = new Scope(
-            ScopeType::INNINGS(),
+            ScopeType::SHOOTOUT(),
             ScopeStatus::COMPLETE(),
             10,
             20
@@ -18,7 +18,7 @@ class ScopeTest extends PHPUnit_Framework_TestCase
     public function testType()
     {
         $this->assertSame(
-            ScopeType::INNINGS(),
+            ScopeType::SHOOTOUT(),
             $this->scope->type()
         );
     }
