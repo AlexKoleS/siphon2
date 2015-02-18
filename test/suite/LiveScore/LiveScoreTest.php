@@ -5,7 +5,7 @@ use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\TimeSpan\TimeSpanInterface;
 use PHPUnit_Framework_TestCase;
 
-class ScopeTest extends PHPUnit_Framework_TestCase
+class LiveScoreTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

@@ -3,6 +3,18 @@ namespace Icecave\Siphon\LiveScore;
 
 class Scope
 {
+    public function __construct(
+        ScopeType $type,
+        ScopeStatus $status,
+        $homePoints,
+        $awayPoints
+    ) {
+        $this->type       = $type;
+        $this->status     = $status;
+        $this->homePoints = $homePoints;
+        $this->awayPoints = $awayPoints;
+    }
+
     /**
      * Get the type of the scope.
      *
@@ -28,9 +40,9 @@ class Scope
      *
      * @param integer The home team's points.
      */
-    public function home()
+    public function homePoints()
     {
-        return $this->home;
+        return $this->homePoints;
     }
 
     /**
@@ -38,8 +50,13 @@ class Scope
      *
      * @param integer The away team's points.
      */
-    public function away()
+    public function awayPoints()
     {
-        return $this->away;
+        return $this->awayPoints;
     }
+
+    private $type;
+    private $status;
+    private $homePoints;
+    private $awayPoints;
 }
