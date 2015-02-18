@@ -9,7 +9,7 @@ interface ScheduleReaderInterface
     /**
      * Read a schedule feed.
      *
-     * @param string $sport The sport (eg, baseball, football, etc)
+     * @param string $sport  The sport (eg, baseball, football, etc)
      * @param string $league The league (eg, MLB, NFL, etc)
      *
      * @return Schedule

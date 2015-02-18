@@ -4,7 +4,7 @@ namespace Icecave\Siphon\LiveScore;
 /**
  * Client for reading live score feeds.
  */
-class LiveScore implements LiveScoreReaderInterface
+class LiveScoreReader implements LiveScoreReaderInterface
 {
     /**
      * Read a live score feed for a competition.
@@ -30,7 +30,6 @@ class LiveScore implements LiveScoreReaderInterface
             ->{'team-sport-content'}
             ->{'league-content'}
             ->{'competition'};
-
 
             // scope (period)
             // scope status

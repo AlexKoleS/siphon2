@@ -9,13 +9,13 @@ use Icecave\Chrono\DateTime;
 class Competition
 {
     /**
-     * @param string $id The competition ID.
-     * @param CompetitionStatus $status The status of the competition.
-     * @param DateTime $startTime The time at which the competition begins.
-     * @param string $sport The sport (eg, baseball, football, etc).
-     * @param string $league The league (eg, MLB, NFL, etc).
-     * @param string $homeTeamId The ID of the home team.
-     * @param string $awayTeamId The ID of the away team.
+     * @param string            $id         The competition ID.
+     * @param CompetitionStatus $status     The status of the competition.
+     * @param DateTime          $startTime  The time at which the competition begins.
+     * @param string            $sport      The sport (eg, baseball, football, etc).
+     * @param string            $league     The league (eg, MLB, NFL, etc).
+     * @param string            $homeTeamId The ID of the home team.
+     * @param string            $awayTeamId The ID of the away team.
      */
     public function __construct(
         $id,

@@ -9,10 +9,10 @@ use Icecave\Chrono\Date;
 class Season
 {
     /**
-     * @param string $id The season ID.
-     * @param string $name The season name.
-     * @param Date $startDate The start date of the season.
-     * @param Date $endDate The end date of the season.
+     * @param string $id        The season ID.
+     * @param string $name      The season name.
+     * @param Date   $startDate The start date of the season.
+     * @param Date   $endDate   The end date of the season.
      */
     public function __construct(
         $id,

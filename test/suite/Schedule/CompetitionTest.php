@@ -1,7 +1,6 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
 use PHPUnit_Framework_TestCase;
 
