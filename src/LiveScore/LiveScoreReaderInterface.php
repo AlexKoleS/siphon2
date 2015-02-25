@@ -1,6 +1,8 @@
 <?php
 namespace Icecave\Siphon\LiveScore;
 
+use Icecave\Siphon\Schedule\Competition;
+
 /**
  * Client for reading live score feeds.
  */
@@ -11,7 +13,7 @@ interface LiveScoreReaderInterface
      *
      * @param Competition $competition The competition.
      *
-     * @return LiveScoreResult
+     * @return LiveScoreInterface
      */
     public function read(Competition $competition);
 }
