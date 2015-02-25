@@ -1,6 +1,8 @@
 <?php
 namespace Icecave\Siphon\Team;
 
+use Icecave\Siphon\XmlReaderInterface;
+
 /**
  * Client for reading team feeds.
  */
@@ -36,9 +38,20 @@ class TeamReader implements TeamReaderInterface
                     $league
                 )
             )
-            ->{'team-sport-content'}
-            ->{'league-content'}
-            ->{'season-content'};
+            ->xpath('//team');
+
+        $teams = [];
+
+        foreach ($xml as $team) {
+            $teams[] = new Team(
+                strval($team->id),
+                strval($team->xpath("name[@type='first']")[0]),
+                strval($team->xpath("name[@type='nick']")[0]),
+                strval($team->xpath("name[@type='short']")[0])
+            );
+        }
+
+        return $teams;
     }
 
     private $xmlReader;

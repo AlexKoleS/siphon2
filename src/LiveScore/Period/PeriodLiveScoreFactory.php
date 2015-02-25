@@ -72,11 +72,7 @@ class PeriodLiveScoreFactory implements LiveScoreFactoryInterface
             $result->add($scope);
         }
 
-        $resultScope = $xml
-            ->{'team-sport-content'}
-            ->{'league-content'}
-            ->{'competition'}
-            ->{'result-scope'};
+        $resultScope = $xml->xpath('//result-scope')[0];
 
         if ($scope) {
             $status = ScopeStatus::memberByValue(

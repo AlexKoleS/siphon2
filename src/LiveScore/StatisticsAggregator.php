@@ -8,11 +8,6 @@ class StatisticsAggregator implements StatisticsAggregatorInterface
 {
     public function extract(SimpleXMLElement $xml)
     {
-        $xml = $xml
-            ->{'team-sport-content'}
-            ->{'league-content'}
-            ->{'competition'};
-
         $result   = [];
         $defaults = [];
 
@@ -21,7 +16,7 @@ class StatisticsAggregator implements StatisticsAggregatorInterface
             $defaults,
             'home',
             $this->map(
-                $xml->{'home-team-content'}->{'stat-group'}
+                $xml->xpath('//home-team-content/stat-group')
             )
         );
 
@@ -30,7 +25,7 @@ class StatisticsAggregator implements StatisticsAggregatorInterface
             $defaults,
             'away',
             $this->map(
-                $xml->{'away-team-content'}->{'stat-group'}
+                $xml->xpath('//away-team-content/stat-group')
             )
         );
 
@@ -84,7 +79,7 @@ class StatisticsAggregator implements StatisticsAggregatorInterface
         }
     }
 
-    private function map(SimpleXMLElement $groups)
+    private function map($groups)
     {
         $ordering = [
             'inning'   => 1 << 8,

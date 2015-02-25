@@ -66,11 +66,7 @@ class InningsLiveScoreFactory implements LiveScoreFactoryInterface
         }
 
         if ($scope) {
-            $resultScope = $xml
-                ->{'team-sport-content'}
-                ->{'league-content'}
-                ->{'competition'}
-                ->{'result-scope'};
+            $resultScope = $xml->xpath('//result-scope')[0];
 
             $status = ScopeStatus::memberByValue(
                 strval($resultScope->{'scope-status'})

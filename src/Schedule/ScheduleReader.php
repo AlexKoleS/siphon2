@@ -39,9 +39,7 @@ class ScheduleReader implements ScheduleReaderInterface
                     $league
                 )
             )
-            ->{'team-sport-content'}
-            ->{'league-content'}
-            ->{'season-content'};
+            ->xpath('//season-content');
 
         $schedule = new Schedule;
 
@@ -66,11 +64,11 @@ class ScheduleReader implements ScheduleReaderInterface
     private function createSeason(SimpleXMLElement $element)
     {
         $startDate = Date::fromIsoString(
-            $element->{'details'}->{'start-date'}
+            $element->details->{'start-date'}
         );
 
         $endDate = Date::fromIsoString(
-            $element->{'details'}->{'end-date'}
+            $element->details->{'end-date'}
         );
 
         return new Season(
