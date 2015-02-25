@@ -1,29 +1,21 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\XmlReaderInterface;
+use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
 class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 {
+    use XmlReaderTestTrait;
+
     public function setUp()
     {
-        $this->xmlReader = Phony::mock(XmlReaderInterface::class);
-
-        $this
-            ->xmlReader
-            ->read
-            ->returns(
-                simplexml_load_string(
-                    file_get_contents(__DIR__ . '/../../fixture/Schedule/schedule.xml')
-                )
-            );
+        $this->setUpXmlReader('Schedule/schedule.xml');
 
         $this->reader = new ScheduleReader(
-            $this->xmlReader->mock()
+            $this->xmlReader()->mock()
         );
     }
 

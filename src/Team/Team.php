@@ -12,9 +12,9 @@ class Team
         $nickname,
         $abbreviation
     ) {
-        $this->id        = $id;
-        $this->name      = $name;
-        $this->nickname  = $nickname;
+        $this->id           = $id;
+        $this->name         = $name;
+        $this->nickname     = $nickname;
         $this->abbreviation = $abbreviation;
     }
 

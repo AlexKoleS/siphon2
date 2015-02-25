@@ -1,29 +1,22 @@
 <?php
 namespace Icecave\Siphon\Atom;
 
-use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\XmlReaderInterface;
+use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
 class AtomReaderTest extends PHPUnit_Framework_TestCase
 {
+    use XmlReaderTestTrait;
+
     public function setUp()
     {
-        $this->threshold = DateTime::fromUnixTime(0);
-        $this->xmlReader = Phony::mock(XmlReaderInterface::class);
+        $this->setUpXmlReader('Atom/atom.xml');
 
-        $this
-            ->xmlReader
-            ->read
-            ->returns(
-                simplexml_load_string(
-                    file_get_contents(__DIR__ . '/../../fixture/Atom/atom.xml')
-                )
-            );
+        $this->threshold = DateTime::fromUnixTime(0);
 
         $this->reader = new AtomReader(
-            $this->xmlReader->mock()
+            $this->xmlReader()->mock()
         );
     }
 
