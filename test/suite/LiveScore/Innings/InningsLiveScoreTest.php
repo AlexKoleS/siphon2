@@ -1,105 +1,74 @@
 <?php
-// namespace Icecave\Siphon\LiveScore;
+namespace Icecave\Siphon\LiveScore\Innings;
 
-// use Eloquent\Phony\Phpunit\Phony;
-// use Icecave\Chrono\TimeSpan\Duration;
-// use PHPUnit_Framework_TestCase;
+use PHPUnit_Framework_TestCase;
 
-// class LiveScoreTest extends PHPUnit_Framework_TestCase
-// {
-//     public function setUp()
-//     {
-//         $this->markTestSkipped();
+class InningsLiveScoreTest extends PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
+        $this->scope1 = new Innings(1,  2,  3,  4,  5,  6);
+        $this->scope2 = new Innings(10, 20, 30, 40, 50, 60);
 
-//         $this->gameClock = Phony::fullMock(Duration::class);
-//         $this->scope1    = Phony::fullMock(Scope::class);
-//         $this->scope2    = Phony::fullMock(Scope::class);
+        $this->liveScore = new InningsLiveScore;
 
-//         $this->liveScore = new LiveScore(
-//             $this->gameClock->mock()
-//         );
-//     }
+        $this->liveScore->add($this->scope1);
+        $this->liveScore->add($this->scope2);
+    }
 
-//     public function testGameClock()
-//     {
-//         $this->assertSame(
-//             $this->gameClock->mock(),
-//             $this->liveScore->gameClock()
-//         );
-//     }
+    public function testHomeTeamHits()
+    {
+        $this->assertSame(
+            33,
+            $this->liveScore->homeTeamHits()
+        );
+    }
 
-//     public function testGameClockNull()
-//     {
-//         $this->liveScore = new LiveScore;
+    public function testAwayTeamHits()
+    {
+        $this->assertSame(
+            44,
+            $this->liveScore->awayTeamHits()
+        );
+    }
 
-//         $this->assertNull(
-//             $this->liveScore->gameClock()
-//         );
-//     }
+    public function testHomeTeamErrors()
+    {
+        $this->assertSame(
+            55,
+            $this->liveScore->homeTeamErrors()
+        );
+    }
 
-//     public function testCurrentScope()
-//     {
-//         $this->liveScore->add(
-//             $this->scope1->mock()
-//         );
+    public function testAwayTeamErrors()
+    {
+        $this->assertSame(
+            66,
+            $this->liveScore->awayTeamErrors()
+        );
+    }
 
-//         $this->liveScore->add(
-//             $this->scope2->mock()
-//         );
+    public function testCurrentInningsType()
+    {
+        $this->assertNull(
+            $this->liveScore->currentInningsType()
+        );
 
-//         $this->assertSame(
-//             $this->scope2->mock(),
-//             $this->liveScore->currentScope()
-//         );
-//     }
+        $this->liveScore->setCurrentInningsType(
+            InningsType::TOP()
+        );
 
-//     public function testCurrentScopeWhenLastScopeIsComplete()
-//     {
-//         $this->scope2->status->returns(
-//             ScopeStatus::COMPLETE()
-//         );
+        $this->assertSame(
+            InningsType::TOP(),
+            $this->liveScore->currentInningsType()
+        );
 
-//         $this->liveScore->add(
-//             $this->scope1->mock()
-//         );
+        $this->liveScore->setCurrentInningsType(
+            null
+        );
 
-//         $this->liveScore->add(
-//             $this->scope2->mock()
-//         );
-
-//         $this->assertNull(
-//             $this->liveScore->currentScope()
-//         );
-//     }
-
-//     public function testCurrentScopeWhenEmpty()
-//     {
-//         $this->assertNull(
-//             $this->liveScore->currentScope()
-//         );
-//     }
-
-//     public function testScopes()
-//     {
-//         $this->assertSame(
-//             [],
-//             $this->liveScore->scopes()
-//         );
-
-//         $this->liveScore->add(
-//             $this->scope1->mock()
-//         );
-
-//         $this->liveScore->add(
-//             $this->scope2->mock()
-//         );
-
-//         $this->assertSame(
-//             [
-//                 $this->scope1->mock(),
-//                 $this->scope2->mock(),
-//             ],
-//             $this->liveScore->scopes()
-//         );
-//     }
-// }
+        $this->assertNull(
+            $this->liveScore->currentInningsType()
+        );
+    }
+}
