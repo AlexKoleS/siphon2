@@ -45,4 +45,53 @@ class UrlBuilderTest extends PHPUnit_Framework_TestCase
 
         $this->builder->build('foo');
     }
+
+    public function testExtract()
+    {
+        $this->assertEquals(
+            [
+                '/path/to/feed',
+                [],
+            ],
+            $this->builder->extract(
+                'http://xml.sportsdirectinc.com/path/to/feed'
+            )
+        );
+    }
+
+    public function testExtractWithNoPath()
+    {
+        $this->assertEquals(
+            [
+                '/',
+                [],
+            ],
+            $this->builder->extract(
+                'http://xml.sportsdirectinc.com'
+            )
+        );
+    }
+
+    public function testExtractWithParameters()
+    {
+        $this->assertEquals(
+            [
+                '/path/to/feed',
+                ['foo' => 'bar'],
+            ],
+            $this->builder->extract(
+                'http://xml.sportsdirectinc.com/path/to/feed?apiKey=%3Ckey%3E&foo=bar'
+            )
+        );
+    }
+
+    public function testExtractWithUnrecognizedUrl()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'The given URL does not match the base URL.'
+        );
+
+        $this->builder->extract('<url>');
+    }
 }

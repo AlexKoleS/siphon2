@@ -5,10 +5,14 @@ use GuzzleHttp\ClientInterface;
 use SimpleXMLElement;
 
 /**
- * Fetch XML data from a feed.
+ * Reads XML from a feed.
  */
 class XmlReader implements XmlReaderInterface
 {
+    /**
+     * @param UrlBuilderInterface $urlBuilder The URL builder used to resolve feed URLs.
+     * @param ClientInterface     $httpClient The HTTP client used to fetch XML data.
+     */
     public function __construct(
         UrlBuilderInterface $urlBuilder,
         ClientInterface $httpClient
@@ -18,7 +22,7 @@ class XmlReader implements XmlReaderInterface
     }
 
     /**
-     * Read an XML feed.
+     * Fetch XML data from a feed.
      *
      * @param string               $resource   The path to the feed.
      * @param array<string, mixed> $parameters Additional parameters to pass.

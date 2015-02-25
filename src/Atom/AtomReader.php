@@ -6,7 +6,9 @@ use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
 /**
- * Client for reading atom feeds.
+ * Read and parse atom feeds.
+ *
+ * Atom feeds are used to determine when any of the data feeds have been updated.
  */
 class AtomReader implements AtomReaderInterface
 {
@@ -16,7 +18,7 @@ class AtomReader implements AtomReaderInterface
     }
 
     /**
-     * Fetch a list of feeds that have been updated since the given time point.
+     * Fetch a list of feeds that have been updated since the given time.
      *
      * @param DateTime    $threshold Feeds updated after this time point are included in the result.
      * @param string|null $feed      Limit results to feeds of the given type, or null for any type.

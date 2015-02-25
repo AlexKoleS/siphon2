@@ -4,12 +4,12 @@ namespace Icecave\Siphon;
 use SimpleXMLElement;
 
 /**
- * Fetch XML data from a feed.
+ * Reads XML from a feed.
  */
 interface XmlReaderInterface
 {
     /**
-     * Read an XML feed.
+     * Fetch XML data from a feed.
      *
      * @param string               $resource   The path to the feed.
      * @param array<string, mixed> $parameters Additional parameters to pass.
