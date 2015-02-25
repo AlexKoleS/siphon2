@@ -20,13 +20,13 @@ class PeriodLiveScore implements LiveScoreInterface, GameTimeInterface
      */
     public function gameTime()
     {
-        return $this->gameType;
+        return $this->gameTime;
     }
 
     /**
      * Set the current game time.
      *
-     * @param Duration|null $gameType The current game time.
+     * @param Duration|null $gameTime The current game time.
      */
     public function setGameTime(Duration $gameTime = null)
     {

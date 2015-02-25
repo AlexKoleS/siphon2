@@ -18,7 +18,7 @@ interface GameTimeInterface
     /**
      * Set the current game time.
      *
-     * @param Duration|null $gameType The current game time.
+     * @param Duration|null $gameTime The current game time.
      */
     public function setGameTime(Duration $gameTime = null);
 }
