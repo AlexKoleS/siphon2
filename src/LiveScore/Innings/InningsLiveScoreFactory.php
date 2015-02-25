@@ -6,7 +6,6 @@ use Icecave\Siphon\LiveScore\LiveScoreInterface;
 use Icecave\Siphon\LiveScore\ScopeStatus;
 use Icecave\Siphon\LiveScore\StatisticsAggregator;
 use Icecave\Siphon\LiveScore\StatisticsAggregatorInterface;
-use Icecave\Siphon\Schedule\Competition;
 use SimpleXMLElement;
 
 class InningsLiveScoreFactory implements LiveScoreFactoryInterface
@@ -27,27 +26,27 @@ class InningsLiveScoreFactory implements LiveScoreFactoryInterface
      * Check if this factory supports creation of live scores for the given
      * competition.
      *
-     * @param Competition $competition The competition.
+     * @param string $sport  The sport (eg, baseball, football, etc)
+     * @param string $league The league (eg, MLB, NFL, etc)
      *
      * @return boolean True if the factory supports the given competition; otherwise, false.
      */
-    public function supports(Competition $competition)
+    public function supports($sport, $league)
     {
-        return 'baseball' === $competition->sport();
+        return 'baseball' === $sport;
     }
 
     /**
      * Create a live score for the given competition.
      *
-     * @param Competition      $competition The competition.
-     * @param SimpleXMLElement $xml         The XML document being parsed.
+     * @param string           $sport  The sport (eg, baseball, football, etc)
+     * @param string           $league The league (eg, MLB, NFL, etc)
+     * @param SimpleXMLElement $xml    The XML document being parsed.
      *
      * @return LiveScoreInterface
      */
-    public function create(
-        Competition $competition,
-        SimpleXMLElement $xml
-    ) {
+    public function create($sport, $league, SimpleXMLElement $xml)
+    {
         $result = new InningsLiveScore;
         $stats  = $this->statisticsAggregator->extract($xml);
         $scope  = null;

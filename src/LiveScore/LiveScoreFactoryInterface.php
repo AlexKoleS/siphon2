@@ -13,19 +13,21 @@ interface LiveScoreFactoryInterface
      * Check if this factory supports creation of live scores for the given
      * competition.
      *
-     * @param Competition $competition The competition.
+     * @param string $sport  The sport (eg, baseball, football, etc)
+     * @param string $league The league (eg, MLB, NFL, etc)
      *
      * @return boolean True if the factory supports the given competition; otherwise, false.
      */
-    public function supports(Competition $competition);
+    public function supports($sport, $league);
 
     /**
      * Create a live score for the given competition.
      *
-     * @param Competition      $competition The competition.
-     * @param SimpleXMLElement $xml         The XML document being parsed.
+     * @param string           $sport  The sport (eg, baseball, football, etc)
+     * @param string           $league The league (eg, MLB, NFL, etc)
+     * @param SimpleXMLElement $xml    The XML document being parsed.
      *
      * @return LiveScoreInterface
      */
-    public function create(Competition $competition, SimpleXMLElement $xml);
+    public function create($sport, $league, SimpleXMLElement $xml);
 }

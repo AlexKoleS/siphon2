@@ -1,8 +1,6 @@
 <?php
 namespace Icecave\Siphon\LiveScore;
 
-use Eloquent\Phony\Phpunit\Phony;
-use Icecave\Chrono\DateTime;
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\LiveScore\Innings\Innings;
 use Icecave\Siphon\LiveScore\Innings\InningsLiveScore;
@@ -10,8 +8,6 @@ use Icecave\Siphon\LiveScore\Innings\InningsType;
 use Icecave\Siphon\LiveScore\Period\Period;
 use Icecave\Siphon\LiveScore\Period\PeriodLiveScore;
 use Icecave\Siphon\LiveScore\Period\PeriodType;
-use Icecave\Siphon\Schedule\Competition;
-use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
@@ -33,19 +29,13 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithPeriods()
     {
-        $competition = new Competition(
-            '/path/to/sport:12345',
-            CompetitionStatus::IN_PROGRESS(),
-            Phony::fullMock(DateTime::class)->mock(),
-            'football',
-            'NFL',
-            '<home>',
-            '<away>'
-        );
-
         $this->setUpXmlReader('LiveScore/livescores-period.xml');
 
-        $liveScore = $this->reader->read($competition);
+        $liveScore = $this->reader->read(
+            'football',
+            'NFL',
+            '/path/to/sport:12345'
+        );
 
         $this
             ->xmlReader()
@@ -77,19 +67,13 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithSpecialPeriods()
     {
-        $competition = new Competition(
-            '/path/to/sport:12345',
-            CompetitionStatus::IN_PROGRESS(),
-            Phony::fullMock(DateTime::class)->mock(),
-            'hockey',
-            'NHL',
-            '<home>',
-            '<away>'
-        );
-
         $this->setUpXmlReader('LiveScore/livescores-period-special.xml');
 
-        $liveScore = $this->reader->read($competition);
+        $liveScore = $this->reader->read(
+            'hockey',
+            'NHL',
+            '/path/to/sport:12345'
+        );
 
         $this
             ->xmlReader()
@@ -159,19 +143,13 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithInnings()
     {
-        $competition = new Competition(
-            '/path/to/sport:12345',
-            CompetitionStatus::IN_PROGRESS(),
-            Phony::fullMock(DateTime::class)->mock(),
-            'baseball',
-            'MLB',
-            '<home>',
-            '<away>'
-        );
-
         $this->setUpXmlReader('LiveScore/livescores-innings.xml');
 
-        $liveScore = $this->reader->read($competition);
+        $liveScore = $this->reader->read(
+            'baseball',
+            'MLB',
+            '/path/to/sport:12345'
+        );
 
         $this
             ->xmlReader()
@@ -211,21 +189,15 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithUnsupportedCompetition()
     {
-        $competition = new Competition(
-            '/path/to/sport:12345',
-            CompetitionStatus::IN_PROGRESS(),
-            Phony::fullMock(DateTime::class)->mock(),
-            '<sport>',
-            '<league>',
-            '<home>',
-            '<away>'
-        );
-
         $this->setExpectedException(
             'InvalidArgumentException',
             'The provided competition could not be handled by any of the known live score factories.'
         );
 
-        $this->reader->read($competition);
+        $liveScore = $this->reader->read(
+            'unknown-sport',
+            'unknown-league',
+            '/path/to/sport:12345'
+        );
     }
 }
