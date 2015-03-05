@@ -6,6 +6,12 @@ namespace Icecave\Siphon\Team;
  */
 class Team
 {
+    /**
+     * @param string      $id
+     * @param string      $name
+     * @param string|null $nickname
+     * @param string      $abbreviation
+     */
     public function __construct(
         $id,
         $name,
@@ -41,7 +47,7 @@ class Team
     /**
      * Get the team nick name.
      *
-     * @return string The team nick name (e.g. Cubs).
+     * @return string|null The team nick name (e.g. Cubs), or null if unavailable.
      */
     public function nickname()
     {
@@ -65,6 +71,10 @@ class Team
      */
     public function displayName()
     {
+        if (null === $this->nickname) {
+            return $this->name;
+        }
+
         return $this->name . ' ' . $this->nickname;
     }
 

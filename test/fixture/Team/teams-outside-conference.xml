@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/basketball</id>
+            <name>basketball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/basketball/league:7</id>
+                <name>NCAA Basketball</name>
+                <name type="nick">NCAAB</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/basketball/season:664550</id>
+                    <name>2014-2015</name>
+                    <details>
+                        <start-date>2014-11-01</start-date>
+                        <end-date>2015-04-30</end-date>
+                    </details>
+                </season>
+                <conference-content>
+                    <conference>
+                        <id>/sport/basketball/conference:117</id>
+                        <name>Big Sky</name>
+                        <name type="short">Big Sky</name>
+                    </conference>
+                    <team-content>
+                        <team>
+                            <id>/sport/basketball/team:2369</id>
+                            <name>Southern Utah</name>
+                            <name type="first">Southern Utah</name>
+                            <name type="nick">Thunderbirds</name>
+                            <name type="short">SUU</name>
+                            <location>
+                                <city>Cedar City</city>
+                                <state>Utah</state>
+                                <country>USA</country>
+                            </location>
+                            <season-details>
+                                <venue>
+                                    <id>/sport/basketball/venue:288410</id>
+                                    <name>Centrum Arena</name>
+                                    <name type="short">Centr</name>
+                                    <location>
+                                        <city>Cedar City</city>
+                                        <state>Utah</state>
+                                        <country>USA</country>
+                                        <timezone>US/Mountain</timezone>
+                                    </location>
+                                    <season-details>
+                                        <capacity>5300</capacity>
+                                    </season-details>
+                                </venue>
+                                <tier>1</tier>
+                            </season-details>
+                        </team>
+                    </team-content>
+                </conference-content>
+                <team-content>
+                    <team>
+                        <id>/sport/basketball/team:2471</id>
+                        <name>St. Mary's (MD)</name>
+                        <name type="first">St. Mary's (MD)</name>
+                        <name type="nick">Seahawks</name>
+                        <name type="short">STMMD</name>
+                        <location>
+                            <city>St. Mary?s City</city>
+                            <state>Maryland</state>
+                            <country>USA</country>
+                        </location>
+                        <season-details>
+                            <tier>2</tier>
+                        </season-details>
+                    </team>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

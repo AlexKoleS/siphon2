@@ -10,8 +10,6 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->setUpXmlReader('Team/teams.xml');
-
         $this->reader = new TeamReader(
             $this->xmlReader()->mock()
         );
@@ -19,6 +17,8 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
+        $this->setUpXmlReader('Team/teams.xml');
+
         $teams = $this->reader->read('baseball', 'MLB', '2009');
 
         $this
@@ -58,6 +58,35 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
                 new Team('/sport/baseball/team:2959', 'Baltimore',     'Orioles',      'BAL'),
                 new Team('/sport/baseball/team:2984', 'Toronto',       'Blue Jays',    'TOR'),
                 new Team('/sport/baseball/team:2960', 'Tampa Bay',     'Rays',         'TB'),
+            ],
+            $teams
+        );
+    }
+
+    public function testReadIncludesTeamsOutsideConference()
+    {
+        $this->setUpXmlReader('Team/teams-outside-conference.xml');
+
+        $teams = $this->reader->read('baseball', 'MLB', '2009');
+
+        $this->assertEquals(
+            [
+                new Team('/sport/basketball/team:2369', 'Southern Utah',     'Thunderbirds', 'SUU'),
+                new Team('/sport/basketball/team:2471', 'St. Mary\'s (MD)',  'Seahawks',     'STMMD'),
+            ],
+            $teams
+        );
+    }
+
+    public function testReadWithoutNickName()
+    {
+        $this->setUpXmlReader('Team/teams-without-nickname.xml');
+
+        $teams = $this->reader->read('baseball', 'MLB', '2009');
+
+        $this->assertEquals(
+            [
+                new Team('/sport/basketball/team:665163', 'North Dakota', null, 'UND'),
             ],
             $teams
         );

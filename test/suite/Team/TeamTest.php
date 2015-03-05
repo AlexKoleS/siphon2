@@ -54,4 +54,19 @@ class TeamTest extends PHPUnit_Framework_TestCase
             $this->team->displayName()
         );
     }
+
+    public function testDisplayNameWithoutNickname()
+    {
+        $this->team = new Team(
+            '<id>',
+            '<name>',
+            null,
+            '<abbreviation>'
+        );
+
+        $this->assertSame(
+            '<name>',
+            $this->team->displayName()
+        );
+    }
 }

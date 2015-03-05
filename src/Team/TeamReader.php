@@ -43,10 +43,18 @@ class TeamReader implements TeamReaderInterface
         $teams = [];
 
         foreach ($xml as $team) {
+            $elements = $team->xpath("name[@type='nick']");
+
+            if ($elements) {
+                $nickname = strval($elements[0]);
+            } else {
+                $nickname = null;
+            }
+
             $teams[] = new Team(
                 strval($team->id),
                 strval($team->xpath("name[@type='first']")[0]),
-                strval($team->xpath("name[@type='nick']")[0]),
+                $nickname,
                 strval($team->xpath("name[@type='short']")[0])
             );
         }
