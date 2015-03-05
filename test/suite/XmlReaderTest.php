@@ -2,8 +2,10 @@
 namespace Icecave\Siphon;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\ResponseInterface;
+use Icecave\Siphon\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
 
 class XmlReaderTest extends PHPUnit_Framework_TestCase
@@ -58,6 +60,25 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             '<xml>',
             $result
+        );
+    }
+
+    public function testReadWithHttpClientException()
+    {
+        $exception = new Exception('The exception!');
+
+        $this
+            ->httpClient
+            ->get
+            ->throws($exception);
+
+        $this->setExpectedException(
+            ServiceUnavailableException::class,
+            'The exception!'
+        );
+
+        $this->reader->read(
+            'path/to/feed'
         );
     }
 }

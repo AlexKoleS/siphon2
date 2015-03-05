@@ -1,7 +1,9 @@
 <?php
 namespace Icecave\Siphon;
 
+use Exception;
 use GuzzleHttp\ClientInterface;
+use Icecave\Siphon\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
 
 /**
@@ -31,8 +33,17 @@ class XmlReader implements XmlReaderInterface
      */
     public function read($resource, array $parameters = [])
     {
-        $url      = $this->urlBuilder->build($resource, $parameters);
-        $response = $this->httpClient->get($url);
+        $url = $this->urlBuilder->build($resource, $parameters);
+
+        try {
+            $response = $this->httpClient->get($url);
+        } catch (Exception $e) {
+            throw new ServiceUnavailableException(
+                $e->getMessage(),
+                0,
+                $e
+            );
+        }
 
         return $response->xml();
     }
