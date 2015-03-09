@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\LiveScore;
+namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Siphon\Score\Innings;
 use Icecave\Siphon\Score\InningsScore;

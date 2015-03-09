@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\LiveScore;
+namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Score\Innings;
@@ -11,9 +11,9 @@ use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
 /**
- * @covers Icecave\Siphon\LiveScore\LiveScoreReader
- * @covers Icecave\Siphon\LiveScore\InningsLiveScoreFactory
- * @covers Icecave\Siphon\LiveScore\PeriodLiveScoreFactory
+ * @covers Icecave\Siphon\Score\LiveScore\LiveScoreReader
+ * @covers Icecave\Siphon\Score\LiveScore\InningsLiveScoreFactory
+ * @covers Icecave\Siphon\Score\LiveScore\PeriodLiveScoreFactory
  */
 class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 {
