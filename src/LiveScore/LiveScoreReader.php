@@ -16,8 +16,8 @@ class LiveScoreReader implements LiveScoreReaderInterface
     ) {
         if (null === $factories) {
             $factories = [
-                new Period\PeriodLiveScoreFactory,
-                new Innings\InningsLiveScoreFactory,
+                new PeriodLiveScoreFactory,
+                new InningsLiveScoreFactory,
             ];
         }
 

@@ -1,7 +1,6 @@
 <?php
-namespace Icecave\Siphon\LiveScore\Innings;
+namespace Icecave\Siphon\Score;
 
-use Icecave\Siphon\Score\ScopeStatus;
 use PHPUnit_Framework_TestCase;
 
 class InningsTest extends PHPUnit_Framework_TestCase

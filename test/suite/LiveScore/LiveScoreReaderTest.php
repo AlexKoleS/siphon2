@@ -2,20 +2,18 @@
 namespace Icecave\Siphon\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
-use Icecave\Siphon\LiveScore\Innings\Innings;
-use Icecave\Siphon\LiveScore\Innings\InningsLiveScore;
-use Icecave\Siphon\LiveScore\Innings\InningsType;
-use Icecave\Siphon\LiveScore\Period\Period;
-use Icecave\Siphon\LiveScore\Period\PeriodLiveScore;
-use Icecave\Siphon\LiveScore\Period\PeriodType;
+use Icecave\Siphon\Score\Innings;
+use Icecave\Siphon\Score\InningsType;
+use Icecave\Siphon\Score\Period;
+use Icecave\Siphon\Score\PeriodType;
 use Icecave\Siphon\Score\ScopeStatus;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
 /**
  * @covers Icecave\Siphon\LiveScore\LiveScoreReader
- * @covers Icecave\Siphon\LiveScore\Innings\InningsLiveScoreFactory
- * @covers Icecave\Siphon\LiveScore\Period\PeriodLiveScoreFactory
+ * @covers Icecave\Siphon\LiveScore\InningsLiveScoreFactory
+ * @covers Icecave\Siphon\LiveScore\PeriodLiveScoreFactory
  */
 class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 {

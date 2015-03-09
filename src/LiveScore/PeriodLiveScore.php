@@ -1,15 +1,14 @@
 <?php
-namespace Icecave\Siphon\LiveScore\Period;
+namespace Icecave\Siphon\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
-use Icecave\Siphon\LiveScore\GameTimeInterface;
-use Icecave\Siphon\LiveScore\LiveScoreInterface;
-use Icecave\Siphon\LiveScore\LiveScoreTrait;
+use Icecave\Siphon\Score\Period;
+use Icecave\Siphon\Score\PeriodScore;
 
 /**
  * Live scores for period based sports.
  */
-class PeriodLiveScore implements LiveScoreInterface, GameTimeInterface
+class PeriodLiveScore extends PeriodScore implements LiveScoreInterface, GameTimeInterface
 {
     use LiveScoreTrait;
 
@@ -31,16 +30,6 @@ class PeriodLiveScore implements LiveScoreInterface, GameTimeInterface
     public function setGameTime(Duration $gameTime = null)
     {
         $this->gameTime = $gameTime;
-    }
-
-    /**
-     * Get the class name of the scope type used by this sport.
-     *
-     * @return string
-     */
-    public function scopeClass()
-    {
-        return Period::class;
     }
 
     private $gameTime;

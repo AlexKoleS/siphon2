@@ -1,15 +1,12 @@
 <?php
-namespace Icecave\Siphon\LiveScore\Innings;
-
-use Icecave\Siphon\LiveScore\LiveScoreInterface;
-use Icecave\Siphon\LiveScore\LiveScoreTrait;
+namespace Icecave\Siphon\Score;
 
 /**
- * Live score for innings-based sports.
+ * Score for innings-based sports.
  */
-class InningsLiveScore implements LiveScoreInterface, InningsStatisticsInterface
+class InningsScore implements ScoreInterface, InningsStatisticsInterface
 {
-    use LiveScoreTrait;
+    use ScoreTrait;
 
     /**
      * Get the number of hits made by the home team.
@@ -76,26 +73,6 @@ class InningsLiveScore implements LiveScoreInterface, InningsStatisticsInterface
     }
 
     /**
-     * Get the current innings type.
-     *
-     * @return InningsType|null The current innings type, or null if the game is complete.
-     */
-    public function currentInningsType()
-    {
-        return $this->currentInningsType;
-    }
-
-    /**
-     * Set the current innings type.
-     *
-     * @param InningsType|null $type The current innings type, or null if the game is complete.
-     */
-    public function setCurrentInningsType(InningsType $type = null)
-    {
-        $this->currentInningsType = $type;
-    }
-
-    /**
      * Get the class name of the scope type used by this sport.
      *
      * @return string
@@ -104,6 +81,4 @@ class InningsLiveScore implements LiveScoreInterface, InningsStatisticsInterface
     {
         return Innings::class;
     }
-
-    private $currentInningsType;
 }
