@@ -1,8 +1,8 @@
 <?php
-namespace Icecave\Siphon\LiveScore\Period;
+namespace Icecave\Siphon\Score\Period;
 
-use Icecave\Siphon\LiveScore\ScopeInterface;
-use Icecave\Siphon\LiveScore\ScopeStatus;
+use Icecave\Siphon\Score\ScopeInterface;
+use Icecave\Siphon\Score\ScopeStatus;
 
 /**
  * Period for team sports.

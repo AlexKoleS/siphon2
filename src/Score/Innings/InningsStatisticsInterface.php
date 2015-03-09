@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\LiveScore\Innings;
+namespace Icecave\Siphon\Score\Innings;
 
 /**
  * Additional statistics for innings-based sports.

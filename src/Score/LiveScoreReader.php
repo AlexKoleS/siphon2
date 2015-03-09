@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\LiveScore;
+namespace Icecave\Siphon\Score;
 
 use Icecave\Siphon\Schedule\Competition;
 use Icecave\Siphon\XmlReaderInterface;

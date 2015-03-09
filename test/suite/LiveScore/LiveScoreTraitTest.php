@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\LiveScore;
+namespace Icecave\Siphon\Score;
 
 use Eloquent\Phony\Phpunit\Phony;
 use PHPUnit_Framework_TestCase;

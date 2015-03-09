@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\LiveScore\Period;
+namespace Icecave\Siphon\Score\Period;
 
 use Icecave\Chrono\TimeSpan\Duration;
 use PHPUnit_Framework_TestCase;
