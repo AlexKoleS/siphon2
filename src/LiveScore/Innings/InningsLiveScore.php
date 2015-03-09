@@ -1,8 +1,8 @@
 <?php
-namespace Icecave\Siphon\Score\Innings;
+namespace Icecave\Siphon\LiveScore\Innings;
 
-use Icecave\Siphon\Score\LiveScoreInterface;
-use Icecave\Siphon\Score\LiveScoreTrait;
+use Icecave\Siphon\LiveScore\LiveScoreInterface;
+use Icecave\Siphon\LiveScore\LiveScoreTrait;
 
 /**
  * Live score for innings-based sports.

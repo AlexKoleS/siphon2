@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\Score\Innings;
+namespace Icecave\Siphon\LiveScore\Innings;
 
 use PHPUnit_Framework_TestCase;
 

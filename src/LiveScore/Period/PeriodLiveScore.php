@@ -1,10 +1,10 @@
 <?php
-namespace Icecave\Siphon\Score\Period;
+namespace Icecave\Siphon\LiveScore\Period;
 
 use Icecave\Chrono\TimeSpan\Duration;
-use Icecave\Siphon\Score\GameTimeInterface;
-use Icecave\Siphon\Score\LiveScoreInterface;
-use Icecave\Siphon\Score\LiveScoreTrait;
+use Icecave\Siphon\LiveScore\GameTimeInterface;
+use Icecave\Siphon\LiveScore\LiveScoreInterface;
+use Icecave\Siphon\LiveScore\LiveScoreTrait;
 
 /**
  * Live scores for period based sports.

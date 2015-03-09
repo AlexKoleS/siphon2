@@ -1,7 +1,7 @@
 <?php
-namespace Icecave\Siphon\Score\Period;
+namespace Icecave\Siphon\LiveScore\Period;
 
-use Icecave\Siphon\Score\ScopeStatus;
+use Icecave\Siphon\LiveScore\ScopeStatus;
 use PHPUnit_Framework_TestCase;
 
 class PeriodTest extends PHPUnit_Framework_TestCase

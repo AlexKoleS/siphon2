@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\Score\Innings;
+namespace Icecave\Siphon\LiveScore\Innings;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 

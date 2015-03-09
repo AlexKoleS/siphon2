@@ -1,14 +1,14 @@
 <?php
-namespace Icecave\Siphon\Score\Innings;
+namespace Icecave\Siphon\LiveScore\Period;
 
-use Icecave\Siphon\Score\LiveScoreFactoryInterface;
-use Icecave\Siphon\Score\LiveScoreInterface;
-use Icecave\Siphon\Score\ScopeStatus;
-use Icecave\Siphon\Score\StatisticsAggregator;
-use Icecave\Siphon\Score\StatisticsAggregatorInterface;
+use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\LiveScore\LiveScoreFactoryInterface;
+use Icecave\Siphon\LiveScore\ScopeStatus;
+use Icecave\Siphon\LiveScore\StatisticsAggregator;
+use Icecave\Siphon\LiveScore\StatisticsAggregatorInterface;
 use SimpleXMLElement;
 
-class InningsLiveScoreFactory implements LiveScoreFactoryInterface
+class PeriodLiveScoreFactory implements LiveScoreFactoryInterface
 {
     /**
      * @param StatisticsAggregatorInterface|null $statisticsAggregator
@@ -33,7 +33,14 @@ class InningsLiveScoreFactory implements LiveScoreFactoryInterface
      */
     public function supports($sport, $league)
     {
-        return 'baseball' === $sport;
+        return in_array(
+            $sport,
+            [
+                'football',
+                'basketball',
+                'hockey',
+            ]
+        );
     }
 
     /**
@@ -47,40 +54,39 @@ class InningsLiveScoreFactory implements LiveScoreFactoryInterface
      */
     public function create($sport, $league, SimpleXMLElement $xml)
     {
-        $result = new InningsLiveScore;
+        $result = new PeriodLiveScore;
         $stats  = $this->statisticsAggregator->extract($xml);
         $scope  = null;
 
         foreach ($stats as $s) {
-            $scope = new Innings(
-                $s->home['runs'],
-                $s->away['runs'],
-                $s->home['hits'],
-                $s->away['hits'],
-                $s->home['errors'],
-                $s->away['errors']
+            $scope = new Period(
+                $s->home['score'],
+                $s->away['score']
+            );
+
+            $scope->setType(
+                PeriodType::memberByValue($s->type)
             );
 
             $result->add($scope);
         }
 
-        if ($scope) {
-            $resultScope = $xml->xpath('//result-scope')[0];
+        $resultScope = $xml->xpath('//result-scope')[0];
 
+        if ($scope) {
             $status = ScopeStatus::memberByValue(
                 strval($resultScope->{'scope-status'})
             );
 
             $scope->setStatus($status);
+        }
 
-            // If the current scope is in progress then set the current innings type ...
-            if (ScopeStatus::IN_PROGRESS() === $status) {
-                $result->setCurrentInningsType(
-                    InningsType::memberByValue(
-                        strval($resultScope->scope['sub-type'])
-                    )
-                );
-            }
+        if ($resultScope->clock) {
+            list($hours, $minutes, $seconds) = explode(':', $resultScope->clock);
+
+            $result->setGameTime(
+                Duration::fromComponents(0, 0, $hours, $minutes, $seconds)
+            );
         }
 
         return $result;

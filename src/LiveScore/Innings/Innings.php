@@ -1,8 +1,8 @@
 <?php
-namespace Icecave\Siphon\Score\Innings;
+namespace Icecave\Siphon\LiveScore\Innings;
 
-use Icecave\Siphon\Score\ScopeInterface;
-use Icecave\Siphon\Score\ScopeStatus;
+use Icecave\Siphon\LiveScore\ScopeInterface;
+use Icecave\Siphon\LiveScore\ScopeStatus;
 
 /**
  * An innings.
