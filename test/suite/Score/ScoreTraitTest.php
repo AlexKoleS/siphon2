@@ -1,12 +1,10 @@
 <?php
-namespace Icecave\Siphon\LiveScore;
+namespace Icecave\Siphon\Score;
 
 use Eloquent\Phony\Phpunit\Phony;
-use Icecave\Siphon\Score\ScopeInterface;
-use Icecave\Siphon\Score\ScopeStatus;
 use PHPUnit_Framework_TestCase;
 
-class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
+class ScoreTraitTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -21,10 +19,10 @@ class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
         $this->scope2->homeTeamPoints->returns(3);
         $this->scope2->awayTeamPoints->returns(4);
 
-        $this->liveScore = Phony::mock(LiveScoreTrait::class);
+        $this->score = Phony::mock(ScoreTrait::class);
 
         $this
-            ->liveScore
+            ->score
             ->scopeClass
             ->returns(ScopeInterface::class);
     }
@@ -33,20 +31,20 @@ class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            $this->liveScore->mock()->homeTeamScore()
+            $this->score->mock()->homeTeamScore()
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope1->mock()
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope2->mock()
         );
 
         $this->assertSame(
             4,
-            $this->liveScore->mock()->homeTeamScore()
+            $this->score->mock()->homeTeamScore()
         );
     }
 
@@ -54,63 +52,20 @@ class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            $this->liveScore->mock()->awayTeamScore()
+            $this->score->mock()->awayTeamScore()
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope1->mock()
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope2->mock()
         );
 
         $this->assertSame(
             6,
-            $this->liveScore->mock()->awayTeamScore()
-        );
-    }
-
-    public function testCurrentScope()
-    {
-        $this
-            ->scope2
-            ->status
-            ->returns(ScopeStatus::IN_PROGRESS());
-
-        $this->liveScore->mock()->add(
-            $this->scope1->mock()
-        );
-
-        $this->liveScore->mock()->add(
-            $this->scope2->mock()
-        );
-
-        $this->assertSame(
-            $this->scope2->mock(),
-            $this->liveScore->mock()->currentScope()
-        );
-    }
-
-    public function testCurrentScopeWhenLastScopeIsComplete()
-    {
-        $this->liveScore->mock()->add(
-            $this->scope1->mock()
-        );
-
-        $this->liveScore->mock()->add(
-            $this->scope2->mock()
-        );
-
-        $this->assertNull(
-            $this->liveScore->mock()->currentScope()
-        );
-    }
-
-    public function testCurrentScopeWhenEmpty()
-    {
-        $this->assertNull(
-            $this->liveScore->mock()->currentScope()
+            $this->score->mock()->awayTeamScore()
         );
     }
 
@@ -118,14 +73,14 @@ class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             [],
-            $this->liveScore->mock()->scopes()
+            $this->score->mock()->scopes()
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope1->mock()
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope2->mock()
         );
 
@@ -134,14 +89,14 @@ class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
                 $this->scope1->mock(),
                 $this->scope2->mock(),
             ],
-            $this->liveScore->mock()->scopes()
+            $this->score->mock()->scopes()
         );
     }
 
     public function testAddWithInvalidScopeType()
     {
         $this
-            ->liveScore
+            ->score
             ->scopeClass
             ->returns(\stdClass::class);
 
@@ -150,7 +105,7 @@ class LiveScoreTraitTest extends PHPUnit_Framework_TestCase
             'Unexpected scope type "' . get_class($this->scope1->mock()) . '", expected "stdClass".'
         );
 
-        $this->liveScore->mock()->add(
+        $this->score->mock()->add(
             $this->scope1->mock()
         );
     }

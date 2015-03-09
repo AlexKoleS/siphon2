@@ -3,9 +3,9 @@ namespace Icecave\Siphon\LiveScore\Period;
 
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\LiveScore\LiveScoreFactoryInterface;
-use Icecave\Siphon\LiveScore\ScopeStatus;
 use Icecave\Siphon\LiveScore\StatisticsAggregator;
 use Icecave\Siphon\LiveScore\StatisticsAggregatorInterface;
+use Icecave\Siphon\Score\ScopeStatus;
 use SimpleXMLElement;
 
 class PeriodLiveScoreFactory implements LiveScoreFactoryInterface

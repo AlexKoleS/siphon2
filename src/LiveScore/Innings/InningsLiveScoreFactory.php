@@ -3,9 +3,9 @@ namespace Icecave\Siphon\LiveScore\Innings;
 
 use Icecave\Siphon\LiveScore\LiveScoreFactoryInterface;
 use Icecave\Siphon\LiveScore\LiveScoreInterface;
-use Icecave\Siphon\LiveScore\ScopeStatus;
 use Icecave\Siphon\LiveScore\StatisticsAggregator;
 use Icecave\Siphon\LiveScore\StatisticsAggregatorInterface;
+use Icecave\Siphon\Score\ScopeStatus;
 use SimpleXMLElement;
 
 class InningsLiveScoreFactory implements LiveScoreFactoryInterface

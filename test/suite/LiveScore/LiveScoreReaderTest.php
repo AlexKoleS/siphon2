@@ -8,6 +8,7 @@ use Icecave\Siphon\LiveScore\Innings\InningsType;
 use Icecave\Siphon\LiveScore\Period\Period;
 use Icecave\Siphon\LiveScore\Period\PeriodLiveScore;
 use Icecave\Siphon\LiveScore\Period\PeriodType;
+use Icecave\Siphon\Score\ScopeStatus;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
