@@ -43,7 +43,9 @@ class AtomReader implements AtomReaderInterface
             )
         );
 
-        $result = new AtomResult;
+        $result = new AtomResult(
+            DateTime::fromIsoString($xml->updated)
+        );
 
         foreach ($xml->entry as $entry) {
             $result->add(

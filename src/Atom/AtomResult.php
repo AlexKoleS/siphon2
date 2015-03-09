@@ -10,6 +10,12 @@ use IteratorAggregate;
  */
 class AtomResult implements Countable, IteratorAggregate
 {
+    public function __construct(DateTime $updatedTime)
+    {
+        $this->updatedTime = $updatedTime;
+        $this->entries     = [];
+    }
+
     /**
      * Add an entry to the collection.
      *
@@ -53,24 +59,15 @@ class AtomResult implements Countable, IteratorAggregate
     }
 
     /**
-     * Get the updated time of the most recently updated entry in the collection.
+     * Get the time at which the atom result was produced.
      *
-     * @return DateTime|null The time of the most recently updated entry, or null if the collection is empty.
+     * @return DateTime The time at which the atom result was produced.
      */
     public function updatedTime()
     {
-        $updatedTime = null;
-
-        foreach ($this->entries as $entry) {
-            if (null === $updatedTime) {
-                $updatedTime = $entry->updatedTime();
-            } elseif ($entry->updatedTime()->isGreaterThan($updatedTime)) {
-                $updatedTime = $entry->updatedTime();
-            }
-        }
-
-        return $updatedTime;
+        return $this->updatedTime;
     }
 
-    private $entries = [];
+    private $updatedTime;
+    private $entries;
 }

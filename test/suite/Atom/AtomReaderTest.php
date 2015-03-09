@@ -44,6 +44,11 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
+            DateTime::fromIsoString('2015-02-15T21:11:15.4952-04:00'),
+            $result->updatedTime()
+        );
+
+        $this->assertEquals(
             [
                 new AtomEntry(
                     'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64109.xml?apiKey=APIKEY',

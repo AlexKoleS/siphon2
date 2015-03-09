@@ -1,7 +1,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Feed Index</title>
     <link href="http://xml.sportsdirectinc.com/Atom?newerThan=2015-02-01T12:42:13&amp;apiKey=APIKEY&amp;maxCount=3"/>
-    <updated>2015-02-15T21:11:14.4952-04:00</updated>
+    <updated>2015-02-15T21:11:15.4952-04:00</updated>
     <id>http://xml.sportsdirectinc.com/Atom?newerThan=2015-02-01T12:42:13&amp;apiKey=APIKEY&amp;maxCount=3</id>
     <entry>
         <title>livescores_64109.xml</title>

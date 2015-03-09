@@ -8,6 +8,8 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $this->updatedTime = DateTime::fromUnixTime(0);
+
         $this->entry1 = new AtomEntry(
             '<url-1>',
             DateTime::fromUnixTime(1)
@@ -18,7 +20,9 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
             DateTime::fromUnixTime(2)
         );
 
-        $this->result = new AtomResult;
+        $this->result = new AtomResult(
+            $this->updatedTime
+        );
     }
 
     public function testIsEmpty()
@@ -72,32 +76,8 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
 
     public function testUpdatedTime()
     {
-        $this->assertNull(
-            $this->result->updatedTime()
-        );
-
-        $this->result->add($this->entry1);
-
-        $this->assertEquals(
-            DateTime::fromUnixTime(1),
-            $this->result->updatedTime()
-        );
-
-        $this->result->add($this->entry2);
-
-        $this->assertEquals(
-            DateTime::fromUnixTime(2),
-            $this->result->updatedTime()
-        );
-    }
-
-    public function testUpdatedTimeIsOrderIndependant()
-    {
-        $this->result->add($this->entry2);
-        $this->result->add($this->entry1);
-
-        $this->assertEquals(
-            DateTime::fromUnixTime(2),
+        $this->assertSame(
+            $this->updatedTime,
             $this->result->updatedTime()
         );
     }
