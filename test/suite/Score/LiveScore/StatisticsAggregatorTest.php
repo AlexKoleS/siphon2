@@ -1,8 +1,8 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-use Icecave\Siphon\Score\LiveScore\Period\Period;
 use Icecave\Siphon\Score\Innings;
+use Icecave\Siphon\Score\LiveScore\Period\Period;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 

@@ -2,12 +2,9 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Siphon\Score\ScopeStatus;
-use Icecave\Siphon\Score\ScoreTrait;
 
 trait LiveScoreTrait
 {
-    use ScoreTrait;
-
     /**
      * Get the current scope.
      *
@@ -15,7 +12,8 @@ trait LiveScoreTrait
      */
     public function currentScope()
     {
-        $scope = end($this->scopes);
+        $scopes = $this->scopes();
+        $scope  = end($scopes);
 
         if (!$scope) {
             return null;
@@ -25,4 +23,11 @@ trait LiveScoreTrait
 
         return $scope;
     }
+
+    /**
+     * Get the scopes that make up the score.
+     *
+     * @return array<ScopeInterface>
+     */
+    abstract public function scopes();
 }

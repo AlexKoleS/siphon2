@@ -1,10 +1,18 @@
 <?php
 namespace Icecave\Siphon\Score;
 
+use Icecave\Siphon\Schedule\CompetitionStatus;
 use InvalidArgumentException;
 
 interface ScoreInterface
 {
+    /**
+     * Get the competition status.
+     *
+     * @return CompetitionStatus
+     */
+    public function competitionStatus();
+
     /**
      * The home team's total score.
      *

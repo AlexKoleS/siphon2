@@ -1,10 +1,38 @@
 <?php
 namespace Icecave\Siphon\Score;
 
+use Icecave\Siphon\Schedule\CompetitionStatus;
 use InvalidArgumentException;
+use LogicException;
 
 trait ScoreTrait
 {
+    /**
+     * Get the competition status.
+     *
+     * @return CompetitionStatus
+     */
+    public function competitionStatus()
+    {
+        if (null === $this->competitionStatus) {
+            throw new LogicException(
+                'Competition status has not been set.'
+            );
+        }
+
+        return $this->competitionStatus;
+    }
+
+    /**
+     * Set the competition status.
+     *
+     * @param CompetitionStatus $status
+     */
+    public function setCompetitionStatus(CompetitionStatus $status)
+    {
+        $this->competitionStatus = $status;
+    }
+
     /**
      * The home team's total score.
      *
@@ -78,5 +106,6 @@ trait ScoreTrait
      */
     abstract public function scopeClass();
 
+    private $competitionStatus;
     private $scopes = [];
 }

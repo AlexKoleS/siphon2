@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Siphon\Schedule\Competition;
+use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
@@ -57,7 +58,15 @@ class LiveScoreReader implements LiveScoreReaderInterface
                 )
             );
 
-        return $factory->create($sport, $league, $xml);
+        $liveScore = $factory->create($sport, $league, $xml);
+
+        $liveScore->setCompetitionStatus(
+            CompetitionStatus::memberByValue(
+                strval($xml->xpath('//competition-status')[0])
+            )
+        );
+
+        return $liveScore;
     }
 
     /**

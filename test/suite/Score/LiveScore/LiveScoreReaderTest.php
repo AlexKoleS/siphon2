@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Innings;
 use Icecave\Siphon\Score\InningsType;
 use Icecave\Siphon\Score\Period;
@@ -54,6 +55,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $scope2->setStatus(ScopeStatus::IN_PROGRESS());
 
         $expected = new PeriodLiveScore;
+        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
         $expected->setGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
         $expected->add($scope1);
         $expected->add($scope2);
@@ -126,6 +128,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $scope7->setType(PeriodType::SHOOTOUT());
 
         $expected = new PeriodLiveScore;
+        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
         $expected->add($scope1);
         $expected->add($scope2);
         $expected->add($scope3);
@@ -176,6 +179,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $scope2->setStatus(ScopeStatus::IN_PROGRESS());
 
         $expected = new InningsLiveScore;
+        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
         $expected->setCurrentInningsType(InningsType::BOTTOM());
         $expected->add($scope1);
         $expected->add($scope2);

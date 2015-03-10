@@ -2,6 +2,8 @@
 namespace Icecave\Siphon\Score;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Siphon\Schedule\CompetitionStatus;
+use LogicException;
 use PHPUnit_Framework_TestCase;
 
 class ScoreTraitTest extends PHPUnit_Framework_TestCase
@@ -25,6 +27,30 @@ class ScoreTraitTest extends PHPUnit_Framework_TestCase
             ->score
             ->scopeClass
             ->returns(ScopeInterface::class);
+    }
+
+    public function testCompetitionStatus()
+    {
+        $score = $this->score->mock();
+
+        try {
+            $score->competitionStatus();
+            $this->fail('Expected exception was not thrown.');
+        } catch (LogicException $e) {
+            $this->assertSame(
+                'Competition status has not been set.',
+                $e->getMessage()
+            );
+        }
+
+        $score->setCompetitionStatus(
+            CompetitionStatus::IN_PROGRESS()
+        );
+
+        $this->assertSame(
+            CompetitionStatus::IN_PROGRESS(),
+            $score->competitionStatus()
+        );
     }
 
     public function testHomeTeamScore()
