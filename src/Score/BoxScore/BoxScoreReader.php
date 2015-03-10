@@ -26,15 +26,16 @@ class BoxScoreReader implements BoxScoreReaderInterface
     }
 
     /**
-     * Read a boxscore feed for a competition.
+     * Read a score feed for a competition.
      *
      * @param string $sport         The sport (eg, baseball, football, etc)
      * @param string $league        The league (eg, MLB, NFL, etc)
+     * @param string $season        The season.
      * @param string $competitionId The competition ID.
      *
-     * @return BoxScoreInterface
+     * @return ScoreInterface
      */
-    public function read($sport, $league, $competitionId)
+    public function read($sport, $league, $season, $competitionId)
     {
         $sport  = strtolower($sport);
         $league = strtoupper($league);
