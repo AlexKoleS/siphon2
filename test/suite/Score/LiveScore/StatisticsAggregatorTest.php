@@ -17,7 +17,7 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
 
     public function testExtractWithPeriods()
     {
-        $this->setUpXmlReader('LiveScore/livescores-period.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-period.xml');
 
         $xml = $this
             ->xmlReader()
@@ -53,7 +53,7 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
 
     public function testExtractWithSpecialPeriods()
     {
-        $this->setUpXmlReader('LiveScore/livescores-period-special.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-period-special.xml');
 
         $xml = $this
             ->xmlReader()
@@ -134,7 +134,7 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
 
     public function testExtractWithInnings()
     {
-        $this->setUpXmlReader('LiveScore/livescores-innings.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-innings.xml');
 
         $xml = $this
             ->xmlReader()

@@ -28,7 +28,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithPeriods()
     {
-        $this->setUpXmlReader('LiveScore/livescores-period.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-period.xml');
 
         $liveScore = $this->reader->read(
             'football',
@@ -66,7 +66,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithSpecialPeriods()
     {
-        $this->setUpXmlReader('LiveScore/livescores-period-special.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-period-special.xml');
 
         $liveScore = $this->reader->read(
             'hockey',
@@ -142,7 +142,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithInnings()
     {
-        $this->setUpXmlReader('LiveScore/livescores-innings.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-innings.xml');
 
         $liveScore = $this->reader->read(
             'baseball',
