@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Icecave\Siphon\Score\LiveScore\LiveScoreInterface | icecave/siphon API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">icecave/siphon API</div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../../../Icecave/Siphon/Score/LiveScore.html">Icecave\Siphon\Score\LiveScore</a>\LiveScoreInterface</h1>
+    </div>
+        <div class="content">
+                <p>interface    <strong>LiveScoreInterface</strong>        implements
+        <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_competitionStatus">competitionStatus</a>()
+                    <p>Get the competition status.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_competitionStatus"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_homeTeamScore">homeTeamScore</a>()
+                    <p>The home team's total score.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_homeTeamScore"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_awayTeamScore">awayTeamScore</a>()
+                    <p>The away team's total score.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_awayTeamScore"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_add">add</a>(<a href="../../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a> $scope)
+                    <p>Add a scope.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_add"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Icecave\Siphon\Score\array&lt;ScopeInterface&gt;">array&lt;ScopeInterface&gt;</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_scopes">scopes</a>()
+                    <p>Get the scopes that make up the score.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_scopes"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_scopeClass">scopeClass</a>()
+                    <p>Get the class name of the scope type used by this sport.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_scopeClass"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_currentScope">currentScope</a>()
+                    <p>Get the current scope.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_competitionStatus">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_competitionStatus"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a> at line 14</div>
+        <code>            public            <a href="../../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a>
+    <strong>competitionStatus</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the competition status.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_homeTeamScore">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_homeTeamScore"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a> at line 21</div>
+        <code>            public            integer
+    <strong>homeTeamScore</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>The home team's total score.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_awayTeamScore">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_awayTeamScore"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a> at line 28</div>
+        <code>            public            integer
+    <strong>awayTeamScore</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>The away team's total score.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_add">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_add"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a> at line 37</div>
+        <code>            public            
+    <strong>add</strong>(<a href="../../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a> $scope)</code>
+    </h3>
+    <div class="details">
+        <p>Add a scope.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a></td>
+                <td>$scope</td>
+                <td>The scope to add.</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>if the scope type is not supported by this sport.</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_scopes">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_scopes"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a> at line 44</div>
+        <code>            public            <abbr title="Icecave\Siphon\Score\array&lt;ScopeInterface&gt;">array&lt;ScopeInterface&gt;</abbr>
+    <strong>scopes</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the scopes that make up the score.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Icecave\Siphon\Score\array&lt;ScopeInterface&gt;">array&lt;ScopeInterface&gt;</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_scopeClass">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Score/ScoreInterface.html#method_scopeClass"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a> at line 51</div>
+        <code>            public            string
+    <strong>scopeClass</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the class name of the scope type used by this sport.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_currentScope">
+        <div class="location">at line 14</div>
+        <code>            public            <a href="../../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a>|null
+    <strong>currentScope</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the current scope.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a>|null</td>
+            <td>The current scope, or null if the competition is not in-progress.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

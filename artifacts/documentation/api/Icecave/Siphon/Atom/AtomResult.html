@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Icecave\Siphon\Atom\AtomResult | icecave/siphon API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">icecave/siphon API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Icecave/Siphon/Atom.html">Icecave\Siphon\Atom</a>\AtomResult</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>AtomResult</strong>        implements
+        <a href="http://php.net/Countable"><abbr title="Countable">Countable</abbr></a>, <a href="http://php.net/IteratorAggregate"><abbr title="IteratorAggregate">IteratorAggregate</abbr></a></p>
+
+            <div class="description">
+            <p>A collection of results from an Atom feed.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_add">add</a>(<a href="../../../Icecave/Siphon/Atom/AtomEntry.html"><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></a> $entry)
+                    <p>Add an entry to the collection.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_isEmpty">isEmpty</a>()
+                    <p>Indicates whether or not the collection contains any entries.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_count">count</a>()
+                    <p>Get the number of entries in the collection.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Icecave\Siphon\Atom\mixed&lt;AtomEntry&gt;">mixed&lt;AtomEntry&gt;</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_getIterator">getIterator</a>()
+                    <p>Iterate over the entries.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_updatedTime">updatedTime</a>()
+                    <p>Get the time at which the atom result was produced.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 13</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+                <td>$updatedTime</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_add">
+        <div class="location">at line 24</div>
+        <code>            public            
+    <strong>add</strong>(<a href="../../../Icecave/Siphon/Atom/AtomEntry.html"><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></a> $entry)</code>
+    </h3>
+    <div class="details">
+        <p>Add an entry to the collection.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Atom/AtomEntry.html"><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></a></td>
+                <td>$entry</td>
+                <td>The entry to add.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isEmpty">
+        <div class="location">at line 34</div>
+        <code>            public            
+    <strong>isEmpty</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Indicates whether or not the collection contains any entries.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_count">
+        <div class="location">at line 44</div>
+        <code>            public            integer
+    <strong>count</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the number of entries in the collection.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The number of entries in the collection.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIterator">
+        <div class="location">at line 54</div>
+        <code>            public            <abbr title="Icecave\Siphon\Atom\mixed&lt;AtomEntry&gt;">mixed&lt;AtomEntry&gt;</abbr>
+    <strong>getIterator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Iterate over the entries.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Icecave\Siphon\Atom\mixed&lt;AtomEntry&gt;">mixed&lt;AtomEntry&gt;</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updatedTime">
+        <div class="location">at line 66</div>
+        <code>            public            <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>
+    <strong>updatedTime</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the time at which the atom result was produced.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+            <td>The time at which the atom result was produced.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
