@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/basketball</id>
+            <name>basketball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/basketball/league:7</id>
+                <name>NCAA Basketball</name>
+                <name type="nick">NCAAB</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/basketball/season:664550</id>
+                    <name>2014-2015</name>
+                    <details>
+                        <start-date>2014-11-01</start-date>
+                        <end-date>2015-04-30</end-date>
+                    </details>
+                </season>
+                <team-content>
+                    <team>
+                        <id>/sport/basketball/team:665163</id>
+                        <name>North Dakota</name>
+                        <name type="first">North Dakota</name>
+                        <name type="short">UND</name>
+                        <location>
+                            <city>Grand Forks</city>
+                            <state>North Dakota</state>
+                            <country>USA</country>
+                        </location>
+                        <season-details>
+                            <venue>
+                                <id>/sport/basketball/venue:635232</id>
+                                <name>Betty Engelstad Sioux Center</name>
+                                <name type="short">BESC</name>
+                                <location>
+                                    <city>Grand Forks</city>
+                                    <state>North Dakota</state>
+                                    <country>USA</country>
+                                    <timezone>US/Central</timezone>
+                                </location>
+                                <season-details>
+                                    <capacity>3300</capacity>
+                                </season-details>
+                            </venue>
+                            <tier>1</tier>
+                        </season-details>
+                    </team>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

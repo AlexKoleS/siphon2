@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+error_reporting(-1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$urlBuilder  = new Icecave\Siphon\UrlBuilder($_SERVER['argv'][1]);
+$httpClient  = new GuzzleHttp\Client;
+$xmlReader   = new Icecave\Siphon\XmlReader($urlBuilder, $httpClient);
+$atomReader  = new Icecave\Siphon\Atom\AtomReader($xmlReader);
+$teamReader  = new Icecave\Siphon\Team\TeamReader($xmlReader);
+$scoreReader = new Icecave\Siphon\LiveScore\LiveScoreReader($xmlReader);
+$clock       = new Icecave\Chrono\Clock\SystemClock;
+
+$result = $scoreReader->read(
+    'basketball',
+    'NCAAB',
+    '/sport/basketball/competition:888652'
+);
+
+// $result = $teamReader->read(
+//     'baseball',
+//     'MLB',
+//     '2015'
+// );
+
+// $result = $atomReader->read(
+//     $clock->localDateTime()->subtract(100),
+//     '/livescores'
+// );
+
+var_dump($result);
+

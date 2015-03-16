@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/baseball</id>
+            <name>baseball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/baseball/league:1219</id>
+                <name>Major League Baseball</name>
+                <name type="nick">MLB</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/baseball/season:851</id>
+                    <name>2010</name>
+                    <details>
+                        <start-date>2010-03-02</start-date>
+                        <end-date>2010-11-15</end-date>
+                    </details>
+                </season>
+                <competition xsi:type="sport:baseball-competition">
+                    <meta>
+                        <property name="event-key">24</property>
+                    </meta>
+                    <id>/sport/baseball/competition:294647</id>
+                    <start-date>2010-04-27T20:40:00-04:00</start-date>
+                    <result-scope>
+                        <competition-status>scheduled</competition-status>
+                    </result-scope>
+                    <home-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2956</id>
+                            <name>Colorado</name>
+                        </team>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:42675</id>
+                                <name type="first">Ubaldo</name>
+                                <name type="last">Jimenez</name>
+                                <throws>right</throws>
+                                <bats>right</bats>
+                            </player>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                            </lineup>
+                        </player-content>
+                    </home-team-content>
+                    <away-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2968</id>
+                            <name>Arizona</name>
+                        </team>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:41499</id>
+                                <name type="first">Edwin</name>
+                                <name type="last">Jackson</name>
+                                <throws>right</throws>
+                                <bats>right</bats>
+                            </player>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                            </lineup>
+                        </player-content>
+                    </away-team-content>
+                    <details>
+                        <competition-type>Regular Season</competition-type>
+                        <day>false</day>
+                        <neutral-site>false</neutral-site>
+                        <date-tbd>false</date-tbd>
+                        <venue>
+                            <id>/sport/baseball/venue:2972</id>
+                            <name>Coors Field</name>
+                            <name type="short">CF</name>
+                            <location>
+                                <city>Denver</city>
+                                <state>Colorado</state>
+                                <country>USA</country>
+                                <timezone>US/Mountain</timezone>
+                            </location>
+                            <season-details>
+                                <capacity>50200</capacity>
+                                <field-type>
+                                    <id>/sport/baseball/field-type:1</id>
+                                    <name>Grass</name>
+                                </field-type>
+                            </season-details>
+                        </venue>
+                    </details>
+                    <betting>
+                        <home-rotation-number>914</home-rotation-number>
+                        <away-rotation-number>913</away-rotation-number>
+                    </betting>
+                    <previous-competition-id>/sport/baseball/competition:290716</previous-competition-id>
+                </competition>
+                <competition xsi:type="sport:baseball-competition">
+                    <meta>
+                        <property name="event-key">25</property>
+                    </meta>
+                    <id>/sport/baseball/competition:293835</id>
+                    <start-date>2010-04-27T22:05:00-04:00</start-date>
+                    <result-scope>
+                        <competition-status>scheduled</competition-status>
+                    </result-scope>
+                    <home-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2979</id>
+                            <name>LA Angels</name>
+                        </team>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:42548</id>
+                                <name type="first">Joe</name>
+                                <name type="last">Saunders</name>
+                                <throws>left</throws>
+                                <bats>left</bats>
+                            </player>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                            </lineup>
+                        </player-content>
+                    </home-team-content>
+                    <away-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2980</id>
+                            <name>Cleveland</name>
+                        </team>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:43367</id>
+                                <name type="first">Mitch</name>
+                                <name type="last">Talbot</name>
+                                <throws>right</throws>
+                                <bats>right</bats>
+                            </player>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                            </lineup>
+                        </player-content>
+                    </away-team-content>
+                    <details>
+                        <competition-type>Regular Season</competition-type>
+                        <day>false</day>
+                        <neutral-site>false</neutral-site>
+                        <date-tbd>false</date-tbd>
+                        <venue>
+                            <id>/sport/baseball/venue:2995</id>
+                            <name>Angel Stadium</name>
+                            <name type="short">Angel</name>
+                            <location>
+                                <city>Anaheim</city>
+                                <state>California</state>
+                                <country>USA</country>
+                                <timezone>US/Pacific</timezone>
+                            </location>
+                            <season-details>
+                                <capacity>45050</capacity>
+                                <field-type>
+                                    <id>/sport/baseball/field-type:1</id>
+                                    <name>Grass</name>
+                                </field-type>
+                            </season-details>
+                        </venue>
+                    </details>
+                    <betting>
+                        <home-rotation-number>930</home-rotation-number>
+                        <away-rotation-number>929</away-rotation-number>
+                    </betting>
+                    <previous-competition-id>/sport/baseball/competition:289872</previous-competition-id>
+                </competition>
+                <competition xsi:type="sport:baseball-competition">
+                    <meta>
+                        <property name="event-key">26</property>
+                    </meta>
+                    <id>/sport/baseball/competition:295678</id>
+                    <start-date>2010-04-27T22:15:00-04:00</start-date>
+                    <result-scope>
+                        <competition-status>scheduled</competition-status>
+                    </result-scope>
+                    <home-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2962</id>
+                            <name>San Francisco</name>
+                        </team>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:41429</id>
+                                <name type="first">Todd</name>
+                                <name type="last">Wellemeyer</name>
+                                <throws>right</throws>
+                                <bats>right</bats>
+                            </player>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                            </lineup>
+                        </player-content>
+                    </home-team-content>
+                    <away-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2958</id>
+                            <name>Philadelphia</name>
+                        </team>
+                    </away-team-content>
+                    <details>
+                        <competition-type>Regular Season</competition-type>
+                        <day>false</day>
+                        <neutral-site>false</neutral-site>
+                        <date-tbd>false</date-tbd>
+                        <venue>
+                            <id>/sport/baseball/venue:3001</id>
+                            <name>AT&amp;T Park</name>
+                            <name type="short">AT&amp;T</name>
+                            <location>
+                                <city>San Francisco</city>
+                                <state>California</state>
+                                <country>USA</country>
+                                <timezone>US/Pacific</timezone>
+                            </location>
+                            <season-details>
+                                <capacity>41503</capacity>
+                                <field-type>
+                                    <id>/sport/baseball/field-type:1</id>
+                                    <name>Grass</name>
+                                </field-type>
+                            </season-details>
+                        </venue>
+                    </details>
+                    <betting>
+                        <home-rotation-number>916</home-rotation-number>
+                        <away-rotation-number>915</away-rotation-number>
+                    </betting>
+                    <previous-competition-id>/sport/baseball/competition:291658</previous-competition-id>
+                </competition>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>
