@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fc23a014aaef3f7dea62a8ded559fdf2",
+    "hash": "09a622c8ba75609e896ce7f24c957ad7",
     "packages": [
         {
             "name": "eloquent/enumeration",
@@ -115,16 +115,16 @@
         },
         {
             "name": "guzzlehttp/ringphp",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/RingPHP.git",
-                "reference": "a903f51b692427318bc813217c0e6505287e79a4"
+                "reference": "f43ab34aad69ca0ba04172cf2c3cd5c12fc0e5a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/a903f51b692427318bc813217c0e6505287e79a4",
-                "reference": "a903f51b692427318bc813217c0e6505287e79a4",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/f43ab34aad69ca0ba04172cf2c3cd5c12fc0e5a4",
+                "reference": "f43ab34aad69ca0ba04172cf2c3cd5c12fc0e5a4",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,8 @@
                     "homepage": "https://github.com/mtdowling"
                 }
             ],
-            "time": "2014-12-11 05:50:32"
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "time": "2015-02-26 20:43:09"
         },
         {
             "name": "guzzlehttp/streams",
@@ -548,16 +549,16 @@
         },
         {
             "name": "eloquent/phony",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/phony.git",
-                "reference": "a050203d19cb10932a28220cc5b9207bbfa4245c"
+                "reference": "48183397e06edbd99705d7e931bb86e271f32aad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/phony/zipball/a050203d19cb10932a28220cc5b9207bbfa4245c",
-                "reference": "a050203d19cb10932a28220cc5b9207bbfa4245c",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/48183397e06edbd99705d7e931bb86e271f32aad",
+                "reference": "48183397e06edbd99705d7e931bb86e271f32aad",
                 "shasum": ""
             },
             "require": {
@@ -569,6 +570,7 @@
                 "athletic/athletic": "~0.1",
                 "counterpart/counterpart": "~1",
                 "danielstjules/pho": "~1",
+                "eloquent/asplode": "~2",
                 "eloquent/fixie": "~0.2.0@dev",
                 "hamcrest/hamcrest-php": "~1",
                 "icecave/isolator": "~3",
@@ -582,7 +584,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.1.x-dev"
+                    "dev-develop": "0.3.x-dev"
                 }
             },
             "autoload": {
@@ -620,7 +622,7 @@
                 "stubbing",
                 "test"
             ],
-            "time": "2014-11-18 01:43:22"
+            "time": "2015-02-27 14:45:57"
         },
         {
             "name": "guzzle/guzzle",

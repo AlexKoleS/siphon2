@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Atom;
 
+use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
 use PHPUnit_Framework_TestCase;
 
@@ -9,19 +10,77 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updatedTime = DateTime::fromUnixTime(0);
-
-        $this->entry1 = new AtomEntry(
-            '<url-1>',
-            DateTime::fromUnixTime(1)
-        );
-
-        $this->entry2 = new AtomEntry(
-            '<url-2>',
-            DateTime::fromUnixTime(2)
-        );
+        $this->entry1      = Phony::mock(AtomEntryInterface::class)->mock();
+        $this->entry2      = Phony::mock(AtomEntryInterface::class)->mock();
 
         $this->result = new AtomResult(
             $this->updatedTime
+        );
+    }
+
+    public function testAdd()
+    {
+        $this->result->add($this->entry1);
+        $this->result->add($this->entry2);
+
+        $this->assertSame(
+            [
+                $this->entry1,
+                $this->entry2,
+            ],
+            $this->result->entries()
+        );
+    }
+
+    public function testRemove()
+    {
+        $this->result->add($this->entry1);
+        $this->result->add($this->entry2);
+
+        $this->result->remove($this->entry1);
+
+        $this->assertSame(
+            [
+                $this->entry2,
+            ],
+            $this->result->entries()
+        );
+    }
+
+    public function testRemoveWithUnknownEntry()
+    {
+        $this->result->remove($this->entry1);
+
+        $this->assertTrue(
+            $this->result->isEmpty()
+        );
+    }
+
+    public function testEntries()
+    {
+        $this->assertSame(
+            [
+            ],
+            $this->result->entries()
+        );
+
+        $this->result->add($this->entry1);
+
+        $this->assertSame(
+            [
+                $this->entry1,
+            ],
+            $this->result->entries()
+        );
+
+        $this->result->add($this->entry2);
+
+        $this->assertSame(
+            [
+                $this->entry1,
+                $this->entry2,
+            ],
+            $this->result->entries()
         );
     }
 
@@ -32,9 +91,30 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
         );
 
         $this->result->add($this->entry1);
+        $this->result->add($this->entry2);
 
         $this->assertFalse(
             $this->result->isEmpty()
+        );
+
+        $this->result->remove($this->entry1);
+
+        $this->assertFalse(
+            $this->result->isEmpty()
+        );
+
+        $this->result->remove($this->entry2);
+
+        $this->assertTrue(
+            $this->result->isEmpty()
+        );
+    }
+
+    public function testUpdatedTime()
+    {
+        $this->assertSame(
+            $this->updatedTime,
+            $this->result->updatedTime()
         );
     }
 
@@ -42,21 +122,29 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            $this->result->count()
+            count($this->result)
         );
 
         $this->result->add($this->entry1);
-
-        $this->assertSame(
-            1,
-            $this->result->count()
-        );
-
         $this->result->add($this->entry2);
 
         $this->assertSame(
             2,
-            $this->result->count()
+            count($this->result)
+        );
+
+        $this->result->remove($this->entry1);
+
+        $this->assertSame(
+            1,
+            count($this->result)
+        );
+
+        $this->result->remove($this->entry2);
+
+        $this->assertSame(
+            0,
+            count($this->result)
         );
     }
 
@@ -71,14 +159,6 @@ class AtomResultTest extends PHPUnit_Framework_TestCase
                 $this->entry2,
             ],
             iterator_to_array($this->result)
-        );
-    }
-
-    public function testUpdatedTime()
-    {
-        $this->assertSame(
-            $this->updatedTime,
-            $this->result->updatedTime()
         );
     }
 }

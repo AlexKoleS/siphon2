@@ -6,7 +6,7 @@ use Icecave\Chrono\DateTime;
 /**
  * A single result from an Atom feed.
  */
-class AtomEntry
+class AtomEntry implements AtomEntryInterface
 {
     /**
      * @param string   $url         The URL of the feed that has been updated.
@@ -19,6 +19,8 @@ class AtomEntry
     }
 
     /**
+     * Get the URL of the feed that has been updated.
+     *
      * @return string The URL of the feed that has been updated.
      */
     public function url()
@@ -27,7 +29,9 @@ class AtomEntry
     }
 
     /**
-     * @return DateTime The time at which the feed was updated.
+     * Get the time at which the update occurred.
+     *
+     * @return DateTime The time at which update occurred.
      */
     public function updatedTime()
     {
