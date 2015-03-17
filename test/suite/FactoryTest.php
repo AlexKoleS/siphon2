@@ -3,7 +3,6 @@ namespace Icecave\Siphon;
 
 use Eloquent\Phony\Phpunit\Phony;
 use GuzzleHttp\Client as HttpClient;
-use Icecave\Siphon\Atom\AtomReader;
 use PHPUnit_Framework_TestCase;
 
 class FactoryTest extends PHPUnit_Framework_TestCase
@@ -54,8 +53,16 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     public function testCreateAtomReader()
     {
         $this->assertEquals(
-            new AtomReader($this->xmlReader->mock()),
+            new Atom\AtomReader($this->xmlReader->mock()),
             $this->factory->createAtomReader()
+        );
+    }
+
+    public function testCreateScheduleReader()
+    {
+        $this->assertEquals(
+            new Schedule\ScheduleReader($this->xmlReader->mock()),
+            $this->factory->createScheduleReader()
         );
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-
 /**
  * Client for reading live score feeds.
  */

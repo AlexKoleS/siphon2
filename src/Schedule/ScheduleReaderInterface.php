@@ -2,7 +2,9 @@
 namespace Icecave\Siphon\Schedule;
 
 /**
- * Client for reading schedule feeds.
+ * Read data from schedule feeds.
+ *
+ * @api
  */
 interface ScheduleReaderInterface
 {
@@ -12,7 +14,7 @@ interface ScheduleReaderInterface
      * @param string $sport  The sport (eg, baseball, football, etc)
      * @param string $league The league (eg, MLB, NFL, etc)
      *
-     * @return Schedule
+     * @return ScheduleInterface
      */
     public function read($sport, $league);
 }

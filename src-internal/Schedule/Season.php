@@ -1,12 +1,13 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
+use ArrayIterator;
 use Icecave\Chrono\Date;
 
 /**
- * A sporting season.
+ * A season within a schedule.
  */
-class Season
+class Season implements SeasonInterface
 {
     /**
      * @param string $id        The season ID.
@@ -70,21 +71,65 @@ class Season
     /**
      * Add a competition to the season.
      *
-     * @param Competition $competition The competition to add.
+     * @param CompetitionInterface $competition The competition to add.
      */
-    public function add(Competition $competition)
+    public function add(CompetitionInterface $competition)
     {
         $this->competitions[] = $competition;
     }
 
     /**
-     * Get the competitions in the season.
+     * Add a competition to the season.
      *
-     * @return array<Competition>
+     * @param CompetitionInterface $competition The competition to add.
+     */
+    public function remove(CompetitionInterface $competition)
+    {
+        $index = array_search($competition, $this->competitions);
+
+        if (false !== $index) {
+            array_splice($this->competitions, $index, 1);
+        }
+    }
+
+    /**
+     * Get the competitions in the collection.
+     *
+     * @return array<CompetitionInterface>
      */
     public function competitions()
     {
         return $this->competitions;
+    }
+
+    /**
+     * Indicates whether or not the collection contains any competitions.
+     *
+     * @return boolean True if the collection is empty; otherwise, false.
+     */
+    public function isEmpty()
+    {
+        return empty($this->competitions);
+    }
+
+    /**
+     * Get the number of competitions in the collection.
+     *
+     * @return integer The number of competitions in the collection.
+     */
+    public function count()
+    {
+        return count($this->competitions);
+    }
+
+    /**
+     * Iterate over the competitions.
+     *
+     * @return mixed<CompetitionInterface>
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->competitions);
     }
 
     private $id;

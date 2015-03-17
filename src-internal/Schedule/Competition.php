@@ -6,7 +6,7 @@ use Icecave\Chrono\DateTime;
 /**
  * A sports competition (ie, "event" / "game" / "match" / etc).
  */
-class Competition
+class Competition implements CompetitionInterface
 {
     /**
      * @param string            $id         The competition ID.

@@ -3,6 +3,9 @@ namespace Icecave\Siphon\Schedule;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 
+/**
+ * @api
+ */
 class CompetitionStatus extends AbstractEnumeration
 {
     const SCHEDULED      = 'scheduled';

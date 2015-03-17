@@ -1,8 +1,6 @@
 <?php
 namespace Icecave\Siphon;
 
-use Icecave\Siphon\Atom\AtomReaderInterface;
-
 /**
  * The global factory used to create Siphon feed readers.
  *
@@ -27,7 +25,14 @@ interface FactoryInterface
     /**
      * Create an atom reader.
      *
-     * @return AtomReaderInterface
+     * @return Atom\AtomReaderInterface
      */
     public function createAtomReader();
+
+    /**
+     * Create a schedule reader.
+     *
+     * @return Schedule\ScheduleReaderInterface
+     */
+    public function createScheduleReader();
 }

@@ -2,7 +2,6 @@
 namespace Icecave\Siphon;
 
 use GuzzleHttp\Client as HttpClient;
-use Icecave\Siphon\Atom\AtomReader;
 
 /**
  * The global factory used to create Siphon feed readers.
@@ -64,7 +63,19 @@ class Factory implements FactoryInterface
      */
     public function createAtomReader()
     {
-        return new AtomReader(
+        return new Atom\AtomReader(
+            $this->xmlReader
+        );
+    }
+
+    /**
+     * Create a schedule reader.
+     *
+     * @return Schedule\ScheduleReaderInterface
+     */
+    public function createScheduleReader()
+    {
+        return new Schedule\ScheduleReader(
             $this->xmlReader
         );
     }
