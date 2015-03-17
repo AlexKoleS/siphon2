@@ -2,29 +2,28 @@
 namespace Icecave\Siphon\Score;
 
 /**
- * An innings.
+ * A scope for sports that use innings (baseball).
  */
-class Innings implements ScopeInterface, InningsStatisticsInterface
+class Inning implements InningInterface
 {
     /**
-     * @param integer $homeTeamPoints The number of runs made by the home team.
-     * @param integer $awayTeamPoints The number of runs made by the away team.
+     * @param integer $homeTeamScore  The number of runs made by the home team.
+     * @param integer $awayTeamScore  The number of runs made by the away team.
      * @param integer $homeTeamHits   The number of hits made by the home team.
      * @param integer $awayTeamHits   The number of hits made by the away team.
      * @param integer $homeTeamErrors The number of errors made by the home team.
      * @param integer $awayTeamErrors The number of errors made by the away team.
      */
     public function __construct(
-        $homeTeamPoints,
-        $awayTeamPoints,
+        $homeTeamScore,
+        $awayTeamScore,
         $homeTeamHits,
         $awayTeamHits,
         $homeTeamErrors,
         $awayTeamErrors
     ) {
-        $this->status         = ScopeStatus::COMPLETE();
-        $this->homeTeamPoints = $homeTeamPoints;
-        $this->awayTeamPoints = $awayTeamPoints;
+        $this->homeTeamScore  = $homeTeamScore;
+        $this->awayTeamScore  = $awayTeamScore;
         $this->homeTeamHits   = $homeTeamHits;
         $this->awayTeamHits   = $awayTeamHits;
         $this->homeTeamErrors = $homeTeamErrors;
@@ -32,33 +31,13 @@ class Innings implements ScopeInterface, InningsStatisticsInterface
     }
 
     /**
-     * Get the status of the scope.
-     *
-     * @return ScopeStatus
-     */
-    public function status()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the status of the scope.
-     *
-     * @param ScopeStatus $status
-     */
-    public function setStatus(ScopeStatus $status)
-    {
-        $this->status = $status;
-    }
-
-    /**
      * Get the number of runs made by the home team.
      *
      * @return integer
      */
-    public function homeTeamPoints()
+    public function homeTeamScore()
     {
-        return $this->homeTeamPoints;
+        return $this->homeTeamScore;
     }
 
     /**
@@ -66,9 +45,9 @@ class Innings implements ScopeInterface, InningsStatisticsInterface
      *
      * @return integer
      */
-    public function awayTeamPoints()
+    public function awayTeamScore()
     {
-        return $this->awayTeamPoints;
+        return $this->awayTeamScore;
     }
 
     /**
@@ -111,9 +90,8 @@ class Innings implements ScopeInterface, InningsStatisticsInterface
         return $this->awayTeamErrors;
     }
 
-    private $status;
-    private $homeTeamPoints;
-    private $awayTeamPoints;
+    private $homeTeamScore;
+    private $awayTeamScore;
     private $homeTeamHits;
     private $awayTeamHits;
     private $homeTeamErrors;

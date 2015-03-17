@@ -73,4 +73,12 @@ class FactoryTest extends PHPUnit_Framework_TestCase
             $this->factory->createTeamReader()
         );
     }
+
+    public function testCreateLiveScoreReader()
+    {
+        $this->assertEquals(
+            new Score\LiveScore\LiveScoreReader($this->xmlReader->mock()),
+            $this->factory->createLiveScoreReader()
+        );
+    }
 }

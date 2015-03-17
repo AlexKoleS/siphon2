@@ -42,4 +42,11 @@ interface FactoryInterface
      * @return Team\TeamReaderInterface
      */
     public function createTeamReader();
+
+    /**
+     * Create a live score reader.
+     *
+     * @return LiveScore\LiveScoreReaderInterface
+     */
+    public function createLiveScoreReader();
 }

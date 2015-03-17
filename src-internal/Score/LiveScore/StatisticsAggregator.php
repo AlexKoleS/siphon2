@@ -4,7 +4,10 @@ namespace Icecave\Siphon\Score\LiveScore;
 use Generator;
 use SimpleXMLElement;
 
-class StatisticsAggregator implements StatisticsAggregatorInterface
+/**
+ * Aggregates 'stat' XML elements per scope.
+ */
+class StatisticsAggregator
 {
     public function extract(SimpleXMLElement $xml)
     {

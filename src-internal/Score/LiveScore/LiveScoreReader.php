@@ -18,12 +18,12 @@ class LiveScoreReader implements LiveScoreReaderInterface
         if (null === $factories) {
             $factories = [
                 new PeriodLiveScoreFactory,
-                new InningsLiveScoreFactory,
+                // new InningLiveScoreFactory,
             ];
         }
 
-        $this->xmlReader = $xmlReader;
-        $this->factories = $factories;
+        $this->xmlReader  = $xmlReader;
+        $this->factories  = $factories;
     }
 
     /**
@@ -58,7 +58,11 @@ class LiveScoreReader implements LiveScoreReaderInterface
                 )
             );
 
-        $liveScore = $factory->create($sport, $league, $xml);
+        $liveScore = $factory->create(
+            $sport,
+            $league,
+            $xml
+        );
 
         $liveScore->setCompetitionStatus(
             CompetitionStatus::memberByValue(

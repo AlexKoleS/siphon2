@@ -3,11 +3,11 @@ namespace Icecave\Siphon\Score;
 
 use PHPUnit_Framework_TestCase;
 
-class InningsTest extends PHPUnit_Framework_TestCase
+class InningTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->scope = new Innings(
+        $this->scope = new Inning(
             1,
             2,
             3,
@@ -17,36 +17,19 @@ class InningsTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testStatus()
-    {
-        $this->assertSame(
-            ScopeStatus::COMPLETE(),
-            $this->scope->status()
-        );
-
-        $this->scope->setStatus(
-            ScopeStatus::IN_PROGRESS()
-        );
-
-        $this->assertSame(
-            ScopeStatus::IN_PROGRESS(),
-            $this->scope->status()
-        );
-    }
-
-    public function testHomeTeamPoints()
+    public function testHomeTeamScore()
     {
         $this->assertSame(
             1,
-            $this->scope->homeTeamPoints()
+            $this->scope->homeTeamScore()
         );
     }
 
-    public function testAwayTeamPoints()
+    public function testAwayTeamScore()
     {
         $this->assertSame(
             2,
-            $this->scope->awayTeamPoints()
+            $this->scope->awayTeamScore()
         );
     }
 

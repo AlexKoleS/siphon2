@@ -5,7 +5,7 @@ use Icecave\Siphon\Schedule\Competition;
 use SimpleXMLElement;
 
 /**
- * A factory for live scores.
+ * Create live score objects from XML data.
  */
 interface LiveScoreFactoryInterface
 {
@@ -21,7 +21,7 @@ interface LiveScoreFactoryInterface
     public function supports($sport, $league);
 
     /**
-     * Create a live score for the given competition.
+     * Create a live-score object from the given XML document.
      *
      * @param string           $sport  The sport (eg, baseball, football, etc)
      * @param string           $league The league (eg, MLB, NFL, etc)
@@ -29,5 +29,9 @@ interface LiveScoreFactoryInterface
      *
      * @return LiveScoreInterface
      */
-    public function create($sport, $league, SimpleXMLElement $xml);
+    public function create(
+        $sport,
+        $league,
+        SimpleXMLElement $xml
+    );
 }

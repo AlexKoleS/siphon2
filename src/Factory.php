@@ -92,6 +92,18 @@ class Factory implements FactoryInterface
         );
     }
 
+    /**
+     * Create a live score reader.
+     *
+     * @return LiveScore\LiveScoreReaderInterface
+     */
+    public function createLiveScoreReader()
+    {
+        return new Score\LiveScore\LiveScoreReader(
+            $this->xmlReader
+        );
+    }
+
     private $urlBuilder;
     private $xmlReader;
 }

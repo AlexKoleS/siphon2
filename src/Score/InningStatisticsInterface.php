@@ -3,8 +3,10 @@ namespace Icecave\Siphon\Score;
 
 /**
  * Additional statistics for innings-based sports.
+ *
+ * @api
  */
-interface InningsStatisticsInterface
+interface InningStatisticsInterface
 {
     /**
      * Get the number of hits made by the home team.
