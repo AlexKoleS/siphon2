@@ -2,7 +2,9 @@
 namespace Icecave\Siphon\Team;
 
 /**
- * Client for reading team feeds.
+ * Read data from team feeds.
+ *
+ * @api
  */
 interface TeamReaderInterface
 {
@@ -13,7 +15,7 @@ interface TeamReaderInterface
      * @param string $league The league (eg, MLB, NFL, etc)
      * @param string $season The season name.
      *
-     * @return array<Team>
+     * @return array<TeamInterface>
      */
     public function read($sport, $league, $season);
 }

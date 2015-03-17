@@ -80,6 +80,18 @@ class Factory implements FactoryInterface
         );
     }
 
+    /**
+     * Create a team reader.
+     *
+     * @return Team\TeamReaderInterface
+     */
+    public function createTeamReader()
+    {
+        return new Team\TeamReader(
+            $this->xmlReader
+        );
+    }
+
     private $urlBuilder;
     private $xmlReader;
 }

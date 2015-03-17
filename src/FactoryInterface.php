@@ -35,4 +35,11 @@ interface FactoryInterface
      * @return Schedule\ScheduleReaderInterface
      */
     public function createScheduleReader();
+
+    /**
+     * Create a team reader.
+     *
+     * @return Team\TeamReaderInterface
+     */
+    public function createTeamReader();
 }

@@ -4,7 +4,7 @@ namespace Icecave\Siphon\Team;
 /**
  * Represents a team in a team sport.
  */
-class Team
+class Team implements TeamInterface
 {
     /**
      * @param string      $id

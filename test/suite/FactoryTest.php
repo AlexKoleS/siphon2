@@ -65,4 +65,12 @@ class FactoryTest extends PHPUnit_Framework_TestCase
             $this->factory->createScheduleReader()
         );
     }
+
+    public function testCreateTeamReader()
+    {
+        $this->assertEquals(
+            new Team\TeamReader($this->xmlReader->mock()),
+            $this->factory->createTeamReader()
+        );
+    }
 }

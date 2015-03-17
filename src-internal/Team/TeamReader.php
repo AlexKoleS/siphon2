@@ -4,7 +4,7 @@ namespace Icecave\Siphon\Team;
 use Icecave\Siphon\XmlReaderInterface;
 
 /**
- * Client for reading team feeds.
+ * Read data from team feeds.
  */
 class TeamReader implements TeamReaderInterface
 {
@@ -20,7 +20,7 @@ class TeamReader implements TeamReaderInterface
      * @param string $league The league (eg, MLB, NFL, etc)
      * @param string $season The season name.
      *
-     * @return array<Team>
+     * @return array<TeamInterface>
      */
     public function read($sport, $league, $season)
     {
