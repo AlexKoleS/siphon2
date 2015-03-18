@@ -1,1 +1,0 @@
-LiveScoreReaderInterface.php

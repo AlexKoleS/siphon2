@@ -4,9 +4,9 @@ namespace Icecave\Siphon\Score\LiveScore;
 interface InningLiveScoreInterface extends LiveScoreInterface
 {
     /**
-     * Get the current scope, if one is in-progress.
+     * Get the current sub-type of the current inning.
      *
-     * @return InningHalf|null The current inning-half (top or bottom), or null if no inning is in progress.
+     * @return InningSubType|null The current inning sub-type (top or bottom), or null if no inning is in progress.
      */
-    public function currentInningHalf();
+    public function currentInningSubType();
 }

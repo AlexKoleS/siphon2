@@ -63,21 +63,22 @@ class StatisticsAggregator
         $team,
         Generator $stats
     ) {
-        foreach ($stats as list($scope, $type, $key, $value)) {
+        foreach ($stats as list($scopeKey, $scopeType, $scopeNum, $key, $value)) {
             $defaults[$key] = 0;
 
-            if (!isset($result[$scope])) {
-                $result[$scope] = (object) [
-                    'type' => $type,
-                    'home' => [],
-                    'away' => [],
+            if (!isset($result[$scopeKey])) {
+                $result[$scopeKey] = (object) [
+                    'type'   => $scopeType,
+                    'number' => $scopeNum,
+                    'home'   => [],
+                    'away'   => [],
                 ]; // @codeCoverageIgnore
             }
 
-            if (isset($result[$scope]->{$team}[$key])) {
-                $result[$scope]->{$team}[$key] += $value;
+            if (isset($result[$scopeKey]->{$team}[$key])) {
+                $result[$scopeKey]->{$team}[$key] += $value;
             } else {
-                $result[$scope]->{$team}[$key] = $value;
+                $result[$scopeKey]->{$team}[$key] = $value;
             }
         }
     }
@@ -100,6 +101,7 @@ class StatisticsAggregator
                     yield [
                         $ordering[$scopeType] | $scopeNum,
                         $scopeType,
+                        $scopeNum,
                         strval($stats['type']),
                         intval($stats['num']),
                     ]; // @codeCoverageIgnore

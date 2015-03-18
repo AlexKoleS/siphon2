@@ -1,88 +1,106 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-use Icecave\Siphon\Score\Innings;
-use Icecave\Siphon\Score\InningsType;
-use Icecave\Siphon\Score\ScopeStatus;
+use Icecave\Siphon\Schedule\CompetitionStatus;
+use Icecave\Siphon\Score\Inning;
+use Icecave\Siphon\Score\InningScore;
 use SimpleXMLElement;
 
-class InningLiveScoreFactory //implements LiveScoreFactoryInterface
+class InningLiveScoreFactory implements LiveScoreFactoryInterface
 {
-    // /**
-    //  * @param StatisticsAggregator|null $statisticsAggregator
-    //  */
-    // public function __construct(StatisticsAggregator $statisticsAggregator = null)
-    // {
-    //     if (null === $statisticsAggregator) {
-    //         $statisticsAggregator = new StatisticsAggregator;
-    //     }
+    /**
+     * @param StatisticsAggregator|null $statisticsAggregator
+     */
+    public function __construct(StatisticsAggregator $statisticsAggregator = null)
+    {
+        $this->statisticsAggregator = $statisticsAggregator ?: new StatisticsAggregator;
+    }
 
-    //     $this->statisticsAggregator = $statisticsAggregator;
-    // }
+    /**
+     * Check if this factory supports creation of live scores for the given
+     * competition.
+     *
+     * @param string $sport  The sport (eg, baseball, football, etc)
+     * @param string $league The league (eg, MLB, NFL, etc)
+     *
+     * @return boolean True if the factory supports the given competition; otherwise, false.
+     */
+    public function supports($sport, $league)
+    {
+        return 'baseball' === $sport;
+    }
 
-    // /**
-    //  * Check if this factory supports creation of live scores for the given
-    //  * competition.
-    //  *
-    //  * @param string $sport  The sport (eg, baseball, football, etc)
-    //  * @param string $league The league (eg, MLB, NFL, etc)
-    //  *
-    //  * @return boolean True if the factory supports the given competition; otherwise, false.
-    //  */
-    // public function supports($sport, $league)
-    // {
-    //     return 'baseball' === $sport;
-    // }
+    /**
+     * Create a live score for the given competition.
+     *
+     * @param string           $sport  The sport (eg, baseball, football, etc)
+     * @param string           $league The league (eg, MLB, NFL, etc)
+     * @param SimpleXMLElement $xml    The XML document being parsed.
+     *
+     * @return LiveScoreInterface
+     */
+    public function create($sport, $league, SimpleXMLElement $xml)
+    {
+        $liveScore = new InningLiveScore;
 
-    // /**
-    //  * Create a live score for the given competition.
-    //  *
-    //  * @param string           $sport  The sport (eg, baseball, football, etc)
-    //  * @param string           $league The league (eg, MLB, NFL, etc)
-    //  * @param SimpleXMLElement $xml    The XML document being parsed.
-    //  *
-    //  * @return LiveScoreInterface
-    //  */
-    // public function create($sport, $league, SimpleXMLElement $xml)
-    // {
-    //     $result = new InningLiveScore;
-    //     $stats  = $this->statisticsAggregator->extract($xml);
-    //     $scope  = null;
+        $this->updateCompetitionStatus($xml, $liveScore);
+        $this->updateCompetitionScore($xml, $liveScore);
 
-    //     foreach ($stats as $s) {
-    //         $scope = new Innings(
-    //             $s->home['runs'],
-    //             $s->away['runs'],
-    //             $s->home['hits'],
-    //             $s->away['hits'],
-    //             $s->home['errors'],
-    //             $s->away['errors']
-    //         );
+        return $liveScore;
+    }
 
-    //         $result->add($scope);
-    //     }
+    private function updateCompetitionStatus(SimpleXMLElement $xml, InningLiveScore $liveScore)
+    {
+        $liveScore->setCompetitionStatus(
+            CompetitionStatus::memberByValue(
+                strval($xml->xpath('//competition-status')[0])
+            )
+        );
+    }
 
-    //     if ($scope) {
-    //         $resultScope = $xml->xpath('//result-scope')[0];
+    private function updateCompetitionScore(SimpleXMLElement $xml, InningLiveScore $liveScore)
+    {
+        $resultScope = $xml->xpath('//result-scope')[0];
 
-    //         $status = ScopeStatus::memberByValue(
-    //             strval($resultScope->{'scope-status'})
-    //         );
+        if ('in-progress' === strval($resultScope->{'scope-status'})) {
+            $currentType   = strval($resultScope->scope['type']);
+            $currentNumber = intval($resultScope->scope['num']);
 
-    //         $scope->setStatus($status);
+            $liveScore->setCurrentInningSubType(
+                InningSubType::memberByValue(
+                    strval($resultScope->scope['sub-type'])
+                )
+            );
+        } else {
+            $currentType   = null;
+            $currentNumber = null;
+        }
 
-    //         // If the current scope is in progress then set the current innings type ...
-    //         if (ScopeStatus::IN_PROGRESS() === $status) {
-    //             $result->setCurrentInningsType(
-    //                 InningsType::memberByValue(
-    //                     strval($resultScope->scope['sub-type'])
-    //                 )
-    //             );
-    //         }
-    //     }
+        $score = new InningScore;
+        $stats = $this->statisticsAggregator->extract($xml);
 
-    //     return $result;
-    // }
+        foreach ($stats as $s) {
+            $scope = new Inning(
+                $s->home['runs'],
+                $s->away['runs'],
+                $s->home['hits'],
+                $s->away['hits'],
+                $s->home['errors'],
+                $s->away['errors']
+            );
 
-    // private $statisticsAggregator;
+            $score->add($scope);
+
+            if (
+                $currentType === $s->type
+                && $currentNumber === $s->number
+            ) {
+                $liveScore->setCurrentScope($scope);
+            }
+        }
+
+        $liveScore->setCompetitionScore($score);
+    }
+
+    private $statisticsAggregator;
 }

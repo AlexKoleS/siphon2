@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\PeriodScore;
 use Icecave\Siphon\Score\PeriodType;
@@ -54,10 +55,55 @@ class PeriodLiveScoreFactory implements LiveScoreFactoryInterface
     ) {
         $liveScore = new PeriodLiveScore;
 
+        $this->updateCompetitionStatus($xml, $liveScore);
+        $this->updateCompetitionScore($xml, $liveScore);
         $this->updateGameTime($xml, $liveScore);
-        $this->updateScore($xml, $liveScore);
 
         return $liveScore;
+    }
+
+    private function updateCompetitionStatus(SimpleXMLElement $xml, PeriodLiveScore $liveScore)
+    {
+        $liveScore->setCompetitionStatus(
+            CompetitionStatus::memberByValue(
+                strval($xml->xpath('//competition-status')[0])
+            )
+        );
+    }
+
+    private function updateCompetitionScore(SimpleXMLElement $xml, PeriodLiveScore $liveScore)
+    {
+        $resultScope = $xml->xpath('//result-scope')[0];
+
+        if ('in-progress' === strval($resultScope->{'scope-status'})) {
+            $currentType   = strval($resultScope->scope['type']);
+            $currentNumber = intval($resultScope->scope['num']);
+        } else {
+            $currentType   = null;
+            $currentNumber = null;
+        }
+
+        $score = new PeriodScore;
+        $stats = $this->statisticsAggregator->extract($xml);
+
+        foreach ($stats as $s) {
+            $scope = new Period(
+                PeriodType::memberByValue($s->type),
+                $s->home['score'],
+                $s->away['score']
+            );
+
+            $score->add($scope);
+
+            if (
+                $currentType === $s->type
+                && $currentNumber === $s->number
+            ) {
+                $liveScore->setCurrentScope($scope);
+            }
+        }
+
+        $liveScore->setCompetitionScore($score);
     }
 
     private function updateGameTime(SimpleXMLElement $xml, PeriodLiveScore $liveScore)
@@ -73,24 +119,6 @@ class PeriodLiveScoreFactory implements LiveScoreFactoryInterface
         $liveScore->setCurrentGameTime(
             Duration::fromComponents(0, 0, $hours, $minutes, $seconds)
         );
-    }
-
-    private function updateScore(SimpleXMLElement $xml, PeriodLiveScore $liveScore)
-    {
-        $score = new PeriodScore;
-        $stats = $this->statisticsAggregator->extract($xml);
-
-        foreach ($stats as $s) {
-            $score->add(
-                new Period(
-                    PeriodType::memberByValue($s->type),
-                    $s->home['score'],
-                    $s->away['score']
-                )
-            );
-        }
-
-        $liveScore->setCompetitionScore($score);
     }
 
     private $statisticsAggregator;

@@ -148,7 +148,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped();
 
-        $this->setUpXmlReader('BoxScore/boxscores-innings.xml');
+        $this->setUpXmlReader('BoxScore/boxscores-inning.xml');
 
         $boxScore = $this->reader->read(
             'baseball',

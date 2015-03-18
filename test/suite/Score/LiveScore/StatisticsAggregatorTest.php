@@ -1,7 +1,6 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-use Icecave\Siphon\Score\Innings;
 use Icecave\Siphon\Score\LiveScore\Period\Period;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
@@ -29,8 +28,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 (object) [
-                    'type' => 'period',
-                    'home' => [
+                    'type'   => 'period',
+                    'number' => 1,
+                    'home'   => [
                         'score' => 3,
                     ],
                     'away' => [
@@ -38,8 +38,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'period',
-                    'home' => [
+                    'type'   => 'period',
+                    'number' => 2,
+                    'home'   => [
                         'score' => 3,
                     ],
                     'away' => [
@@ -65,8 +66,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 (object) [
-                    'type' => 'period',
-                    'home' => [
+                    'type'   => 'period',
+                    'number' => 1,
+                    'home'   => [
                         'score' => 2,
                     ],
                     'away' => [
@@ -74,8 +76,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'period',
-                    'home' => [
+                    'type'   => 'period',
+                    'number' => 2,
+                    'home'   => [
                         'score' => 0,
                     ],
                     'away' => [
@@ -83,8 +86,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'period',
-                    'home' => [
+                    'type'   => 'period',
+                    'number' => 3,
+                    'home'   => [
                         'score' => 1,
                     ],
                     'away' => [
@@ -92,8 +96,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'overtime',
-                    'home' => [
+                    'type'   => 'overtime',
+                    'number' => 1,
+                    'home'   => [
                         'score' => 0,
                     ],
                     'away' => [
@@ -101,8 +106,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'shootout',
-                    'home' => [
+                    'type'   => 'shootout',
+                    'number' => 1,
+                    'home'   => [
                         'score' => 0,
                     ],
                     'away' => [
@@ -110,8 +116,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'shootout',
-                    'home' => [
+                    'type'   => 'shootout',
+                    'number' => 2,
+                    'home'   => [
                         'score' => 0,
                     ],
                     'away' => [
@@ -119,8 +126,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'shootout',
-                    'home' => [
+                    'type'   => 'shootout',
+                    'number' => 3,
+                    'home'   => [
                         'score' => 0,
                     ],
                     'away' => [
@@ -134,7 +142,7 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
 
     public function testExtractWithInnings()
     {
-        $this->setUpXmlReader('Score/LiveScore/livescores-innings.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-inning.xml');
 
         $xml = $this
             ->xmlReader()
@@ -146,8 +154,9 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 (object) [
-                    'type' => 'inning',
-                    'home' => [
+                    'type'   => 'inning',
+                    'number' => 1,
+                    'home'   => [
                         'errors' => 0,
                         'hits'   => 1,
                         'runs'   => 0,
@@ -159,13 +168,14 @@ class StatisticsAggregatorTest extends PHPUnit_Framework_TestCase
                     ],
                 ],
                 (object) [
-                    'type' => 'inning',
-                    'home' => [
+                    'type'   => 'inning',
+                    'number' => 2,
+                    'home'   => [
                         'errors' => 0,
                         'hits'   => 2,
                         'runs'   => 0,
                     ],
-                    'away' => [
+                    'away'   => [
                         'errors' => 0,
                         'hits'   => 2,
                         'runs'   => 1,

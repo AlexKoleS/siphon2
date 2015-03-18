@@ -1,12 +1,12 @@
 <?php
-namespace Icecave\Siphon\Score;
+namespace Icecave\Siphon\Score\LiveScore;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 
 /**
- * The inning half.
+ * A sub-type (half) of an inning.
  */
-class InningHalf extends AbstractEnumeration
+class InningSubType extends AbstractEnumeration
 {
     const TOP    = 'top';    // away team is batting
     const BOTTOM = 'bottom'; // home team is batting
