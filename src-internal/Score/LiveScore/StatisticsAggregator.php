@@ -9,6 +9,21 @@ use SimpleXMLElement;
  */
 class StatisticsAggregator
 {
+    /**
+     * Extract values from 'stat' elements into an easily usable structures.
+     *
+     * The result value is an array of objects, each object represents a single
+     * scope and has the following attributes:
+     *
+     * - type (period, overtime, shootout, inning, etc)
+     * - number (the scope number from the 'num' attribute)
+     * - home (an associated array of statistics for the home team)
+     * - away (an associated array of statistics for the home team)
+     *
+     * @param SimpleXMLElement The XML document.
+     *
+     * @return array<stdClass>
+     */
     public function extract(SimpleXMLElement $xml)
     {
         $result   = [];
@@ -40,6 +55,13 @@ class StatisticsAggregator
         return $result;
     }
 
+    /**
+     * Normalize all home/away statistics arrays so that they are guaranteed to
+     * contain all possible keys.
+     *
+     * @param array<stdClass>      &$result  The un-normalized result.
+     * @param array<string, mixed> $defaults An associative array of defaults to add to each statistics array.
+     */
     private function normalize(
         array &$result,
         array $defaults
@@ -57,6 +79,15 @@ class StatisticsAggregator
         $result = array_values($result);
     }
 
+    /**
+     * Reduce a sequence of statistics 5-tuples from the map() method to
+     * associative arrays inside the results array.
+     *
+     * @param array     &$result   The result object to populate.
+     * @param array     &$defaults An array that is populated with default values that must be present in every scope.
+     * @param string    $team      The string 'home' or 'away', depending on which team's stats are being populated.
+     * @param Generator $stats     The result of the map() method.
+     */
     private function reduce(
         array &$result,
         array &$defaults,
@@ -83,6 +114,21 @@ class StatisticsAggregator
         }
     }
 
+    /**
+     * Yield a sequence of 5-tuples for each statistics present in the XML.
+     *
+     * Each 5-tuple contains:
+     *
+     * - ordering (an integer used to correctly sort the scopes)
+     * - scope type (period, overtime, shootout, inning, etc)
+     * - scope number (the scope number from the 'num' attribute)
+     * - stat key
+     * - stat value
+     *
+     * @param array<SimpleXMLElement> $groups An array of 'stat-group' elements.
+     *
+     * @return mixed<tuple<integer, string, integer, string, integer>> A sequence of 5-tuples.
+     */
     private function map($groups)
     {
         $ordering = [
