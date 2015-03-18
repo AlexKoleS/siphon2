@@ -2,7 +2,7 @@
 namespace Icecave\Siphon\Schedule;
 
 /**
- * Read data from schedule feeds.
+ * A client for SDI schedule feeds.
  *
  * @api
  */

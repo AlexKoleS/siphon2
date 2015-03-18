@@ -5,6 +5,8 @@ use Eloquent\Enumeration\AbstractEnumeration;
 
 /**
  * A sub-type (half) of an inning.
+ *
+ * @api
  */
 class InningSubType extends AbstractEnumeration
 {

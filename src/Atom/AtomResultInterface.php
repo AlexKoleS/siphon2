@@ -6,7 +6,9 @@ use Icecave\Chrono\DateTime;
 use IteratorAggregate;
 
 /**
- * A collection of results from an Atom feed.
+ * The result of reading an Atom feed.
+ *
+ * An atom result is a collection of AtomEntryInterface objects.
  *
  * @api
  */

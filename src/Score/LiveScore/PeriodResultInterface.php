@@ -1,7 +1,12 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-interface PeriodLiveScoreInterface extends LiveScoreInterface
+/**
+ * The result of reading a live score feed for a competition that uses periods.
+ *
+ * @api
+ */
+interface PeriodResultInterface extends LiveScoreResultInterface
 {
     /**
      * Get the current game time.

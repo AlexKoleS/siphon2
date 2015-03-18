@@ -6,7 +6,7 @@ use Icecave\Siphon\Score\ScopeInterface;
 use Icecave\Siphon\Score\ScoreInterface;
 use LogicException;
 
-trait LiveScoreTrait
+trait ResultTrait
 {
     /**
      * Get the current scope, if one is in-progress.

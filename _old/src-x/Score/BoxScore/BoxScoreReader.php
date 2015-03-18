@@ -67,7 +67,7 @@ class BoxScoreReader implements BoxScoreReaderInterface
      * @param string $sport  The sport (eg, baseball, football, etc)
      * @param string $league The league (eg, MLB, NFL, etc)
      *
-     * @return LiveScoreFactoryInterface
+     * @return ResultFactoryInterface
      */
     private function selectFactory($sport, $league)
     {

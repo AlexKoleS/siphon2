@@ -4,7 +4,10 @@ namespace Icecave\Siphon\Atom;
 use Icecave\Chrono\DateTime;
 
 /**
- * A single result from an atom feed.
+ * A single Atom result.
+ *
+ * An Atom entry provides the URL and modification timestamp of each feed listed
+ * in the Atom feed.
  *
  * @api
  */

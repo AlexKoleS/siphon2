@@ -1,7 +1,12 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-interface InningLiveScoreInterface extends LiveScoreInterface
+/**
+ * The result of reading a live score feed for a competition that uses innings.
+ *
+ * @api
+ */
+interface InningResultInterface extends LiveScoreResultInterface
 {
     /**
      * Get the current sub-type of the current inning.

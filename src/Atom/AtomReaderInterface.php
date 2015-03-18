@@ -4,9 +4,9 @@ namespace Icecave\Siphon\Atom;
 use Icecave\Chrono\DateTime;
 
 /**
- * Read data from the Atom feed.
+ * A client for SDI Atom feeds.
  *
- * Atom feeds are used to poll for changes to the sports data feeds.
+ * Atom feeds are polled to check for changes to the sports data feeds.
  *
  * @api
  */

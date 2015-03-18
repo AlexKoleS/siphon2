@@ -3,9 +3,9 @@ namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
 
-class PeriodLiveScore implements PeriodLiveScoreInterface
+class PeriodResult implements PeriodResultInterface
 {
-    use LiveScoreTrait;
+    use ResultTrait;
 
     /**
      * Get the current game time.

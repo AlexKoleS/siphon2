@@ -4,7 +4,9 @@ namespace Icecave\Siphon\Schedule;
 use Icecave\Chrono\DateTime;
 
 /**
- * A sports competition (ie, "event" / "game" / "match" / etc).
+ * A sports competition.
+ *
+ * Also known as a "game", "event", "match", etc.
  *
  * @api
  */

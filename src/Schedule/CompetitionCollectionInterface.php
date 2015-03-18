@@ -5,7 +5,7 @@ use Countable;
 use IteratorAggregate;
 
 /**
- * A schedule containing zero or more seasons.
+ * A collection of competitions.
  *
  * @api
  */

@@ -2,7 +2,10 @@
 namespace Icecave\Siphon\Schedule;
 
 /**
- * A schedule containing zero or more seasons.
+ * A schedule is a collection of seasons.
+ *
+ * As seasons contain competitions, a schedule can also be used as a collection
+ * of competitions, via CompetitionCollectionInterface.
  *
  * @api
  */

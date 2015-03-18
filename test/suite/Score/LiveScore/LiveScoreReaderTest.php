@@ -13,8 +13,8 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers Icecave\Siphon\Score\LiveScore\LiveScoreReader
- * @covers Icecave\Siphon\Score\LiveScore\InningLiveScoreFactory
- * @covers Icecave\Siphon\Score\LiveScore\PeriodLiveScoreFactory
+ * @covers Icecave\Siphon\Score\LiveScore\InningFactory
+ * @covers Icecave\Siphon\Score\LiveScore\PeriodFactory
  */
 class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-period.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'football',
             'NFL',
             '/path/to/sport:12345'
@@ -45,7 +45,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $scope1 = new Period(PeriodType::PERIOD(), 3, 7);
         $scope2 = new Period(PeriodType::PERIOD(), 3, 0);
 
-        $expected = new PeriodLiveScore;
+        $expected = new PeriodResult;
         $expected->setCurrentScope($scope2);
         $expected->setCurrentGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
@@ -58,7 +58,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
 
@@ -66,7 +66,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-period-complete.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'football',
             'NFL',
             '/path/to/sport:12345'
@@ -77,7 +77,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/football/NFL/livescores/livescores_12345.xml');
 
-        $expected = new PeriodLiveScore;
+        $expected = new PeriodResult;
         $expected->setCompetitionStatus(CompetitionStatus::COMPLETE());
 
         $score = new PeriodScore;
@@ -90,7 +90,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
 
@@ -98,7 +98,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-period-special.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'hockey',
             'NHL',
             '/path/to/sport:12345'
@@ -117,7 +117,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $scope6 = new Period(PeriodType::SHOOTOUT(), 0, 1);
         $scope7 = new Period(PeriodType::SHOOTOUT(), 0, 0);
 
-        $expected = new PeriodLiveScore;
+        $expected = new PeriodResult;
         $expected->setCurrentScope($scope7);
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
 
@@ -134,7 +134,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
 
@@ -142,7 +142,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-inning.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'baseball',
             'MLB',
             '/path/to/sport:12345'
@@ -156,7 +156,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $scope1 = new Inning(0, 0, 1, 0, 0, 0);
         $scope2 = new Inning(0, 1, 2, 2, 0, 0);
 
-        $expected = new InningLiveScore;
+        $expected = new InningResult;
         $expected->setCurrentScope($scope2);
         $expected->setCurrentInningSubType(InningSubType::BOTTOM());
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
@@ -169,7 +169,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
 
@@ -177,7 +177,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-inning-complete.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'baseball',
             'MLB',
             '/path/to/sport:12345'
@@ -188,7 +188,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/baseball/MLB/livescores/livescores_12345.xml');
 
-        $expected = new InningLiveScore;
+        $expected = new InningResult;
         $expected->setCompetitionStatus(CompetitionStatus::COMPLETE());
 
         $score = new InningScore;
@@ -206,7 +206,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
     public function testReadWithUnsupportedCompetition()
@@ -216,7 +216,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             'The provided competition could not be handled by any of the known live score factories.'
         );
 
-        $liveScore = $this->reader->read(
+        $this->reader->read(
             'unknown-sport',
             'unknown-league',
             '/path/to/sport:12345'

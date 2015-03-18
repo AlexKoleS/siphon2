@@ -7,32 +7,32 @@ use Icecave\Siphon\Score\PeriodInterface;
 use Icecave\Siphon\Score\ScoreInterface;
 use PHPUnit_Framework_TestCase;
 
-class InningLiveScoreTest extends PHPUnit_Framework_TestCase
+class InningResultTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->liveScore = new InningLiveScore;
+        $this->result = new InningResult;
     }
 
     public function testCurrentScope()
     {
         $this->assertNull(
-            $this->liveScore->currentScope()
+            $this->result->currentScope()
         );
 
         $scope = Phony::mock(PeriodInterface::class)->mock();
 
-        $this->liveScore->setCurrentScope($scope);
+        $this->result->setCurrentScope($scope);
 
         $this->assertSame(
             $scope,
-            $this->liveScore->currentScope()
+            $this->result->currentScope()
         );
 
-        $this->liveScore->setCurrentScope(null);
+        $this->result->setCurrentScope(null);
 
         $this->assertNull(
-            $this->liveScore->currentScope()
+            $this->result->currentScope()
         );
     }
 
@@ -40,16 +40,16 @@ class InningLiveScoreTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             CompetitionStatus::OTHER(),
-            $this->liveScore->competitionStatus()
+            $this->result->competitionStatus()
         );
 
-        $this->liveScore->setCompetitionStatus(
+        $this->result->setCompetitionStatus(
             CompetitionStatus::SCHEDULED()
         );
 
         $this->assertSame(
             CompetitionStatus::SCHEDULED(),
-            $this->liveScore->competitionStatus()
+            $this->result->competitionStatus()
         );
     }
 
@@ -57,11 +57,11 @@ class InningLiveScoreTest extends PHPUnit_Framework_TestCase
     {
         $score = Phony::mock(ScoreInterface::class)->mock();
 
-        $this->liveScore->setCompetitionScore($score);
+        $this->result->setCompetitionScore($score);
 
         $this->assertSame(
             $score,
-            $this->liveScore->competitionScore()
+            $this->result->competitionScore()
         );
     }
 
@@ -72,28 +72,28 @@ class InningLiveScoreTest extends PHPUnit_Framework_TestCase
             'Score has not been set.'
         );
 
-        $this->liveScore->competitionScore();
+        $this->result->competitionScore();
     }
 
     public function testCurrentInningSubType()
     {
         $this->assertNull(
-            $this->liveScore->currentInningSubType()
+            $this->result->currentInningSubType()
         );
 
-        $this->liveScore->setCurrentInningSubType(
+        $this->result->setCurrentInningSubType(
             InningSubType::TOP()
         );
 
         $this->assertSame(
             InningSubType::TOP(),
-            $this->liveScore->currentInningSubType()
+            $this->result->currentInningSubType()
         );
 
-        $this->liveScore->setCurrentInningSubType(null);
+        $this->result->setCurrentInningSubType(null);
 
         $this->assertNull(
-            $this->liveScore->currentInningSubType()
+            $this->result->currentInningSubType()
         );
     }
 }

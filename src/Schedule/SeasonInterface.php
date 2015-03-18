@@ -6,6 +6,9 @@ use Icecave\Chrono\Date;
 /**
  * A season within a schedule.
  *
+ * Seasons can be used as a collection of competitions, via
+ * CompetitionCollectionInterface.
+ *
  * @api
  */
 interface SeasonInterface extends CompetitionCollectionInterface

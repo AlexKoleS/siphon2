@@ -2,7 +2,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 /**
- * Client for reading live score feeds.
+ * A client for reading SDI live score feeds.
  *
  * @api
  */
@@ -15,7 +15,7 @@ interface LiveScoreReaderInterface
      * @param string $league        The league (eg, MLB, NFL, etc)
      * @param string $competitionId The competition ID.
      *
-     * @return LiveScoreInterface
+     * @return LiveScoreResultInterface
      */
     public function read($sport, $league, $competitionId);
 }

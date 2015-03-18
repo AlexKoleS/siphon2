@@ -5,7 +5,12 @@ use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\ScopeInterface;
 use Icecave\Siphon\Score\ScoreInterface;
 
-interface LiveScoreInterface
+/**
+ * The result of reading a live score feed.
+ *
+ * @api
+ */
+interface LiveScoreResultInterface
 {
     /**
      * Get the current scope, if one is in-progress.

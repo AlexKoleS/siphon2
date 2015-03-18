@@ -7,7 +7,7 @@ use SimpleXMLElement;
 /**
  * Create live score objects from XML data.
  */
-interface LiveScoreFactoryInterface
+interface ResultFactoryInterface
 {
     /**
      * Check if this factory supports creation of live scores for the given

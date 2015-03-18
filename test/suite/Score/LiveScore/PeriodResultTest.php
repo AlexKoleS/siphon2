@@ -8,32 +8,32 @@ use Icecave\Siphon\Score\PeriodInterface;
 use Icecave\Siphon\Score\ScoreInterface;
 use PHPUnit_Framework_TestCase;
 
-class PeriodLiveScoreTest extends PHPUnit_Framework_TestCase
+class PeriodResultTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->liveScore = new PeriodLiveScore;
+        $this->result = new PeriodResult;
     }
 
     public function testCurrentScope()
     {
         $this->assertNull(
-            $this->liveScore->currentScope()
+            $this->result->currentScope()
         );
 
         $scope = Phony::mock(PeriodInterface::class)->mock();
 
-        $this->liveScore->setCurrentScope($scope);
+        $this->result->setCurrentScope($scope);
 
         $this->assertSame(
             $scope,
-            $this->liveScore->currentScope()
+            $this->result->currentScope()
         );
 
-        $this->liveScore->setCurrentScope(null);
+        $this->result->setCurrentScope(null);
 
         $this->assertNull(
-            $this->liveScore->currentScope()
+            $this->result->currentScope()
         );
     }
 
@@ -41,16 +41,16 @@ class PeriodLiveScoreTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             CompetitionStatus::OTHER(),
-            $this->liveScore->competitionStatus()
+            $this->result->competitionStatus()
         );
 
-        $this->liveScore->setCompetitionStatus(
+        $this->result->setCompetitionStatus(
             CompetitionStatus::SCHEDULED()
         );
 
         $this->assertSame(
             CompetitionStatus::SCHEDULED(),
-            $this->liveScore->competitionStatus()
+            $this->result->competitionStatus()
         );
     }
 
@@ -58,11 +58,11 @@ class PeriodLiveScoreTest extends PHPUnit_Framework_TestCase
     {
         $score = Phony::mock(ScoreInterface::class)->mock();
 
-        $this->liveScore->setCompetitionScore($score);
+        $this->result->setCompetitionScore($score);
 
         $this->assertSame(
             $score,
-            $this->liveScore->competitionScore()
+            $this->result->competitionScore()
         );
     }
 
@@ -73,28 +73,28 @@ class PeriodLiveScoreTest extends PHPUnit_Framework_TestCase
             'Score has not been set.'
         );
 
-        $this->liveScore->competitionScore();
+        $this->result->competitionScore();
     }
 
     public function testCurrentGameTime()
     {
         $this->assertNull(
-            $this->liveScore->currentGameTime()
+            $this->result->currentGameTime()
         );
 
         $gameTime = new Duration;
 
-        $this->liveScore->setCurrentGameTime($gameTime);
+        $this->result->setCurrentGameTime($gameTime);
 
         $this->assertSame(
             $gameTime,
-            $this->liveScore->currentGameTime()
+            $this->result->currentGameTime()
         );
 
-        $this->liveScore->setCurrentGameTime(null);
+        $this->result->setCurrentGameTime(null);
 
         $this->assertNull(
-            $this->liveScore->currentGameTime()
+            $this->result->currentGameTime()
         );
     }
 }

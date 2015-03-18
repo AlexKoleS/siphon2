@@ -1,9 +1,9 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-class InningLiveScore implements InningLiveScoreInterface
+class InningResult implements InningResultInterface
 {
-    use LiveScoreTrait;
+    use ResultTrait;
 
     /**
      * Get the current sub-type of the current inning.

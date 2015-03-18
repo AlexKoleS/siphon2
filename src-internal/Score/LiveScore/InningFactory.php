@@ -6,7 +6,7 @@ use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
 use SimpleXMLElement;
 
-class InningLiveScoreFactory implements LiveScoreFactoryInterface
+class InningFactory implements ResultFactoryInterface
 {
     /**
      * @param StatisticsAggregator|null $statisticsAggregator
@@ -41,24 +41,24 @@ class InningLiveScoreFactory implements LiveScoreFactoryInterface
      */
     public function create($sport, $league, SimpleXMLElement $xml)
     {
-        $liveScore = new InningLiveScore;
+        $result = new InningResult;
 
-        $this->updateCompetitionStatus($xml, $liveScore);
-        $this->updateCompetitionScore($xml, $liveScore);
+        $this->updateCompetitionStatus($xml, $result);
+        $this->updateCompetitionScore($xml, $result);
 
-        return $liveScore;
+        return $result;
     }
 
-    private function updateCompetitionStatus(SimpleXMLElement $xml, InningLiveScore $liveScore)
+    private function updateCompetitionStatus(SimpleXMLElement $xml, InningResult $result)
     {
-        $liveScore->setCompetitionStatus(
+        $result->setCompetitionStatus(
             CompetitionStatus::memberByValue(
                 strval($xml->xpath('//competition-status')[0])
             )
         );
     }
 
-    private function updateCompetitionScore(SimpleXMLElement $xml, InningLiveScore $liveScore)
+    private function updateCompetitionScore(SimpleXMLElement $xml, InningResult $result)
     {
         $resultScope = $xml->xpath('//result-scope')[0];
 
@@ -66,7 +66,7 @@ class InningLiveScoreFactory implements LiveScoreFactoryInterface
             $currentType   = strval($resultScope->scope['type']);
             $currentNumber = intval($resultScope->scope['num']);
 
-            $liveScore->setCurrentInningSubType(
+            $result->setCurrentInningSubType(
                 InningSubType::memberByValue(
                     strval($resultScope->scope['sub-type'])
                 )
@@ -95,11 +95,11 @@ class InningLiveScoreFactory implements LiveScoreFactoryInterface
                 $currentType === $s->type
                 && $currentNumber === $s->number
             ) {
-                $liveScore->setCurrentScope($scope);
+                $result->setCurrentScope($scope);
             }
         }
 
-        $liveScore->setCompetitionScore($score);
+        $result->setCompetitionScore($score);
     }
 
     private $statisticsAggregator;
