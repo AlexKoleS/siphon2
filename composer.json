@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Icecave\\Siphon\\": "src"
+            "Icecave\\Siphon\\": ["src", "src-internal"]
         }
     },
     "extra": {

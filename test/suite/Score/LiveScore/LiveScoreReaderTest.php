@@ -3,18 +3,18 @@ namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Schedule\CompetitionStatus;
-use Icecave\Siphon\Score\Innings;
-use Icecave\Siphon\Score\InningsType;
+use Icecave\Siphon\Score\Inning;
+use Icecave\Siphon\Score\InningScore;
 use Icecave\Siphon\Score\Period;
+use Icecave\Siphon\Score\PeriodScore;
 use Icecave\Siphon\Score\PeriodType;
-use Icecave\Siphon\Score\ScopeStatus;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
 /**
  * @covers Icecave\Siphon\Score\LiveScore\LiveScoreReader
- * @covers Icecave\Siphon\Score\LiveScore\InningsLiveScoreFactory
- * @covers Icecave\Siphon\Score\LiveScore\PeriodLiveScoreFactory
+ * @covers Icecave\Siphon\Score\LiveScore\InningFactory
+ * @covers Icecave\Siphon\Score\LiveScore\PeriodFactory
  */
 class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 {
@@ -31,7 +31,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-period.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'football',
             'NFL',
             '/path/to/sport:12345'
@@ -42,27 +42,55 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/football/NFL/livescores/livescores_12345.xml');
 
-        $scope1 = new Period(
-            3, // home team points
-            7  // away team points
-        );
-        $scope1->setStatus(ScopeStatus::COMPLETE());
+        $scope1 = new Period(PeriodType::PERIOD(), 3, 7);
+        $scope2 = new Period(PeriodType::PERIOD(), 3, 0);
 
-        $scope2 = new Period(
-            3, // home team points
-            0  // away team points
-        );
-        $scope2->setStatus(ScopeStatus::IN_PROGRESS());
-
-        $expected = new PeriodLiveScore;
+        $expected = new PeriodResult;
+        $expected->setCurrentScope($scope2);
+        $expected->setCurrentGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-        $expected->setGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
-        $expected->add($scope1);
-        $expected->add($scope2);
+
+        $score = new PeriodScore;
+        $score->add($scope1);
+        $score->add($scope2);
+
+        $expected->setCompetitionScore($score);
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
+        );
+    }
+
+    public function testReadWithPeriodsOnCompleteEvent()
+    {
+        $this->setUpXmlReader('Score/LiveScore/livescores-period-complete.xml');
+
+        $result = $this->reader->read(
+            'football',
+            'NFL',
+            '/path/to/sport:12345'
+        );
+
+        $this
+            ->xmlReader()
+            ->read
+            ->calledWith('/sport/v2/football/NFL/livescores/livescores_12345.xml');
+
+        $expected = new PeriodResult;
+        $expected->setCompetitionStatus(CompetitionStatus::COMPLETE());
+
+        $score = new PeriodScore;
+        $score->add(new Period(PeriodType::PERIOD(), 3,  7));
+        $score->add(new Period(PeriodType::PERIOD(), 3,  0));
+        $score->add(new Period(PeriodType::PERIOD(), 10, 3));
+        $score->add(new Period(PeriodType::PERIOD(), 3,  5));
+
+        $expected->setCompetitionScore($score);
+
+        $this->assertEquals(
+            $expected,
+            $result
         );
     }
 
@@ -70,7 +98,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/LiveScore/livescores-period-special.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'hockey',
             'NHL',
             '/path/to/sport:12345'
@@ -81,73 +109,40 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/hockey/NHL/livescores/livescores_12345.xml');
 
-        $scope1 = new Period(
-            2, // home team points
-            0  // away team points
-        );
-        $scope1->setStatus(ScopeStatus::COMPLETE());
+        $scope1 = new Period(PeriodType::PERIOD(),   2, 0);
+        $scope2 = new Period(PeriodType::PERIOD(),   0, 0);
+        $scope3 = new Period(PeriodType::PERIOD(),   1, 3);
+        $scope4 = new Period(PeriodType::OVERTIME(), 0, 0);
+        $scope5 = new Period(PeriodType::SHOOTOUT(), 0, 0);
+        $scope6 = new Period(PeriodType::SHOOTOUT(), 0, 1);
+        $scope7 = new Period(PeriodType::SHOOTOUT(), 0, 0);
 
-        $scope2 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope2->setStatus(ScopeStatus::COMPLETE());
-
-        $scope3 = new Period(
-            1, // home team points
-            3  // away team points
-        );
-        $scope3->setStatus(ScopeStatus::COMPLETE());
-
-        $scope4 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope4->setStatus(ScopeStatus::COMPLETE());
-        $scope4->setType(PeriodType::OVERTIME());
-
-        $scope5 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope5->setStatus(ScopeStatus::COMPLETE());
-        $scope5->setType(PeriodType::SHOOTOUT());
-
-        $scope6 = new Period(
-            0, // home team points
-            1  // away team points
-        );
-        $scope6->setStatus(ScopeStatus::COMPLETE());
-        $scope6->setType(PeriodType::SHOOTOUT());
-
-        $scope7 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope7->setStatus(ScopeStatus::IN_PROGRESS());
-        $scope7->setType(PeriodType::SHOOTOUT());
-
-        $expected = new PeriodLiveScore;
+        $expected = new PeriodResult;
+        $expected->setCurrentScope($scope7);
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-        $expected->add($scope1);
-        $expected->add($scope2);
-        $expected->add($scope3);
-        $expected->add($scope4);
-        $expected->add($scope5);
-        $expected->add($scope6);
-        $expected->add($scope7);
+
+        $score = new PeriodScore;
+        $score->add($scope1);
+        $score->add($scope2);
+        $score->add($scope3);
+        $score->add($scope4);
+        $score->add($scope5);
+        $score->add($scope6);
+        $score->add($scope7);
+
+        $expected->setCompetitionScore($score);
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
 
     public function testReadWithInnings()
     {
-        $this->setUpXmlReader('Score/LiveScore/livescores-innings.xml');
+        $this->setUpXmlReader('Score/LiveScore/livescores-inning.xml');
 
-        $liveScore = $this->reader->read(
+        $result = $this->reader->read(
             'baseball',
             'MLB',
             '/path/to/sport:12345'
@@ -158,38 +153,62 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/baseball/MLB/livescores/livescores_12345.xml');
 
-        $scope1 = new Innings(
-            0, // home team runs
-            0, // away team runs
-            1, // home team hits
-            0, // away team hits
-            0, // home team errors
-            0  // away team errors
-        );
-        $scope1->setStatus(ScopeStatus::COMPLETE());
+        $scope1 = new Inning(0, 0, 1, 0, 0, 0);
+        $scope2 = new Inning(0, 1, 2, 2, 0, 0);
 
-        $scope2 = new Innings(
-            0, // home team runs
-            1, // away team runs
-            2, // home team hits
-            2, // away team hits
-            0, // home team errors
-            0  // away team errors
-        );
-        $scope2->setStatus(ScopeStatus::IN_PROGRESS());
-
-        $expected = new InningsLiveScore;
+        $expected = new InningResult;
+        $expected->setCurrentScope($scope2);
+        $expected->setCurrentInningSubType(InningSubType::BOTTOM());
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-        $expected->setCurrentInningsType(InningsType::BOTTOM());
-        $expected->add($scope1);
-        $expected->add($scope2);
+
+        $score = new InningScore;
+        $score->add($scope1);
+        $score->add($scope2);
+
+        $expected->setCompetitionScore($score);
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $result
         );
     }
 
+    public function testReadWithInningsOnCompleteEvent()
+    {
+        $this->setUpXmlReader('Score/LiveScore/livescores-inning-complete.xml');
+
+        $result = $this->reader->read(
+            'baseball',
+            'MLB',
+            '/path/to/sport:12345'
+        );
+
+        $this
+            ->xmlReader()
+            ->read
+            ->calledWith('/sport/v2/baseball/MLB/livescores/livescores_12345.xml');
+
+        $expected = new InningResult;
+        $expected->setCompetitionStatus(CompetitionStatus::COMPLETE());
+
+        $score = new InningScore;
+        $score->add(new Inning(0, 0, 1, 0, 0, 0));
+        $score->add(new Inning(0, 1, 2, 2, 0, 0));
+        $score->add(new Inning(0, 0, 0, 3, 0, 0));
+        $score->add(new Inning(1, 2, 3, 2, 1, 0));
+        $score->add(new Inning(0, 0, 1, 0, 0, 0));
+        $score->add(new Inning(0, 0, 0, 2, 0, 0));
+        $score->add(new Inning(0, 1, 2, 1, 0, 0));
+        $score->add(new Inning(0, 3, 0, 5, 0, 1));
+        $score->add(new Inning(0, 0, 1, 0, 0, 0));
+
+        $expected->setCompetitionScore($score);
+
+        $this->assertEquals(
+            $expected,
+            $result
+        );
+    }
     public function testReadWithUnsupportedCompetition()
     {
         $this->setExpectedException(
@@ -197,7 +216,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             'The provided competition could not be handled by any of the known live score factories.'
         );
 
-        $liveScore = $this->reader->read(
+        $this->reader->read(
             'unknown-sport',
             'unknown-league',
             '/path/to/sport:12345'

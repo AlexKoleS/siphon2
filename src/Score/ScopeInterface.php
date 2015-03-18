@@ -1,33 +1,14 @@
 <?php
 namespace Icecave\Siphon\Score;
 
-interface ScopeInterface
+/**
+ * A scope within a competition.
+ *
+ * For example, a scope may be an individual period, overtime period or inning
+ * within a competition.
+ *
+ * @api
+ */
+interface ScopeInterface extends TeamScoreInterface
 {
-    /**
-     * Get the status of the scope.
-     *
-     * @return ScopeStatus
-     */
-    public function status();
-
-    /**
-     * Set the status of the scope.
-     *
-     * @param ScopeStatus $status
-     */
-    public function setStatus(ScopeStatus $status);
-
-    /**
-     * The "points" earned by the home team.
-     *
-     * @return integer
-     */
-    public function homeTeamPoints();
-
-    /**
-     * The "points" earned by the away team.
-     *
-     * @return integer
-     */
-    public function awayTeamPoints();
 }
