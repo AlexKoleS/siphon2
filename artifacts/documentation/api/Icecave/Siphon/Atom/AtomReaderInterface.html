@@ -25,8 +25,8 @@
                 <p>interface    <strong>AtomReaderInterface</strong></p>
 
             <div class="description">
-            <p>Read and parse atom feeds.</p>
-            <p>Atom feeds are used to determine when any of the data feeds have been updated.</p>
+            <p>A client for SDI Atom feeds.</p>
+            <p>Atom feeds are polled to check for changes to the sports data feeds.</p>
         </div>
     
     
@@ -36,11 +36,11 @@
             <table>
                     <tr>
                 <td class="type">
-                    <a href="../../../Icecave/Siphon/Atom/AtomResult.html"><abbr title="Icecave\Siphon\Atom\AtomResult">AtomResult</abbr></a>
+                    <a href="../../../Icecave/Siphon/Atom/AtomResultInterface.html"><abbr title="Icecave\Siphon\Atom\AtomResultInterface">AtomResultInterface</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_read">read</a>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $threshold, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)
-                    <p>Fetch a list of feeds that have been updated since the given time.</p>
+                    <p>Fetch a list of feeds that have been updated since the given threshold time.</p>
                 </td>
                 <td></td>
             </tr>
@@ -50,12 +50,12 @@
         <h2>Details</h2>
 
                         <h3 id="method_read">
-        <div class="location">at line 23</div>
-        <code>            public            <a href="../../../Icecave/Siphon/Atom/AtomResult.html"><abbr title="Icecave\Siphon\Atom\AtomResult">AtomResult</abbr></a>
+        <div class="location">at line 26</div>
+        <code>            public            <a href="../../../Icecave/Siphon/Atom/AtomResultInterface.html"><abbr title="Icecave\Siphon\Atom\AtomResultInterface">AtomResultInterface</abbr></a>
     <strong>read</strong>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $threshold, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)</code>
     </h3>
     <div class="details">
-        <p>Fetch a list of feeds that have been updated since the given time.</p>
+        <p>Fetch a list of feeds that have been updated since the given threshold time.</p>
         <p>
 </p>
         <div class="tags">
@@ -65,7 +65,7 @@
                     <tr>
                 <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
                 <td>$threshold</td>
-                <td>Feeds updated after this time point are included in the result.</td>
+                <td>Limit results to feeds updated after this time point.</td>
             </tr>
                     <tr>
                 <td>string|null</td>
@@ -89,7 +89,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Icecave/Siphon/Atom/AtomResult.html"><abbr title="Icecave\Siphon\Atom\AtomResult">AtomResult</abbr></a></td>
+            <td><a href="../../../Icecave/Siphon/Atom/AtomResultInterface.html"><abbr title="Icecave\Siphon\Atom\AtomResultInterface">AtomResultInterface</abbr></a></td>
             <td>
 </td>
         </tr>

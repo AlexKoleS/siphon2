@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>Icecave\Siphon\Score\PeriodScore | icecave/siphon API</title>
+        <title>Icecave\Siphon\Score\PeriodInterface | icecave/siphon API</title>
                     <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
                             </head>
         <body id="class">
@@ -18,15 +18,15 @@
 
         <div id="title">icecave/siphon API</div>
 
-            <div class="type">Class</div>
-    <h1><a href="../../../Icecave/Siphon/Score.html">Icecave\Siphon\Score</a>\PeriodScore</h1>
+            <div class="type">Interface</div>
+    <h1><a href="../../../Icecave/Siphon/Score.html">Icecave\Siphon\Score</a>\PeriodInterface</h1>
     </div>
         <div class="content">
-                <p>class    <strong>PeriodScore</strong>        implements
-        <a href="../../../Icecave/Siphon/Score/ScoreInterface.html"><abbr title="Icecave\Siphon\Score\ScoreInterface">ScoreInterface</abbr></a></p>
+                <p>interface    <strong>PeriodInterface</strong>        implements
+        <a href="../../../Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">ScopeInterface</abbr></a></p>
 
             <div class="description">
-            <p>Scores for period based sports.</p>
+            <p>A scope used for period-based sports (anything that does not use innings);</p>
             <p>
 </p>
         </div>
@@ -38,11 +38,11 @@
             <table>
                     <tr>
                 <td class="type">
-                    string
+                    <a href="../../../Icecave/Siphon/Score/PeriodType.html"><abbr title="Icecave\Siphon\Score\PeriodType">PeriodType</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_scopeClass">scopeClass</a>()
-                    <p>Get the class name of the scope type used by this sport.</p>
+                    <a href="#method_type">type</a>()
+                    <p>Get the type of the period.</p>
                 </td>
                 <td></td>
             </tr>
@@ -51,13 +51,13 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_scopeClass">
+                        <h3 id="method_type">
         <div class="location">at line 16</div>
-        <code>            public            string
-    <strong>scopeClass</strong>()</code>
+        <code>            public            <a href="../../../Icecave/Siphon/Score/PeriodType.html"><abbr title="Icecave\Siphon\Score\PeriodType">PeriodType</abbr></a>
+    <strong>type</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the class name of the scope type used by this sport.</p>
+        <p>Get the type of the period.</p>
         <p>
 </p>
         <div class="tags">
@@ -66,9 +66,8 @@
 
                     <table>
         <tr>
-            <td>string</td>
-            <td>
-</td>
+            <td><a href="../../../Icecave/Siphon/Score/PeriodType.html"><abbr title="Icecave\Siphon\Score\PeriodType">PeriodType</abbr></a></td>
+            <td>The period type.</td>
         </tr>
     </table>
 
