@@ -49,7 +49,7 @@ trait ResultTrait
      */
     public function setCompetitionStatus(CompetitionStatus $status)
     {
-        return $this->competitionStatus = $status;
+        $this->competitionStatus = $status;
     }
 
     /**
@@ -70,6 +70,8 @@ trait ResultTrait
 
     /**
      * Set the competition score.
+     *
+     * @param ScoreInterface $score The competition score.
      */
     public function setCompetitionScore(ScoreInterface $score)
     {
