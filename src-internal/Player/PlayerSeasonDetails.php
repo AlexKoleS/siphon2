@@ -7,12 +7,12 @@ namespace Icecave\Siphon\Player;
 class PlayerSeasonDetails implements PlayerSeasonDetailsInterface
 {
     /**
-     * @param string  $playerId
-     * @param string  $season
-     * @param string  $number
-     * @param string  $position
-     * @param string  $positionName
-     * @param boolean $isActive
+     * @param string      $playerId
+     * @param string      $season
+     * @param string|null $number
+     * @param string      $position
+     * @param string      $positionName
+     * @param boolean     $isActive
      */
     public function __construct(
         $playerId,
@@ -55,7 +55,7 @@ class PlayerSeasonDetails implements PlayerSeasonDetailsInterface
      *
      * The result is provided as a string to allow numbers such as '00'.
      *
-     * @return string The player's jersey number.
+     * @return string|null The player's jersey number, or null if it is unknown.
      */
     public function number()
     {

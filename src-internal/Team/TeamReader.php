@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Team;
 
+use Icecave\Siphon\XPath;
 use Icecave\Siphon\XmlReaderInterface;
 
 /**
@@ -43,19 +44,13 @@ class TeamReader implements TeamReaderInterface
         $teams = [];
 
         foreach ($xml as $team) {
-            $elements = $team->xpath("name[@type='nick']");
-
-            if ($elements) {
-                $nickname = strval($elements[0]);
-            } else {
-                $nickname = null;
-            }
+            $nickname = XPath::stringOrNull($team, "name[@type='nick']");
 
             $teams[] = new Team(
                 strval($team->id),
-                strval($team->xpath("name[@type='first']")[0]),
+                XPath::string($team, "name[@type='first']"),
                 $nickname,
-                strval($team->xpath("name[@type='short']")[0])
+                XPath::string($team, "name[@type='short']")
             );
         }
 

@@ -6,6 +6,7 @@ use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\PeriodScore;
 use Icecave\Siphon\Score\PeriodType;
+use Icecave\Siphon\XPath;
 use SimpleXMLElement;
 
 class PeriodFactory implements ResultFactoryInterface
@@ -66,14 +67,14 @@ class PeriodFactory implements ResultFactoryInterface
     {
         $result->setCompetitionStatus(
             CompetitionStatus::memberByValue(
-                strval($xml->xpath('//competition-status')[0])
+                XPath::string($xml, '//competition-status')
             )
         );
     }
 
     private function updateCompetitionScore(SimpleXMLElement $xml, PeriodResult $result)
     {
-        $resultScope = $xml->xpath('//result-scope')[0];
+        $resultScope = XPath::element($xml, '//result-scope');
 
         if ('in-progress' === strval($resultScope->{'scope-status'})) {
             $currentType   = strval($resultScope->scope['type']);
@@ -108,13 +109,13 @@ class PeriodFactory implements ResultFactoryInterface
 
     private function updateGameTime(SimpleXMLElement $xml, PeriodResult $result)
     {
-        $clock = $xml->xpath('//result-scope/clock');
+        $clock = XPath::stringOrNull($xml, '//result-scope/clock');
 
-        if (!$clock) {
+        if (null === $clock) {
             return;
         }
 
-        list($hours, $minutes, $seconds) = explode(':', current($clock));
+        list($hours, $minutes, $seconds) = explode(':', $clock);
 
         $result->setCurrentGameTime(
             Duration::fromComponents(0, 0, $hours, $minutes, $seconds)

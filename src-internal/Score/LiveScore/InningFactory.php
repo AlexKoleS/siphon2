@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Score\LiveScore;
 use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
+use Icecave\Siphon\XPath;
 use SimpleXMLElement;
 
 class InningFactory implements ResultFactoryInterface
@@ -53,14 +54,14 @@ class InningFactory implements ResultFactoryInterface
     {
         $result->setCompetitionStatus(
             CompetitionStatus::memberByValue(
-                strval($xml->xpath('//competition-status')[0])
+                XPath::string($xml, '//competition-status')
             )
         );
     }
 
     private function updateCompetitionScore(SimpleXMLElement $xml, InningResult $result)
     {
-        $resultScope = $xml->xpath('//result-scope')[0];
+        $resultScope = XPath::element($xml, '//result-scope');
 
         if ('in-progress' === strval($resultScope->{'scope-status'})) {
             $currentType   = strval($resultScope->scope['type']);

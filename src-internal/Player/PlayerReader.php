@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Player;
 
 use Icecave\Siphon\Util;
+use Icecave\Siphon\XPath;
 use Icecave\Siphon\XmlReaderInterface;
 
 /**
@@ -41,28 +42,29 @@ class PlayerReader implements PlayerReaderInterface
                     $league
                 )
             )
-            ->xpath('//team');
+            ->xpath('//player');
 
-        $teams = [];
+        $result = [];
 
-        // foreach ($xml as $team) {
-        //     $elements = $team->xpath("name[@type='nick']");
+        foreach ($xml as $playerElement) {
+            $result[] = [
+                new Player(
+                    strval($playerElement->id),
+                    XPath::string($playerElement, "name[@type='first']"),
+                    XPath::string($playerElement, "name[@type='last']")
+                ),
+                new PlayerSeasonDetails(
+                    strval($playerElement->id),
+                    $season,
+                    XPath::stringOrNull($playerElement, "season-details/number"),
+                    XPath::string($playerElement, "season-details/position[@type='primary']/name[@type='short']"),
+                    XPath::string($playerElement, "season-details/position[@type='primary']/name[count(@type)=0]"),
+                    XPath::string($playerElement, "season-details/active") === 'true'
+                ),
+            ];
+        }
 
-        //     if ($elements) {
-        //         $nickname = strval($elements[0]);
-        //     } else {
-        //         $nickname = null;
-        //     }
-
-        //     $teams[] = new Team(
-        //         strval($team->id),
-        //         strval($team->xpath("name[@type='first']")[0]),
-        //         $nickname,
-        //         strval($team->xpath("name[@type='short']")[0])
-        //     );
-        // }
-
-        return $teams;
+        return $result;
     }
 
     private $xmlReader;
