@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Siphon\Schedule\Competition;
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
@@ -42,9 +43,6 @@ class LiveScoreReader implements LiveScoreReaderInterface
         // Determine which live score factory to use ...
         $factory = $this->selectFactory($sport, $league);
 
-        // Extract the numeric portion of the competition ID ...
-        list(, $id) = explode(':', $competitionId, 2);
-
         // Read the feed ...
         $xml = $this
             ->xmlReader
@@ -53,7 +51,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
                     '/sport/v2/%s/%s/livescores/livescores_%d.xml',
                     $sport,
                     $league,
-                    $id
+                    Util::extractNumericId($competitionId)
                 )
             );
 
