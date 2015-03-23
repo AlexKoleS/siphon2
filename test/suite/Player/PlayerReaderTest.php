@@ -19,7 +19,12 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Player/players.xml');
 
-        $result = $this->reader->read('baseball', 'MLB', '2009', '/sport/baseball/team:12345');
+        $result = $this->reader->read(
+            'baseball',
+            'MLB',
+            '2009',
+            '/sport/baseball/team:12345'
+        );
 
         $this
             ->xmlReader

@@ -34,7 +34,7 @@ class PlayerReader implements PlayerReaderInterface
             ->xmlReader
             ->read(
                 sprintf(
-                    '/sport/v2/%s/%s/players/%s/players_%s_%s.xml',
+                    '/sport/v2/%s/%s/players/%s/players_%d_%s.xml',
                     $sport,
                     $league,
                     $season,
@@ -46,20 +46,20 @@ class PlayerReader implements PlayerReaderInterface
 
         $result = [];
 
-        foreach ($xml as $playerElement) {
+        foreach ($xml as $element) {
             $result[] = [
                 new Player(
-                    strval($playerElement->id),
-                    XPath::string($playerElement, "name[@type='first']"),
-                    XPath::string($playerElement, "name[@type='last']")
+                    strval($element->id),
+                    XPath::string($element, "name[@type='first']"),
+                    XPath::string($element, "name[@type='last']")
                 ),
                 new PlayerSeasonDetails(
-                    strval($playerElement->id),
+                    strval($element->id),
                     $season,
-                    XPath::stringOrNull($playerElement, "season-details/number"),
-                    XPath::string($playerElement, "season-details/position[@type='primary']/name[@type='short']"),
-                    XPath::string($playerElement, "season-details/position[@type='primary']/name[count(@type)=0]"),
-                    XPath::string($playerElement, "season-details/active") === 'true'
+                    XPath::stringOrNull($element, "season-details/number"),
+                    XPath::string($element, "season-details/position[@type='primary']/name[@type='short']"),
+                    XPath::string($element, "season-details/position[@type='primary']/name[count(@type)=0]"),
+                    XPath::string($element, "season-details/active") === 'true'
                 ),
             ];
         }
