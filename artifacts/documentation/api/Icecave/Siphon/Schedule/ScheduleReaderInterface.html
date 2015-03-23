@@ -40,7 +40,7 @@
                     <a href="../../../Icecave/Siphon/Schedule/ScheduleInterface.html"><abbr title="Icecave\Siphon\Schedule\ScheduleInterface">ScheduleInterface</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_read">read</a>(string $sport, string $league)
+                    <a href="#method_read">read</a>(string $sport, string $league, <a href="../../../Icecave/Siphon/Schedule/ScheduleLimit.html"><abbr title="Icecave\Siphon\Schedule\ScheduleLimit">ScheduleLimit</abbr></a> $limit = null)
                     <p>Read a schedule feed.</p>
                 </td>
                 <td></td>
@@ -61,9 +61,9 @@
         <h2>Details</h2>
 
                         <h3 id="method_read">
-        <div class="location">at line 19</div>
+        <div class="location">at line 20</div>
         <code>            public            <a href="../../../Icecave/Siphon/Schedule/ScheduleInterface.html"><abbr title="Icecave\Siphon\Schedule\ScheduleInterface">ScheduleInterface</abbr></a>
-    <strong>read</strong>(string $sport, string $league)</code>
+    <strong>read</strong>(string $sport, string $league, <a href="../../../Icecave/Siphon/Schedule/ScheduleLimit.html"><abbr title="Icecave\Siphon\Schedule\ScheduleLimit">ScheduleLimit</abbr></a> $limit = null)</code>
     </h3>
     <div class="details">
         <p>Read a schedule feed.</p>
@@ -82,6 +82,11 @@
                 <td>string</td>
                 <td>$league</td>
                 <td>The league (eg, MLB, NFL, etc)</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Schedule/ScheduleLimit.html"><abbr title="Icecave\Siphon\Schedule\ScheduleLimit">ScheduleLimit</abbr></a></td>
+                <td>$limit</td>
+                <td>Limit results to a compeititons within a certain timeframe.</td>
             </tr>
             </table>
 
@@ -102,7 +107,7 @@
     </div>
 
                 <h3 id="method_readDeleted">
-        <div class="location">at line 29</div>
+        <div class="location">at line 30</div>
         <code>            public            <a href="../../../Icecave/Siphon/Schedule/ScheduleInterface.html"><abbr title="Icecave\Siphon\Schedule\ScheduleInterface">ScheduleInterface</abbr></a>
     <strong>readDeleted</strong>(string $sport, string $league)</code>
     </h3>
