@@ -26,19 +26,48 @@ class ScheduleReader implements ScheduleReaderInterface
      */
     public function read($sport, $league)
     {
+        $sport    = strtolower($sport);
+        $league   = strtoupper($league);
+        $resource = sprintf(
+            '/sport/v2/%s/%s/schedule/schedule_%s.xml',
+            $sport,
+            $league,
+            $league
+        );
+
+        return $this->readResource($sport, $league, $resource);
+    }
+
+    /**
+     * Read the deleted schedule feed.
+     *
+     * @param string $sport  The sport (eg, baseball, football, etc)
+     * @param string $league The league (eg, MLB, NFL, etc)
+     *
+     * @return ScheduleInterface
+     */
+    public function readDeleted($sport, $league)
+    {
+        $sport    = strtolower($sport);
+        $league   = strtoupper($league);
+        $resource = sprintf(
+            '/sport/v2/%s/%s/games-deleted/games_deleted_%s.xml',
+            $sport,
+            $league,
+            $league
+        );
+
+        return $this->readResource($sport, $league, $resource);
+    }
+
+    private function readResource($sport, $league, $resource)
+    {
         $sport  = strtolower($sport);
         $league = strtoupper($league);
 
         $xml = $this
             ->xmlReader
-            ->read(
-                sprintf(
-                    '/sport/v2/%s/%s/schedule/schedule_%s.xml',
-                    $sport,
-                    $league,
-                    $league
-                )
-            )
+            ->read($resource)
             ->xpath('//season-content');
 
         $schedule = new Schedule;

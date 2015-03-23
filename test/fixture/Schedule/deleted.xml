@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/hockey</id>
+            <name>hockey</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/hockey/league:1</id>
+                <name>National Hockey League</name>
+                <name type="nick">NHL</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/hockey/season:19</id>
+                    <name>2009-2010</name>
+                    <details>
+                        <start-date>2009-10-01</start-date>
+                        <end-date>2010-06-30</end-date>
+                    </details>
+                </season>
+                <competition>
+                    <id>/sport/hockey/competition:32577</id>
+                    <start-date>2010-04-16T22:00:00-04:00</start-date>
+                    <result-scope>
+                        <competition-status>scheduled</competition-status>
+                    </result-scope>
+                    <home-team-content>
+                        <team>
+                            <id>/sport/hockey/team:19</id>
+                            <name>Phoenix</name>
+                        </team>
+                    </home-team-content>
+                    <away-team-content>
+                        <team>
+                            <id>/sport/hockey/team:20</id>
+                            <name>Dallas</name>
+                        </team>
+                    </away-team-content>
+                </competition>
+                <competition>
+                    <id>/sport/hockey/competition:32539</id>
+                    <start-date>2010-04-25T19:00:00-04:00</start-date>
+                    <result-scope>
+                        <competition-status>scheduled</competition-status>
+                    </result-scope>
+                    <home-team-content>
+                        <team>
+                            <id>/sport/hockey/team:12</id>
+                            <name>Philadelphia</name>
+                        </team>
+                    </home-team-content>
+                    <away-team-content>
+                        <team>
+                            <id>/sport/hockey/team:13</id>
+                            <name>New Jersey</name>
+                        </team>
+                    </away-team-content>
+                </competition>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>
