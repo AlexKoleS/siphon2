@@ -15,7 +15,7 @@ class InjuryStatus extends AbstractEnumeration
     const DISABLED_60_DAY   = '60-day DL';
 
     // NBA, no longer used ...
-    const INJURED_RESERVED  = 'I-R';
+    const INJURED_RESERVE   = 'I-R';
     const INJURED_LIST      = 'I-L';
 
     // Canadian Football? ...
