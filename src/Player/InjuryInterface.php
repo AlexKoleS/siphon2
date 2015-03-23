@@ -12,6 +12,13 @@ use Icecave\Chrono\DateTime;
 interface InjuryInterface
 {
     /**
+     * Get the injury ID.
+     *
+     * @return string The injury ID.
+     */
+    public function id();
+
+    /**
      * Get the player ID.
      *
      * @return string The player ID.
@@ -58,7 +65,7 @@ interface InjuryInterface
     /**
      * The last time at which information about this player's injury was updated.
      *
-     * @return DateTime The last update time.
+     * @return DateTime|null The last update time, or null if the update time is unknown.
      */
     public function updatedTime();
 }

@@ -13,6 +13,7 @@ class InjuryTest extends PHPUnit_Framework_TestCase
         $this->updatedTime = DateTime::fromUnixTime(1);
 
         $this->injury = new Injury(
+            '<id>',
             '<player-id>',
             '<type>',
             InjuryStatus::OUT(),
@@ -20,6 +21,14 @@ class InjuryTest extends PHPUnit_Framework_TestCase
             '<note>',
             $this->date,
             $this->updatedTime
+        );
+    }
+
+    public function testId()
+    {
+        $this->assertSame(
+            '<id>',
+            $this->injury->id()
         );
     }
 

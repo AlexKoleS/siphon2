@@ -10,14 +10,16 @@ use Icecave\Chrono\DateTime;
 class Injury implements InjuryInterface
 {
     public function __construct(
+        $id,
         $playerId,
         $type,
         InjuryStatus $status,
         $statusInformation,
         $note,
         Date $date,
-        DateTime $updatedTime
+        DateTime $updatedTime = null
     ) {
+        $this->id                = $id;
         $this->playerId          = $playerId;
         $this->type              = $type;
         $this->status            = $status;
@@ -25,6 +27,16 @@ class Injury implements InjuryInterface
         $this->note              = $note;
         $this->date              = $date;
         $this->updatedTime       = $updatedTime;
+    }
+
+    /**
+     * Get the injury ID.
+     *
+     * @return string The injury ID.
+     */
+    public function id()
+    {
+        return $this->id;
     }
 
     /**
@@ -92,13 +104,14 @@ class Injury implements InjuryInterface
     /**
      * The last time at which information about this player's injury was updated.
      *
-     * @return DateTime The last update time.
+     * @return DateTime|null The last update time, or null if the update time is unknown.
      */
     public function updatedTime()
     {
         return $this->updatedTime;
     }
 
+    private $id;
     private $playerId;
     private $type;
     private $status;
