@@ -25,7 +25,7 @@
                 <p>interface    <strong>InjuryInterface</strong></p>
 
             <div class="description">
-            <p>Encapsulates season-specific information about a player.</p>
+            <p>Information about a specific injury.</p>
             <p>
 </p>
         </div>
@@ -35,6 +35,16 @@
             <h2>Methods</h2>
 
             <table>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_id">id</a>()
+                    <p>Get the injury ID.</p>
+                </td>
+                <td></td>
+            </tr>
                     <tr>
                 <td class="type">
                     string
@@ -50,8 +60,18 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_season">season</a>()
-                    <p>Get the season name.</p>
+                    <a href="#method_type">type</a>()
+                    <p>The type of injury.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Icecave/Siphon/Player/InjuryStatus.html"><abbr title="Icecave\Siphon\Player\InjuryStatus">InjuryStatus</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_status">status</a>()
+                    <p>Get the injury status.</p>
                 </td>
                 <td></td>
             </tr>
@@ -60,8 +80,8 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_number">number</a>()
-                    <p>Get the player's jersey number for this season.</p>
+                    <a href="#method_statusInformation">statusInformation</a>()
+                    <p>Get a very short human-readable description of the status.</p>
                 </td>
                 <td></td>
             </tr>
@@ -70,28 +90,28 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_position">position</a>()
-                    <p>Get the player's position for this season.</p>
+                    <a href="#method_note">note</a>()
+                    <p>Get a human-readable note about the injury.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    string
+                    <abbr title="Icecave\Chrono\Date">Date</abbr>
                 </td>
                 <td class="last">
-                    <a href="#method_positionName">positionName</a>()
-                    <p>Get the player's position name.</p>
+                    <a href="#method_date">date</a>()
+                    <p>The date when the injury was recorded.</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    boolean
+                    <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>|null
                 </td>
                 <td class="last">
-                    <a href="#method_isActive">isActive</a>()
-                    <p>Indicates whether or not the player is active on the team for this season.</p>
+                    <a href="#method_updatedTime">updatedTime</a>()
+                    <p>The last time at which information about this player's injury was updated.</p>
                 </td>
                 <td></td>
             </tr>
@@ -100,8 +120,33 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_playerId">
-        <div class="location">at line 16</div>
+                        <h3 id="method_id">
+        <div class="location">at line 19</div>
+        <code>            public            string
+    <strong>id</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the injury ID.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The injury ID.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_playerId">
+        <div class="location">at line 26</div>
         <code>            public            string
     <strong>playerId</strong>()</code>
     </h3>
@@ -125,13 +170,37 @@
                     </div>
     </div>
 
-                <h3 id="method_season">
-        <div class="location">at line 23</div>
+                <h3 id="method_type">
+        <div class="location">at line 35</div>
         <code>            public            string
-    <strong>season</strong>()</code>
+    <strong>type</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the season name.</p>
+        <p>The type of injury.</p>
+        <p>This may be a body location of a very brief description of the injury.</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The injury type.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_status">
+        <div class="location">at line 42</div>
+        <code>            public            <a href="../../../Icecave/Siphon/Player/InjuryStatus.html"><abbr title="Icecave\Siphon\Player\InjuryStatus">InjuryStatus</abbr></a>
+    <strong>status</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the injury status.</p>
         <p>
 </p>
         <div class="tags">
@@ -140,107 +209,109 @@
 
                     <table>
         <tr>
-            <td>string</td>
-            <td>The season name.</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_number">
-        <div class="location">at line 32</div>
-        <code>            public            string
-    <strong>number</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Get the player's jersey number for this season.</p>
-        <p>The result is provided as a string to allow numbers such as '00'.</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>string</td>
-            <td>The player's jersey number.</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_position">
-        <div class="location">at line 41</div>
-        <code>            public            string
-    <strong>position</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Get the player's position for this season.</p>
-        <p>This is the position "short name" or "code" such as "RP" for "Reliever".</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>string</td>
-            <td>The player's position.</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_positionName">
-        <div class="location">at line 48</div>
-        <code>            public            string
-    <strong>positionName</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Get the player's position name.</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>string</td>
-            <td>The name of the player's position.</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_isActive">
-        <div class="location">at line 55</div>
-        <code>            public            boolean
-    <strong>isActive</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>Indicates whether or not the player is active on the team for this season.</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>boolean</td>
+            <td><a href="../../../Icecave/Siphon/Player/InjuryStatus.html"><abbr title="Icecave\Siphon\Player\InjuryStatus">InjuryStatus</abbr></a></td>
             <td>
 </td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_statusInformation">
+        <div class="location">at line 49</div>
+        <code>            public            string
+    <strong>statusInformation</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get a very short human-readable description of the status.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The injury display status.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_note">
+        <div class="location">at line 56</div>
+        <code>            public            string
+    <strong>note</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get a human-readable note about the injury.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>The note.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_date">
+        <div class="location">at line 63</div>
+        <code>            public            <abbr title="Icecave\Chrono\Date">Date</abbr>
+    <strong>date</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>The date when the injury was recorded.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Icecave\Chrono\Date">Date</abbr></td>
+            <td>The injury start date.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_updatedTime">
+        <div class="location">at line 70</div>
+        <code>            public            <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>|null
+    <strong>updatedTime</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>The last time at which information about this player's injury was updated.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr>|null</td>
+            <td>The last update time, or null if the update time is unknown.</td>
         </tr>
     </table>
 
