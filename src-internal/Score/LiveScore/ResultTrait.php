@@ -29,6 +29,26 @@ trait ResultTrait
     }
 
     /**
+     * Get the status of the current scope.
+     *
+     * @return ScopeStatus|null The status of the current scope, or null if the competition is not in-progress.
+     */
+    public function currentScopeStatus()
+    {
+        return $this->currentScopeStatus;
+    }
+
+    /**
+     * Set the status of the current scope.
+     *
+     * @param ScopeStatus|null $status The status of the current scope, or null if the competition is not in-progress.
+     */
+    public function setCurrentScopeStatus(ScopeStatus $status = null)
+    {
+        $this->currentScopeStatus = $status;
+    }
+
+    /**
      * Get the current status of the competition.
      *
      * @return CompetitionStatus
@@ -79,6 +99,7 @@ trait ResultTrait
     }
 
     private $currentScope;
+    private $currentScopeStatus;
     private $competitionStatus;
     private $competitionScore;
 }

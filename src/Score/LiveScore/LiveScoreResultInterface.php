@@ -13,11 +13,18 @@ use Icecave\Siphon\Score\ScoreInterface;
 interface LiveScoreResultInterface
 {
     /**
-     * Get the current scope, if one is in-progress.
+     * Get the current scope, if any.
      *
      * @return ScopeInterface|null The current scope, or null if the competition is not in-progress.
      */
     public function currentScope();
+
+    /**
+     * Get the status of the current scope.
+     *
+     * @return ScopeStatus|null The status of the current scope, or null if the competition is not in-progress.
+     */
+    public function currentScopeStatus();
 
     /**
      * Get the current status of the competition.

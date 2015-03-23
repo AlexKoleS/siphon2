@@ -63,9 +63,15 @@ class InningFactory implements ResultFactoryInterface
     {
         $resultScope = XPath::element($xml, '//result-scope');
 
-        if ('in-progress' === strval($resultScope->{'scope-status'})) {
+        if (CompetitionStatus::COMPLETE() !== $result->competitionStatus()) {
             $currentType   = strval($resultScope->scope['type']);
             $currentNumber = intval($resultScope->scope['num']);
+
+            $result->setCurrentScopeStatus(
+                ScopeStatus::memberByValue(
+                    strval($resultScope->{'scope-status'})
+                )
+            );
 
             $result->setCurrentInningSubType(
                 InningSubType::memberByValue(
@@ -75,6 +81,7 @@ class InningFactory implements ResultFactoryInterface
         } else {
             $currentType   = null;
             $currentNumber = null;
+            $scopeStatus   = null;
         }
 
         $score = new InningScore;

@@ -76,9 +76,15 @@ class PeriodFactory implements ResultFactoryInterface
     {
         $resultScope = XPath::element($xml, '//result-scope');
 
-        if ('in-progress' === strval($resultScope->{'scope-status'})) {
+        if (CompetitionStatus::COMPLETE() !== $result->competitionStatus()) {
             $currentType   = strval($resultScope->scope['type']);
             $currentNumber = intval($resultScope->scope['num']);
+
+            $result->setCurrentScopeStatus(
+                ScopeStatus::memberByValue(
+                    strval($resultScope->{'scope-status'})
+                )
+            );
         } else {
             $currentType   = null;
             $currentNumber = null;

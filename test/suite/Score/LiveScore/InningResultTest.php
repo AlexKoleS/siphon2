@@ -36,6 +36,30 @@ class InningResultTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCurrentScopeStatus()
+    {
+        $this->assertNull(
+            $this->result->currentScopeStatus()
+        );
+
+        $this->result->setCurrentScopeStatus(
+            ScopeStatus::DELAY_RAIN()
+        );
+
+        $this->assertSame(
+            ScopeStatus::DELAY_RAIN(),
+            $this->result->currentScopeStatus()
+        );
+
+        $this->result->setCurrentScopeStatus(
+            null
+        );
+
+        $this->assertNull(
+            $this->result->currentScopeStatus()
+        );
+    }
+
     public function testCompetitionStatus()
     {
         $this->assertSame(

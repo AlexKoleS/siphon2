@@ -47,6 +47,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $expected = new PeriodResult;
         $expected->setCurrentScope($scope2);
+        $expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
         $expected->setCurrentGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
 
@@ -119,6 +120,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $expected = new PeriodResult;
         $expected->setCurrentScope($scope7);
+        $expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
 
         $score = new PeriodScore;
@@ -158,6 +160,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $expected = new InningResult;
         $expected->setCurrentScope($scope2);
+        $expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
         $expected->setCurrentInningSubType(InningSubType::BOTTOM());
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
 
