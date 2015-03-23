@@ -1,8 +1,11 @@
 <?php
 namespace Icecave\Siphon\Player;
 
+use Icecave\Chrono\Date;
+use Icecave\Chrono\DateTime;
+
 /**
- * Encapsulates season-specific information about a player.
+ * Information about a specific injury.
  *
  * @api
  */
@@ -16,41 +19,46 @@ interface InjuryInterface
     public function playerId();
 
     /**
-     * Get the season name.
+     * The type of injury.
      *
-     * @return string The season name.
+     * This may be a body location of a very brief description of the injury.
+     *
+     * @return string The injury type.
      */
-    public function season();
+    public function type();
 
     /**
-     * Get the player's jersey number for this season.
+     * Get the injury status.
      *
-     * The result is provided as a string to allow numbers such as '00'.
-     *
-     * @return string The player's jersey number.
+     * @return InjuryStatus
      */
-    public function number();
+    public function status();
 
     /**
-     * Get the player's position for this season.
+     * Get a very short human-readable description of the status.
      *
-     * This is the position "short name" or "code" such as "RP" for "Reliever".
-     *
-     * @return string The player's position.
+     * @return string The injury display status.
      */
-    public function position();
+    public function statusInformation();
 
     /**
-     * Get the player's position name.
+     * Get a human-readable note about the injury.
      *
-     * @return string The name of the player's position.
+     * @return string The note.
      */
-    public function positionName();
+    public function note();
 
     /**
-     * Indicates whether or not the player is active on the team for this season.
+     * The date when the injury was recorded.
      *
-     * @return boolean
+     * @return Date The injury start date.
      */
-    public function isActive();
+    public function date();
+
+    /**
+     * The last time at which information about this player's injury was updated.
+     *
+     * @return DateTime The last update time.
+     */
+    public function updatedTime();
 }
