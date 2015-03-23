@@ -11,12 +11,13 @@ interface ScheduleReaderInterface
     /**
      * Read a schedule feed.
      *
-     * @param string $sport  The sport (eg, baseball, football, etc)
-     * @param string $league The league (eg, MLB, NFL, etc)
+     * @param string             $sport  The sport (eg, baseball, football, etc)
+     * @param string             $league The league (eg, MLB, NFL, etc)
+     * @param ScheduleLimit|null $limit  Limit results to a compeititons within a certain timeframe.
      *
      * @return ScheduleInterface
      */
-    public function read($sport, $league);
+    public function read($sport, $league, ScheduleLimit $limit = null);
 
     /**
      * Read the deleted schedule feed.

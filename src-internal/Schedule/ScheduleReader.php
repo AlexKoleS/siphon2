@@ -19,21 +19,37 @@ class ScheduleReader implements ScheduleReaderInterface
     /**
      * Read a schedule feed.
      *
-     * @param string $sport  The sport (eg, baseball, football, etc)
-     * @param string $league The league (eg, MLB, NFL, etc)
+     * @param string             $sport  The sport (eg, baseball, football, etc)
+     * @param string             $league The league (eg, MLB, NFL, etc)
+     * @param ScheduleLimit|null $limit  Limit results to a compeititons within a certain timeframe.
      *
-     * @return Schedule
+     * @return ScheduleInterface
      */
-    public function read($sport, $league)
+    public function read($sport, $league, ScheduleLimit $limit = null)
     {
+        if (null === $limit) {
+            $limit = ScheduleLimit::NONE();
+        }
+
         $sport    = strtolower($sport);
         $league   = strtoupper($league);
-        $resource = sprintf(
-            '/sport/v2/%s/%s/schedule/schedule_%s.xml',
-            $sport,
-            $league,
-            $league
-        );
+
+        if (ScheduleLimit::NONE() === $limit) {
+            $resource = sprintf(
+                '/sport/v2/%s/%s/schedule/schedule_%s.xml',
+                $sport,
+                $league,
+                $league
+            );
+        } else {
+            $resource = sprintf(
+                '/sport/v2/%s/%s/schedule/schedule_%s_%d_days.xml',
+                $sport,
+                $league,
+                $league,
+                $limit->value()
+            );
+        }
 
         return $this->readResource($sport, $league, $resource);
     }

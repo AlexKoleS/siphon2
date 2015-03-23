@@ -81,6 +81,70 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testReadWithLimit()
+    {
+        $this->setUpXmlReader('Schedule/schedule.xml');
+
+        $schedule = $this->reader->read('baseball', 'MLB', ScheduleLimit::DAYS_2());
+
+        $this
+            ->xmlReader
+            ->read
+            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
+
+        $expected = new Schedule;
+
+        $season = new Season(
+            '/sport/baseball/season:851',
+            '2010',
+            Date::fromIsoString('2010-03-02'),
+            Date::fromIsoString('2010-11-15')
+        );
+
+        $expected->add($season);
+
+        $season->add(
+            new Competition(
+                '/sport/baseball/competition:294647',
+                CompetitionStatus::SCHEDULED(),
+                DateTime::fromIsoString('2010-04-27T20:40:00-04:00'),
+                'baseball',
+                'MLB',
+                '/sport/baseball/team:2956',
+                '/sport/baseball/team:2968'
+            )
+        );
+
+        $season->add(
+            new Competition(
+                '/sport/baseball/competition:293835',
+                CompetitionStatus::SCHEDULED(),
+                DateTime::fromIsoString('2010-04-27T22:05:00-04:00'),
+                'baseball',
+                'MLB',
+                '/sport/baseball/team:2979',
+                '/sport/baseball/team:2980'
+            )
+        );
+
+        $season->add(
+            new Competition(
+                '/sport/baseball/competition:295678',
+                CompetitionStatus::SCHEDULED(),
+                DateTime::fromIsoString('2010-04-27T22:15:00-04:00'),
+                'baseball',
+                'MLB',
+                '/sport/baseball/team:2962',
+                '/sport/baseball/team:2958'
+            )
+        );
+
+        $this->assertEquals(
+            $expected,
+            $schedule
+        );
+    }
+
     public function testReadDeleted()
     {
         $this->setUpXmlReader('Schedule/deleted.xml');
