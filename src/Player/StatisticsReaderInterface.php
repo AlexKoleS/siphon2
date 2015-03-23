@@ -6,7 +6,7 @@ namespace Icecave\Siphon\Player;
  *
  * @api
  */
-interface PlayerStatisticsReaderInterface
+interface StatisticsReaderInterface
 {
     /**
      * Read a player statistics feed.
@@ -16,7 +16,7 @@ interface PlayerStatisticsReaderInterface
      * @param string $season The season name.
      * @param string $teamId The ID of the team.
      *
-     * @return array<tuple<PlayerInterface, PlayerStatisticsInterface>>
+     * @return array<tuple<PlayerInterface, StatisticsInterface>>
      */
     public function read($sport, $league, $season, $teamId);
 }

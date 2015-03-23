@@ -9,7 +9,7 @@ use SimpleXMLElement;
 /**
  * Read data from player statistics feeds.
  */
-class PlayerStatisticsReader implements PlayerReaderInterface
+class StatisticsReader implements PlayerReaderInterface
 {
     public function __construct(XmlReaderInterface $xmlReader)
     {
@@ -24,7 +24,7 @@ class PlayerStatisticsReader implements PlayerReaderInterface
      * @param string $season The season name.
      * @param string $teamId The ID of the team.
      *
-     * @return array<tuple<PlayerInterface, PlayerStatisticsInterface>>
+     * @return array<tuple<PlayerInterface, StatisticsInterface>>
      */
     public function read($sport, $league, $season, $teamId)
     {
@@ -56,7 +56,7 @@ class PlayerStatisticsReader implements PlayerReaderInterface
                     XPath::string($player, "name[@type='first']"),
                     XPath::string($player, "name[@type='last']")
                 ),
-                new PlayerStatistics(
+                new Statistics(
                     strval($player->id),
                     $season,
                     $this->aggregateStatistics($element)

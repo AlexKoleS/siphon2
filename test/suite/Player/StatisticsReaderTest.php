@@ -4,13 +4,13 @@ namespace Icecave\Siphon\Player;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
-class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
+class StatisticsReaderTest extends PHPUnit_Framework_TestCase
 {
     use XmlReaderTestTrait;
 
     public function setUp()
     {
-        $this->reader = new PlayerStatisticsReader(
+        $this->reader = new StatisticsReader(
             $this->xmlReader()->mock()
         );
     }
@@ -35,7 +35,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             [
                 [
                     new Player('/sport/football/player:16721', 'Hamza', 'Abdullah'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:16721',
                         '2009-2010',
                         [
@@ -55,7 +55,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:6686', 'Michael', 'Adams'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:6686',
                         '2009-2010',
                         [
@@ -83,7 +83,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:35835', 'Jason', 'Banks'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:35835',
                         '2009-2010',
                         [
@@ -99,7 +99,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:333', 'Anthony', 'Becht'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:333',
                         '2009-2010',
                         [
@@ -130,7 +130,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:1253', 'Monty', 'Beisel'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1253',
                         '2009-2010',
                         [
@@ -151,7 +151,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:534', 'Bertrand', 'Berry'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:534',
                         '2009-2010',
                         [
@@ -177,7 +177,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:204', 'Anquan', 'Boldin'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:204',
                         '2009-2010',
                         [
@@ -204,7 +204,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:16948', 'Alan', 'Branch'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:16948',
                         '2009-2010',
                         [
@@ -227,7 +227,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:2735', 'Steve', 'Breaston'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:2735',
                         '2009-2010',
                         [
@@ -273,7 +273,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:1786', 'Jeremy', 'Bridges'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1786',
                         '2009-2010',
                         [
@@ -292,28 +292,28 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:5493', 'Nehemiah', 'Broughton'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:5493',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:23983', 'Cody', 'Brown'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:23983',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:12958', 'Elton', 'Brown'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:12958',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:10111', 'Levi', 'Brown'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10111',
                         '2009-2010',
                         [
@@ -331,7 +331,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:1379', 'Ralph', 'Brown'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1379',
                         '2009-2010',
                         [
@@ -354,21 +354,21 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:10284', 'Chase', 'Bullock'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10284',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:3279', 'Dominique', 'Byrd'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:3279',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:18298', 'Calais', 'Campbell'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:18298',
                         '2009-2010',
                         [
@@ -393,28 +393,28 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:10332', 'Trevor', 'Canfield'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10332',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:2556', 'Tim', 'Castille'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:2556',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:34882', 'Jeremy', 'Clark'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:34882',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:19198', 'Ben', 'Claxton'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:19198',
                         '2009-2010',
                         [
@@ -426,7 +426,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:16918', 'Karlos', 'Dansby'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:16918',
                         '2009-2010',
                         [
@@ -458,7 +458,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:18680', 'Tony', 'Davis'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:18680',
                         '2009-2010',
                         [
@@ -470,7 +470,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:19377', 'Will', 'Davis'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:19377',
                         '2009-2010',
                         [
@@ -492,7 +492,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:16917', 'Darnell', 'Dockett'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:16917',
                         '2009-2010',
                         [
@@ -522,7 +522,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:10151', 'Early', 'Doucet'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10151',
                         '2009-2010',
                         [
@@ -551,14 +551,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:29249', 'Jameel', 'Dowling'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:29249',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:13958', 'Keilein', 'Dykes'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:13958',
                         '2009-2010',
                         [
@@ -571,14 +571,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:23580', 'Alex', 'Field'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:23580',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:15373', 'Larry', 'Fitzgerald'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:15373',
                         '2009-2010',
                         [
@@ -610,28 +610,28 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:7722', 'Wilrey', 'Fontenot'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:7722',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:787', 'Melvin', 'Fowler'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:787',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:2865', 'Aaron', 'Francisco'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:2865',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:1121', 'Mike', 'Gandy'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1121',
                         '2009-2010',
                         [
@@ -646,21 +646,21 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:40154', 'Ed', 'Gant'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:40154',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:21836', 'Michael Ray', 'Garvin'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:21836',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:19151', 'Ben', 'Graham'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:19151',
                         '2009-2010',
                         [
@@ -685,14 +685,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:7374', 'Justin', 'Green'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:7374',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:488', 'Clark', 'Haggans'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:488',
                         '2009-2010',
                         [
@@ -719,7 +719,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:302', 'Gerald', 'Hayes'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:302',
                         '2009-2010',
                         [
@@ -740,7 +740,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:10146', 'Ali', 'Highsmith'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10146',
                         '2009-2010',
                         [
@@ -757,7 +757,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:24833', 'Timothy', 'Hightower'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:24833',
                         '2009-2010',
                         [
@@ -797,21 +797,21 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:354', 'Victor', 'Hobson'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:354',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:10860', 'David', 'Holloway'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10860',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:8433', 'Kenny', 'Iwebema'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:8433',
                         '2009-2010',
                         [
@@ -831,14 +831,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:10251', 'Herman', 'Johnson'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10251',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:20759', 'Rashad', 'Johnson'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:20759',
                         '2009-2010',
                         [
@@ -858,14 +858,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:33842', 'Onrea', 'Jones'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:33842',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:19504', 'Brandon', 'Keith'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:19504',
                         '2009-2010',
                         [
@@ -877,14 +877,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:16307', 'Dennis', 'Keyes'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:16307',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:480', 'Dan', 'Kreider'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:480',
                         '2009-2010',
                         [
@@ -904,7 +904,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:557', 'Mike', 'Leach'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:557',
                         '2009-2010',
                         [
@@ -921,7 +921,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:3276', 'Matt', 'Leinart'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:3276',
                         '2009-2010',
                         [
@@ -957,21 +957,21 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:17799', 'Rodney', 'Leisle'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:17799',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:33908', 'Keith', 'Lewis'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:33908',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:10532', 'Lance', 'Long'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:10532',
                         '2009-2010',
                         [
@@ -984,7 +984,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:15143', 'Deuce', 'Lutui'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:15143',
                         '2009-2010',
                         [
@@ -1001,14 +1001,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:40155', 'Reagan', 'Maui\'a'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:40155',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:8804', 'Bryant', 'McFadden'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:8804',
                         '2009-2010',
                         [
@@ -1031,14 +1031,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:8286', 'Carlton', 'Medder'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:8286',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:29448', 'Shane', 'Morales'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:29448',
                         '2009-2010',
                         [
@@ -1050,7 +1050,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:1780', 'Sean', 'Morey'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1780',
                         '2009-2010',
                         [
@@ -1070,7 +1070,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:3626', 'Mike', 'Nugent'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:3626',
                         '2009-2010',
                         [
@@ -1091,7 +1091,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:1558', 'Chike', 'Okeafor'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1558',
                         '2009-2010',
                         [
@@ -1116,14 +1116,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:12964', 'Tyler', 'Palko'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:12964',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:3225', 'Ben', 'Patrick'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:3225',
                         '2009-2010',
                         [
@@ -1150,35 +1150,35 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:13717', 'Brandon', 'Pearce'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:13717',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:1934', 'Scott', 'Peters'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1934',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:4138', 'Leonard', 'Pope'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:4138',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:17244', 'Waylon', 'Prather'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:17244',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:1941', 'Neil', 'Rackers'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1941',
                         '2009-2010',
                         [
@@ -1211,14 +1211,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:4368', 'Donovan', 'Raiola'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:4368',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:1131', 'Bryan', 'Robinson'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:1131',
                         '2009-2010',
                         [
@@ -1243,7 +1243,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:35815', 'Dominique', 'Rodgers-Cromartie'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:35815',
                         '2009-2010',
                         [
@@ -1272,7 +1272,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:2260', 'Antrel', 'Rolle'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:2260',
                         '2009-2010',
                         [
@@ -1308,28 +1308,28 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:506', 'Oliver', 'Ross'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:506',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:12151', 'Pat', 'Ross'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:12151',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:2461', 'Steve', 'Sanders'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:2461',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:14254', 'Lyle', 'Sendlein'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:14254',
                         '2009-2010',
                         [
@@ -1348,14 +1348,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:13854', 'Alex', 'Shor'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:13854',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:3105', 'Stephen', 'Spach'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:3105',
                         '2009-2010',
                         [
@@ -1373,7 +1373,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:512', 'Brian', 'St. Pierre'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:512',
                         '2009-2010',
                         [
@@ -1399,7 +1399,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:30573', 'LaRod', 'Stephens-Howling'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:30573',
                         '2009-2010',
                         [
@@ -1445,7 +1445,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:27321', 'Pago', 'Togafau'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:27321',
                         '2009-2010',
                         [
@@ -1462,7 +1462,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:39511', 'Gregory', 'Toler'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:39511',
                         '2009-2010',
                         [
@@ -1488,14 +1488,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:507', 'Jerame', 'Tuman'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:507',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:2033', 'Jerheme', 'Urban'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:2033',
                         '2009-2010',
                         [
@@ -1520,21 +1520,21 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:34874', 'Ellot', 'Vallejo'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:34874',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:5725', 'Chris', 'Vincent'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:5725',
                         '2009-2010'
                     ),
                 ],
                 [
                     new Player('/sport/football/player:23257', 'Reggie', 'Walker'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:23257',
                         '2009-2010',
                         [
@@ -1553,7 +1553,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:11720', 'Matt', 'Ware'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:11720',
                         '2009-2010',
                         [
@@ -1573,7 +1573,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:30', 'Kurt', 'Warner'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:30',
                         '2009-2010',
                         [
@@ -1625,7 +1625,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:8947', 'Gabe', 'Watson'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:8947',
                         '2009-2010',
                         [
@@ -1643,7 +1643,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:28446', 'Beanie', 'Wells'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:28446',
                         '2009-2010',
                         [
@@ -1676,7 +1676,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:306', 'Reggie', 'Wells'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:306',
                         '2009-2010',
                         [
@@ -1693,7 +1693,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:274', 'Adrian', 'Wilson'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:274',
                         '2009-2010',
                         [
@@ -1722,7 +1722,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
                 ],
                 [
                     new Player('/sport/football/player:19009', 'Jason', 'Wright'),
-                    new PlayerStatistics(
+                    new Statistics(
                         '/sport/football/player:19009',
                         '2009-2010',
                         [

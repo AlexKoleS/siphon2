@@ -6,7 +6,7 @@ use ArrayIterator;
 /**
  * Player statistics.
  */
-class PlayerStatistics implements PlayerStatisticsInterface
+class Statistics implements StatisticsInterface
 {
     /**
      * @param string                                      $playerId

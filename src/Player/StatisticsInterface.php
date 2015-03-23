@@ -8,7 +8,7 @@ use IteratorAggregate;
  *
  * @api
  */
-interface PlayerStatisticsInterface extends IteratorAggregate
+interface StatisticsInterface extends IteratorAggregate
 {
     /**
      * Get the player ID.

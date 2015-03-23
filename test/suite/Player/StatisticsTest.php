@@ -3,11 +3,11 @@ namespace Icecave\Siphon\Player;
 
 use PHPUnit_Framework_TestCase;
 
-class PlayerStatisticsTest extends PHPUnit_Framework_TestCase
+class StatisticsTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->statistics = new PlayerStatistics(
+        $this->statistics = new Statistics(
             '<player-id>',
             '<season>',
             [

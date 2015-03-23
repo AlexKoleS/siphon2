@@ -3,11 +3,11 @@ namespace Icecave\Siphon\Player;
 
 use PHPUnit_Framework_TestCase;
 
-class PlayerSeasonDetailsTest extends PHPUnit_Framework_TestCase
+class SeasonDetailsTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->details = new PlayerSeasonDetails(
+        $this->details = new SeasonDetails(
             '<player-id>',
             '<season>',
             '<number>',

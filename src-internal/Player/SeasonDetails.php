@@ -4,7 +4,7 @@ namespace Icecave\Siphon\Player;
 /**
  * Encapsulates season-specific information about a player.
  */
-class PlayerSeasonDetails implements PlayerSeasonDetailsInterface
+class SeasonDetails implements SeasonDetailsInterface
 {
     /**
      * @param string      $playerId

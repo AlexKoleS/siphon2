@@ -6,7 +6,7 @@ namespace Icecave\Siphon\Player;
  *
  * @api
  */
-interface PlayerSeasonDetailsInterface
+interface SeasonDetailsInterface
 {
     /**
      * Get the player ID.

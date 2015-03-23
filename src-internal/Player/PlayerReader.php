@@ -23,7 +23,7 @@ class PlayerReader implements PlayerReaderInterface
      * @param string $season The season name.
      * @param string $teamId The ID of the team.
      *
-     * @return array<tuple<PlayerInterface, PlayerSeasonDetailsInterface>>
+     * @return array<tuple<PlayerInterface, SeasonDetailsInterface>>
      */
     public function read($sport, $league, $season, $teamId)
     {
@@ -53,7 +53,7 @@ class PlayerReader implements PlayerReaderInterface
                     XPath::string($element, "name[@type='first']"),
                     XPath::string($element, "name[@type='last']")
                 ),
-                new PlayerSeasonDetails(
+                new SeasonDetails(
                     strval($element->id),
                     $season,
                     XPath::stringOrNull($element, "season-details/number"),
