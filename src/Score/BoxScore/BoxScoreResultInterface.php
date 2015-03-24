@@ -11,6 +11,13 @@ use Icecave\Siphon\Score\ScoreInterface;
 interface BoxScoreResultInterface
 {
     /**
+     * Get per-player statistics for the competition.
+     *
+     * @return array<tuple<PlayerInterface, StatisticsInterface>>
+     */
+    public function playerStatistics();
+
+    /**
      * Get the competition score.
      *
      * @return ScoreInterface

@@ -22,7 +22,7 @@ class InjuryReader implements InjuryReaderInterface
      * @param string $sport  The sport (eg, baseball, football, etc)
      * @param string $league The league (eg, MLB, NFL, etc)
      *
-     * @return array<tuple<PlayerInterface, InjuryInterface>>
+     * @return array<InjuryInterface>
      */
     public function read($sport, $league)
     {
@@ -44,7 +44,6 @@ class InjuryReader implements InjuryReaderInterface
         $result = [];
 
         foreach ($xml as $element) {
-            $player = $element->{'player'};
             $injury = $element->{'injury'};
 
             if ($injury->{'last-updated'}) {
@@ -55,25 +54,18 @@ class InjuryReader implements InjuryReaderInterface
                 $updatedTime = null;
             }
 
-            $result[] = [
-                new Player(
-                    strval($player->id),
-                    XPath::string($player, "name[@type='first']"),
-                    XPath::string($player, "name[@type='last']")
+            $result[] = new Injury(
+                strval($injury->id),
+                strval($element->{'player'}->id),
+                strval($injury->location->name),
+                InjuryStatus::memberByValue(
+                    strval($injury->{'injury-status'}->status)
                 ),
-                new Injury(
-                    strval($injury->id),
-                    strval($player->id),
-                    strval($injury->location->name),
-                    InjuryStatus::memberByValue(
-                        strval($injury->{'injury-status'}->status)
-                    ),
-                    strval($injury->{'injury-status'}->{'display-status'}),
-                    strval($injury->{'injury-status'}->note),
-                    Date::fromIsoString($injury->{'start-date'}),
-                    $updatedTime
-                ),
-            ];
+                strval($injury->{'injury-status'}->{'display-status'}),
+                strval($injury->{'injury-status'}->note),
+                Date::fromIsoString($injury->{'start-date'}),
+                $updatedTime
+            );
         }
 
         return $result;

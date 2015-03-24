@@ -2,7 +2,7 @@
 namespace Icecave\Siphon\Player;
 
 /**
- * A player, an athelete who participates in a competition.
+ * A player, an athlete who participates in a competition.
  *
  * @api
  */

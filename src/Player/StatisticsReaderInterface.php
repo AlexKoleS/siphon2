@@ -16,7 +16,7 @@ interface StatisticsReaderInterface
      * @param string $season The season name.
      * @param string $teamId The ID of the team.
      *
-     * @return array<tuple<PlayerInterface, StatisticsInterface>>
+     * @return array<StatisticsInterface>
      */
     public function read($sport, $league, $season, $teamId);
 }
