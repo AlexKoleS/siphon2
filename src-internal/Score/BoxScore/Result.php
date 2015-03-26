@@ -12,7 +12,7 @@ class Result implements BoxScoreResultInterface
     /**
      * Get per-player statistics for the competition.
      *
-     * @return array<tuple<PlayerInterface, StatisticsInterface>>
+     * @return array<StatisticsInterface>
      */
     public function playerStatistics()
     {
@@ -22,7 +22,7 @@ class Result implements BoxScoreResultInterface
     /**
      * Set per-player statistics for the competition.
      *
-     * @return array<tuple<PlayerInterface, StatisticsInterface>>
+     * @return array<StatisticsInterface>
      */
     public function setPlayerStatistics(array $playerStatistics)
     {

@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score\BoxScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Player\Statistics;
 use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
@@ -21,8 +22,6 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->markTestSkipped();
-
         $this->reader = new BoxScoreReader(
             $this->xmlReader()->mock()
         );
@@ -46,20 +45,93 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $expected = new Result;
 
-        // $scope1 = new Period(PeriodType::PERIOD(), 3, 7);
-        // $scope2 = new Period(PeriodType::PERIOD(), 3, 0);
+        $expected->setPlayerStatistics(
+            [
+                // home team ...
+                new Statistics(
+                    '/sport/football/player:27853',
+                    '2009-2010',
+                    [
+                        'game-stats' => [
+                            'games_played' => 1,
+                            'games_started' => 1,
+                        ]
+                    ]
+                ),
+                new Statistics(
+                    '/sport/football/player:347',
+                    '2009-2010',
+                    [
+                        'game-stats' => [
+                            'games_played' => 1,
+                            'defense_assisted_tackles' => 1,
+                        ]
+                    ]
+                ),
+                new Statistics(
+                    '/sport/football/player:2753',
+                    '2009-2010',
+                    [
+                        'game-stats' => [
+                            'games_played' => 1,
+                            'games_started' => 1,
+                            'rushing_plays' => 1,
+                            'rushing_net_yards' => 3,
+                            'rushing_longest_yards' => 3,
+                            'passing_plays_attempted' => 43,
+                            'passing_plays_completed' => 33,
+                            'passing_gross_yards' => 405,
+                            'passing_net_yards' => 363,
+                            'passing_longest_yards' => 34,
+                            'passing_plays_intercepted' => 2,
+                            'passing_plays_sacked' => 4,
+                            'passing_sacked_yards' => 42,
+                            'passing_touchdowns' => 1,
+                            'total_touchdowns' => 1,
+                            'starter_games_won' => 1,
+                            'passer_rating' => 89.583336000000003,
+                        ]
+                    ]
+                ),
 
-        // $expected = new PeriodResult;
-        // $expected->setCurrentScope($scope2);
-        // $expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
-        // $expected->setCurrentGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
-        // $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-
-        // $score = new PeriodScore;
-        // $score->add($scope1);
-        // $score->add($scope2);
-
-        // $expected->setCompetitionScore($score);
+                // away team ...
+                new Statistics(
+                    '/sport/football/player:12674',
+                    '2009-2010',
+                    [
+                        'game-stats' => [
+                            'games_played' => 1,
+                            'games_started' => 1,
+                            'defense_solo_tackles' => 8,
+                            'defense_assisted_tackles' => 4,
+                            'defense_fumble_recoveries' => 1,
+                        ]
+                    ]
+                ),
+                new Statistics(
+                    '/sport/football/player:729',
+                    '2009-2010',
+                    [
+                        'game-stats' => [
+                            'games_played' => 1,
+                            'games_started' => 1,
+                            'defense_solo_tackles' => 2,
+                            'defense_assisted_tackles' => 1,
+                        ]
+                    ]
+                ),
+                new Statistics(
+                    '/sport/football/player:9058',
+                    '2009-2010',
+                    [
+                        'game-stats' => [
+                            'games_played' => 1,
+                            'games_started' => 1,
+                        ]
+                    ]
+                ),
+            ]
+        );
 
         $this->assertEquals(
             $expected,

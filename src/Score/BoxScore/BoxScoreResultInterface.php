@@ -13,7 +13,7 @@ interface BoxScoreResultInterface
     /**
      * Get per-player statistics for the competition.
      *
-     * @return array<tuple<PlayerInterface, StatisticsInterface>>
+     * @return array<StatisticsInterface>
      */
     public function playerStatistics();
 
