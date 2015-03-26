@@ -1,150 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>Icecave\Siphon\Player\StatisticsInterface | icecave/siphon API</title>
-                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
-                            </head>
-        <body id="class">
-            <div class="header">
-        <ul>
-            <li><a href="../../../classes.html">Classes</a></li>
-                            <li><a href="../../../namespaces.html">Namespaces</a></li>
-                        <li><a href="../../../interfaces.html">Interfaces</a></li>
-            <li><a href="../../../doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Icecave\Siphon\Player\StatisticsInterface | icecave/siphon API</title>
 
-        <div id="title">icecave/siphon API</div>
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
 
-            <div class="type">Interface</div>
-    <h1><a href="../../../Icecave/Siphon/Player.html">Icecave\Siphon\Player</a>\StatisticsInterface</h1>
+    <body id="class" data-name="class:Icecave_Siphon_Player_StatisticsInterface" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <p>interface    <strong>StatisticsInterface</strong>        implements
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">icecave/siphon API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">interface</span></li>
+                                                            <li><a href="../../../Icecave.html">Icecave</a></li>
+                                        <li><a href="../../../Icecave/Siphon.html">Siphon</a></li>
+                                        <li><a href="../../../Icecave/Siphon/Player.html">Player</a></li>
+    
+                <li>StatisticsInterface</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>StatisticsInterface</h1>
+    </div>
+
+    <p>    interface
+    <strong>StatisticsInterface</strong>        implements
         <a href="http://php.net/IteratorAggregate"><abbr title="IteratorAggregate">IteratorAggregate</abbr></a></p>
 
             <div class="description">
-            <p>Player statistics.</p>
-            <p>
-</p>
-        </div>
+            <p>Player statistics.</p>                    </div>
+    
     
     
     
             <h2>Methods</h2>
 
-            <table>
-                    <tr>
-                <td class="type">
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_playerId">playerId</a>()
-                    <p>Get the player ID.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Get the player ID.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_season">season</a>()
-                    <p>Get the season name.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    integer|<abbr title="Icecave\Siphon\Player\float">float</abbr>
-                </td>
-                <td class="last">
+                                            <p>Get the season name.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer|float
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_get">get</a>(string $group, string $key, mixed $default)
-                    <p>Get the value for specific statistical metric.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    integer|<abbr title="Icecave\Siphon\Player\float">float</abbr>
-                </td>
-                <td class="last">
+                                            <p>Get the value for specific statistical metric.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer|float
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getTotal">getTotal</a>(string $key)
-                    <p>Get the total value for a specific statistical metric across all groups.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Get the total value for a specific statistical metric across all groups.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_has">has</a>(string $group, string $key)
-                    <p>Check if a given key exists within a group.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Check if a given key exists within a group.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getIterator">getIterator</a>()
-                    <p>Iterate over statistical totals.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Iterate over statistical totals.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;string,">mixed&lt;tuple&lt;string,</abbr>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_iterate">iterate</a>()
-                    <p>Iterate over a flat sequence of groups and keys.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Iterate over a flat sequence of groups and keys.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_iterateByGroup">iterateByGroup</a>()
-                    <p>Iterate over the the statistics by group.</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Iterate over the the statistics by group.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_iterateByKey">iterateByKey</a>()
-                    <p>Iterate over the the statistics by key.</p>
-                </td>
-                <td></td>
-            </tr>
-            </table>
+                                            <p>Iterate over the the statistics by key.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
 
 
         <h2>Details</h2>
 
-                        <h3 id="method_playerId">
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_playerId">
         <div class="location">at line 18</div>
-        <code>            public            string
+        <code>                    string
     <strong>playerId</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the player ID.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Get the player ID.</p>                                </div>
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>The player ID.</td>
@@ -156,20 +198,21 @@
                     </div>
     </div>
 
-                <h3 id="method_season">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_season">
         <div class="location">at line 25</div>
-        <code>            public            string
+        <code>                    string
     <strong>season</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the season name.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Get the season name.</p>                                </div>
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>The season name.</td>
@@ -181,19 +224,20 @@
                     </div>
     </div>
 
-                <h3 id="method_get">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_get">
         <div class="location">at line 36</div>
-        <code>            public            integer|<abbr title="Icecave\Siphon\Player\float">float</abbr>
+        <code>                    integer|float
     <strong>get</strong>(string $group, string $key, mixed $default)</code>
     </h3>
     <div class="details">
-        <p>Get the value for specific statistical metric.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Get the value for specific statistical metric.</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$group</td>
@@ -214,9 +258,9 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
-            <td>integer|<abbr title="Icecave\Siphon\Player\float">float</abbr></td>
+            <td>integer|float</td>
             <td>
 </td>
         </tr>
@@ -227,19 +271,20 @@
                     </div>
     </div>
 
-                <h3 id="method_getTotal">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTotal">
         <div class="location">at line 45</div>
-        <code>            public            integer|<abbr title="Icecave\Siphon\Player\float">float</abbr>
+        <code>                    integer|float
     <strong>getTotal</strong>(string $key)</code>
     </h3>
     <div class="details">
-        <p>Get the total value for a specific statistical metric across all groups.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Get the total value for a specific statistical metric across all groups.</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$key</td>
@@ -250,9 +295,9 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
-            <td>integer|<abbr title="Icecave\Siphon\Player\float">float</abbr></td>
+            <td>integer|float</td>
             <td>
 </td>
         </tr>
@@ -263,19 +308,20 @@
                     </div>
     </div>
 
-                <h3 id="method_has">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_has">
         <div class="location">at line 53</div>
-        <code>            public            
+        <code>                    
     <strong>has</strong>(string $group, string $key)</code>
     </h3>
     <div class="details">
-        <p>Check if a given key exists within a group.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Check if a given key exists within a group.</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$group</td>
@@ -294,20 +340,21 @@
                     </div>
     </div>
 
-                <h3 id="method_getIterator">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getIterator">
         <div class="location">at line 60</div>
-        <code>            public            <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
+        <code>                    <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
     <strong>getIterator</strong>()</code>
     </h3>
     <div class="details">
-        <p>Iterate over statistical totals.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Iterate over statistical totals.</p>                                </div>
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr></td>
             <td>integer|float> A map of key name to total value.</td>
@@ -319,20 +366,21 @@
                     </div>
     </div>
 
-                <h3 id="method_iterate">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_iterate">
         <div class="location">at line 67</div>
-        <code>            public            <abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;string,">mixed&lt;tuple&lt;string,</abbr>
+        <code>                    <abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;string,">mixed&lt;tuple&lt;string,</abbr>
     <strong>iterate</strong>()</code>
     </h3>
     <div class="details">
-        <p>Iterate over a flat sequence of groups and keys.</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Iterate over a flat sequence of groups and keys.</p>                                </div>
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;string,">mixed&lt;tuple&lt;string,</abbr></td>
             <td>string, integer|float>> A sequence of 3-tuples containing group name, key name and value.</td>
@@ -344,20 +392,22 @@
                     </div>
     </div>
 
-                <h3 id="method_iterateByGroup">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_iterateByGroup">
         <div class="location">at line 77</div>
-        <code>            public            <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
+        <code>                    <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
     <strong>iterateByGroup</strong>()</code>
     </h3>
     <div class="details">
-        <p>Iterate over the the statistics by group.</p>
-        <p>The key is the group name, the value is an associative array mapping
-statistical key to value.</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Iterate over the the statistics by group.</p>                    <p>The key is the group name, the value is an associative array mapping
+statistical key to value.</p>            </div>
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr></td>
             <td>array&lt;string, integer|float>></td>
@@ -369,20 +419,22 @@ statistical key to value.</p>
                     </div>
     </div>
 
-                <h3 id="method_iterateByKey">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_iterateByKey">
         <div class="location">at line 87</div>
-        <code>            public            <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
+        <code>                    <abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr>
     <strong>iterateByKey</strong>()</code>
     </h3>
     <div class="details">
-        <p>Iterate over the the statistics by key.</p>
-        <p>The key is the statistical key, the value is an associative array mapping
-group name to value.</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Iterate over the the statistics by key.</p>                    <p>The key is the statistical key, the value is an associative array mapping
+group name to value.</p>            </div>
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><abbr title="Icecave\Siphon\Player\mixed&lt;string,">mixed&lt;string,</abbr></td>
             <td>array&lt;string, integer|float>></td>
@@ -394,10 +446,17 @@ group name to value.</p>
                     </div>
     </div>
 
+            </div>
+            </div>
+
     
             </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
     </div>
     </body>
+
 </html>

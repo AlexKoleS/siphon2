@@ -1,229 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>Interfaces | icecave/siphon API</title>
-                    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-                            </head>
-        <body id="overview">
-            <div class="header">
-        <ul>
-            <li><a href="classes.html">Classes</a></li>
-                            <li><a href="namespaces.html">Namespaces</a></li>
-                        <li><a href="interfaces.html">Interfaces</a></li>
-            <li><a href="doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Interfaces | icecave/siphon API</title>
 
-        <div id="title">icecave/siphon API</div>
+            <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="css/sami.css">
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/typeahead.min.js"></script>
+        <script src="sami.js"></script>
+    
+    
+    </head>
 
-            <h1>Interfaces</h1>
+    <body id="interfaces" data-name="" data-root-path="">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <table>
-                    <tr>
-                <td><a href="Icecave/Siphon/Atom/AtomEntryInterface.html" target="main"><abbr title="Icecave\Siphon\Atom\AtomEntryInterface">Icecave\Siphon\Atom\AtomEntryInterface</abbr></a></td>
-                <td class="last">
-                    A single Atom result.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Atom/AtomReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Atom\AtomReaderInterface">Icecave\Siphon\Atom\AtomReaderInterface</abbr></a></td>
-                <td class="last">
-                    A client for SDI Atom feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Atom/AtomResultInterface.html" target="main"><abbr title="Icecave\Siphon\Atom\AtomResultInterface">Icecave\Siphon\Atom\AtomResultInterface</abbr></a></td>
-                <td class="last">
-                    The result of reading an Atom feed.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/FactoryInterface.html" target="main"><abbr title="Icecave\Siphon\FactoryInterface">Icecave\Siphon\FactoryInterface</abbr></a></td>
-                <td class="last">
-                    The global factory used to create Siphon feed readers.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/InjuryInterface.html" target="main"><abbr title="Icecave\Siphon\Player\InjuryInterface">Icecave\Siphon\Player\InjuryInterface</abbr></a></td>
-                <td class="last">
-                    Information about a specific injury.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/InjuryReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Player\InjuryReaderInterface">Icecave\Siphon\Player\InjuryReaderInterface</abbr></a></td>
-                <td class="last">
-                    Read data from player injury feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/PlayerInterface.html" target="main"><abbr title="Icecave\Siphon\Player\PlayerInterface">Icecave\Siphon\Player\PlayerInterface</abbr></a></td>
-                <td class="last">
-                    A player, an athlete who participates in a competition.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/PlayerReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Player\PlayerReaderInterface">Icecave\Siphon\Player\PlayerReaderInterface</abbr></a></td>
-                <td class="last">
-                    Read data from player feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/SeasonDetailsInterface.html" target="main"><abbr title="Icecave\Siphon\Player\SeasonDetailsInterface">Icecave\Siphon\Player\SeasonDetailsInterface</abbr></a></td>
-                <td class="last">
-                    Encapsulates season-specific information about a player.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/StatisticsInterface.html" target="main"><abbr title="Icecave\Siphon\Player\StatisticsInterface">Icecave\Siphon\Player\StatisticsInterface</abbr></a></td>
-                <td class="last">
-                    Player statistics.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Player/StatisticsReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Player\StatisticsReaderInterface">Icecave\Siphon\Player\StatisticsReaderInterface</abbr></a></td>
-                <td class="last">
-                    Read data from player statistics feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Schedule/CompetitionCollectionInterface.html" target="main"><abbr title="Icecave\Siphon\Schedule\CompetitionCollectionInterface">Icecave\Siphon\Schedule\CompetitionCollectionInterface</abbr></a></td>
-                <td class="last">
-                    A collection of competitions.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Schedule/CompetitionInterface.html" target="main"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">Icecave\Siphon\Schedule\CompetitionInterface</abbr></a></td>
-                <td class="last">
-                    A sports competition.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Schedule/ScheduleInterface.html" target="main"><abbr title="Icecave\Siphon\Schedule\ScheduleInterface">Icecave\Siphon\Schedule\ScheduleInterface</abbr></a></td>
-                <td class="last">
-                    A schedule is a collection of seasons.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Schedule/ScheduleReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Schedule\ScheduleReaderInterface">Icecave\Siphon\Schedule\ScheduleReaderInterface</abbr></a></td>
-                <td class="last">
-                    A client for SDI schedule feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Schedule/SeasonInterface.html" target="main"><abbr title="Icecave\Siphon\Schedule\SeasonInterface">Icecave\Siphon\Schedule\SeasonInterface</abbr></a></td>
-                <td class="last">
-                    A season within a schedule.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/BoxScore/BoxScoreReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface">Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface</abbr></a></td>
-                <td class="last">
-                    A client for reading SDI box score feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/BoxScore/BoxScoreResultInterface.html" target="main"><abbr title="Icecave\Siphon\Score\BoxScore\BoxScoreResultInterface">Icecave\Siphon\Score\BoxScore\BoxScoreResultInterface</abbr></a></td>
-                <td class="last">
-                    The result of reading a box score feed.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/InningInterface.html" target="main"><abbr title="Icecave\Siphon\Score\InningInterface">Icecave\Siphon\Score\InningInterface</abbr></a></td>
-                <td class="last">
-                    A scope for sports that use innings (baseball).
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/InningScoreInterface.html" target="main"><abbr title="Icecave\Siphon\Score\InningScoreInterface">Icecave\Siphon\Score\InningScoreInterface</abbr></a></td>
-                <td class="last">
-                    A competition score for sports that use innings (baseball).
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/InningStatisticsInterface.html" target="main"><abbr title="Icecave\Siphon\Score\InningStatisticsInterface">Icecave\Siphon\Score\InningStatisticsInterface</abbr></a></td>
-                <td class="last">
-                    Additional statistics for innings-based sports.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/LiveScore/InningResultInterface.html" target="main"><abbr title="Icecave\Siphon\Score\LiveScore\InningResultInterface">Icecave\Siphon\Score\LiveScore\InningResultInterface</abbr></a></td>
-                <td class="last">
-                    The result of reading a live score feed for a competition that uses innings.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/LiveScore/LiveScoreReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface">Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface</abbr></a></td>
-                <td class="last">
-                    A client for reading SDI live score feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/LiveScore/LiveScoreResultInterface.html" target="main"><abbr title="Icecave\Siphon\Score\LiveScore\LiveScoreResultInterface">Icecave\Siphon\Score\LiveScore\LiveScoreResultInterface</abbr></a></td>
-                <td class="last">
-                    The result of reading a live score feed.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/LiveScore/PeriodResultInterface.html" target="main"><abbr title="Icecave\Siphon\Score\LiveScore\PeriodResultInterface">Icecave\Siphon\Score\LiveScore\PeriodResultInterface</abbr></a></td>
-                <td class="last">
-                    The result of reading a live score feed for a competition that uses periods.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/PeriodInterface.html" target="main"><abbr title="Icecave\Siphon\Score\PeriodInterface">Icecave\Siphon\Score\PeriodInterface</abbr></a></td>
-                <td class="last">
-                    A scope used for period-based sports (anything that does not use innings);
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/ScopeInterface.html" target="main"><abbr title="Icecave\Siphon\Score\ScopeInterface">Icecave\Siphon\Score\ScopeInterface</abbr></a></td>
-                <td class="last">
-                    A scope within a competition.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/ScoreInterface.html" target="main"><abbr title="Icecave\Siphon\Score\ScoreInterface">Icecave\Siphon\Score\ScoreInterface</abbr></a></td>
-                <td class="last">
-                    A competition score.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Score/TeamScoreInterface.html" target="main"><abbr title="Icecave\Siphon\Score\TeamScoreInterface">Icecave\Siphon\Score\TeamScoreInterface</abbr></a></td>
-                <td class="last">
-                    A score pair for a team-based sport.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Team/TeamInterface.html" target="main"><abbr title="Icecave\Siphon\Team\TeamInterface">Icecave\Siphon\Team\TeamInterface</abbr></a></td>
-                <td class="last">
-                    A team in a team sport.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/Team/TeamReaderInterface.html" target="main"><abbr title="Icecave\Siphon\Team\TeamReaderInterface">Icecave\Siphon\Team\TeamReaderInterface</abbr></a></td>
-                <td class="last">
-                    Read data from team feeds.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/UrlBuilderInterface.html" target="main"><abbr title="Icecave\Siphon\UrlBuilderInterface">Icecave\Siphon\UrlBuilderInterface</abbr></a></td>
-                <td class="last">
-                    Constructs a fully-qualified feed URL from a resource name and parameter set.
-                </td>
-            </tr>
-                    <tr>
-                <td><a href="Icecave/Siphon/XmlReaderInterface.html" target="main"><abbr title="Icecave\Siphon\XmlReaderInterface">Icecave\Siphon\XmlReaderInterface</abbr></a></td>
-                <td class="last">
-                    Read XML data based on a resource name.
-                </td>
-            </tr>
-            </table>
+
+                <div id="api-tree"></div>
+
         </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">icecave/siphon API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="classes.html">Classes</a></li>
+                                            <li><a href="namespaces.html">Namespaces</a></li>
+                                        <li><a href="interfaces.html">Interfaces</a></li>
+                    <li><a href="traits.html">Traits</a></li>
+                    <li><a href="doc-index.html">Index</a></li>
+                    <li><a href="search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div id="page-content">
+                    <div class="page-header">
+        <h1>Interfaces</h1>
+    </div>
+
+    <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Atom/AtomEntryInterface.html"><abbr title="Icecave\Siphon\Atom\AtomEntryInterface">Icecave\Siphon\Atom\AtomEntryInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A single Atom result.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Atom/AtomReaderInterface.html"><abbr title="Icecave\Siphon\Atom\AtomReaderInterface">Icecave\Siphon\Atom\AtomReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A client for SDI Atom feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Atom/AtomResultInterface.html"><abbr title="Icecave\Siphon\Atom\AtomResultInterface">Icecave\Siphon\Atom\AtomResultInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    The result of reading an Atom feed.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/FactoryInterface.html"><abbr title="Icecave\Siphon\FactoryInterface">Icecave\Siphon\FactoryInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    The global factory used to create Siphon feed readers.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/InjuryInterface.html"><abbr title="Icecave\Siphon\Player\InjuryInterface">Icecave\Siphon\Player\InjuryInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Information about a specific injury.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/InjuryReaderInterface.html"><abbr title="Icecave\Siphon\Player\InjuryReaderInterface">Icecave\Siphon\Player\InjuryReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Read data from player injury feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/PlayerInterface.html"><abbr title="Icecave\Siphon\Player\PlayerInterface">Icecave\Siphon\Player\PlayerInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A player, an athlete who participates in a competition.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/PlayerReaderInterface.html"><abbr title="Icecave\Siphon\Player\PlayerReaderInterface">Icecave\Siphon\Player\PlayerReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Read data from player feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/SeasonDetailsInterface.html"><abbr title="Icecave\Siphon\Player\SeasonDetailsInterface">Icecave\Siphon\Player\SeasonDetailsInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Encapsulates season-specific information about a player.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/StatisticsInterface.html"><abbr title="Icecave\Siphon\Player\StatisticsInterface">Icecave\Siphon\Player\StatisticsInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Player statistics.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Player/StatisticsReaderInterface.html"><abbr title="Icecave\Siphon\Player\StatisticsReaderInterface">Icecave\Siphon\Player\StatisticsReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Read data from player statistics feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Schedule/CompetitionCollectionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionCollectionInterface">Icecave\Siphon\Schedule\CompetitionCollectionInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A collection of competitions.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">Icecave\Siphon\Schedule\CompetitionInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A sports competition.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Schedule/ScheduleInterface.html"><abbr title="Icecave\Siphon\Schedule\ScheduleInterface">Icecave\Siphon\Schedule\ScheduleInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A schedule is a collection of seasons.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Schedule/ScheduleReaderInterface.html"><abbr title="Icecave\Siphon\Schedule\ScheduleReaderInterface">Icecave\Siphon\Schedule\ScheduleReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A client for SDI schedule feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Schedule/SeasonInterface.html"><abbr title="Icecave\Siphon\Schedule\SeasonInterface">Icecave\Siphon\Schedule\SeasonInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A season within a schedule.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/BoxScore/BoxScoreReaderInterface.html"><abbr title="Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface">Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A client for reading SDI box score feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/BoxScore/BoxScoreResultInterface.html"><abbr title="Icecave\Siphon\Score\BoxScore\BoxScoreResultInterface">Icecave\Siphon\Score\BoxScore\BoxScoreResultInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    The result of reading a box score feed.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/InningInterface.html"><abbr title="Icecave\Siphon\Score\InningInterface">Icecave\Siphon\Score\InningInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A scope for sports that use innings (baseball).
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/InningScoreInterface.html"><abbr title="Icecave\Siphon\Score\InningScoreInterface">Icecave\Siphon\Score\InningScoreInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A competition score for sports that use innings (baseball).
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/InningStatisticsInterface.html"><abbr title="Icecave\Siphon\Score\InningStatisticsInterface">Icecave\Siphon\Score\InningStatisticsInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Additional statistics for innings-based sports.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/LiveScore/InningResultInterface.html"><abbr title="Icecave\Siphon\Score\LiveScore\InningResultInterface">Icecave\Siphon\Score\LiveScore\InningResultInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    The result of reading a live score feed for a competition that uses innings.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/LiveScore/LiveScoreReaderInterface.html"><abbr title="Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface">Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A client for reading SDI live score feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/LiveScore/LiveScoreResultInterface.html"><abbr title="Icecave\Siphon\Score\LiveScore\LiveScoreResultInterface">Icecave\Siphon\Score\LiveScore\LiveScoreResultInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    The result of reading a live score feed.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/LiveScore/PeriodResultInterface.html"><abbr title="Icecave\Siphon\Score\LiveScore\PeriodResultInterface">Icecave\Siphon\Score\LiveScore\PeriodResultInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    The result of reading a live score feed for a competition that uses periods.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/PeriodInterface.html"><abbr title="Icecave\Siphon\Score\PeriodInterface">Icecave\Siphon\Score\PeriodInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A scope used for period-based sports (anything that does not use innings);
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/ScopeInterface.html"><abbr title="Icecave\Siphon\Score\ScopeInterface">Icecave\Siphon\Score\ScopeInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A scope within a competition.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/ScoreInterface.html"><abbr title="Icecave\Siphon\Score\ScoreInterface">Icecave\Siphon\Score\ScoreInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A competition score.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Score/TeamScoreInterface.html"><abbr title="Icecave\Siphon\Score\TeamScoreInterface">Icecave\Siphon\Score\TeamScoreInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A score pair for a team-based sport.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">Icecave\Siphon\Team\TeamInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    A team in a team sport.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/Team/TeamReaderInterface.html"><abbr title="Icecave\Siphon\Team\TeamReaderInterface">Icecave\Siphon\Team\TeamReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Read data from team feeds.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/UrlBuilderInterface.html"><abbr title="Icecave\Siphon\UrlBuilderInterface">Icecave\Siphon\UrlBuilderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Constructs a fully-qualified feed URL from a resource name and parameter set.
+                </div>
+            </div>
+                    <div class="row">
+                <div class="col-md-6">
+                                            <em><a href="Icecave/Siphon/XmlReaderInterface.html"><abbr title="Icecave\Siphon\XmlReaderInterface">Icecave\Siphon\XmlReaderInterface</abbr></a></em>
+                                    </div>
+                <div class="col-md-6">
+                    Read XML data based on a resource name.
+                </div>
+            </div>
+            </div>
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
     </div>
     </body>
+
 </html>
