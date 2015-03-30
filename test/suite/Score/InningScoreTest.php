@@ -13,19 +13,11 @@ class InningScoreTest extends PHPUnit_Framework_TestCase
 
         $this->scope1->homeTeamScore->returns(1);
         $this->scope1->awayTeamScore->returns(2);
-        $this->scope1->homeTeamHits->returns(3);
-        $this->scope1->awayTeamHits->returns(4);
-        $this->scope1->homeTeamErrors->returns(5);
-        $this->scope1->awayTeamErrors->returns(6);
 
         $this->scope2->homeTeamScore->returns(7);
         $this->scope2->awayTeamScore->returns(8);
-        $this->scope2->homeTeamHits->returns(9);
-        $this->scope2->awayTeamHits->returns(10);
-        $this->scope2->homeTeamErrors->returns(11);
-        $this->scope2->awayTeamErrors->returns(12);
 
-        $this->score = new InningScore;
+        $this->score = new InningScore(12, 14, 16, 18);
     }
 
     public function testHomeTeamScore()
@@ -73,19 +65,6 @@ class InningScoreTest extends PHPUnit_Framework_TestCase
     public function testHomeTeamHits()
     {
         $this->assertSame(
-            0,
-            $this->score->homeTeamHits()
-        );
-
-        $this->score->add(
-            $this->scope1->mock()
-        );
-
-        $this->score->add(
-            $this->scope2->mock()
-        );
-
-        $this->assertSame(
             12,
             $this->score->homeTeamHits()
         );
@@ -93,19 +72,6 @@ class InningScoreTest extends PHPUnit_Framework_TestCase
 
     public function testAwayTeamHits()
     {
-        $this->assertSame(
-            0,
-            $this->score->awayTeamHits()
-        );
-
-        $this->score->add(
-            $this->scope1->mock()
-        );
-
-        $this->score->add(
-            $this->scope2->mock()
-        );
-
         $this->assertSame(
             14,
             $this->score->awayTeamHits()
@@ -115,19 +81,6 @@ class InningScoreTest extends PHPUnit_Framework_TestCase
     public function testHomeTeamErrors()
     {
         $this->assertSame(
-            0,
-            $this->score->homeTeamErrors()
-        );
-
-        $this->score->add(
-            $this->scope1->mock()
-        );
-
-        $this->score->add(
-            $this->scope2->mock()
-        );
-
-        $this->assertSame(
             16,
             $this->score->homeTeamErrors()
         );
@@ -135,19 +88,6 @@ class InningScoreTest extends PHPUnit_Framework_TestCase
 
     public function testAwayTeamErrors()
     {
-        $this->assertSame(
-            0,
-            $this->score->awayTeamErrors()
-        );
-
-        $this->score->add(
-            $this->scope1->mock()
-        );
-
-        $this->score->add(
-            $this->scope2->mock()
-        );
-
         $this->assertSame(
             18,
             $this->score->awayTeamErrors()

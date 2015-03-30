@@ -155,8 +155,8 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/baseball/MLB/livescores/livescores_12345.xml');
 
-        $scope1 = new Inning(0, 0, 1, 0, 0, 0);
-        $scope2 = new Inning(0, 1, 2, 2, 0, 0);
+        $scope1 = new Inning(0, 0);
+        $scope2 = new Inning(0, 1);
 
         $expected = new InningResult;
         $expected->setCurrentScope($scope2);
@@ -164,7 +164,13 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $expected->setCurrentInningSubType(InningSubType::BOTTOM());
         $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
 
-        $score = new InningScore;
+        $score = new InningScore(
+            3, // home team hits
+            2, // away team hits
+            0, // home team errors
+            0  // away team errors
+        );
+
         $score->add($scope1);
         $score->add($scope2);
 
@@ -194,16 +200,22 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $expected = new InningResult;
         $expected->setCompetitionStatus(CompetitionStatus::COMPLETE());
 
-        $score = new InningScore;
-        $score->add(new Inning(0, 0, 1, 0, 0, 0));
-        $score->add(new Inning(0, 1, 2, 2, 0, 0));
-        $score->add(new Inning(0, 0, 0, 3, 0, 0));
-        $score->add(new Inning(1, 2, 3, 2, 1, 0));
-        $score->add(new Inning(0, 0, 1, 0, 0, 0));
-        $score->add(new Inning(0, 0, 0, 2, 0, 0));
-        $score->add(new Inning(0, 1, 2, 1, 0, 0));
-        $score->add(new Inning(0, 3, 0, 5, 0, 1));
-        $score->add(new Inning(0, 0, 1, 0, 0, 0));
+        $score = new InningScore(
+            10, // home team hits
+            15, // away team hits
+            1,  // home team errors
+            1   // away team errors
+        );
+
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 1));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(1, 2));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 1));
+        $score->add(new Inning(0, 3));
+        $score->add(new Inning(0, 0));
 
         $expected->setCompetitionScore($score);
 

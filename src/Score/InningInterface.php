@@ -6,6 +6,6 @@ namespace Icecave\Siphon\Score;
  *
  * @api
  */
-interface InningInterface extends ScopeInterface, InningStatisticsInterface
+interface InningInterface extends ScopeInterface
 {
 }

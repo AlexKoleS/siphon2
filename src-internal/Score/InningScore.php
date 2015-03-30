@@ -8,19 +8,31 @@ class InningScore implements InningScoreInterface
     use ScoreTrait;
 
     /**
+     * @param integer $homeTeamHits   The number of hits made by the home team.
+     * @param integer $awayTeamHits   The number of hits made by the away team.
+     * @param integer $homeTeamErrors The number of errors made by the home team.
+     * @param integer $awayTeamErrors The number of errors made by the away team.
+     */
+    public function __construct(
+        $homeTeamHits = 0,
+        $awayTeamHits = 0,
+        $homeTeamErrors = 0,
+        $awayTeamErrors = 0
+    ) {
+        $this->homeTeamHits   = $homeTeamHits;
+        $this->awayTeamHits   = $awayTeamHits;
+        $this->homeTeamErrors = $homeTeamErrors;
+        $this->awayTeamErrors = $awayTeamErrors;
+    }
+
+    /**
      * Get the number of hits made by the home team.
      *
      * @return integer
      */
     public function homeTeamHits()
     {
-        $total = 0;
-
-        foreach ($this->scopes() as $scope) {
-            $total += $scope->homeTeamHits();
-        }
-
-        return $total;
+        return $this->homeTeamHits;
     }
 
     /**
@@ -30,13 +42,7 @@ class InningScore implements InningScoreInterface
      */
     public function awayTeamHits()
     {
-        $total = 0;
-
-        foreach ($this->scopes() as $scope) {
-            $total += $scope->awayTeamHits();
-        }
-
-        return $total;
+        return $this->awayTeamHits;
     }
 
     /**
@@ -46,13 +52,7 @@ class InningScore implements InningScoreInterface
      */
     public function homeTeamErrors()
     {
-        $total = 0;
-
-        foreach ($this->scopes() as $scope) {
-            $total += $scope->homeTeamErrors();
-        }
-
-        return $total;
+        return $this->homeTeamErrors;
     }
 
     /**
@@ -62,13 +62,7 @@ class InningScore implements InningScoreInterface
      */
     public function awayTeamErrors()
     {
-        $total = 0;
-
-        foreach ($this->scopes() as $scope) {
-            $total += $scope->awayTeamErrors();
-        }
-
-        return $total;
+        return $this->awayTeamErrors;
     }
 
     private function checkScopeType(ScopeInterface $scope)
@@ -83,4 +77,9 @@ class InningScore implements InningScoreInterface
             );
         }
     }
+
+    private $homeTeamHits;
+    private $awayTeamHits;
+    private $homeTeamErrors;
+    private $awayTeamErrors;
 }

@@ -84,20 +84,18 @@ class InningFactory implements ResultFactoryInterface
             $scopeStatus   = null;
         }
 
-        $score = new InningScore;
-        $stats = $this->statisticsAggregator->extract($xml);
+        $stats          = $this->statisticsAggregator->extract($xml);
+        $innings        = [];
+        $homeTeamHits   = 0;
+        $awayTeamHits   = 0;
+        $homeTeamErrors = 0;
+        $awayTeamErrors = 0;
 
         foreach ($stats as $s) {
             $scope = new Inning(
                 $s->home['runs'],
-                $s->away['runs'],
-                $s->home['hits'],
-                $s->away['hits'],
-                $s->home['errors'],
-                $s->away['errors']
+                $s->away['runs']
             );
-
-            $score->add($scope);
 
             if (
                 $currentType === $s->type
@@ -105,6 +103,24 @@ class InningFactory implements ResultFactoryInterface
             ) {
                 $result->setCurrentScope($scope);
             }
+
+            $innings[] = $scope;
+
+            $homeTeamHits   += $s->home['hits'];
+            $awayTeamHits   += $s->away['hits'];
+            $homeTeamErrors += $s->home['errors'];
+            $awayTeamErrors += $s->away['errors'];
+        }
+
+        $score = new InningScore(
+            $homeTeamHits,
+            $awayTeamHits,
+            $homeTeamErrors,
+            $awayTeamErrors
+        );
+
+        foreach ($innings as $inning) {
+            $score->add($inning);
         }
 
         $result->setCompetitionScore($score);
