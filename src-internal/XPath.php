@@ -11,9 +11,7 @@ abstract class XPath
         $result = static::elementOrNull($element, $xpath);
 
         if (null === $result) {
-            throw new RuntimeException(
-                'XPath not found: "' . $xpath . '".'
-            );
+            throw static::createException($xpath);
         }
 
         return $result;
@@ -32,7 +30,13 @@ abstract class XPath
 
     public static function string(SimpleXMLElement $element, $xpath)
     {
-        return strval(static::element($element, $xpath));
+        $result = static::stringOrNull($element, $xpath);
+
+        if (null === $result) {
+            throw static::createException($xpath);
+        }
+
+        return $result;
     }
 
     public static function stringOrNull(SimpleXMLElement $element, $xpath)
@@ -44,5 +48,38 @@ abstract class XPath
         }
 
         return strval($result);
+    }
+
+    public static function number(SimpleXMLElement $element, $xpath)
+    {
+        $result = static::numberOrNull($element, $xpath);
+
+        if (null === $result) {
+            throw static::createException($xpath);
+        }
+
+        return $result;
+    }
+
+    public static function numberOrNull(SimpleXMLElement $element, $xpath)
+    {
+        $result = static::stringOrNull($element, $xpath);
+
+        if (null === $result) {
+            return null;
+        } elseif (!is_numeric($result)) {
+            throw self::createException($xpath, 'Path does not resolve to a number');
+        } elseif (ctype_digit($result)) {
+            return intval($result);
+        } else {
+            return floatval($result);
+        }
+    }
+
+    private static function createException($xpath, $message = 'Path not found')
+    {
+        throw new RuntimeException(
+            $message . ': "' . $xpath . '".'
+        );
     }
 }

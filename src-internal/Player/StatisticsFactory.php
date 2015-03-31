@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Player;
 
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XPath;
 use SimpleXMLElement;
 
@@ -18,34 +19,8 @@ class StatisticsFactory
             $result[] = new Statistics(
                 strval($element->{'player'}->id),
                 $season,
-                $this->aggregateStatistics($element)
+                Util::extractStatisticsGroups($element)
             );
-        }
-
-        return $result;
-    }
-
-    private function aggregateStatistics(SimpleXMLElement $element)
-    {
-        $result = [];
-
-        foreach ($element->{'stat-group'} as $group) {
-            $stats = [];
-
-            foreach ($group->stat as $stat) {
-                $key   = strval($stat['type']);
-                $value = strval($stat['num']);
-
-                if (ctype_digit($value)) {
-                    $stats[$key] = intval($value);
-                } else {
-                    $stats[$key] = floatval($value);
-                }
-            }
-
-            if ($stats) {
-                $result[strval($group->key)] = $stats;
-            }
         }
 
         return $result;

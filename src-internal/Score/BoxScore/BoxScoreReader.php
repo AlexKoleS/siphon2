@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Score\BoxScore;
 use Icecave\Siphon\Player\StatisticsFactory;
 use Icecave\Siphon\Util;
 use Icecave\Siphon\XmlReaderInterface;
+use InvalidArgumentException;
 
 /**
  * A client for reading SDI box score feeds.
@@ -12,10 +13,19 @@ class BoxScoreReader implements BoxScoreReaderInterface
 {
     public function __construct(
         XmlReaderInterface $xmlReader,
-        StatisticsFactory $factory = null
+        StatisticsFactory $statisticsFactory = null,
+        array $scoreFactories = null
     ) {
-        $this->xmlReader = $xmlReader;
-        $this->factory   = $factory ?: new StatisticsFactory;
+        if (null === $scoreFactories) {
+            $scoreFactories = [
+                new PeriodScoreFactory,
+                new InningScoreFactory,
+            ];
+        }
+
+        $this->xmlReader         = $xmlReader;
+        $this->statisticsFactory = $statisticsFactory ?: new StatisticsFactory;
+        $this->scoreFactories    = $scoreFactories;
     }
 
     /**
@@ -33,6 +43,9 @@ class BoxScoreReader implements BoxScoreReaderInterface
         $sport  = strtolower($sport);
         $league = strtoupper($league);
 
+        // Determine which score factory to use ...
+        $scoreFactory = $this->selectScoreFactory($sport, $league);
+
         $xml = $this
             ->xmlReader
             ->read(
@@ -49,12 +62,42 @@ class BoxScoreReader implements BoxScoreReaderInterface
         $result = new Result;
 
         $result->setPlayerStatistics(
-            $this->factory->create($xml)
+            $this->statisticsFactory->create($xml)
+        );
+
+        $result->setCompetitionScore(
+            $scoreFactory->create(
+                $sport,
+                $league,
+                $xml
+            )
         );
 
         return $result;
     }
 
+    /**
+     * Find the appropriate score factory to use for the given competition.
+     *
+     * @param string $sport  The sport (eg, baseball, football, etc)
+     * @param string $league The league (eg, MLB, NFL, etc)
+     *
+     * @return ScoreFactoryInterface
+     */
+    private function selectScoreFactory($sport, $league)
+    {
+        foreach ($this->scoreFactories as $factory) {
+            if ($factory->supports($sport, $league)) {
+                return $factory;
+            }
+        }
+
+        throw new InvalidArgumentException(
+            'The provided competition could not be handled by any of the known score factories.'
+        );
+    }
+
     private $xmlReader;
-    private $factory;
+    private $statisticsFactory;
+    private $scoreFactories;
 }

@@ -11,11 +11,6 @@ use Icecave\Siphon\Score\PeriodType;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
-/**
- * @covers Icecave\Siphon\Score\LiveScore\LiveScoreReader
- * @covers Icecave\Siphon\Score\LiveScore\InningFactory
- * @covers Icecave\Siphon\Score\LiveScore\PeriodFactory
- */
 class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 {
     use XmlReaderTestTrait;

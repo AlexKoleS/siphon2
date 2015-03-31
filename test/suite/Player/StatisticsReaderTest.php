@@ -4,10 +4,6 @@ namespace Icecave\Siphon\Player;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
-/**
- * @covers Icecave\Siphon\Player\StatisticsReader
- * @covers Icecave\Siphon\Player\StatisticsFactory
- */
 class StatisticsReaderTest extends PHPUnit_Framework_TestCase
 {
     use XmlReaderTestTrait;
