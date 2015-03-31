@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Score\BoxScore;
 
 use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XPath;
 use SimpleXMLElement;
 
@@ -34,78 +35,46 @@ class InningScoreFactory implements ScoreFactoryInterface
      */
     public function create($sport, $league, SimpleXMLElement $xml)
     {
-        $result = new InningScore;
+        $homeTeamStats = Util::extractStatisticsGroups(XPath::element($xml, '//home-team-content'));
+        $awayTeamStats = Util::extractStatisticsGroups(XPath::element($xml, '//away-team-content'));
 
-        // $homeTeamScore,
-        // $awayTeamScore,
-        // $homeTeamHits,
-        // $awayTeamHits,
-        // $homeTeamErrors,
-        // $awayTeamErrors
+        $result = new InningScore(
+            isset($homeTeamStats['results']['hits'])   ? $homeTeamStats['results']['hits']   : 0,
+            isset($awayTeamStats['results']['hits'])   ? $awayTeamStats['results']['hits']   : 0,
+            isset($homeTeamStats['results']['errors']) ? $homeTeamStats['results']['errors'] : 0,
+            isset($awayTeamStats['results']['errors']) ? $awayTeamStats['results']['errors'] : 0
+        );
 
+        $inningCount    = 9;
+        $homeTeamScores = $this->extractScores($homeTeamStats, $inningCount);
+        $awayTeamScores = $this->extractScores($awayTeamStats, $inningCount);
+
+        for ($index = 1; $index <= $inningCount; ++$index) {
+            $result->add(
+                new Inning(
+                    isset($homeTeamScores[$index]) ? $homeTeamScores[$index] : 0,
+                    isset($awayTeamScores[$index]) ? $awayTeamScores[$index] : 0
+                )
+            );
+        }
 
         return $result;
     }
 
-    private function updateCompetitionStatus(SimpleXMLElement $xml, InningResult $result)
+    private function extractScores(array $stats, &$inningCount)
     {
-        $result->setCompetitionStatus(
-            CompetitionStatus::memberByValue(
-                XPath::string($xml, '//competition-status')
-            )
-        );
-    }
+        $result = [];
 
-    private function updateCompetitionScore(SimpleXMLElement $xml, InningResult $result)
-    {
-        $resultScope = XPath::element($xml, '//result-scope');
+        foreach ($stats['game-stats'] as $key => $value) {
+            $matches = [];
 
-        if (CompetitionStatus::COMPLETE() !== $result->competitionStatus()) {
-            $currentType   = strval($resultScope->scope['type']);
-            $currentNumber = intval($resultScope->scope['num']);
-
-            $result->setCurrentScopeStatus(
-                ScopeStatus::memberByValue(
-                    strval($resultScope->{'scope-status'})
-                )
-            );
-
-            $result->setCurrentInningSubType(
-                InningSubType::memberByValue(
-                    strval($resultScope->scope['sub-type'])
-                )
-            );
-        } else {
-            $currentType   = null;
-            $currentNumber = null;
-            $scopeStatus   = null;
-        }
-
-        $score = new InningScore;
-        $stats = $this->statisticsAggregator->extract($xml);
-
-        foreach ($stats as $s) {
-            $scope = new Inning(
-                $s->home['runs'],
-                $s->away['runs'],
-                $s->home['hits'],
-                $s->away['hits'],
-                $s->home['errors'],
-                $s->away['errors']
-            );
-
-            $score->add($scope);
-
-            if (
-                $currentType === $s->type
-                && $currentNumber === $s->number
-            ) {
-                $result->setCurrentScope($scope);
+            if (preg_match('/runs_inning_(\d+)/', $key, $matches)) {
+                $number          = intval($matches[1]);
+                $inningCount     = max($inningCount, $number);
+                $result[$number] = $value;
             }
         }
 
-        $result->setCompetitionScore($score);
+        return $result;
     }
-
-    private $statisticsAggregator;
 }

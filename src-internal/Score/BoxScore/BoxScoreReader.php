@@ -23,9 +23,9 @@ class BoxScoreReader implements BoxScoreReaderInterface
             ];
         }
 
-        $this->xmlReader = $xmlReader;
+        $this->xmlReader         = $xmlReader;
         $this->statisticsFactory = $statisticsFactory ?: new StatisticsFactory;
-        $this->scoreFactories = $scoreFactories;
+        $this->scoreFactories    = $scoreFactories;
     }
 
     /**
@@ -61,16 +61,16 @@ class BoxScoreReader implements BoxScoreReaderInterface
 
         $result = new Result;
 
-        // $result->setCompetitionScore(
-        //     $scoreFactory->create(
-        //         $sport,
-        //         $league,
-        //         $xml
-        //     )
-        // );
-
         $result->setPlayerStatistics(
             $this->statisticsFactory->create($xml)
+        );
+
+        $result->setCompetitionScore(
+            $scoreFactory->create(
+                $sport,
+                $league,
+                $xml
+            )
         );
 
         return $result;

@@ -7,8 +7,8 @@ namespace Icecave\Siphon\Score;
 class Inning implements InningInterface
 {
     /**
-     * @param integer $homeTeamScore  The number of runs made by the home team.
-     * @param integer $awayTeamScore  The number of runs made by the away team.
+     * @param integer $homeTeamScore The number of runs made by the home team.
+     * @param integer $awayTeamScore The number of runs made by the away team.
      */
     public function __construct($homeTeamScore, $awayTeamScore)
     {

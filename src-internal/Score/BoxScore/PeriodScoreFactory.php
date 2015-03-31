@@ -1,8 +1,10 @@
 <?php
 namespace Icecave\Siphon\Score\BoxScore;
 
-use Icecave\Siphon\Score\Inning;
-use Icecave\Siphon\Score\InningScore;
+use Icecave\Siphon\Score\Period;
+use Icecave\Siphon\Score\PeriodScore;
+use Icecave\Siphon\Score\PeriodType;
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XPath;
 use SimpleXMLElement;
 
@@ -19,8 +21,7 @@ class PeriodScoreFactory implements ScoreFactoryInterface
      */
     public function supports($sport, $league)
     {
-        return 'baseball' === $sport
-            && 'MLB' === $league;
+        return isset($this->periodConfiguration[$sport . '/' . $league]);
     }
 
     /**
@@ -34,72 +35,152 @@ class PeriodScoreFactory implements ScoreFactoryInterface
      */
     public function create($sport, $league, SimpleXMLElement $xml)
     {
-        $result = new InningScore;
+        $homeTeamStats = Util::extractStatisticsGroups(XPath::element($xml, '//home-team-content'));
+        $awayTeamStats = Util::extractStatisticsGroups(XPath::element($xml, '//away-team-content'));
 
+        $sportKey            = $sport . '/' . $league;
+        $periodConfiguration = $this->periodConfiguration[$sportKey];
+        $periodCounts        = [];
 
+        foreach ($periodConfiguration as $type => $count) {
+            $periodCounts[$type] = 0;
+        }
+
+        $homeTeamScores = $this->extractScores(
+            $homeTeamStats,
+            $periodCounts,
+            $sportKey
+        );
+
+        $awayTeamScores = $this->extractScores(
+            $awayTeamStats,
+            $periodCounts,
+            $sportKey
+        );
+
+        $indexedConfiguration = [];
+        foreach ($periodConfiguration as $type => $count) {
+            $indexedConfiguration[] = [$type, $count];
+        }
+
+        for ($index = 1; $index < count($indexedConfiguration); ++$index) {
+            list($type, $minCount) = $indexedConfiguration[$index];
+            $actualCount           = $periodCounts[$type];
+
+            if (!$actualCount && $index > 1) {
+                continue;
+            }
+
+            list($prevType, $prevCount) = $indexedConfiguration[$index - 1];
+            $periodCounts[$prevType]    = max($periodCounts[$prevType], $prevCount);
+        }
+
+        $result = new PeriodScore;
+
+        foreach ($periodCounts as $type => $count) {
+            for ($index = 1; $index <= $count; ++$index) {
+                $result->add(
+                    new Period(
+                        $this->periodType($type),
+                        isset($homeTeamScores[$type][$index]) ? $homeTeamScores[$type][$index] : 0,
+                        isset($awayTeamScores[$type][$index]) ? $awayTeamScores[$type][$index] : 0
+                    )
+                );
+            }
+        }
 
         return $result;
     }
 
-    private function updateCompetitionStatus(SimpleXMLElement $xml, InningResult $result)
+    private function extractScores(array $stats, array &$periodCounts, $sportKey)
     {
-        $result->setCompetitionStatus(
-            CompetitionStatus::memberByValue(
-                XPath::string($xml, '//competition-status')
+        $pattern = sprintf(
+            '/%s_(%s)(?:_(\d+))?/',
+            preg_quote($this->scoreKey[$sportKey], '/'),
+            implode(
+                '|',
+                array_map(
+                    function ($type) {
+                        return preg_quote($type, '/');
+                    },
+                    array_keys($this->periodConfiguration[$sportKey])
+                )
             )
         );
-    }
 
-    private function updateCompetitionScore(SimpleXMLElement $xml, InningResult $result)
-    {
-        $resultScope = XPath::element($xml, '//result-scope');
+        $result = [];
 
-        if (CompetitionStatus::COMPLETE() !== $result->competitionStatus()) {
-            $currentType   = strval($resultScope->scope['type']);
-            $currentNumber = intval($resultScope->scope['num']);
+        foreach ($stats['game-stats'] as $key => $value) {
+            $matches = [];
 
-            $result->setCurrentScopeStatus(
-                ScopeStatus::memberByValue(
-                    strval($resultScope->{'scope-status'})
-                )
-            );
+            if (preg_match($pattern, $key, $matches)) {
+                $type = $matches[1];
 
-            $result->setCurrentInningSubType(
-                InningSubType::memberByValue(
-                    strval($resultScope->scope['sub-type'])
-                )
-            );
-        } else {
-            $currentType   = null;
-            $currentNumber = null;
-            $scopeStatus   = null;
-        }
+                if (isset($matches[2])) {
+                    $number = intval($matches[2]);
+                } else {
+                    $number = 1;
+                }
 
-        $score = new InningScore;
-        $stats = $this->statisticsAggregator->extract($xml);
+                $periodCounts[$type] = max($periodCounts[$type], $number);
 
-        foreach ($stats as $s) {
-            $scope = new Inning(
-                $s->home['runs'],
-                $s->away['runs'],
-                $s->home['hits'],
-                $s->away['hits'],
-                $s->home['errors'],
-                $s->away['errors']
-            );
+                if (!isset($result[$type])) {
+                    $result[$type] = [];
+                }
 
-            $score->add($scope);
-
-            if (
-                $currentType === $s->type
-                && $currentNumber === $s->number
-            ) {
-                $result->setCurrentScope($scope);
+                $result[$type][$number] = $value;
             }
         }
 
-        $result->setCompetitionScore($score);
+        return $result;
     }
 
-    private $statisticsAggregator;
+    private function periodType($key)
+    {
+        if ('overtime' === $key) {
+            return PeriodType::OVERTIME();
+        } elseif ('shootout' === $key) {
+            return PeriodType::SHOOTOUT();
+        }
+
+        return PeriodType::PERIOD();
+    }
+
+    private $scoreKey = [
+        'football/NFL'     => 'points',
+        'football/NCAAF'   => 'points',
+        'basketball/NBA'   => 'points',
+        'basketball/NCAAB' => 'points',
+        'hockey/NHL'       => 'goals',
+    ];
+
+    /**
+     * This is a map of sport/league to the support period types.
+     *
+     * The period type maps to the minimum number of periods of that type that
+     * must exist before the next period type may be used.
+     */
+    private $periodConfiguration = [
+        'football/NFL' => [
+            'quarter'  => 4,
+            'overtime' => 1,
+        ],
+        'football/NCAAF' => [
+            'quarter'  => 4,
+            'overtime' => 1,
+        ],
+        'basketball/NBA' => [
+            'quarter'  => 4,
+            'overtime' => 1,
+        ],
+        'basketball/NCAAB' => [
+            'half'     => 2,
+            'overtime' => 1,
+        ],
+        'hockey/NHL' => [
+            'period'   => 3,
+            'overtime' => 1,
+            'shootout' => 3,
+        ],
+    ];
 }

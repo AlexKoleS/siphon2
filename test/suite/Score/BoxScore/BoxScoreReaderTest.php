@@ -1,9 +1,7 @@
 <?php
 namespace Icecave\Siphon\Score\BoxScore;
 
-use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Player\Statistics;
-use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
 use Icecave\Siphon\Score\Period;
@@ -12,12 +10,6 @@ use Icecave\Siphon\Score\PeriodType;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
-/**
- * @covers Icecave\Siphon\Score\BoxScore\BoxScoreReader
- * @covers Icecave\Siphon\Player\StatisticsFactory
- * @covers Icecave\Siphon\Score\BoxScore\PeriodScoreFactory
- * @covers Icecave\Siphon\Score\BoxScore\InningScoreFactory
- */
 class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 {
     use XmlReaderTestTrait;
@@ -29,13 +21,9 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testReadWithPeriods()
+    public function testReadWithPeriodsOnCompleteEvent()
     {
-        $this->markTestSkipped(
-            PeriodScoreFactory::class . ' has not been implemented.'
-        );
-
-        $this->setUpXmlReader('Score/BoxScore/boxscores-period.xml');
+        $this->setUpXmlReader('Score/BoxScore/boxscores-period-complete.xml');
 
         $result = $this->reader->read(
             'football',
@@ -59,7 +47,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     '2009-2010',
                     [
                         'game-stats' => [
-                            'games_played' => 1,
+                            'games_played'  => 1,
                             'games_started' => 1,
                         ]
                     ]
@@ -69,7 +57,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     '2009-2010',
                     [
                         'game-stats' => [
-                            'games_played' => 1,
+                            'games_played'             => 1,
                             'defense_assisted_tackles' => 1,
                         ]
                     ]
@@ -79,23 +67,23 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     '2009-2010',
                     [
                         'game-stats' => [
-                            'games_played' => 1,
-                            'games_started' => 1,
-                            'rushing_plays' => 1,
-                            'rushing_net_yards' => 3,
-                            'rushing_longest_yards' => 3,
-                            'passing_plays_attempted' => 43,
-                            'passing_plays_completed' => 33,
-                            'passing_gross_yards' => 405,
-                            'passing_net_yards' => 363,
-                            'passing_longest_yards' => 34,
+                            'games_played'              => 1,
+                            'games_started'             => 1,
+                            'rushing_plays'             => 1,
+                            'rushing_net_yards'         => 3,
+                            'rushing_longest_yards'     => 3,
+                            'passing_plays_attempted'   => 43,
+                            'passing_plays_completed'   => 33,
+                            'passing_gross_yards'       => 405,
+                            'passing_net_yards'         => 363,
+                            'passing_longest_yards'     => 34,
                             'passing_plays_intercepted' => 2,
-                            'passing_plays_sacked' => 4,
-                            'passing_sacked_yards' => 42,
-                            'passing_touchdowns' => 1,
-                            'total_touchdowns' => 1,
-                            'starter_games_won' => 1,
-                            'passer_rating' => 89.583336000000003,
+                            'passing_plays_sacked'      => 4,
+                            'passing_sacked_yards'      => 42,
+                            'passing_touchdowns'        => 1,
+                            'total_touchdowns'          => 1,
+                            'starter_games_won'         => 1,
+                            'passer_rating'             => 89.583336000000003,
                         ]
                     ]
                 ),
@@ -106,10 +94,10 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     '2009-2010',
                     [
                         'game-stats' => [
-                            'games_played' => 1,
-                            'games_started' => 1,
-                            'defense_solo_tackles' => 8,
-                            'defense_assisted_tackles' => 4,
+                            'games_played'              => 1,
+                            'games_started'             => 1,
+                            'defense_solo_tackles'      => 8,
+                            'defense_assisted_tackles'  => 4,
                             'defense_fumble_recoveries' => 1,
                         ]
                     ]
@@ -119,9 +107,9 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     '2009-2010',
                     [
                         'game-stats' => [
-                            'games_played' => 1,
-                            'games_started' => 1,
-                            'defense_solo_tackles' => 2,
+                            'games_played'             => 1,
+                            'games_started'            => 1,
+                            'defense_solo_tackles'     => 2,
                             'defense_assisted_tackles' => 1,
                         ]
                     ]
@@ -131,7 +119,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     '2009-2010',
                     [
                         'game-stats' => [
-                            'games_played' => 1,
+                            'games_played'  => 1,
                             'games_started' => 1,
                         ]
                     ]
@@ -146,7 +134,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         $score->add(new Period(PeriodType::PERIOD(),   3, 3));
         $score->add(new Period(PeriodType::OVERTIME(), 3, 0));
 
-        $result->setCompetitionScore($score);
+        $expected->setCompetitionScore($score);
 
         $this->assertEquals(
             $expected,
@@ -154,9 +142,9 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testReadWithInnings()
+    public function testReadWithInningsOnCompleteEvent()
     {
-        $this->setUpXmlReader('Score/BoxScore/boxscores-inning.xml');
+        $this->setUpXmlReader('Score/BoxScore/boxscores-inning-complete.xml');
 
         $result = $this->reader->read(
             'baseball',
@@ -170,29 +158,29 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_12345.xml');
 
+        // IGNORE PLAYER STATISTICS FOR NOW ...
+        $result->setPlayerStatistics([]);
+
         $expected = new Result;
 
-        // $expected->setPlayerStatistics(
-        //     []
-        // );
-
-        $score = new InningScore;
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-        $score->add(new Inning());
-
-        $result->setCompetitionScore($score);
-
-        $this->assertEquals(
-            $expected,
-            $result
+        $score = new InningScore(
+            10, // home team hits
+            8,  // away team hits
+            0,  // home team errors
+            1   // away team errors
         );
+
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 1));
+        $score->add(new Inning(2, 0));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(1, 2));
+        $score->add(new Inning(2, 0));
+        $score->add(new Inning(0, 0));
+
+        $expected->setCompetitionScore($score);
 
         $this->assertEquals(
             $expected,
@@ -210,6 +198,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         $this->reader->read(
             'unknown-sport',
             'unknown-league',
+            '2009',
             '/path/to/sport:12345'
         );
     }
