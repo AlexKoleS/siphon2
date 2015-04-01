@@ -46,7 +46,35 @@ interface FactoryInterface
     /**
      * Create a live score reader.
      *
-     * @return LiveScore\LiveScoreReaderInterface
+     * @return Score\LiveScore\LiveScoreReaderInterface
      */
     public function createLiveScoreReader();
+
+    /**
+     * Create a box score reader.
+     *
+     * @return Score\BoxScore\BoxScoreReaderInterface
+     */
+    public function createBoxScoreReader();
+
+    /**
+     * Create a player reader.
+     *
+     * @return Player\PlayerReaderInterface
+     */
+    public function createPlayerReader();
+
+    /**
+     * Create a player injury reader.
+     *
+     * @return Player\InjuryReaderInterface
+     */
+    public function createPlayerInjuryReader();
+
+    /**
+     * Create a player statistics reader.
+     *
+     * @return Player\StatisticsReaderInterface
+     */
+    public function createPlayerStatisticsReader();
 }

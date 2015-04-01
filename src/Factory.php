@@ -95,11 +95,59 @@ class Factory implements FactoryInterface
     /**
      * Create a live score reader.
      *
-     * @return LiveScore\LiveScoreReaderInterface
+     * @return Score\LiveScore\LiveScoreReaderInterface
      */
     public function createLiveScoreReader()
     {
         return new Score\LiveScore\LiveScoreReader(
+            $this->xmlReader
+        );
+    }
+
+    /**
+     * Create a box score reader.
+     *
+     * @return Score\BoxScore\BoxScoreReaderInterface
+     */
+    public function createBoxScoreReader()
+    {
+        return new Score\BoxScore\BoxScoreReader(
+            $this->xmlReader
+        );
+    }
+
+    /**
+     * Create a player reader.
+     *
+     * @return Player\PlayerReaderInterface
+     */
+    public function createPlayerReader()
+    {
+        return new Player\PlayerReader(
+            $this->xmlReader
+        );
+    }
+
+    /**
+     * Create a player injury reader.
+     *
+     * @return Player\InjuryReaderInterface
+     */
+    public function createPlayerInjuryReader()
+    {
+        return new Player\InjuryReader(
+            $this->xmlReader
+        );
+    }
+
+    /**
+     * Create a player statistics reader.
+     *
+     * @return Player\StatisticsReaderInterface
+     */
+    public function createPlayerStatisticsReader()
+    {
+        return new Player\StatisticsReader(
             $this->xmlReader
         );
     }

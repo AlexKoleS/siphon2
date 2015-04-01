@@ -81,4 +81,36 @@ class FactoryTest extends PHPUnit_Framework_TestCase
             $this->factory->createLiveScoreReader()
         );
     }
+
+    public function testCreateBoxScoreReader()
+    {
+        $this->assertEquals(
+            new Score\BoxScore\BoxScoreReader($this->xmlReader->mock()),
+            $this->factory->createBoxScoreReader()
+        );
+    }
+
+    public function testCreatePlayerReader()
+    {
+        $this->assertEquals(
+            new Player\PlayerReader($this->xmlReader->mock()),
+            $this->factory->createPlayerReader()
+        );
+    }
+
+    public function testCreatePlayerInjuryReader()
+    {
+        $this->assertEquals(
+            new Player\InjuryReader($this->xmlReader->mock()),
+            $this->factory->createPlayerInjuryReader()
+        );
+    }
+
+    public function testCreatePlayerStatisticsReader()
+    {
+        $this->assertEquals(
+            new Player\StatisticsReader($this->xmlReader->mock()),
+            $this->factory->createPlayerStatisticsReader()
+        );
+    }
 }
