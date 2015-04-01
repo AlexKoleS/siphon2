@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\XmlReaderInterface;
 use SimpleXMLElement;
 
@@ -21,7 +22,7 @@ class ScheduleReader implements ScheduleReaderInterface
      *
      * @param string             $sport  The sport (eg, baseball, football, etc)
      * @param string             $league The league (eg, MLB, NFL, etc)
-     * @param ScheduleLimit|null $limit  Limit results to a compeititons within a certain timeframe.
+     * @param ScheduleLimit|null $limit  Limit results to a competitions within a certain timeframe.
      *
      * @return ScheduleInterface
      */
@@ -74,6 +75,32 @@ class ScheduleReader implements ScheduleReaderInterface
         );
 
         return $this->readResource($sport, $league, $resource);
+    }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return mixed
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        throw new InvalidArgumentException(
+            'Unsupported atom entry.'
+        );
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(AtomEntry $atomEntry)
+    {
+        return false;
     }
 
     private function readResource($sport, $league, $resource)

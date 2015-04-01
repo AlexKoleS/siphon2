@@ -1463,4 +1463,14 @@ class StatisticsReaderTest extends PHPUnit_Framework_TestCase
             $result
         );
     }
+
+    public function testReadAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testSupportsAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
 }

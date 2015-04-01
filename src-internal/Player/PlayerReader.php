@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Player;
 
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Util;
 use Icecave\Siphon\XPath;
 use Icecave\Siphon\XmlReaderInterface;
@@ -65,6 +66,32 @@ class PlayerReader implements PlayerReaderInterface
         }
 
         return $result;
+    }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return mixed
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        throw new InvalidArgumentException(
+            'Unsupported atom entry.'
+        );
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(AtomEntry $atomEntry)
+    {
+        return false;
     }
 
     private $xmlReader;

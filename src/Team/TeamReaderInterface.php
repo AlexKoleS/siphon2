@@ -1,12 +1,14 @@
 <?php
 namespace Icecave\Siphon\Team;
 
+use Icecave\Siphon\ReaderInterface;
+
 /**
  * Read data from team feeds.
  *
  * @api
  */
-interface TeamReaderInterface
+interface TeamReaderInterface extends ReaderInterface
 {
     /**
      * Read a team feed.

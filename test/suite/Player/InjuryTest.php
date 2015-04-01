@@ -9,7 +9,7 @@ class InjuryTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->date        = Date::fromUnixtime(0);
+        $this->date        = Date::fromUnixTime(0);
         $this->updatedTime = DateTime::fromUnixTime(1);
 
         $this->injury = new Injury(

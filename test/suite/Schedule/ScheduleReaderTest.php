@@ -196,4 +196,14 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             $schedule
         );
     }
+
+    public function testReadAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testSupportsAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
 }

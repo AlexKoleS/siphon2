@@ -232,4 +232,14 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             '/path/to/sport:12345'
         );
     }
+
+    public function testReadAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testSupportsAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
 }

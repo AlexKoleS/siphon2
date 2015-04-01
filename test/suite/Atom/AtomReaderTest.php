@@ -1,7 +1,9 @@
 <?php
 namespace Icecave\Siphon\Atom;
 
+use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\UrlBuilderInterface;
 use Icecave\Siphon\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
 
@@ -13,9 +15,21 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Atom/atom.xml');
 
-        $this->threshold = DateTime::fromUnixTime(0);
+        $this->urlBuilder = Phony::mock(UrlBuilderInterface::class);
+        $this->threshold  = DateTime::fromUnixTime(0);
+
+        $this
+            ->urlBuilder
+            ->extract
+            ->returns(
+                [
+                    '/path/to/resource',
+                    ['foo' => 'bar'],
+                ]
+            );
 
         $this->reader = new AtomReader(
+            $this->urlBuilder->mock(),
             $this->xmlReader()->mock()
         );
     }
@@ -52,14 +66,20 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             [
                 new AtomEntry(
                     'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64109.xml?apiKey=APIKEY',
+                    '/path/to/resource',
+                    ['foo' => 'bar'],
                     DateTime::fromIsoString('2015-02-15T21:11:11.4811-04:00')
                 ),
                 new AtomEntry(
                     'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64110.xml?apiKey=APIKEY',
+                    '/path/to/resource',
+                    ['foo' => 'bar'],
                     DateTime::fromIsoString('2015-02-15T21:11:11.5121-04:00')
                 ),
                 new AtomEntry(
                     'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64108.xml?apiKey=APIKEY',
+                    '/path/to/resource',
+                    ['foo' => 'bar'],
                     DateTime::fromIsoString('2015-02-15T21:11:14.4951-04:00')
                 ),
             ],

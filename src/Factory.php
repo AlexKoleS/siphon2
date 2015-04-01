@@ -64,6 +64,7 @@ class Factory implements FactoryInterface
     public function createAtomReader()
     {
         return new Atom\AtomReader(
+            $this->urlBuilder,
             $this->xmlReader
         );
     }

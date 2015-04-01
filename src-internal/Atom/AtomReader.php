@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\UrlBuilderInterface;
 use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
@@ -12,9 +13,12 @@ use InvalidArgumentException;
  */
 class AtomReader implements AtomReaderInterface
 {
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
-        $this->xmlReader = $xmlReader;
+    public function __construct(
+        UrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
+        $this->xmlReader  = $xmlReader;
     }
 
     /**
@@ -49,9 +53,17 @@ class AtomReader implements AtomReaderInterface
         );
 
         foreach ($xml->entry as $entry) {
+            $url = strval($entry->link['href']);
+
+            list($resource, $parameters) = $this
+                ->urlBuilder
+                ->extract($url);
+
             $result->add(
                 new AtomEntry(
-                    strval($entry->link['href']),
+                    $url,
+                    $resource,
+                    $parameters,
                     DateTime::fromIsoString($entry->updated)
                 )
             );
@@ -89,5 +101,6 @@ class AtomReader implements AtomReaderInterface
         return $parameters;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

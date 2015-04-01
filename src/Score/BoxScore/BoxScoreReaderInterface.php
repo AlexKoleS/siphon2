@@ -1,12 +1,14 @@
 <?php
 namespace Icecave\Siphon\Score\BoxScore;
 
+use Icecave\Siphon\ReaderInterface;
+
 /**
  * A client for reading SDI box score feeds.
  *
  * @api
  */
-interface BoxScoreReaderInterface
+interface BoxScoreReaderInterface extends ReaderInterface
 {
     /**
      * Read a box score feed for a competition.

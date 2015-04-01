@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Schedule\Competition;
 use Icecave\Siphon\Util;
 use Icecave\Siphon\XmlReaderInterface;
@@ -60,6 +61,32 @@ class LiveScoreReader implements LiveScoreReaderInterface
             $league,
             $xml
         );
+    }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return mixed
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        throw new InvalidArgumentException(
+            'Unsupported atom entry.'
+        );
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(AtomEntry $atomEntry)
+    {
+        return false;
     }
 
     /**

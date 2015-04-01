@@ -91,4 +91,14 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
             $teams
         );
     }
+
+    public function testReadAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testSupportsAtomEntry()
+    {
+        $this->markTestIncomplete();
+    }
 }

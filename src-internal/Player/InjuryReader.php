@@ -3,8 +3,11 @@ namespace Icecave\Siphon\Player;
 
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Atom\AtomEntry;
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XPath;
 use Icecave\Siphon\XmlReaderInterface;
+use InvalidArgumentException;
 
 /**
  * Read data from player injury feeds.
@@ -33,7 +36,7 @@ class InjuryReader implements InjuryReaderInterface
             ->xmlReader
             ->read(
                 sprintf(
-                    '/sport/v2/%s/%s/injuries/injuries_%s.xml',
+                    self::URL_PATTERN,
                     $sport,
                     $league,
                     $league
@@ -70,6 +73,51 @@ class InjuryReader implements InjuryReaderInterface
 
         return $result;
     }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return array<InjuryInterface>
+     * @throws InvalidArgumentException if this atom entry is not supported.
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        if (!$this->supportsAtomEntry($atomEntry)) {
+            throw new InvalidArgumentException(
+                'Unsupported atom entry.'
+            );
+        }
+
+        list($sport, $league) = Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+
+        return $this->read($sport, $league);
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(AtomEntry $atomEntry)
+    {
+        if ($atomEntry->parameters()) {
+            return false;
+        }
+
+        return null !== Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+    }
+
+    const URL_PATTERN = '/sport/v2/%s/%s/injuries/injuries_%s.xml';
 
     private $xmlReader;
 }
