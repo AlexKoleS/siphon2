@@ -1,6 +1,8 @@
 <?php
 namespace Icecave\Siphon\Score\BoxScore;
 
+use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Player\Statistics;
 use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
@@ -16,30 +18,8 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new BoxScoreReader(
-            $this->xmlReader()->mock()
-        );
-    }
-
-    public function testReadWithPeriodsOnCompleteEvent()
-    {
-        $this->setUpXmlReader('Score/BoxScore/boxscores-period-complete.xml');
-
-        $result = $this->reader->read(
-            'football',
-            'NFL',
-            '2009-2010',
-            '/path/to/sport:12345'
-        );
-
-        $this
-            ->xmlReader()
-            ->read
-            ->calledWith('/sport/v2/football/NFL/boxscores/2009-2010/boxscore_NFL_12345.xml');
-
-        $expected = new Result;
-
-        $expected->setPlayerStatistics(
+        $this->expected = new Result;
+        $this->expected->setPlayerStatistics(
             [
                 // home team ...
                 new Statistics(
@@ -134,10 +114,31 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         $score->add(new Period(PeriodType::PERIOD(),   3, 3));
         $score->add(new Period(PeriodType::OVERTIME(), 3, 0));
 
-        $expected->setCompetitionScore($score);
+        $this->expected->setCompetitionScore($score);
+
+        $this->reader = new BoxScoreReader(
+            $this->xmlReader()->mock()
+        );
+    }
+
+    public function testReadWithPeriodsOnCompleteEvent()
+    {
+        $this->setUpXmlReader('Score/BoxScore/boxscores-period-complete.xml');
+
+        $result = $this->reader->read(
+            'football',
+            'NFL',
+            '2009-2010',
+            '/path/to/sport:12345'
+        );
+
+        $this
+            ->xmlReader()
+            ->read
+            ->calledWith('/sport/v2/football/NFL/boxscores/2009-2010/boxscore_NFL_12345.xml');
 
         $this->assertEquals(
-            $expected,
+            $this->expected,
             $result
         );
     }
@@ -158,7 +159,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_12345.xml');
 
-        // IGNORE PLAYER STATISTICS FOR NOW ...
+        // TODO: test player stats
         $result->setPlayerStatistics([]);
 
         $expected = new Result;
@@ -188,6 +189,14 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testReadWithInningsOnCompleteEventPlayerStatistics()
+    {
+        // This test should be removed when the test above handles testing of the player stats
+        $this->markTestIncomplete(
+            'Player statistics have not been chekced for innings-based box scores.'
+        );
+    }
+
     public function testReadWithUnsupportedCompetition()
     {
         $this->setExpectedException(
@@ -205,11 +214,78 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadAtomEntry()
     {
-        $this->markTestIncomplete();
+        $this->setUpXmlReader('Score/BoxScore/boxscores-period-complete.xml');
+
+        $result = $this->reader->readAtomEntry(
+            new AtomEntry(
+                '<url>',
+                '/sport/v2/football/NFL/boxscores/2009-2010/boxscore_NFL_12345.xml',
+                [],
+                DateTime::fromUnixTime(0)
+            )
+        );
+
+        $this
+            ->xmlReader
+            ->read
+            ->calledWith('/sport/v2/football/NFL/boxscores/2009-2010/boxscore_NFL_12345.xml');
+
+        $this->assertEquals(
+            $this->expected,
+            $result
+        );
+    }
+
+    public function testReadAtomEntryFailure()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unsupported atom entry.'
+        );
+
+        $this->reader->readAtomEntry(
+            new AtomEntry(
+                '<atom-url>',
+                '<atom-resource>',
+                ['foo' => 'bar'],
+                DateTime::fromUnixTime(0)
+            )
+        );
     }
 
     public function testSupportsAtomEntry()
     {
-        $this->markTestIncomplete();
+        $this->assertFalse(
+            $this->reader->supportsAtomEntry(
+                new AtomEntry(
+                    '<atom-url>',
+                    '<atom-resource>',
+                    ['foo' => 'bar'],
+                    DateTime::fromUnixTime(0)
+                )
+            )
+        );
+
+        $this->assertFalse(
+            $this->reader->supportsAtomEntry(
+                new AtomEntry(
+                    '<atom-url>',
+                    '<atom-resource>',
+                    [],
+                    DateTime::fromUnixTime(0)
+                )
+            )
+        );
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry(
+                new AtomEntry(
+                    '<url>',
+                    '/sport/v2/football/NFL/boxscores/2009-2010/boxscore_NFL_12345.xml',
+                    [],
+                    DateTime::fromUnixTime(0)
+                )
+            )
+        );
     }
 }

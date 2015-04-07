@@ -90,7 +90,7 @@ class ScheduleReader implements ScheduleReaderInterface
     {
         if (!$atomEntry->parameters()) {
             if ($matches = Util::parse(self::URL_PATTERN_LIMITED, $atomEntry->resource())) {
-                list($sport, $league, , $limit) = $matches;
+                list($sport, $league,, $limit)  = $matches;
                 $limit                          = ScheduleLimit::memberByValue(intval($limit));
             } elseif ($matches = Util::parse(self::URL_PATTERN, $atomEntry->resource())) {
                 list($sport, $league) = $matches;

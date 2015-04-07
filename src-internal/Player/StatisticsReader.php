@@ -84,10 +84,10 @@ class StatisticsReader implements PlayerReaderInterface
     /**
      * Read a player statistics feed.
      *
-     * @param string $sport  The sport (eg, baseball, football, etc)
-     * @param string $league The league (eg, MLB, NFL, etc)
-     * @param string $season The season name.
-     * @param string $teamId The ID of the team.
+     * @param string  $sport  The sport (eg, baseball, football, etc)
+     * @param string  $league The league (eg, MLB, NFL, etc)
+     * @param string  $season The season name.
+     * @param integer $teamId The numeric ID of the team.
      *
      * @return array<StatisticsInterface>
      */
