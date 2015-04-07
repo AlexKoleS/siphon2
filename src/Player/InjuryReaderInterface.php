@@ -1,12 +1,14 @@
 <?php
 namespace Icecave\Siphon\Player;
 
+use Icecave\Siphon\ReaderInterface;
+
 /**
  * Read data from player injury feeds.
  *
  * @api
  */
-interface InjuryReaderInterface
+interface InjuryReaderInterface extends ReaderInterface
 {
     /**
      * Read a player injury feed.

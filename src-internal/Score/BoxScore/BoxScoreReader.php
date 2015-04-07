@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Score\BoxScore;
 
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Player\StatisticsFactory;
 use Icecave\Siphon\Util;
 use Icecave\Siphon\XmlReaderInterface;
@@ -40,6 +41,68 @@ class BoxScoreReader implements BoxScoreReaderInterface
      */
     public function read($sport, $league, $season, $competitionId)
     {
+        return $this->readImpl(
+            $sport,
+            $league,
+            $season,
+            Util::extractNumericId($competitionId)
+        );
+    }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return mixed
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        if (!$this->supportsAtomEntry($atomEntry)) {
+            throw new InvalidArgumentException(
+                'Unsupported atom entry.'
+            );
+        }
+
+        list($sport, $league, $season, $_, $competitionId) = Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+
+        return $this->readImpl($sport, $league, $season, $competitionId);
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(AtomEntry $atomEntry)
+    {
+        if ($atomEntry->parameters()) {
+            return false;
+        }
+
+        return null !== Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+    }
+
+    /**
+     * Read a box score feed for a competition.
+     *
+     * @param string  $sport         The sport (eg, baseball, football, etc)
+     * @param string  $league        The league (eg, MLB, NFL, etc)
+     * @param string  $season        The season.
+     * @param integer $competitionId The numeric competition ID.
+     *
+     * @return BoxScoreResultInterface
+     */
+    private function readImpl($sport, $league, $season, $competitionId)
+    {
         $sport  = strtolower($sport);
         $league = strtoupper($league);
 
@@ -50,12 +113,12 @@ class BoxScoreReader implements BoxScoreReaderInterface
             ->xmlReader
             ->read(
                 sprintf(
-                    '/sport/v2/%s/%s/boxscores/%s/boxscore_%s_%d.xml',
+                    self::URL_PATTERN,
                     $sport,
                     $league,
                     $season,
                     $league,
-                    Util::extractNumericId($competitionId)
+                    $competitionId
                 )
             );
 
@@ -96,6 +159,8 @@ class BoxScoreReader implements BoxScoreReaderInterface
             'The provided competition could not be handled by any of the known score factories.'
         );
     }
+
+    const URL_PATTERN = '/sport/v2/%s/%s/boxscores/%s/boxscore_%s_%d.xml';
 
     private $xmlReader;
     private $statisticsFactory;

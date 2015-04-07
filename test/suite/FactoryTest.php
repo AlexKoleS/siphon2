@@ -53,7 +53,10 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     public function testCreateAtomReader()
     {
         $this->assertEquals(
-            new Atom\AtomReader($this->xmlReader->mock()),
+            new Atom\AtomReader(
+                $this->urlBuilder->mock(),
+                $this->xmlReader->mock()
+            ),
             $this->factory->createAtomReader()
         );
     }

@@ -5,6 +5,8 @@ use Eloquent\Phony\Phpunit\Phony;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\ResponseInterface;
+use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
 
@@ -79,6 +81,50 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
 
         $this->reader->read(
             'path/to/feed'
+        );
+    }
+
+    public function testReadAtomEntry()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '<atom-resource>',
+            ['foo' => 'bar'],
+            DateTime::fromUnixTime(0)
+        );
+
+        $result = $this->reader->readAtomEntry($entry);
+
+        $this
+            ->urlBuilder
+            ->build
+            ->calledWith(
+                '<atom-resource>',
+                ['foo' => 'bar']
+            );
+
+        $this
+            ->httpClient
+            ->get
+            ->calledWith('<url>');
+
+        $this->assertEquals(
+            '<xml>',
+            $result
+        );
+    }
+
+    public function testSupportsAtomEntry()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '<atom-resource>',
+            ['foo' => 'bar'],
+            DateTime::fromUnixTime(0)
+        );
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry)
         );
     }
 }

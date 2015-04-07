@@ -6,7 +6,7 @@ use SimpleXMLElement;
 /**
  * Read XML data based on a resource name.
  */
-interface XmlReaderInterface
+interface XmlReaderInterface extends ReaderInterface
 {
     /**
      * Read XML data for the given resource.

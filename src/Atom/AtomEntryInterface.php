@@ -21,6 +21,20 @@ interface AtomEntryInterface
     public function url();
 
     /**
+     * Get the path to the feed.
+     *
+     * @return string The path to the feed.
+     */
+    public function resource();
+
+    /**
+     * Get the URL parameters.
+     *
+     * @return array<string, mixed> Additional parameters to pass.
+     */
+    public function parameters();
+
+    /**
      * Get the time at which the update occurred.
      *
      * @return DateTime The time at which update occurred.

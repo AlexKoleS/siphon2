@@ -1,12 +1,14 @@
 <?php
 namespace Icecave\Siphon\Player;
 
+use Icecave\Siphon\ReaderInterface;
+
 /**
  * Read data from player feeds.
  *
  * @api
  */
-interface PlayerReaderInterface
+interface PlayerReaderInterface extends ReaderInterface
 {
     /**
      * Read a player feed.

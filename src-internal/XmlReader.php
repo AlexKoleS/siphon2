@@ -3,6 +3,7 @@ namespace Icecave\Siphon;
 
 use Exception;
 use GuzzleHttp\ClientInterface;
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
 
@@ -46,6 +47,33 @@ class XmlReader implements XmlReaderInterface
         }
 
         return $response->xml();
+    }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return mixed
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        return $this->read(
+            $atomEntry->resource(),
+            $atomEntry->parameters()
+        );
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(AtomEntry $atomEntry)
+    {
+        return true;
     }
 
     private $urlBuilder;
