@@ -4,7 +4,9 @@ namespace Icecave\Siphon\Schedule;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomEntry;
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XmlReaderInterface;
+use InvalidArgumentException;
 use SimpleXMLElement;
 
 /**
@@ -37,14 +39,14 @@ class ScheduleReader implements ScheduleReaderInterface
 
         if (ScheduleLimit::NONE() === $limit) {
             $resource = sprintf(
-                '/sport/v2/%s/%s/schedule/schedule_%s.xml',
+                self::URL_PATTERN,
                 $sport,
                 $league,
                 $league
             );
         } else {
             $resource = sprintf(
-                '/sport/v2/%s/%s/schedule/schedule_%s_%d_days.xml',
+                self::URL_PATTERN_LIMITED,
                 $sport,
                 $league,
                 $league,
@@ -68,7 +70,7 @@ class ScheduleReader implements ScheduleReaderInterface
         $sport    = strtolower($sport);
         $league   = strtoupper($league);
         $resource = sprintf(
-            '/sport/v2/%s/%s/games-deleted/games_deleted_%s.xml',
+            self::URL_PATTERN_DELETED,
             $sport,
             $league,
             $league
@@ -86,6 +88,29 @@ class ScheduleReader implements ScheduleReaderInterface
      */
     public function readAtomEntry(AtomEntry $atomEntry)
     {
+        if (!$atomEntry->parameters()) {
+            if ($matches = Util::parse(self::URL_PATTERN_LIMITED, $atomEntry->resource())) {
+                list($sport, $league,, $limit) = $matches;
+                $limit                         = ScheduleLimit::memberByValue(intval($limit));
+            } elseif ($matches = Util::parse(self::URL_PATTERN, $atomEntry->resource())) {
+                list($sport, $league) = $matches;
+                $limit                = null;
+            } elseif ($matches = Util::parse(self::URL_PATTERN_DELETED, $atomEntry->resource())) {
+                list($sport, $league) = $matches;
+
+                return $this->readDeleted(
+                    $sport,
+                    $league
+                );
+            }
+
+            return $this->read(
+                $sport,
+                $league,
+                $limit
+            );
+        }
+
         throw new InvalidArgumentException(
             'Unsupported atom entry.'
         );
@@ -100,6 +125,27 @@ class ScheduleReader implements ScheduleReaderInterface
      */
     public function supportsAtomEntry(AtomEntry $atomEntry)
     {
+        if ($atomEntry->parameters()) {
+            return false;
+        }
+
+        $patterns = [
+            self::URL_PATTERN_LIMITED,
+            self::URL_PATTERN,
+            self::URL_PATTERN_DELETED,
+        ];
+
+        foreach ($patterns as $pattern) {
+            $matches = Util::parse(
+                $pattern,
+                $atomEntry->resource()
+            );
+
+            if (null !== $matches) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -174,6 +220,10 @@ class ScheduleReader implements ScheduleReaderInterface
             strval($element->{'away-team-content'}->{'team'}->{'id'})
         );
     }
+
+    const URL_PATTERN         = '/sport/v2/%s/%s/schedule/schedule_%s.xml';
+    const URL_PATTERN_LIMITED = '/sport/v2/%s/%s/schedule/schedule_%s_%d_days.xml';
+    const URL_PATTERN_DELETED = '/sport/v2/%s/%s/games-deleted/games_deleted_%s.xml';
 
     private $xmlReader;
 }
