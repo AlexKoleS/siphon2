@@ -64,7 +64,7 @@ class BoxScoreReader implements BoxScoreReaderInterface
             );
         }
 
-        list($sport, $league, $season,, $competitionId) = Util::parse(
+        list($sport, $league, $season, $_, $competitionId) = Util::parse(
             self::URL_PATTERN,
             $atomEntry->resource()
         );

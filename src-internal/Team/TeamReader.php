@@ -2,8 +2,10 @@
 namespace Icecave\Siphon\Team;
 
 use Icecave\Siphon\Atom\AtomEntry;
+use Icecave\Siphon\Util;
 use Icecave\Siphon\XPath;
 use Icecave\Siphon\XmlReaderInterface;
+use InvalidArgumentException;
 
 /**
  * Read data from team feeds.
@@ -33,7 +35,7 @@ class TeamReader implements TeamReaderInterface
             ->xmlReader
             ->read(
                 sprintf(
-                    '/sport/v2/%s/%s/teams/%s/teams_%s.xml',
+                    self::URL_PATTERN,
                     $sport,
                     $league,
                     $season,
@@ -67,9 +69,18 @@ class TeamReader implements TeamReaderInterface
      */
     public function readAtomEntry(AtomEntry $atomEntry)
     {
-        throw new InvalidArgumentException(
-            'Unsupported atom entry.'
+        if (!$this->supportsAtomEntry($atomEntry)) {
+            throw new InvalidArgumentException(
+                'Unsupported atom entry.'
+            );
+        }
+
+        list($sport, $league, $season) = Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
         );
+
+        return $this->read($sport, $league, $season);
     }
 
     /**
@@ -81,8 +92,17 @@ class TeamReader implements TeamReaderInterface
      */
     public function supportsAtomEntry(AtomEntry $atomEntry)
     {
-        return false;
+        if ($atomEntry->parameters()) {
+            return false;
+        }
+
+        return null !== Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
     }
+
+    const URL_PATTERN = '/sport/v2/%s/%s/teams/%s/teams_%s.xml';
 
     private $xmlReader;
 }
