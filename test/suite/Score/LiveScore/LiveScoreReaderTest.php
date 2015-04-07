@@ -1,7 +1,9 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
+use Icecave\Chrono\DateTime;
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Inning;
 use Icecave\Siphon\Score\InningScore;
@@ -17,6 +19,20 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $scope1 = new Period(PeriodType::PERIOD(), 3, 7);
+        $scope2 = new Period(PeriodType::PERIOD(), 3, 0);
+
+        $score = new PeriodScore;
+        $score->add($scope1);
+        $score->add($scope2);
+
+        $this->expected = new PeriodResult;
+        $this->expected->setCurrentScope($scope2);
+        $this->expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
+        $this->expected->setCurrentGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
+        $this->expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
+        $this->expected->setCompetitionScore($score);
+
         $this->reader = new LiveScoreReader(
             $this->xmlReader()->mock()
         );
@@ -37,23 +53,8 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/football/NFL/livescores/livescores_12345.xml');
 
-        $scope1 = new Period(PeriodType::PERIOD(), 3, 7);
-        $scope2 = new Period(PeriodType::PERIOD(), 3, 0);
-
-        $expected = new PeriodResult;
-        $expected->setCurrentScope($scope2);
-        $expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
-        $expected->setCurrentGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
-        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-
-        $score = new PeriodScore;
-        $score->add($scope1);
-        $score->add($scope2);
-
-        $expected->setCompetitionScore($score);
-
         $this->assertEquals(
-            $expected,
+            $this->expected,
             $result
         );
     }
@@ -235,11 +236,78 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadAtomEntry()
     {
-        $this->markTestIncomplete();
+        $this->setUpXmlReader('Score/LiveScore/livescores-period.xml');
+
+        $result = $this->reader->readAtomEntry(
+            new AtomEntry(
+                '<url>',
+                '/sport/v2/football/NFL/livescores/livescores_12345.xml',
+                [],
+                DateTime::fromUnixTime(0)
+            )
+        );
+
+        $this
+            ->xmlReader
+            ->read
+            ->calledWith('/sport/v2/football/NFL/livescores/livescores_12345.xml');
+
+        $this->assertEquals(
+            $this->expected,
+            $result
+        );
+    }
+
+    public function testReadAtomEntryFailure()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Unsupported atom entry.'
+        );
+
+        $this->reader->readAtomEntry(
+            new AtomEntry(
+                '<atom-url>',
+                '<atom-resource>',
+                ['foo' => 'bar'],
+                DateTime::fromUnixTime(0)
+            )
+        );
     }
 
     public function testSupportsAtomEntry()
     {
-        $this->markTestIncomplete();
+        $this->assertFalse(
+            $this->reader->supportsAtomEntry(
+                new AtomEntry(
+                    '<atom-url>',
+                    '<atom-resource>',
+                    ['foo' => 'bar'],
+                    DateTime::fromUnixTime(0)
+                )
+            )
+        );
+
+        $this->assertFalse(
+            $this->reader->supportsAtomEntry(
+                new AtomEntry(
+                    '<atom-url>',
+                    '<atom-resource>',
+                    [],
+                    DateTime::fromUnixTime(0)
+                )
+            )
+        );
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry(
+                new AtomEntry(
+                    '<url>',
+                    '/sport/v2/football/NFL/livescores/livescores_12345.xml',
+                    [],
+                    DateTime::fromUnixTime(0)
+                )
+            )
+        );
     }
 }

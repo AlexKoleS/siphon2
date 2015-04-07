@@ -38,28 +38,10 @@ class LiveScoreReader implements LiveScoreReaderInterface
      */
     public function read($sport, $league, $competitionId)
     {
-        $sport  = strtolower($sport);
-        $league = strtoupper($league);
-
-        // Determine which live score factory to use ...
-        $factory = $this->selectFactory($sport, $league);
-
-        // Read the feed ...
-        $xml = $this
-            ->xmlReader
-            ->read(
-                sprintf(
-                    '/sport/v2/%s/%s/livescores/livescores_%d.xml',
-                    $sport,
-                    $league,
-                    Util::extractNumericId($competitionId)
-                )
-            );
-
-        return $factory->create(
+        return $this->readImpl(
             $sport,
             $league,
-            $xml
+            Util::extractNumericId($competitionId)
         );
     }
 
@@ -72,9 +54,18 @@ class LiveScoreReader implements LiveScoreReaderInterface
      */
     public function readAtomEntry(AtomEntry $atomEntry)
     {
-        throw new InvalidArgumentException(
-            'Unsupported atom entry.'
+        if (!$this->supportsAtomEntry($atomEntry)) {
+            throw new InvalidArgumentException(
+                'Unsupported atom entry.'
+            );
+        }
+
+        list($sport, $league, $competitionId) = Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
         );
+
+        return $this->readImpl($sport, $league, $competitionId);
     }
 
     /**
@@ -86,7 +77,50 @@ class LiveScoreReader implements LiveScoreReaderInterface
      */
     public function supportsAtomEntry(AtomEntry $atomEntry)
     {
-        return false;
+        if ($atomEntry->parameters()) {
+            return false;
+        }
+
+        return null !== Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+    }
+
+    /**
+     * Read a live score feed for a competition.
+     *
+     * @param string $sport         The sport (eg, baseball, football, etc)
+     * @param string $league        The league (eg, MLB, NFL, etc)
+     * @param string $competitionId The competition ID.
+     *
+     * @return LiveScoreInterface
+     */
+    public function readImpl($sport, $league, $competitionId)
+    {
+        $sport  = strtolower($sport);
+        $league = strtoupper($league);
+
+        // Determine which live score factory to use ...
+        $factory = $this->selectFactory($sport, $league);
+
+        // Read the feed ...
+        $xml = $this
+            ->xmlReader
+            ->read(
+                sprintf(
+                    self::URL_PATTERN,
+                    $sport,
+                    $league,
+                    $competitionId
+                )
+            );
+
+        return $factory->create(
+            $sport,
+            $league,
+            $xml
+        );
     }
 
     /**
@@ -109,6 +143,8 @@ class LiveScoreReader implements LiveScoreReaderInterface
             'The provided competition could not be handled by any of the known live score factories.'
         );
     }
+
+    const URL_PATTERN = '/sport/v2/%s/%s/livescores/livescores_%d.xml';
 
     private $xmlReader;
     private $factories;
