@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Score\BoxScore;
 
 use Icecave\Siphon\Player\StatisticsInterface;
 use Icecave\Siphon\Score\ScoreInterface;
+use LogicException;
 
 /**
  * The result of reading a box score feed.
