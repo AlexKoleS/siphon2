@@ -3,31 +3,29 @@ namespace Icecave\Siphon\Player;
 
 use Icecave\Siphon\Atom\AtomEntry;
 use Icecave\Siphon\Util;
+use Icecave\Siphon\XPath;
 use Icecave\Siphon\XmlReaderInterface;
 use InvalidArgumentException;
 
 /**
- * Read data from player statistics feeds.
+ * Read data from player image feeds.
  */
-class StatisticsReader implements PlayerReaderInterface
+class ImageReader implements PlayerReaderInterface
 {
-    public function __construct(
-        XmlReaderInterface $xmlReader,
-        StatisticsFactory $factory = null
-    ) {
+    public function __construct(XmlReaderInterface $xmlReader)
+    {
         $this->xmlReader = $xmlReader;
-        $this->factory   = $factory ?: new StatisticsFactory;
     }
 
     /**
-     * Read a player statistics feed.
+     * Read a player image feed.
      *
      * @param string $sport  The sport (eg, baseball, football, etc)
      * @param string $league The league (eg, MLB, NFL, etc)
      * @param string $season The season name.
      * @param string $teamId The ID of the team.
      *
-     * @return array<StatisticsInterface>
+     * @return array<ImageInterface>
      */
     public function read($sport, $league, $season, $teamId)
     {
@@ -82,14 +80,14 @@ class StatisticsReader implements PlayerReaderInterface
     }
 
     /**
-     * Read a player statistics feed.
+     * Read a player image feed.
      *
      * @param string  $sport  The sport (eg, baseball, football, etc)
      * @param string  $league The league (eg, MLB, NFL, etc)
      * @param string  $season The season name.
      * @param integer $teamId The numeric ID of the team.
      *
-     * @return array<StatisticsInterface>
+     * @return array<ImageInterface>
      */
     private function readImpl($sport, $league, $season, $teamId)
     {
@@ -107,13 +105,23 @@ class StatisticsReader implements PlayerReaderInterface
                     $teamId,
                     $league
                 )
-            );
+            )
+            ->xpath('//player-content');
 
-        return $this->factory->create($xml);
+        $result = [];
+
+        foreach ($xml as $element) {
+            $result[] = new Image(
+                XPath::string($element, 'player/id'),
+                XPath::string($element, 'image/url'),
+                XPath::string($element, 'image/thumbnailurl')
+            );
+        }
+
+        return $result;
     }
 
-    const URL_PATTERN = '/sport/v2/%s/%s/player-stats/%s/player_stats_%d_%s.xml';
+    const URL_PATTERN = '/sport/v2/%s/%s/player-images/%s/player-images_%d_%s.xml';
 
     private $xmlReader;
-    private $factory;
 }
