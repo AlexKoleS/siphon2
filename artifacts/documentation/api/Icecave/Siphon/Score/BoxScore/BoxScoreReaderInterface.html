@@ -101,7 +101,7 @@
                     boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_supportsAtomEntry">supportsAtomEntry</a>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry)
+                    <a href="#method_supportsAtomEntry">supportsAtomEntry</a>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry, array $parameters = array())
                                             <p>Check if the given atom entry can be used by this reader.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/ReaderInterface.html#method_supportsAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a></small></div>
             </div>
@@ -136,8 +136,7 @@
                     <tr>
                 <td><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></td>
                 <td>$atomEntry</td>
-                <td>
-</td>
+                <td>The atom entry.</td>
             </tr>
             </table>
 
@@ -169,9 +168,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_supportsAtomEntry">
-        <div class="location">in <a href="../../../../Icecave/Siphon/ReaderInterface.html#method_supportsAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a> at line 29</div>
+        <div class="location">in <a href="../../../../Icecave/Siphon/ReaderInterface.html#method_supportsAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a> at line 30</div>
         <code>                    boolean
-    <strong>supportsAtomEntry</strong>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry)</code>
+    <strong>supportsAtomEntry</strong>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry, array $parameters = array())</code>
     </h3>
     <div class="details">
                     <div class="method-description">
@@ -183,8 +182,12 @@
                     <tr>
                 <td><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></td>
                 <td>$atomEntry</td>
-                <td>
-</td>
+                <td>The atom entry.</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$parameters</td>
+                <td>&amp;$parameters Populated with reader-specific parameters represented by the atom entry.</td>
             </tr>
             </table>
 
