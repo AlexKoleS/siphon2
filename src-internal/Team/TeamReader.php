@@ -69,37 +69,53 @@ class TeamReader implements TeamReaderInterface
      */
     public function readAtomEntry(AtomEntry $atomEntry)
     {
-        if (!$this->supportsAtomEntry($atomEntry)) {
+        $parameters = [];
+
+        if (!$this->supportsAtomEntry($atomEntry, $parameters)) {
             throw new InvalidArgumentException(
                 'Unsupported atom entry.'
             );
         }
 
-        list($sport, $league, $season) = Util::parse(
-            self::URL_PATTERN,
-            $atomEntry->resource()
+        return $this->read(
+            $parameters['sport'],
+            $parameters['league'],
+            $parameters['season']
         );
-
-        return $this->read($sport, $league, $season);
     }
 
     /**
      * Check if the given atom entry can be used by this reader.
      *
-     * @param AtomEntry $atomEntry
+     * @param AtomEntry $atomEntry   The atom entry.
+     * @param array     &$parameters Populated with reader-specific parameters represented by the atom entry.
      *
      * @return boolean
      */
-    public function supportsAtomEntry(AtomEntry $atomEntry)
-    {
+    public function supportsAtomEntry(
+        AtomEntry $atomEntry,
+        array &$parameters = []
+    ) {
         if ($atomEntry->parameters()) {
             return false;
         }
 
-        return null !== Util::parse(
+        $matches = Util::parse(
             self::URL_PATTERN,
             $atomEntry->resource()
         );
+
+        if (null === $matches) {
+            return false;
+        }
+
+        $parameters = [
+            'sport'  => $matches[0],
+            'league' => $matches[1],
+            'season' => $matches[2],
+        ];
+
+        return true;
     }
 
     const URL_PATTERN = '/sport/v2/%s/%s/teams/%s/teams_%s.xml';

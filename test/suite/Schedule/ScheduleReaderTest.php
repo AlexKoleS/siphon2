@@ -295,4 +295,82 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/baseball/MLB/schedule/schedule_MLB.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'   => 'baseball',
+                'league'  => 'MLB',
+                'limit'   => ScheduleLimit::NONE(),
+                'deleted' => false,
+            ],
+            $parameters
+        );
+    }
+
+    public function testSupportsAtomEntryParametersWithLimit()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'   => 'baseball',
+                'league'  => 'MLB',
+                'limit'   => ScheduleLimit::DAYS_2(),
+                'deleted' => false,
+            ],
+            $parameters
+        );
+    }
+
+    public function testSupportsAtomEntryParametersDeleted()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/hockey/NHL/games-deleted/games_deleted_NHL.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'   => 'hockey',
+                'league'  => 'NHL',
+                'limit'   => null,
+                'deleted' => true,
+            ],
+            $parameters
+        );
+    }
 }

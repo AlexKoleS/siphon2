@@ -127,4 +127,25 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
             $this->reader->supportsAtomEntry($entry)
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '<atom-resource>',
+            ['foo' => 'bar'],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [],
+            $parameters
+        );
+    }
 }

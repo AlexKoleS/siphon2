@@ -136,4 +136,28 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/football/NFL/injuries/injuries_NFL.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'  => 'football',
+                'league' => 'NFL',
+            ],
+            $parameters
+        );
+    }
 }

@@ -88,62 +88,90 @@ class ScheduleReader implements ScheduleReaderInterface
      */
     public function readAtomEntry(AtomEntry $atomEntry)
     {
-        if (!$atomEntry->parameters()) {
-            if ($matches = Util::parse(self::URL_PATTERN_LIMITED, $atomEntry->resource())) {
-                list($sport, $league, $_, $limit)  = $matches;
-                $limit                             = ScheduleLimit::memberByValue(intval($limit));
-            } elseif ($matches = Util::parse(self::URL_PATTERN, $atomEntry->resource())) {
-                list($sport, $league) = $matches;
-                $limit                = null;
-            } elseif ($matches = Util::parse(self::URL_PATTERN_DELETED, $atomEntry->resource())) {
-                list($sport, $league) = $matches;
+        $parameters = [];
 
-                return $this->readDeleted(
-                    $sport,
-                    $league
-                );
-            }
-
-            return $this->read(
-                $sport,
-                $league,
-                $limit
+        if (!$this->supportsAtomEntry($atomEntry, $parameters)) {
+            throw new InvalidArgumentException(
+                'Unsupported atom entry.'
             );
         }
 
-        throw new InvalidArgumentException(
-            'Unsupported atom entry.'
+        if ($parameters['deleted']) {
+            return $this->readDeleted(
+                $parameters['sport'],
+                $parameters['league']
+            );
+        }
+
+        return $this->read(
+            $parameters['sport'],
+            $parameters['league'],
+            $parameters['limit']
         );
     }
 
     /**
      * Check if the given atom entry can be used by this reader.
      *
-     * @param AtomEntry $atomEntry
+     * @param AtomEntry $atomEntry   The atom entry.
+     * @param array     &$parameters Populated with reader-specific parameters represented by the atom entry.
      *
      * @return boolean
      */
-    public function supportsAtomEntry(AtomEntry $atomEntry)
-    {
+    public function supportsAtomEntry(
+        AtomEntry $atomEntry,
+        array &$parameters = []
+    ) {
         if ($atomEntry->parameters()) {
             return false;
         }
 
-        $patterns = [
+        $matches = Util::parse(
             self::URL_PATTERN_LIMITED,
+            $atomEntry->resource()
+        );
+
+        if (null !== $matches) {
+            $parameters = [
+                'sport'   => $matches[0],
+                'league'  => $matches[1],
+                'limit'   => ScheduleLimit::memberByValue(intval($matches[3])),
+                'deleted' => false,
+            ];
+
+            return true;
+        }
+
+        $matches = Util::parse(
             self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+
+        if (null !== $matches) {
+            $parameters = [
+                'sport'   => $matches[0],
+                'league'  => $matches[1],
+                'limit'   => ScheduleLimit::NONE(),
+                'deleted' => false,
+            ];
+
+            return true;
+        }
+
+        $matches = Util::parse(
             self::URL_PATTERN_DELETED,
-        ];
+            $atomEntry->resource()
+        );
 
-        foreach ($patterns as $pattern) {
-            $matches = Util::parse(
-                $pattern,
-                $atomEntry->resource()
-            );
+        if (null !== $matches) {
+            $parameters = [
+                'sport'   => $matches[0],
+                'league'  => $matches[1],
+                'limit'   => null,
+                'deleted' => true,
+            ];
 
-            if (null !== $matches) {
-                return true;
-            }
+            return true;
         }
 
         return false;

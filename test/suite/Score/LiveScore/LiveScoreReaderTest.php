@@ -310,4 +310,29 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/football/NFL/livescores/livescores_12345.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'         => 'football',
+                'league'        => 'NFL',
+                'competitionId' => '/sport/football/competition:12345',
+            ],
+            $parameters
+        );
+    }
 }

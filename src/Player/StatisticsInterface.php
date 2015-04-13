@@ -67,7 +67,7 @@ interface StatisticsInterface extends IteratorAggregate
     public function iterate();
 
     /**
-     * Iterate over the the statistics by group.
+     * Iterate over the statistics by group.
      *
      * The key is the group name, the value is an associative array mapping
      * statistical key to value.
@@ -77,7 +77,7 @@ interface StatisticsInterface extends IteratorAggregate
     public function iterateByGroup();
 
     /**
-     * Iterate over the the statistics by key.
+     * Iterate over the statistics by key.
      *
      * The key is the statistical key, the value is an associative array mapping
      * group name to value.

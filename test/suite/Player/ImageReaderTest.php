@@ -263,4 +263,30 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/baseball/MLB/player-images/2015/player-images_12345_MLB.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'  => 'baseball',
+                'league' => 'MLB',
+                'season' => '2015',
+                'teamId' => '/sport/baseball/team:12345',
+            ],
+            $parameters
+        );
+    }
 }

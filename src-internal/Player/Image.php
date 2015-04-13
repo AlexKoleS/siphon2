@@ -1,7 +1,6 @@
 <?php
 namespace Icecave\Siphon\Player;
 
-
 /**
  * Information about player images.
  */

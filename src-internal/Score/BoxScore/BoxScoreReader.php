@@ -41,68 +41,6 @@ class BoxScoreReader implements BoxScoreReaderInterface
      */
     public function read($sport, $league, $season, $competitionId)
     {
-        return $this->readImpl(
-            $sport,
-            $league,
-            $season,
-            Util::extractNumericId($competitionId)
-        );
-    }
-
-    /**
-     * Read a feed based on an atom entry.
-     *
-     * @param AtomEntry $atomEntry
-     *
-     * @return mixed
-     */
-    public function readAtomEntry(AtomEntry $atomEntry)
-    {
-        if (!$this->supportsAtomEntry($atomEntry)) {
-            throw new InvalidArgumentException(
-                'Unsupported atom entry.'
-            );
-        }
-
-        list($sport, $league, $season, $_, $competitionId) = Util::parse(
-            self::URL_PATTERN,
-            $atomEntry->resource()
-        );
-
-        return $this->readImpl($sport, $league, $season, $competitionId);
-    }
-
-    /**
-     * Check if the given atom entry can be used by this reader.
-     *
-     * @param AtomEntry $atomEntry
-     *
-     * @return boolean
-     */
-    public function supportsAtomEntry(AtomEntry $atomEntry)
-    {
-        if ($atomEntry->parameters()) {
-            return false;
-        }
-
-        return null !== Util::parse(
-            self::URL_PATTERN,
-            $atomEntry->resource()
-        );
-    }
-
-    /**
-     * Read a box score feed for a competition.
-     *
-     * @param string  $sport         The sport (eg, baseball, football, etc)
-     * @param string  $league        The league (eg, MLB, NFL, etc)
-     * @param string  $season        The season.
-     * @param integer $competitionId The numeric competition ID.
-     *
-     * @return BoxScoreResultInterface
-     */
-    private function readImpl($sport, $league, $season, $competitionId)
-    {
         $sport  = strtolower($sport);
         $league = strtoupper($league);
 
@@ -118,7 +56,7 @@ class BoxScoreReader implements BoxScoreReaderInterface
                     $league,
                     $season,
                     $league,
-                    $competitionId
+                    Util::extractNumericId($competitionId)
                 )
             );
 
@@ -137,6 +75,70 @@ class BoxScoreReader implements BoxScoreReaderInterface
         );
 
         return $result;
+    }
+
+    /**
+     * Read a feed based on an atom entry.
+     *
+     * @param AtomEntry $atomEntry
+     *
+     * @return mixed
+     */
+    public function readAtomEntry(AtomEntry $atomEntry)
+    {
+        $parameters = [];
+
+        if (!$this->supportsAtomEntry($atomEntry, $parameters)) {
+            throw new InvalidArgumentException(
+                'Unsupported atom entry.'
+            );
+        }
+
+        return $this->read(
+            $parameters['sport'],
+            $parameters['league'],
+            $parameters['season'],
+            $parameters['competitionId']
+        );
+    }
+
+    /**
+     * Check if the given atom entry can be used by this reader.
+     *
+     * @param AtomEntry $atomEntry   The atom entry.
+     * @param array     &$parameters Populated with reader-specific parameters represented by the atom entry.
+     *
+     * @return boolean
+     */
+    public function supportsAtomEntry(
+        AtomEntry $atomEntry,
+        array &$parameters = []
+    ) {
+        if ($atomEntry->parameters()) {
+            return false;
+        }
+
+        $matches = Util::parse(
+            self::URL_PATTERN,
+            $atomEntry->resource()
+        );
+
+        if (null === $matches) {
+            return false;
+        }
+
+        $parameters = [
+            'sport'         => $matches[0],
+            'league'        => $matches[1],
+            'season'        => $matches[2],
+            'competitionId' => sprintf(
+                '/sport/%s/competition:%d',
+                $matches[0],
+                $matches[4]
+            ),
+        ];
+
+        return true;
     }
 
     /**

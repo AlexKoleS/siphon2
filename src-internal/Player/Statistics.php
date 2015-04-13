@@ -126,7 +126,7 @@ class Statistics implements StatisticsInterface
     }
 
     /**
-     * Iterate over the the statistics by group.
+     * Iterate over the statistics by group.
      *
      * The key is the group name, the value is an associative array mapping
      * statistical key to value.
@@ -149,7 +149,7 @@ class Statistics implements StatisticsInterface
     }
 
     /**
-     * Iterate over the the statistics by key.
+     * Iterate over the statistics by key.
      *
      * The key is the statistical key, the value is an associative array mapping
      * group name to value.

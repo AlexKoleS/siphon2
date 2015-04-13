@@ -67,12 +67,15 @@ class XmlReader implements XmlReaderInterface
     /**
      * Check if the given atom entry can be used by this reader.
      *
-     * @param AtomEntry $atomEntry
+     * @param AtomEntry $atomEntry   The atom entry.
+     * @param array     &$parameters Populated with reader-specific parameters represented by the atom entry.
      *
      * @return boolean
      */
-    public function supportsAtomEntry(AtomEntry $atomEntry)
-    {
+    public function supportsAtomEntry(
+        AtomEntry $atomEntry,
+        array &$parameters = []
+    ) {
         return true;
     }
 

@@ -1454,7 +1454,7 @@ class StatisticsReaderTest extends PHPUnit_Framework_TestCase
             'football',
             'NFL',
             '2009-2010',
-            '/sport/baseball/team:12345'
+            '/sport/football/team:12345'
         );
 
         $this
@@ -1542,6 +1542,32 @@ class StatisticsReaderTest extends PHPUnit_Framework_TestCase
                     DateTime::fromUnixTime(0)
                 )
             )
+        );
+    }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/football/NFL/player-stats/2009-2010/player_stats_12345_NFL.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'  => 'football',
+                'league' => 'NFL',
+                'season' => '2009-2010',
+                'teamId' => '/sport/football/team:12345',
+            ],
+            $parameters
         );
     }
 }

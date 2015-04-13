@@ -326,4 +326,30 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/baseball/MLB/players/2009/players_12345_MLB.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'  => 'baseball',
+                'league' => 'MLB',
+                'season' => '2009',
+                'teamId' => '/sport/baseball/team:12345',
+            ],
+            $parameters
+        );
+    }
 }

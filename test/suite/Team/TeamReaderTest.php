@@ -172,4 +172,29 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'   => 'baseball',
+                'league'  => 'MLB',
+                'season'  => '2009',
+            ],
+            $parameters
+        );
+    }
 }

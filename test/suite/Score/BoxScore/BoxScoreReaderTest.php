@@ -288,4 +288,30 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testSupportsAtomEntryParameters()
+    {
+        $entry = new AtomEntry(
+            '<atom-url>',
+            '/sport/v2/football/NFL/boxscores/2009-2010/boxscore_NFL_12345.xml',
+            [],
+            DateTime::fromUnixTime(0)
+        );
+
+        $parameters = [];
+
+        $this->assertTrue(
+            $this->reader->supportsAtomEntry($entry, $parameters)
+        );
+
+        $this->assertSame(
+            [
+                'sport'         => 'football',
+                'league'        => 'NFL',
+                'season'        => '2009-2010',
+                'competitionId' => '/sport/football/competition:12345',
+            ],
+            $parameters
+        );
+    }
 }
