@@ -9,7 +9,7 @@ class Player implements PlayerInterface
     /**
      * @param string $id
      * @param string $firstName
-     * @param string $lastName
+     * @param string|null $lastName
      */
     public function __construct(
         $id,
@@ -44,7 +44,7 @@ class Player implements PlayerInterface
     /**
      * Get the player's last name.
      *
-     * @return string The player's last name.
+     * @return string|null The player's last name, or null if the player only has a single name.
      */
     public function lastName()
     {
@@ -58,10 +58,12 @@ class Player implements PlayerInterface
      */
     public function displayName()
     {
-        return sprintf(
-            '%s %s',
-            $this->firstName,
-            $this->lastName
+        return trim(
+            sprintf(
+                '%s %s',
+                $this->firstName,
+                $this->lastName
+            )
         );
     }
 

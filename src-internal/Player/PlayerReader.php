@@ -49,11 +49,19 @@ class PlayerReader implements PlayerReaderInterface
         $result = [];
 
         foreach ($xml as $element) {
+            $first = XPath::stringOrNull($element, "name[@type='first']");
+            $last  = XPath::string($element, "name[@type='last']");
+
+            if (null === $first) {
+                $first = $last;
+                $last  = null;
+            }
+
             $result[] = [
                 new Player(
                     strval($element->id),
-                    XPath::string($element, "name[@type='first']"),
-                    XPath::string($element, "name[@type='last']")
+                    $first,
+                    $last
                 ),
                 new SeasonDetails(
                     strval($element->id),

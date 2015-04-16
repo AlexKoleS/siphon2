@@ -45,4 +45,18 @@ class PlayerTest extends PHPUnit_Framework_TestCase
             $this->player->displayName()
         );
     }
+
+    public function testDisplayNameWithEmptyLastName()
+    {
+        $this->player = new Player(
+            '<id>',
+            '<first>',
+            null
+        );
+
+        $this->assertSame(
+            '<first>',
+            $this->player->displayName()
+        );
+    }
 }

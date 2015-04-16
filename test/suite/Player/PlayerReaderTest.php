@@ -217,8 +217,12 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
                 new Player('/sport/baseball/player:42886', 'Jose', 'Veras'),
                 new SeasonDetails('/sport/baseball/player:42886', '2009', '41', 'RP', 'Reliever', false),
             ],
+
+            // This player was altered in the XML to only include a single name.
+            // Note that in the XML player's with single names have the first-name omitted, however the player classes
+            // omits the last name instead.
             [
-                new Player('/sport/baseball/player:42341', 'Chien-Ming', 'Wang'),
+                new Player('/sport/baseball/player:42341', 'Wang', null),
                 new SeasonDetails('/sport/baseball/player:42341', '2009', '40', 'SP', 'Starter', true),
             ],
         ];

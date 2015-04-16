@@ -25,7 +25,7 @@ interface PlayerInterface
     /**
      * Get the player's last name.
      *
-     * @return string The player's last name.
+     * @return string|null The player's last name, or null if the player only has a single name.
      */
     public function lastName();
 

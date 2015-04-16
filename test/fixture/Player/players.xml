@@ -1352,7 +1352,6 @@
                     <player-content>
                         <player xsi:type="sport:baseball-player">
                             <id>/sport/baseball/player:42341</id>
-                            <name type="first">Chien-Ming</name>
                             <name type="last">Wang</name>
                             <height unit="inches">75</height>
                             <weight unit="pounds">230</weight>
