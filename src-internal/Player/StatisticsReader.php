@@ -9,7 +9,7 @@ use InvalidArgumentException;
 /**
  * Read data from player statistics feeds.
  */
-class StatisticsReader implements PlayerReaderInterface
+class StatisticsReader implements StatisticsReaderInterface
 {
     public function __construct(
         XmlReaderInterface $xmlReader,
