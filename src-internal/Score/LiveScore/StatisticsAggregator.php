@@ -132,10 +132,11 @@ class StatisticsAggregator
     private function map($groups)
     {
         $ordering = [
-            'inning'   => 1 << 8,
-            'period'   => 1 << 8,
-            'overtime' => 2 << 8,
-            'shootout' => 3 << 8,
+            'inning'       => 1 << 8,
+            'extra-inning' => 2 << 8,
+            'period'       => 1 << 8,
+            'overtime'     => 2 << 8,
+            'shootout'     => 3 << 8,
         ];
 
         foreach ($groups as $group) {

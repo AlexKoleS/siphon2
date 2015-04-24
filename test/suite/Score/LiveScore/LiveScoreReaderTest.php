@@ -220,6 +220,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             $result
         );
     }
+
     public function testReadWithUnsupportedCompetition()
     {
         $this->setExpectedException(
@@ -231,6 +232,55 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             'unknown-sport',
             'unknown-league',
             '/path/to/sport:12345'
+        );
+    }
+
+    public function testReadWithExtraInnings()
+    {
+        $this->setUpXmlReader('Score/LiveScore/livescores-inning-extra.xml');
+
+        $result = $this->reader->read(
+            'baseball',
+            'MLB',
+            '/path/to/sport:12345'
+        );
+
+        $this
+            ->xmlReader()
+            ->read
+            ->calledWith('/sport/v2/baseball/MLB/livescores/livescores_12345.xml');
+
+        $expected = new InningResult;
+        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
+
+        $score = new InningScore(
+            17, // home team hits
+            17, // away team hits
+            1,  // home team errors
+            1   // away team errors
+        );
+
+        $currentScope = new Inning(0, 0);
+
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 1));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(1, 2));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 0));
+        $score->add(new Inning(0, 1));
+        $score->add(new Inning(0, 3));
+        $score->add(new Inning(6, 0));
+        $score->add($currentScope);
+
+        $expected->setCurrentScope($currentScope);
+        $expected->setCurrentScopeStatus(ScopeStatus::IN_PROGRESS());
+        $expected->setCurrentInningSubType(InningSubType::TOP());
+        $expected->setCompetitionScore($score);
+
+        $this->assertEquals(
+            $expected,
+            $result
         );
     }
 

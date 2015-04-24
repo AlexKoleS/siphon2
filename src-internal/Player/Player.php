@@ -7,8 +7,8 @@ namespace Icecave\Siphon\Player;
 class Player implements PlayerInterface
 {
     /**
-     * @param string $id
-     * @param string $firstName
+     * @param string      $id
+     * @param string      $firstName
      * @param string|null $lastName
      */
     public function __construct(
