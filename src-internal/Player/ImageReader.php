@@ -10,7 +10,7 @@ use InvalidArgumentException;
 /**
  * Read data from player image feeds.
  */
-class ImageReader implements PlayerReaderInterface
+class ImageReader implements ImageReaderInterface
 {
     public function __construct(XmlReaderInterface $xmlReader)
     {
