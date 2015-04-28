@@ -116,6 +116,20 @@ class StatisticsTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testIterateGroup()
+    {
+        $this->assertSame(
+            [
+                'a' => 5,
+                'b' => 10,
+                'c' => 0,
+            ],
+            iterator_to_array(
+                $this->statistics->iterateGroup('one')
+            )
+        );
+    }
+
     public function testIterateByGroup()
     {
         $this->assertSame(

@@ -67,6 +67,15 @@ interface StatisticsInterface extends IteratorAggregate
     public function iterate();
 
     /**
+     * Iterate over a the keys in a single group.
+     *
+     * @param string $groupName
+     *
+     * @return mixed<string, integer|float> A map of key name to value.
+     */
+    public function iterateGroup($groupName);
+
+    /**
      * Iterate over the statistics by group.
      *
      * The key is the group name, the value is an associative array mapping

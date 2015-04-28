@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Player;
 
 use ArrayIterator;
+use EmptyIterator;
 
 /**
  * Player statistics.
@@ -123,6 +124,35 @@ class Statistics implements StatisticsInterface
                 yield [$group, $key, $value];
             }
         }
+    }
+
+    /**
+     * Iterate over a the keys in a single group.
+     *
+     * @param string $groupName
+     *
+     * @return mixed<string, integer|float> A map of key name to value.
+     */
+    public function iterateGroup($groupName)
+    {
+        $defaults   = [];
+        $groupStats = [];
+
+        foreach ($this->groups as $group => $stats) {
+            foreach ($stats as $key => $value) {
+                $defaults[$key] = 0;
+            }
+
+            if ($group === $groupName) {
+                $groupStats = $stats;
+            }
+        }
+
+        return new ArrayIterator(
+            array_merge($defaults, $groupStats)
+        );
+
+        return new EmptyIterator;
     }
 
     /**
