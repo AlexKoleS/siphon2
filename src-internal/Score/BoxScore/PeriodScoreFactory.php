@@ -110,25 +110,27 @@ class PeriodScoreFactory implements ScoreFactoryInterface
 
         $result = [];
 
-        foreach ($stats['game-stats'] as $key => $value) {
-            $matches = [];
+        if (isset($stats['game-stats'])) {
+            foreach ($stats['game-stats'] as $key => $value) {
+                $matches = [];
 
-            if (preg_match($pattern, $key, $matches)) {
-                $type = $matches[1];
+                if (preg_match($pattern, $key, $matches)) {
+                    $type = $matches[1];
 
-                if (isset($matches[2])) {
-                    $number = intval($matches[2]);
-                } else {
-                    $number = 1;
+                    if (isset($matches[2])) {
+                        $number = intval($matches[2]);
+                    } else {
+                        $number = 1;
+                    }
+
+                    $periodCounts[$type] = max($periodCounts[$type], $number);
+
+                    if (!isset($result[$type])) {
+                        $result[$type] = [];
+                    }
+
+                    $result[$type][$number] = $value;
                 }
-
-                $periodCounts[$type] = max($periodCounts[$type], $number);
-
-                if (!isset($result[$type])) {
-                    $result[$type] = [];
-                }
-
-                $result[$type][$number] = $value;
             }
         }
 

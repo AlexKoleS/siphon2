@@ -65,13 +65,15 @@ class InningScoreFactory implements ScoreFactoryInterface
     {
         $result = [];
 
-        foreach ($stats['game-stats'] as $key => $value) {
-            $matches = [];
+        if (isset($stats['game-stats'])) {
+            foreach ($stats['game-stats'] as $key => $value) {
+                $matches = [];
 
-            if (preg_match('/runs_inning_(\d+)/', $key, $matches)) {
-                $number          = intval($matches[1]);
-                $inningCount     = max($inningCount, $number);
-                $result[$number] = $value;
+                if (preg_match('/runs_inning_(\d+)/', $key, $matches)) {
+                    $number          = intval($matches[1]);
+                    $inningCount     = max($inningCount, $number);
+                    $result[$number] = $value;
+                }
             }
         }
 
