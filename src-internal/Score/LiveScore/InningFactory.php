@@ -70,18 +70,16 @@ class InningFactory implements ResultFactoryInterface
             $scopeStatus = strval($resultScope->{'scope-status'});
 
             if ($scopeStatus) {
-                $scopeStatus = ScopeStatus::memberByValue($scopeStatus);
-            } else {
-                $scopeStatus = ScopeStatus::OTHER();
+                $result->setCurrentScopeStatus(
+                    ScopeStatus::memberByValue($scopeStatus)
+                );
+
+                $result->setCurrentInningSubType(
+                    InningSubType::memberByValue(
+                        strval($resultScope->scope['sub-type'])
+                    )
+                );
             }
-
-            $result->setCurrentScopeStatus($scopeStatus);
-
-            $result->setCurrentInningSubType(
-                InningSubType::memberByValue(
-                    strval($resultScope->scope['sub-type'])
-                )
-            );
         } else {
             $currentType   = null;
             $currentNumber = null;

@@ -83,12 +83,10 @@ class PeriodFactory implements ResultFactoryInterface
             $scopeStatus = strval($resultScope->{'scope-status'});
 
             if ($scopeStatus) {
-                $scopeStatus = ScopeStatus::memberByValue($scopeStatus);
-            } else {
-                $scopeStatus = ScopeStatus::OTHER();
+                $result->setCurrentScopeStatus(
+                    ScopeStatus::memberByValue($scopeStatus)
+                );
             }
-
-            $result->setCurrentScopeStatus($scopeStatus);
         } else {
             $currentType   = null;
             $currentNumber = null;
