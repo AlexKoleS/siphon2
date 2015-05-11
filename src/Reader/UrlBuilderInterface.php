@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon;
+namespace Icecave\Siphon\Reader;
 
 /**
  * Constructs a fully-qualified feed URL from a resource name and parameter set.

@@ -1,12 +1,12 @@
 <?php
-namespace Icecave\Siphon;
+namespace Icecave\Siphon\Reader;
 
 use SimpleXMLElement;
 
 /**
  * Read XML data based on a resource name.
  */
-interface XmlReaderInterface extends ReaderInterface
+interface XmlReaderInterface
 {
     /**
      * Read XML data for the given resource.

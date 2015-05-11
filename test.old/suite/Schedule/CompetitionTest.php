@@ -1,10 +1,7 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Sport;
-use Icecave\Siphon\Team\TeamInterface;
 use PHPUnit_Framework_TestCase;
 
 class CompetitionTest extends PHPUnit_Framework_TestCase
@@ -12,18 +9,15 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->startTime = DateTime::fromUnixTime(0);
-        $this->season    = Phony::mock(SeasonInterface::class)->mock();
-        $this->homeTeam  = Phony::mock(TeamInterface::class)->mock();
-        $this->awayTeam  = Phony::mock(TeamInterface::class)->mock();
 
         $this->competition = new Competition(
             '<id>',
             CompetitionStatus::IN_PROGRESS(),
             $this->startTime,
-            Sport::NFL(),
-            $this->season,
-            $this->homeTeam,
-            $this->awayTeam
+            '<sport>',
+            '<league>',
+            '<home>',
+            '<away>'
         );
     }
 
@@ -51,35 +45,35 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSeason()
-    {
-        $this->assertSame(
-            $this->season,
-            $this->competition->season()
-        );
-    }
-
     public function testSport()
     {
         $this->assertSame(
-            Sport::NFL(),
+            '<sport>',
             $this->competition->sport()
+        );
+    }
+
+    public function testLeague()
+    {
+        $this->assertSame(
+            '<league>',
+            $this->competition->league()
         );
     }
 
     public function testHomeTeamId()
     {
         $this->assertSame(
-            $this->homeTeam,
-            $this->competition->homeTeam()
+            '<home>',
+            $this->competition->homeTeamId()
         );
     }
 
     public function testAwayTeamId()
     {
         $this->assertSame(
-            $this->awayTeam,
-            $this->competition->awayTeam()
+            '<away>',
+            $this->competition->awayTeamId()
         );
     }
 }
