@@ -101,7 +101,7 @@ class Season implements
      */
     public function add(Competition $competition)
     {
-        $this->competitions[spl_object_hash($competition)] = $competition;
+        $this->competitions[$competition->id()] = $competition;
     }
 
     /**
@@ -111,7 +111,7 @@ class Season implements
      */
     public function remove(Competition $competition)
     {
-        unset($this->competitions[spl_object_hash($competition)]);
+        unset($this->competitions[$competition->id()]);
     }
 
     private $id;

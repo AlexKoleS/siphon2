@@ -5,9 +5,9 @@ use Eloquent\Enumeration\AbstractEnumeration;
 
 class ScheduleType extends AbstractEnumeration
 {
-    const FULL          = 'full';
-    const LIMIT_2_DAYS  = 'limit_2_days';
-    const LIMIT_7_DAYS  = 'limit_7_days';
-    const LIMIT_30_DAYS = 'limit_30_days';
-    const DELETED       = 'deleted';
+    const FULL          = INF;
+    const LIMIT_2_DAYS  = 2;
+    const LIMIT_7_DAYS  = 7;
+    const LIMIT_30_DAYS = 30;
+    const DELETED       = 0;
 }

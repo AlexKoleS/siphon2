@@ -9,8 +9,11 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->season1 = Phony::fullMock(Season::class)->mock();
-        $this->season2 = Phony::fullMock(Season::class)->mock();
+        $this->season1 = Phony::fullMock(Season::class);
+        $this->season2 = Phony::fullMock(Season::class);
+
+        $this->season1->id->returns('<season 1>');
+        $this->season2->id->returns('<season 2>');
 
         $this->response = new ScheduleResponse(
             Sport::NFL(),
@@ -55,7 +58,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
             count($this->response)
         );
 
-        $this->response->add($this->season1);
+        $this->response->add($this->season1->mock());
 
         $this->assertSame(
             1,
@@ -70,13 +73,13 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
             iterator_to_array($this->response)
         );
 
-        $this->response->add($this->season1);
-        $this->response->add($this->season2);
+        $this->response->add($this->season1->mock());
+        $this->response->add($this->season2->mock());
 
         $this->assertSame(
             [
-                $this->season1,
-                $this->season2,
+                $this->season1->mock(),
+                $this->season2->mock(),
             ],
             iterator_to_array($this->response)
         );
@@ -84,11 +87,11 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $this->response->add($this->season1);
+        $this->response->add($this->season1->mock());
 
         $this->assertSame(
             [
-                $this->season1,
+                $this->season1->mock(),
             ],
             iterator_to_array($this->response)
         );
@@ -96,12 +99,12 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->season1);
-        $this->response->add($this->season1);
+        $this->response->add($this->season1->mock());
+        $this->response->add($this->season1->mock());
 
         $this->assertSame(
             [
-                $this->season1,
+                $this->season1->mock(),
             ],
             iterator_to_array($this->response)
         );
@@ -109,8 +112,8 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->response->add($this->season1);
-        $this->response->remove($this->season1);
+        $this->response->add($this->season1->mock());
+        $this->response->remove($this->season1->mock());
 
         $this->assertSame(
             [],
@@ -120,9 +123,9 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveUnknownRequest()
     {
-        $this->response->add($this->season1);
-        $this->response->remove($this->season1);
-        $this->response->remove($this->season1);
+        $this->response->add($this->season1->mock());
+        $this->response->remove($this->season1->mock());
+        $this->response->remove($this->season1->mock());
 
         $this->assertSame(
             [],

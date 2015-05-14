@@ -1,7 +1,6 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-
 /**
  * A reference to a season within a schedule.
  *

@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamInterface;
 
@@ -28,13 +29,14 @@ class Competition
         TeamInterface $homeTeam,
         TeamInterface $awayTeam
     ) {
-        $this->id        = $id;
-        $this->status    = $status;
-        $this->startTime = $startTime;
-        $this->sport     = $sport;
-        $this->season    = $season;
-        $this->homeTeam  = $homeTeam;
-        $this->awayTeam  = $awayTeam;
+        $this->id             = $id;
+        $this->status         = $status;
+        $this->startTime      = $startTime;
+        $this->sport          = $sport;
+        $this->season         = $season;
+        $this->homeTeam       = $homeTeam;
+        $this->awayTeam       = $awayTeam;
+        $this->notablePlayers = [];
     }
 
     /**
@@ -107,6 +109,39 @@ class Competition
         return $this->awayTeam;
     }
 
+    /**
+     * Get any "notable" players for this competition.
+     *
+     * This includes:
+     *  - MLB starting pitchers
+     *
+     * @return array<Player>
+     */
+    public function notablePlayers()
+    {
+        return array_values($this->notablePlayers);
+    }
+
+    /**
+     * Add a notable player to the competition.
+     *
+     * @param Player $player The player to add.
+     */
+    public function addNotablePlayer(Player $player)
+    {
+        $this->notablePlayers[$player->id()] = $player;
+    }
+
+    /**
+     * Remove a notable player from the competition.
+     *
+     * @param Player $player The player to remove.
+     */
+    public function removeNotablePlayer(Player $player)
+    {
+        unset($this->notablePlayers[$player->id()]);
+    }
+
     private $id;
     private $status;
     private $startTime;
@@ -114,4 +149,5 @@ class Competition
     private $season;
     private $homeTeam;
     private $awayTeam;
+    private $notablePlayers;
 }

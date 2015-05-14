@@ -1,14 +1,6 @@
 <?php
 namespace Icecave\Siphon;
 
-use Eloquent\Phony\Phpunit\Phony;
-use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Reader\RequestFactoryInterface;
-use Icecave\Siphon\Reader\RequestInterface;
-use Icecave\Siphon\Reader\RequestVisitorInterface;
-use Icecave\Siphon\Reader\XmlReaderTestTrait;
-use Icecave\Siphon\Sport;
-use Icecave\Siphon\UrlBuilderInterface;
 use PHPUnit_Framework_TestCase;
 
 class SportTest extends PHPUnit_Framework_TestCase
@@ -16,12 +8,12 @@ class SportTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->sports = [
-            'NFL' => 'football',
+            'NFL'   => 'football',
             'NCAAF' => 'football',
-            'NBA' => 'basketball',
+            'NBA'   => 'basketball',
             'NCAAB' => 'basketball',
-            'MLB' => 'baseball',
-            'NHL' => 'hockey',
+            'MLB'   => 'baseball',
+            'NHL'   => 'hockey',
         ];
     }
 

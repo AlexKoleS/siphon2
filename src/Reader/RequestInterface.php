@@ -1,7 +1,6 @@
 <?php
 namespace Icecave\Siphon\Reader;
 
-
 /**
  * Interface for requests.
  */

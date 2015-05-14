@@ -89,7 +89,7 @@ class ScheduleResponse implements
      */
     public function add(SeasonInterface $season)
     {
-        $this->seasons[spl_object_hash($season)] = $season;
+        $this->seasons[$season->id()] = $season;
     }
 
     /**
@@ -99,7 +99,7 @@ class ScheduleResponse implements
      */
     public function remove(SeasonInterface  $season)
     {
-        unset($this->seasons[spl_object_hash($season)]);
+        unset($this->seasons[$season->id()]);
     }
 
     private $sport;

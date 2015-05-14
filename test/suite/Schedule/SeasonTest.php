@@ -9,8 +9,12 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->comp1     = Phony::fullMock(Competition::class)->mock();
-        $this->comp2     = Phony::fullMock(Competition::class)->mock();
+        $this->comp1 = Phony::fullMock(Competition::class);
+        $this->comp2 = Phony::fullMock(Competition::class);
+
+        $this->comp1->id->returns('<comp 1>');
+        $this->comp2->id->returns('<comp 2>');
+
         $this->startDate = Date::fromUnixTime(0);
         $this->endDate   = Date::fromUnixTime(1);
 
@@ -56,13 +60,13 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $this->season->add($this->comp1);
-        $this->season->add($this->comp2);
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
 
         $this->assertSame(
             [
-                $this->comp1,
-                $this->comp2,
+                $this->comp1->mock(),
+                $this->comp2->mock(),
             ],
             iterator_to_array($this->season)
         );
@@ -70,14 +74,14 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->season->add($this->comp1);
-        $this->season->add($this->comp2);
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
 
-        $this->season->remove($this->comp1);
+        $this->season->remove($this->comp1->mock());
 
         $this->assertSame(
             [
-                $this->comp2,
+                $this->comp2->mock(),
             ],
             iterator_to_array($this->season)
         );
@@ -85,7 +89,7 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveWithUnknownCompetition()
     {
-        $this->season->remove($this->comp1);
+        $this->season->remove($this->comp1->mock());
 
         $this->assertSame(
             [],
@@ -100,22 +104,22 @@ class SeasonTest extends PHPUnit_Framework_TestCase
             count($this->season)
         );
 
-        $this->season->add($this->comp1);
-        $this->season->add($this->comp2);
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
 
         $this->assertSame(
             2,
             count($this->season)
         );
 
-        $this->season->remove($this->comp1);
+        $this->season->remove($this->comp1->mock());
 
         $this->assertSame(
             1,
             count($this->season)
         );
 
-        $this->season->remove($this->comp2);
+        $this->season->remove($this->comp2->mock());
 
         $this->assertSame(
             0,
@@ -125,13 +129,13 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 
     public function testGetIterator()
     {
-        $this->season->add($this->comp1);
-        $this->season->add($this->comp2);
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
 
         $this->assertEquals(
             [
-                $this->comp1,
-                $this->comp2,
+                $this->comp1->mock(),
+                $this->comp2->mock(),
             ],
             iterator_to_array($this->season)
         );
