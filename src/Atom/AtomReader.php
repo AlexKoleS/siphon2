@@ -11,11 +11,11 @@ use InvalidArgumentException;
 class AtomReader implements ReaderInterface
 {
     public function __construct(
-        RequestFactoryInterface $requestFactory,
-        XmlReaderInterface $xmlReader
+        XmlReaderInterface $xmlReader,
+        RequestFactoryInterface $requestFactory = null
     ) {
-        $this->requestFactory = $requestFactory;
         $this->xmlReader      = $xmlReader;
+        $this->requestFactory = $requestFactory ?: new RequestFactory;
     }
 
     /**

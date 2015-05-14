@@ -32,8 +32,8 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $this->reader = new AtomReader(
-            $this->requestFactory->mock(),
-            $this->xmlReader()->mock()
+            $this->xmlReader()->mock(),
+            $this->requestFactory->mock()
         );
     }
 
