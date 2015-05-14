@@ -17,12 +17,12 @@ class SportTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    public function testFromComponents()
+    public function testFindByComponents()
     {
         foreach ($this->sports as $league => $sport) {
             $this->assertSame(
                 Sport::memberByKey($league),
-                Sport::fromComponents($sport, $league)
+                Sport::findByComponents($sport, $league)
             );
         }
     }

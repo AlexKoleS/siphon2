@@ -3,6 +3,8 @@ namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\ReaderInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
@@ -16,6 +18,8 @@ use SimpleXMLElement;
  */
 class ScheduleReader implements ReaderInterface
 {
+    use PlayerFactoryTrait;
+
     public function __construct(XmlReaderInterface $xmlReader)
     {
         $this->xmlReader = $xmlReader;
@@ -60,7 +64,7 @@ class ScheduleReader implements ReaderInterface
         $xml = $this
             ->xmlReader
             ->read($resource)
-            ->xpath('//season-content');
+            ->xpath('.//season-content');
 
         $response = new ScheduleResponse(
             $request->sport(),
@@ -115,7 +119,7 @@ class ScheduleReader implements ReaderInterface
         Sport $sport,
         SeasonInterface $season
     ) {
-        return new Competition(
+        $competition = new Competition(
             strval($element->id),
             CompetitionStatus::memberByValue(
                 strval($element->{'result-scope'}->{'competition-status'})
@@ -132,6 +136,14 @@ class ScheduleReader implements ReaderInterface
                 $element->{'away-team-content'}->{'team'}
             )
         );
+
+        foreach ($element->xpath('.//player') as $playerElement) {
+            $competition->addNotablePlayer(
+                $this->createPlayer($playerElement)
+            );
+        }
+
+        return $competition;
     }
 
     private function createTeamReference(SimpleXMLElement $element)

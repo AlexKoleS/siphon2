@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Schedule;
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Sport;
@@ -32,80 +33,81 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             Date::fromIsoString('2010-11-15')
         );
 
-        $season->add(
-            new Competition(
-                '/sport/baseball/competition:294647',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-27T20:40:00-04:00'),
-                Sport::MLB(),
-                $season,
-                new TeamRef('/sport/baseball/team:2956', 'Colorado'),
-                new TeamRef('/sport/baseball/team:2968', 'Arizona')
+        $comp1 = new Competition(
+            '/sport/baseball/competition:294647',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2010-04-27T20:40:00-04:00'),
+            Sport::MLB(),
+            $season,
+            new TeamRef('/sport/baseball/team:2956', 'Colorado'),
+            new TeamRef('/sport/baseball/team:2968', 'Arizona')
+        );
+
+        $comp1->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:42675',
+                'Ubaldo',
+                'Jimenez'
             )
         );
 
-        $season->add(
-            new Competition(
-                '/sport/baseball/competition:293835',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-27T22:05:00-04:00'),
-                Sport::MLB(),
-                $season,
-                new TeamRef('/sport/baseball/team:2979', 'LA Angels'),
-                new TeamRef('/sport/baseball/team:2980', 'Cleveland')
+        $comp1->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:41499',
+                'Edwin',
+                'Jackson'
             )
         );
 
-        $season->add(
-            new Competition(
-                '/sport/baseball/competition:295678',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-27T22:15:00-04:00'),
-                Sport::MLB(),
-                $season,
-                new TeamRef('/sport/baseball/team:2962', 'San Francisco'),
-                new TeamRef('/sport/baseball/team:2958', 'Philadelphia')
+        $comp2 = new Competition(
+            '/sport/baseball/competition:293835',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2010-04-27T22:05:00-04:00'),
+            Sport::MLB(),
+            $season,
+            new TeamRef('/sport/baseball/team:2979', 'LA Angels'),
+            new TeamRef('/sport/baseball/team:2980', 'Cleveland')
+        );
+
+        $comp2->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:42548',
+                'Joe',
+                'Saunders'
             )
         );
+
+        $comp2->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:43367',
+                'Mitch',
+                'Talbot'
+            )
+        );
+
+        $comp3 = new Competition(
+            '/sport/baseball/competition:295678',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2010-04-27T22:15:00-04:00'),
+            Sport::MLB(),
+            $season,
+            new TeamRef('/sport/baseball/team:2962', 'San Francisco'),
+            new TeamRef('/sport/baseball/team:2958', 'Philadelphia')
+        );
+
+        $comp3->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:41429',
+                'Todd',
+                'Wellemeyer'
+            )
+        );
+
+        $season->add($comp1);
+        $season->add($comp2);
+        $season->add($comp3);
 
         $this->response->add($season);
-
-        // $this->expected = new Schedule;
-        // $this->expected->add($season);
-
-        // $season = new Season(
-        //     '/sport/hockey/season:19',
-        //     '2009-2010',
-        //     Date::fromIsoString('2009-10-01'),
-        //     Date::fromIsoString('2010-06-30')
-        // );
-
-        // $season->add(
-        //     new Competition(
-        //         '/sport/hockey/competition:32577',
-        //         CompetitionStatus::SCHEDULED(),
-        //         DateTime::fromIsoString('2010-04-16T22:00:00-04:00'),
-        //         'hockey',
-        //         'NHL',
-        //         '/sport/hockey/team:19',
-        //         '/sport/hockey/team:20'
-        //     )
-        // );
-
-        // $season->add(
-        //     new Competition(
-        //         '/sport/hockey/competition:32539',
-        //         CompetitionStatus::SCHEDULED(),
-        //         DateTime::fromIsoString('2010-04-25T19:00:00-04:00'),
-        //         'hockey',
-        //         'NHL',
-        //         '/sport/hockey/team:12',
-        //         '/sport/hockey/team:13'
-        //     )
-        // );
-
-        // $this->expectedDeleted = new Schedule;
-        // $this->expectedDeleted->add($season);
 
         $this->reader = new ScheduleReader(
             $this->xmlReader()->mock()

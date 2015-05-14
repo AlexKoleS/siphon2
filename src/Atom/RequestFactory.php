@@ -2,6 +2,9 @@
 namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Schedule\ScheduleRequest;
+use Icecave\Siphon\Schedule\ScheduleType;
+use Icecave\Siphon\Sport;
 use InvalidArgumentException;
 use stdClass;
 
@@ -22,10 +25,6 @@ class RequestFactory implements RequestFactoryInterface
     {
         $components = (object) parse_url($url);
 
-        if (!isset($components->path)) {
-            $components->path = '/';
-        }
-
         if (isset($components->query)) {
             $query = [];
 
@@ -41,6 +40,8 @@ class RequestFactory implements RequestFactoryInterface
 
         if ($request = $this->createAtomRequest($components)) {
             return $request;
+        } elseif ($request = $this->createScheduleRequest($components)) {
+            return $request;
         }
 
         throw new InvalidArgumentException('Unsupported URL.');
@@ -49,11 +50,11 @@ class RequestFactory implements RequestFactoryInterface
     /**
      * Attempt to create an AtomRequest.
      *
-     * @param array $components The URL components.
+     * @param stdClass $components The URL components.
      *
      * @return AtomRequest|null
      */
-    public function createAtomRequest(stdClass $components)
+    private function createAtomRequest(stdClass $components)
     {
         if ('/Atom' !== $components->path) {
             return null;
@@ -84,5 +85,49 @@ class RequestFactory implements RequestFactoryInterface
         }
 
         return $request;
+    }
+
+    /**
+     * Attempt to create a ScheduleRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return ScheduleRequest|null
+     */
+    public function createScheduleRequest(stdClass $components)
+    {
+        $matches = [];
+
+        // full schedule ...
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/schedule/schedule_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            $sport = Sport::findByComponents($matches[1], $matches[2]);
+            $type  = ScheduleType::FULL();
+
+        // limited ...
+        } elseif (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/schedule/schedule_\2_(\d+)_days.xml$}',
+            $components->path,
+            $matches
+        )) {
+            $sport = Sport::findByComponents($matches[1], $matches[2]);
+            $type  = ScheduleType::memberByValue(intval($matches[3]));
+
+        // deleted ...
+        } elseif (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/games-deleted/games_deleted_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            $sport = Sport::findByComponents($matches[1], $matches[2]);
+            $type  = ScheduleType::DELETED();
+        } else {
+            return null;
+        }
+
+        return new ScheduleRequest($sport, $type);
     }
 }

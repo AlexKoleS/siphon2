@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon;
+namespace Icecave\Siphon\Util;
 
 use PHPUnit_Framework_TestCase;
 

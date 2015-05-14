@@ -2,6 +2,9 @@
 namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Schedule\ScheduleRequest;
+use Icecave\Siphon\Schedule\ScheduleType;
+use Icecave\Siphon\Sport;
 use PHPUnit_Framework_TestCase;
 
 class RequestFactoryTest extends PHPUnit_Framework_TestCase
@@ -72,6 +75,30 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                     null,
                     5000,
                     SORT_DESC
+                ),
+            ],
+
+            'schedule' => [
+                '/sport/v2/baseball/MLB/schedule/schedule_MLB.xml',
+                new ScheduleRequest(
+                    Sport::MLB(),
+                    ScheduleType::FULL()
+                ),
+            ],
+
+            'schedule with limit' => [
+                '/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml',
+                new ScheduleRequest(
+                    Sport::MLB(),
+                    ScheduleType::LIMIT_2_DAYS()
+                ),
+            ],
+
+            'schedule with deleted competitions' => [
+                '/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml',
+                new ScheduleRequest(
+                    Sport::MLB(),
+                    ScheduleType::DELETED()
                 ),
             ],
         ];

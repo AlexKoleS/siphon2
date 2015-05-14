@@ -1,9 +1,12 @@
 <?php
-namespace Icecave\Siphon;
+namespace Icecave\Siphon\Util;
 
 use RuntimeException;
 use SimpleXMLElement;
 
+/**
+ * Internal utilities for XPath operations.
+ */
 abstract class XPath
 {
     public static function element(SimpleXMLElement $element, $xpath)
