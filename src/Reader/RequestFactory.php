@@ -1,7 +1,8 @@
 <?php
-namespace Icecave\Siphon\Atom;
+namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Sport;

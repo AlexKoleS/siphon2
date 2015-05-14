@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Atom;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Reader\RequestFactoryInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;

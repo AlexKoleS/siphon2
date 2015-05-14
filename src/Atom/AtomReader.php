@@ -3,6 +3,8 @@ namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\ReaderInterface;
+use Icecave\Siphon\Reader\RequestFactory;
+use Icecave\Siphon\Reader\RequestFactoryInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;

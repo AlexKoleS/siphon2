@@ -1,5 +1,7 @@
 <?php
-namespace Icecave\Siphon\Atom;
+namespace Icecave\Siphon\Reader;
+
+use InvalidArgumentException;
 
 /**
  * Construct RequestInterface objects from the URLs returned by the Atom feed.
