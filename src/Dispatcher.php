@@ -3,9 +3,15 @@ namespace Icecave\Siphon;
 
 use GuzzleHttp\Client as HttpClient;
 use Icecave\Siphon\Atom\AtomReader;
-use Icecave\Siphon\Reader\CompositeReader;
+use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Reader\UrlBuilder;
+use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReader;
+use Icecave\Siphon\Reader\XmlReaderInterface;
+use Icecave\Siphon\Schedule\ScheduleReader;
+use Icecave\Siphon\Schedule\ScheduleRequest;
 
 /**
  * The dispatcher is a facade for easily servicing any Siphon request.
@@ -25,17 +31,28 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $httpClient = new HttpClient;
         $xmlReader  = new XmlReader($urlBuilder, $httpClient);
 
-        return new static($urlBuilder, $xmlReader);
+        return new static(
+            $urlBuilder,
+            $xmlReader,
+            new AtomReader($xmlReader),
+            new ScheduleReader($xmlReader)
+        );
     }
 
     /**
      * @param UrlBuilderInterface $urlBuilder The URL builder to use.
      * @param XmlReaderInterface  $xmlReader  The XML reader to use.
      */
-    public function __construct(UrlBuilderInterface $urlBuilder, XmlReaderInterface $xmlReader)
-    {
-        $this->urlBuilder = $urlBuilder;
-        $this->xmlReader  = $xmlReader;
+    public function __construct(
+        UrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader,
+        AtomReader $atomReader,
+        ScheduleReader $scheduleReader
+    ) {
+        $this->urlBuilder     = $urlBuilder;
+        $this->xmlReader      = $xmlReader;
+        $this->atomReader     = $atomReader;
+        $this->scheduleReader = $scheduleReader;
     }
 
     /**
@@ -92,10 +109,6 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitAtomRequest(AtomRequest $request)
     {
-        if ($this->atomReader) {
-            $this->atomReader = new AtomReader($this->xmlReader);
-        }
-
         return $this->atomReader->read($request);
     }
 
@@ -110,10 +123,6 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitScheduleRequest(ScheduleRequest $request)
     {
-        if ($this->scheduleReader) {
-            $this->scheduleReader = new ScheduleReader($this->xmlReader);
-        }
-
         return $this->scheduleReader->read($request);
     }
 
