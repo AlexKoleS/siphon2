@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Schedule;
 
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Sport;
 use IteratorAggregate;
 
@@ -18,6 +19,7 @@ class ScheduleResponse implements
     {
         $this->setSport($sport);
         $this->setType($type);
+        $this->seasons = [];
     }
 
     /**
@@ -102,7 +104,19 @@ class ScheduleResponse implements
         unset($this->seasons[$season->id()]);
     }
 
+    /**
+     * Dispatch a call to the given visitor.
+     *
+     * @param ResponseVisitorInterface $visitor
+     *
+     * @return mixed
+     */
+    public function accept(ResponseVisitorInterface $visitor)
+    {
+        return $visitor->visitScheduleResponse($this);
+    }
+
     private $sport;
     private $type;
-    private $seasons = [];
+    private $seasons;
 }

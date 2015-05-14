@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Schedule;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Sport;
 use PHPUnit_Framework_TestCase;
 
@@ -131,5 +132,13 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
             [],
             iterator_to_array($this->response)
         );
+    }
+    public function testAccept()
+    {
+        $visitor = Phony::mock(ResponseVisitorInterface::class);
+
+        $this->response->accept($visitor->mock());
+
+        $visitor->visitScheduleResponse->calledWith($this->response);
     }
 }

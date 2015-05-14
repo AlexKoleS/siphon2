@@ -67,7 +67,7 @@ class ScheduleRequest implements RequestInterface
     /**
      * Dispatch a call to the given visitor.
      *
-     * @param VisitorInterface $visitor
+     * @param RequestVisitorInterface $visitor
      *
      * @return mixed
      */

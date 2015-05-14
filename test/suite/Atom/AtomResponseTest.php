@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Atom;
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use PHPUnit_Framework_TestCase;
 
 class AtomResponseTest extends PHPUnit_Framework_TestCase
@@ -114,5 +115,14 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
             [],
             iterator_to_array($this->response)
         );
+    }
+
+    public function testAccept()
+    {
+        $visitor = Phony::mock(ResponseVisitorInterface::class);
+
+        $this->response->accept($visitor->mock());
+
+        $visitor->visitAtomResponse->calledWith($this->response);
     }
 }

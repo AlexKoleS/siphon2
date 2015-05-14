@@ -5,6 +5,7 @@ use Countable;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use IteratorAggregate;
 
 /**
@@ -84,6 +85,18 @@ class AtomResponse implements
     public function remove(RequestInterface $request)
     {
         unset($this->requests[spl_object_hash($request)]);
+    }
+
+    /**
+     * Dispatch a call to the given visitor.
+     *
+     * @param ResponseVisitorInterface $visitor
+     *
+     * @return mixed
+     */
+    public function accept(ResponseVisitorInterface $visitor)
+    {
+        return $visitor->visitAtomResponse($this);
     }
 
     private $requests;
