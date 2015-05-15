@@ -5,7 +5,6 @@ use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
-use Icecave\Siphon\Reader\ReaderInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;

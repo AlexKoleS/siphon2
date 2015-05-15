@@ -2,7 +2,6 @@
 namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Reader\ReaderInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
@@ -43,7 +42,7 @@ class AtomReader implements AtomReaderInterface
 
         foreach ($xml->entry as $entry) {
             $response->add(
-                strval($entry->link['href']),
+                $this->stripApiKey($entry->link['href']),
                 DateTime::fromIsoString($entry->updated)
             );
         }
@@ -86,6 +85,27 @@ class AtomReader implements AtomReaderInterface
         }
 
         return $parameters;
+    }
+
+    /**
+     * Strip the API KEY parameter from a URL.
+     *
+     * @param string
+     *
+     * @return string
+     */
+    private function stripApiKey($url)
+    {
+        $parts = parse_url($url);
+
+        if (isset($parts['query'])) {
+            $query = [];
+            parse_str($parts['query'], $query);
+            unset($query['apiKey']);
+            $parts['query'] = http_build_query($query);
+        }
+
+        return http_build_url($parts);
     }
 
     private $xmlReader;

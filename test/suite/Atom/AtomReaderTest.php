@@ -55,15 +55,15 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             [
                 [
-                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64109.xml?apiKey=APIKEY',
+                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64109.xml',
                     DateTime::fromIsoString('2015-02-15T21:11:11.4811-04:00'),
                 ],
                 [
-                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64110.xml?apiKey=APIKEY',
+                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64110.xml',
                     DateTime::fromIsoString('2015-02-15T21:11:11.5121-04:00'),
                 ],
                 [
-                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64108.xml?apiKey=APIKEY',
+                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64108.xml',
                     DateTime::fromIsoString('2015-02-15T21:11:14.4951-04:00'),
                 ],
             ],
