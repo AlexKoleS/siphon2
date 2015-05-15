@@ -8,7 +8,10 @@ use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use InvalidArgumentException;
 
-class AtomReader implements ReaderInterface
+/**
+ * Client for reading atom feeds.
+ */
+class AtomReader implements AtomReaderInterface
 {
     public function __construct(XmlReaderInterface $xmlReader)
     {

@@ -16,7 +16,7 @@ use SimpleXMLElement;
 /**
  * Client for reading schedule feeds.
  */
-class ScheduleReader implements ReaderInterface
+class ScheduleReader implements ScheduleReaderInterface
 {
     use PlayerFactoryTrait;
 
