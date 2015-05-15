@@ -3,8 +3,6 @@ namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\ReaderInterface;
-use Icecave\Siphon\Reader\RequestFactory;
-use Icecave\Siphon\Reader\RequestFactoryInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
@@ -12,12 +10,9 @@ use InvalidArgumentException;
 
 class AtomReader implements ReaderInterface
 {
-    public function __construct(
-        XmlReaderInterface $xmlReader,
-        RequestFactoryInterface $requestFactory = null
-    ) {
-        $this->xmlReader      = $xmlReader;
-        $this->requestFactory = $requestFactory ?: new RequestFactory;
+    public function __construct(XmlReaderInterface $xmlReader)
+    {
+        $this->xmlReader = $xmlReader;
     }
 
     /**
@@ -44,13 +39,10 @@ class AtomReader implements ReaderInterface
         );
 
         foreach ($xml->entry as $entry) {
-            $url = strval($entry->link['href']);
-
-            $request = $this
-                ->requestFactory
-                ->create($url);
-
-            $response->add($request);
+            $response->add(
+                strval($entry->link['href']),
+                DateTime::fromIsoString($entry->updated)
+            );
         }
 
         return $response;
@@ -93,6 +85,5 @@ class AtomReader implements ReaderInterface
         return $parameters;
     }
 
-    private $requestFactory;
     private $xmlReader;
 }

@@ -3,15 +3,12 @@ namespace Icecave\Siphon\Atom;
 
 use Countable;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use IteratorAggregate;
 
 /**
  * A response from the atom feed.
- *
- * The response contains a set of requests for other feeds that have changed.
  */
 class AtomResponse implements
     ResponseInterface,
@@ -20,7 +17,7 @@ class AtomResponse implements
 {
     public function __construct(DateTime $updatedTime)
     {
-        $this->requests = [];
+        $this->entries = [];
 
         $this->setUpdatedTime($updatedTime);
     }
@@ -46,45 +43,48 @@ class AtomResponse implements
     }
 
     /**
-     * Get the number of requests in the response.
+     * Get the number of entries in the response.
      *
      * @return integer
      */
     public function count()
     {
-        return count($this->requests);
+        return count($this->entries);
     }
 
     /**
-     * Iterate the requests.
+     * Iterate the entries.
      *
-     * @return mixed<RequestInterface>
+     * An entry is a 2-tuple of URL and modification time.
+     *
+     * @return mixed<tuple<string, DateTime>> A sequence of entries.
      */
     public function getIterator()
     {
-        foreach ($this->requests as $request) {
-            yield $request;
+        foreach ($this->entries as $entry) {
+            yield $entry;
         }
     }
 
     /**
-     * Add a request to the response.
+     * Add an entry to the response.
      *
-     * @param RequestInterface $request The request to add.
+     * @param string   $url         The feed URL.
+     * @param DateTime $updatedTime The last modification time of the feed.
      */
-    public function add(RequestInterface $request)
+    public function add($url, DateTime $updatedTime)
     {
-        $this->requests[spl_object_hash($request)] = $request;
+        $this->entries[$url] = [$url, $updatedTime];
     }
 
     /**
-     * Remove a request to the response.
+     * Remove an entry from the response.
      *
-     * @param RequestInterface $request The request to add.
+     * @param string $url The feed URL.
      */
-    public function remove(RequestInterface $request)
+    public function remove($url)
     {
-        unset($this->requests[spl_object_hash($request)]);
+        unset($this->entries[$url]);
     }
 
     /**
@@ -99,6 +99,6 @@ class AtomResponse implements
         return $visitor->visitAtomResponse($this);
     }
 
-    private $requests;
+    private $entries;
     private $updatedTime;
 }

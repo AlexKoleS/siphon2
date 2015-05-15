@@ -3,7 +3,6 @@ namespace Icecave\Siphon\Atom;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use PHPUnit_Framework_TestCase;
 
@@ -12,8 +11,6 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updatedTime = DateTime::fromUnixTime(0);
-        $this->request1    = Phony::mock(RequestInterface::class)->mock();
-        $this->request2    = Phony::mock(RequestInterface::class)->mock();
 
         $this->response = new AtomResponse($this->updatedTime);
     }
@@ -42,7 +39,7 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
             count($this->response)
         );
 
-        $this->response->add($this->request1);
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
 
         $this->assertSame(
             1,
@@ -57,13 +54,19 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
             iterator_to_array($this->response)
         );
 
-        $this->response->add($this->request1);
-        $this->response->add($this->request2);
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->response->add('<url 2>', DateTime::fromUnixTime(2));
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->request1,
-                $this->request2,
+                [
+                    '<url 1>',
+                    DateTime::fromUnixTime(1),
+                ],
+                [
+                    '<url 2>',
+                    DateTime::fromUnixTime(2),
+                ],
             ],
             iterator_to_array($this->response)
         );
@@ -71,11 +74,14 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $this->response->add($this->request1);
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->request1,
+                [
+                    '<url 1>',
+                    DateTime::fromUnixTime(1),
+                ],
             ],
             iterator_to_array($this->response)
         );
@@ -83,12 +89,15 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->request1);
-        $this->response->add($this->request1);
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->request1,
+                [
+                    '<url 1>',
+                    DateTime::fromUnixTime(1),
+                ],
             ],
             iterator_to_array($this->response)
         );
@@ -96,8 +105,8 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->response->add($this->request1);
-        $this->response->remove($this->request1);
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->response->remove('<url 1>');
 
         $this->assertSame(
             [],
@@ -107,9 +116,9 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveUnknownRequest()
     {
-        $this->response->add($this->request1);
-        $this->response->remove($this->request1);
-        $this->response->remove($this->request1);
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->response->remove('<url 1>');
+        $this->response->remove('<url 1>');
 
         $this->assertSame(
             [],

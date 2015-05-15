@@ -3,7 +3,6 @@ namespace Icecave\Siphon\Atom;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Reader\RequestFactoryInterface;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use PHPUnit_Framework_TestCase;
@@ -16,25 +15,12 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Atom/atom.xml');
 
-        $this->requestFactory = Phony::mock(RequestFactoryInterface::class);
-        $this->request1       = Phony::mock(RequestInterface::class);
-        $this->request2       = Phony::mock(RequestInterface::class);
-        $this->request3       = Phony::mock(RequestInterface::class);
-
-        $this
-            ->requestFactory
-            ->create
-            ->returns($this->request1->mock())
-            ->returns($this->request2->mock())
-            ->returns($this->request3->mock());
-
         $this->request = new AtomRequest(
             DateTime::fromUnixTime(86400)
         );
 
         $this->reader = new AtomReader(
-            $this->xmlReader()->mock(),
-            $this->requestFactory->mock()
+            $this->xmlReader()->mock()
         );
     }
 
@@ -66,11 +52,20 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             $response->updatedTime()
         );
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->request1->mock(),
-                $this->request2->mock(),
-                $this->request3->mock(),
+                [
+                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64109.xml?apiKey=APIKEY',
+                    DateTime::fromIsoString('2015-02-15T21:11:11.4811-04:00'),
+                ],
+                [
+                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64110.xml?apiKey=APIKEY',
+                    DateTime::fromIsoString('2015-02-15T21:11:11.5121-04:00'),
+                ],
+                [
+                    'http://xml.sportsdirectinc.com/sport/v2/hockey/NHL/livescores/livescores_64108.xml?apiKey=APIKEY',
+                    DateTime::fromIsoString('2015-02-15T21:11:14.4951-04:00'),
+                ],
             ],
             iterator_to_array($response)
         );
@@ -147,7 +142,9 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             'Unsupported request.'
         );
 
-        $this->reader->read($this->request1->mock());
+        $this->reader->read(
+            Phony::mock(RequestInterface::class)->mock()
+        );
     }
 
     public function testIsSupported()
@@ -157,7 +154,9 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertFalse(
-            $this->reader->isSupported($this->request1->mock())
+            $this->reader->isSupported(
+                Phony::mock(RequestInterface::class)->mock()
+            )
         );
     }
 }
