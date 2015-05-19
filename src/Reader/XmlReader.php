@@ -3,6 +3,8 @@ namespace Icecave\Siphon\Reader;
 
 use Exception;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
 
@@ -37,6 +39,11 @@ class XmlReader implements XmlReaderInterface
 
         try {
             $response = $this->httpClient->get($url);
+        } catch (ClientException $e) {
+            if (404 === $e->getCode()) {
+                throw new NotFoundException($e);
+            }
+            throw new ServiceUnavailableException($e);
         } catch (Exception $e) {
             throw new ServiceUnavailableException($e);
         }
