@@ -43,6 +43,16 @@ class AtomResponse implements
     }
 
     /**
+     * Check if the response contains entries.
+     *
+     * @param boolean True if the response is empty; otherwise, false.
+     */
+    public function isEmpty()
+    {
+        return empty($this->entries);
+    }
+
+    /**
      * Get the number of entries in the response.
      *
      * @return integer
@@ -85,6 +95,14 @@ class AtomResponse implements
     public function remove($url)
     {
         unset($this->entries[$url]);
+    }
+
+    /**
+     * Remove all entries from the response.
+     */
+    public function clear()
+    {
+        $this->entries = [];
     }
 
     /**

@@ -52,6 +52,19 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testIsEmpty()
+    {
+        $this->assertTrue(
+            $this->response->isEmpty()
+        );
+
+        $this->response->add($this->season1->mock());
+
+        $this->assertFalse(
+            $this->response->isEmpty()
+        );
+    }
+
     public function testCount()
     {
         $this->assertSame(
@@ -133,6 +146,19 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
             iterator_to_array($this->response)
         );
     }
+
+    public function testClear()
+    {
+        $this->response->add($this->season1->mock());
+        $this->response->add($this->season2->mock());
+
+        $this->response->clear();
+
+        $this->assertTrue(
+            $this->response->isEmpty()
+        );
+    }
+
     public function testAccept()
     {
         $visitor = Phony::mock(ResponseVisitorInterface::class);

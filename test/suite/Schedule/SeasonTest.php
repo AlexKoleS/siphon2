@@ -97,6 +97,31 @@ class SeasonTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testClear()
+    {
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
+
+        $this->season->clear();
+
+        $this->assertTrue(
+            $this->season->isEmpty()
+        );
+    }
+
+    public function testIsEmpty()
+    {
+        $this->assertTrue(
+            $this->season->isEmpty()
+        );
+
+        $this->season->add($this->comp1->mock());
+
+        $this->assertFalse(
+            $this->season->isEmpty()
+        );
+    }
+
     public function testCount()
     {
         $this->assertSame(

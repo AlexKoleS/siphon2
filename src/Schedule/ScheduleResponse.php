@@ -63,6 +63,16 @@ class ScheduleResponse implements
     }
 
     /**
+     * Check if the response contains seasons.
+     *
+     * @param boolean True if the response is empty; otherwise, false.
+     */
+    public function isEmpty()
+    {
+        return empty($this->seasons);
+    }
+
+    /**
      * Get the number of seasons in the response.
      *
      * @return integer
@@ -99,9 +109,17 @@ class ScheduleResponse implements
      *
      * @param Season $season The season to remove.
      */
-    public function remove(SeasonInterface  $season)
+    public function remove(SeasonInterface $season)
     {
         unset($this->seasons[$season->id()]);
+    }
+
+    /**
+     * Remove all seasons from the response.
+     */
+    public function clear()
+    {
+        $this->seasons = [];
     }
 
     /**

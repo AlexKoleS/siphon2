@@ -73,6 +73,16 @@ class Season implements
     }
 
     /**
+     * Check if the season contains competitions.
+     *
+     * @param boolean True if the season is empty; otherwise, false.
+     */
+    public function isEmpty()
+    {
+        return empty($this->competitions);
+    }
+
+    /**
      * Get the number of competitions in the collection.
      *
      * @return integer The number of competitions in the collection.
@@ -112,6 +122,14 @@ class Season implements
     public function remove(Competition $competition)
     {
         unset($this->competitions[$competition->id()]);
+    }
+
+    /**
+     * Remove all competitions from the season.
+     */
+    public function clear()
+    {
+        $this->competitions = [];
     }
 
     private $id;

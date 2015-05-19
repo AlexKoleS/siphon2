@@ -5,6 +5,7 @@ use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;
@@ -60,15 +61,22 @@ class ScheduleReader implements ScheduleReaderInterface
             );
         }
 
-        $xml = $this
-            ->xmlReader
-            ->read($resource)
-            ->xpath('.//season-content');
-
         $response = new ScheduleResponse(
             $request->sport(),
             $request->type()
         );
+
+        try {
+            $xml = $this
+                ->xmlReader
+                ->read($resource)
+                ->xpath('.//season-content');
+        } catch (NotFoundException $e) {
+            // If a well-formed request is not found it appears to means there
+            // are no upcoming seasons within the timeframe given by the request's
+            // schedule type.
+            return $response;
+        }
 
         foreach ($xml as $element) {
             $season = $this->createSeason($element->season);

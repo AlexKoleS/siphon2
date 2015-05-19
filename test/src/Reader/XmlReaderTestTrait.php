@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Reader;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 
 trait XmlReaderTestTrait
 {
@@ -15,6 +16,14 @@ trait XmlReaderTestTrait
                     file_get_contents(__DIR__ . '/../../fixture/' . $path)
                 )
             );
+    }
+
+    public function setUpXmlReaderNotFound()
+    {
+        $this
+            ->xmlReader()
+            ->read
+            ->throws(new NotFoundException);
     }
 
     public function xmlReader()

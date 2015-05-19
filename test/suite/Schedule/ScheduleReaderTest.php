@@ -189,6 +189,27 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testReadNotFound()
+    {
+        $this->setUpXmlReaderNotFound();
+
+        $response = $this
+            ->reader
+            ->read($this->request);
+
+        $this
+            ->xmlReader
+            ->read
+            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+
+        $this->response->clear();
+
+        $this->assertEquals(
+            $this->response,
+            $response
+        );
+    }
+
     public function testIsSupported()
     {
         $this->assertTrue(

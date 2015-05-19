@@ -32,6 +32,19 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testIsEmpty()
+    {
+        $this->assertTrue(
+            $this->response->isEmpty()
+        );
+
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+
+        $this->assertFalse(
+            $this->response->isEmpty()
+        );
+    }
+
     public function testCount()
     {
         $this->assertSame(
@@ -123,6 +136,18 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             [],
             iterator_to_array($this->response)
+        );
+    }
+
+    public function testClear()
+    {
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+
+        $this->response->clear();
+
+        $this->assertTrue(
+            $this->response->isEmpty()
         );
     }
 
