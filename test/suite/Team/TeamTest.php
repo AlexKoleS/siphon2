@@ -10,8 +10,8 @@ class TeamTest extends PHPUnit_Framework_TestCase
         $this->team = new Team(
             '<id>',
             '<name>',
-            '<nickname>',
-            '<abbreviation>'
+            '<abbreviation>',
+            '<nickname>'
         );
     }
 
@@ -60,8 +60,8 @@ class TeamTest extends PHPUnit_Framework_TestCase
         $this->team = new Team(
             '<id>',
             '<name>',
-            null,
-            '<abbreviation>'
+            '<abbreviation>',
+            null
         );
 
         $this->assertSame(
