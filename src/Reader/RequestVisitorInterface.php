@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Team\TeamRequest;
 
@@ -36,4 +37,13 @@ interface RequestVisitorInterface
      * @return mixed
      */
     public function visitTeamRequest(TeamRequest $request);
+
+    /**
+     * Visit the given request.
+     *
+     * @param PlayerRequest $request
+     *
+     * @return mixed
+     */
+    public function visitPlayerRequest(PlayerRequest $request);
 }

@@ -1,17 +1,18 @@
 <?php
-namespace Icecave\Siphon\Team;
+namespace Icecave\Siphon\Player;
 
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
-use Icecave\Siphon\Util\XPath;
+use Icecave\Siphon\Team\TeamFactoryTrait;
 use InvalidArgumentException;
 
 /**
- * Client for reading team feeds.
+ * Client for reading player feeds.
  */
-class TeamReader implements TeamReaderInterface
+class PlayerReader implements PlayerReaderInterface
 {
+    use PlayerFactoryTrait;
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
@@ -38,25 +39,25 @@ class TeamReader implements TeamReaderInterface
             ->xmlReader
             ->read(
                 sprintf(
-                    '/sport/v2/%s/%s/teams/%s/teams_%s.xml',
+                    '/sport/v2/%s/%s/players/%s/players_%d_%s.xml',
                     $request->sport()->sport(),
                     $request->sport()->league(),
                     $request->seasonName(),
+                    $request->teamId(),
                     $request->sport()->league()
                 )
             )
             ->xpath('.//season-content')[0];
 
-        $season = $this->createSeason($xml->season);
-
-        $response = new TeamResponse(
+        $response = new PlayerResponse(
             $request->sport(),
-            $season
+            $this->createSeason($xml->season),
+            $this->createTeam($xml->{'team-content'}->team)
         );
 
-        foreach ($xml->xpath('.//team') as $team) {
+        foreach ($xml->xpath('.//player') as $player) {
             $response->add(
-                $this->createTeam($team)
+                $this->createPlayer($player)
             );
         }
 
@@ -70,7 +71,7 @@ class TeamReader implements TeamReaderInterface
      */
     public function isSupported(RequestInterface $request)
     {
-        return $request instanceof TeamRequest;
+        return $request instanceof PlayerRequest;
     }
 
     private $xmlReader;

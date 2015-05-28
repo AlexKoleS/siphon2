@@ -5,6 +5,9 @@ use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Atom\AtomResponse;
+use Icecave\Siphon\Player\PlayerReaderInterface;
+use Icecave\Siphon\Player\PlayerRequest;
+use Icecave\Siphon\Player\PlayerResponse;
 use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleReaderInterface;
@@ -21,16 +24,18 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     {
         $this->urlBuilder     = Phony::mock(UrlBuilderInterface::class);
         $this->xmlReader      = Phony::mock(XmlReaderInterface::class);
-        $this->atomReader     = Phony::fullMock(AtomReaderInterface::class);
-        $this->scheduleReader = Phony::fullMock(ScheduleReaderInterface::class);
-        $this->teamReader     = Phony::fullMock(TeamReaderInterface::class);
+        $this->atomReader     = Phony::mock(AtomReaderInterface::class);
+        $this->scheduleReader = Phony::mock(ScheduleReaderInterface::class);
+        $this->teamReader     = Phony::mock(TeamReaderInterface::class);
+        $this->playerReader   = Phony::mock(PlayerReaderInterface::class);
 
         $this->dispatcher = new Dispatcher(
             $this->urlBuilder->mock(),
             $this->xmlReader->mock(),
             $this->atomReader->mock(),
             $this->scheduleReader->mock(),
-            $this->teamReader->mock()
+            $this->teamReader->mock(),
+            $this->playerReader->mock()
         );
     }
 
@@ -89,6 +94,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             TeamRequest::class,
             TeamResponse::class,
             $this->teamReader
+        );
+    }
+
+    public function testPlayerRequest()
+    {
+        $this->dispatchTest(
+            PlayerRequest::class,
+            PlayerResponse::class,
+            $this->playerReader
         );
     }
 
