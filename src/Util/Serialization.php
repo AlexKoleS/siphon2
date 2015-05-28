@@ -14,6 +14,10 @@ abstract class Serialization
      */
     public static function serialize($version)
     {
+        if (!is_int($version) || $version < 1) {
+            throw new InvalidArgumentException('Version must be a positive integer.');
+        }
+
         return json_encode(func_get_args());
     }
 
@@ -27,13 +31,26 @@ abstract class Serialization
 
         if (!is_array($data) || empty($data)) {
             throw new InvalidArgumentException(
-                'Serialization data must be a JSON array containing at least one element.'
+                'Serialized buffers must be a JSON array with at least one element.'
             );
         }
 
-        $version = array_shift($data);
-        $handler = func_get_arg($version); // parameter 0 is the buffer
+        $version   = array_shift($data);
+        $supported = func_num_args() - 1;
 
-        return call_user_func_array($handler, $data);
+        if ($version > $supported) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Could not unserialization data format version %d, maximum supported version is %d.',
+                    $version,
+                    $supported
+                )
+            );
+        }
+
+        return call_user_func_array(
+            func_get_arg($version), // parameter 0 is the buffer
+            $data
+        );
     }
 }
