@@ -2,14 +2,17 @@
 namespace Icecave\Siphon;
 
 use Eloquent\Phony\Phpunit\Phony;
-use Icecave\Siphon\Atom\AtomReader;
+use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Atom\AtomResponse;
 use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
-use Icecave\Siphon\Schedule\ScheduleReader;
+use Icecave\Siphon\Schedule\ScheduleReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleResponse;
+use Icecave\Siphon\Team\TeamReaderInterface;
+use Icecave\Siphon\Team\TeamRequest;
+use Icecave\Siphon\Team\TeamResponse;
 use PHPUnit_Framework_TestCase;
 
 class DispatcherTest extends PHPUnit_Framework_TestCase
@@ -18,14 +21,16 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     {
         $this->urlBuilder     = Phony::mock(UrlBuilderInterface::class);
         $this->xmlReader      = Phony::mock(XmlReaderInterface::class);
-        $this->atomReader     = Phony::fullMock(AtomReader::class);
-        $this->scheduleReader = Phony::fullMock(ScheduleReader::class);
+        $this->atomReader     = Phony::fullMock(AtomReaderInterface::class);
+        $this->scheduleReader = Phony::fullMock(ScheduleReaderInterface::class);
+        $this->teamReader     = Phony::fullMock(TeamReaderInterface::class);
 
         $this->dispatcher = new Dispatcher(
             $this->urlBuilder->mock(),
             $this->xmlReader->mock(),
             $this->atomReader->mock(),
-            $this->scheduleReader->mock()
+            $this->scheduleReader->mock(),
+            $this->teamReader->mock()
         );
     }
 
@@ -75,6 +80,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             ScheduleRequest::class,
             ScheduleResponse::class,
             $this->scheduleReader
+        );
+    }
+
+    public function testTeamRequest()
+    {
+        $this->dispatchTest(
+            TeamRequest::class,
+            TeamResponse::class,
+            $this->teamReader
         );
     }
 

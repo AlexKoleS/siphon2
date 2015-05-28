@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Siphon\Atom\AtomResponse;
 use Icecave\Siphon\Schedule\ScheduleResponse;
+use Icecave\Siphon\Team\TeamResponse;
 
 /**
  * Response visitor.
@@ -26,4 +27,13 @@ interface ResponseVisitorInterface
      * @return mixed
      */
     public function visitScheduleResponse(ScheduleResponse $response);
+
+    /**
+     * Visit the given response.
+     *
+     * @param TeamResponse $response
+     *
+     * @return mixed
+     */
+    public function visitTeamResponse(TeamResponse $response);
 }

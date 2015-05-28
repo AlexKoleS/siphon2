@@ -3,6 +3,7 @@ namespace Icecave\Siphon;
 
 use GuzzleHttp\Client as HttpClient;
 use Icecave\Siphon\Atom\AtomReader;
+use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
@@ -11,7 +12,11 @@ use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReader;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleReader;
+use Icecave\Siphon\Schedule\ScheduleReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleRequest;
+use Icecave\Siphon\Team\TeamReader;
+use Icecave\Siphon\Team\TeamReaderInterface;
+use Icecave\Siphon\Team\TeamRequest;
 
 /**
  * The dispatcher is a facade for easily servicing any Siphon request.
@@ -35,24 +40,23 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             $urlBuilder,
             $xmlReader,
             new AtomReader($xmlReader),
-            new ScheduleReader($xmlReader)
+            new ScheduleReader($xmlReader),
+            new TeamReader($xmlReader)
         );
     }
 
-    /**
-     * @param UrlBuilderInterface $urlBuilder The URL builder to use.
-     * @param XmlReaderInterface  $xmlReader  The XML reader to use.
-     */
     public function __construct(
         UrlBuilderInterface $urlBuilder,
         XmlReaderInterface $xmlReader,
-        AtomReader $atomReader,
-        ScheduleReader $scheduleReader
+        AtomReaderInterface $atomReader,
+        ScheduleReaderInterface $scheduleReader,
+        TeamReaderInterface $teamReader
     ) {
         $this->urlBuilder     = $urlBuilder;
         $this->xmlReader      = $xmlReader;
         $this->atomReader     = $atomReader;
         $this->scheduleReader = $scheduleReader;
+        $this->teamReader     = $teamReader;
     }
 
     /**
@@ -126,8 +130,23 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         return $this->scheduleReader->read($request);
     }
 
+    /**
+     * Visit the given request.
+     *
+     * @access private
+     *
+     * @param TeamRequest $request
+     *
+     * @return mixed
+     */
+    public function visitTeamRequest(TeamRequest $request)
+    {
+        return $this->teamReader->read($request);
+    }
+
     private $urlBuilder;
     private $xmlReader;
     private $atomReader;
     private $scheduleReader;
+    private $teamReader;
 }

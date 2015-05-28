@@ -19,6 +19,7 @@ use SimpleXMLElement;
 class ScheduleReader implements ScheduleReaderInterface
 {
     use PlayerFactoryTrait;
+    use SeasonFactoryTrait;
 
     public function __construct(XmlReaderInterface $xmlReader)
     {
@@ -105,20 +106,6 @@ class ScheduleReader implements ScheduleReaderInterface
     public function isSupported(RequestInterface $request)
     {
         return $request instanceof ScheduleRequest;
-    }
-
-    private function createSeason(SimpleXMLElement $element)
-    {
-        return new Season(
-            strval($element->id),
-            strval($element->name),
-            Date::fromIsoString(
-                $element->details->{'start-date'}
-            ),
-            Date::fromIsoString(
-                $element->details->{'end-date'}
-            )
-        );
     }
 
     private function createCompetition(

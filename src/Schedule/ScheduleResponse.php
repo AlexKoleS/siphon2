@@ -85,7 +85,7 @@ class ScheduleResponse implements
     /**
      * Iterate the seasons.
      *
-     * @return mixed<Season>
+     * @return mixed<SeasonInterface>
      */
     public function getIterator()
     {
@@ -97,7 +97,7 @@ class ScheduleResponse implements
     /**
      * Add a season to the response.
      *
-     * @param Season $season The season to add.
+     * @param SeasonInterface $season The season to add.
      */
     public function add(SeasonInterface $season)
     {
@@ -107,7 +107,7 @@ class ScheduleResponse implements
     /**
      * Remove a season from the response.
      *
-     * @param Season $season The season to remove.
+     * @param SeasonInterface $season The season to remove.
      */
     public function remove(SeasonInterface $season)
     {
