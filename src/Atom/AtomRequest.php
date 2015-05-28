@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Atom;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
+use Icecave\Siphon\Util\Serialization;
 use InvalidArgumentException;
 
 /**
@@ -137,7 +138,41 @@ class AtomRequest implements RequestInterface
         return $visitor->visitAtomRequest($this);
     }
 
-    private $theshold;
+    /**
+     * Serialize the request to a buffer.
+     *
+     * @return string
+     */
+    public function serialize()
+    {
+        return Serialization::serialize(
+            1, // version 1
+            $this->updatedTime->unixTime(),
+            $this->feed,
+            $this->limit,
+            $this->order
+        );
+    }
+
+    /**
+     * Unserialize a serialized request from a buffer.
+     *
+     * @param string $buffer
+     */
+    public function unserialize($buffer)
+    {
+        Serialization::unserialize(
+            $buffer,
+            function ($updatedTime, $feed, $limit, $order) {
+                $this->updatedTime = DateTime::fromUnixTime($updatedTime);
+                $this->feed        = $feed;
+                $this->limit       = $limit;
+                $this->order       = $order;
+            }
+        );
+    }
+
+    private $updatedTime;
     private $feed;
     private $limit;
     private $order;

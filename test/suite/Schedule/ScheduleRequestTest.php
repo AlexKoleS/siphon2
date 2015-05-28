@@ -53,4 +53,26 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
 
         $visitor->visitScheduleRequest->calledWith($this->request);
     }
+
+    public function testSerialize()
+    {
+        $buffer  = serialize($this->request);
+        $request = unserialize($buffer);
+
+        $this->assertEquals(
+            $this->request,
+            $request
+        );
+
+        // Enum instances must be identical ...
+        $this->assertSame(
+            Sport::NFL(),
+            $request->sport()
+        );
+
+        $this->assertSame(
+            ScheduleType::FULL(),
+            $request->type()
+        );
+    }
 }

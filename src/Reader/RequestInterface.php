@@ -1,10 +1,12 @@
 <?php
 namespace Icecave\Siphon\Reader;
 
+use Serializable;
+
 /**
  * Interface for requests.
  */
-interface RequestInterface
+interface RequestInterface extends Serializable
 {
     /**
      * Dispatch a call to the given visitor.

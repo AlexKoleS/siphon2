@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Schedule;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Util\Serialization;
 
 /**
  * A request to the schedule feed.
@@ -74,6 +75,36 @@ class ScheduleRequest implements RequestInterface
     public function accept(RequestVisitorInterface $visitor)
     {
         return $visitor->visitScheduleRequest($this);
+    }
+
+    /**
+     * Serialize the request to a buffer.
+     *
+     * @return string
+     */
+    public function serialize()
+    {
+        return Serialization::serialize(
+            1, // version 1
+            $this->sport->key(),
+            $this->type->key()
+        );
+    }
+
+    /**
+     * Unserialize a serialized request from a buffer.
+     *
+     * @param string $buffer
+     */
+    public function unserialize($buffer)
+    {
+        Serialization::unserialize(
+            $buffer,
+            function ($sport, $type) {
+                $this->sport = Sport::memberByKey($sport);
+                $this->type  = ScheduleType::memberByKey($type);
+            }
+        );
     }
 
     private $sport;

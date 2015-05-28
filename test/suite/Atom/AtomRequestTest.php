@@ -10,7 +10,7 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->updatedTime = DateTime::fromUnixTime(0);
+        $this->updatedTime = DateTime::fromUnixTime(123);
 
         $this->request = new AtomRequest($this->updatedTime);
     }
@@ -109,5 +109,16 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
         $this->request->accept($visitor->mock());
 
         $visitor->visitAtomRequest->calledWith($this->request);
+    }
+
+    public function testSerialize()
+    {
+        $buffer  = serialize($this->request);
+        $request = unserialize($buffer);
+
+        $this->assertEquals(
+            $this->request,
+            $request
+        );
     }
 }
