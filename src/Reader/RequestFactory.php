@@ -3,9 +3,11 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamRequest;
 use InvalidArgumentException;
 use stdClass;
 
@@ -42,6 +44,10 @@ class RequestFactory implements RequestFactoryInterface
         if ($request = $this->createAtomRequest($components)) {
             return $request;
         } elseif ($request = $this->createScheduleRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createTeamRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createPlayerRequest($components)) {
             return $request;
         }
 
@@ -95,7 +101,7 @@ class RequestFactory implements RequestFactoryInterface
      *
      * @return ScheduleRequest|null
      */
-    public function createScheduleRequest(stdClass $components)
+    private function createScheduleRequest(stdClass $components)
     {
         $matches = [];
 
@@ -130,5 +136,56 @@ class RequestFactory implements RequestFactoryInterface
         }
 
         return new ScheduleRequest($sport, $type);
+    }
+
+    /**
+     * Attempt to create a TeamRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return TeamRequest|null
+     */
+    private function createTeamRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/teams/([^/]+)/teams_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new TeamRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3]
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a PlayerRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return PlayerRequest|null
+     */
+    private function createPlayerRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/players/([^/]+)/players_(\d+)_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new PlayerRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                $matches[4]
+            );
+        }
+
+        return null;
     }
 }

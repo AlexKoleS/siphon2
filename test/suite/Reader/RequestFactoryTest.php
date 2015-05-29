@@ -3,9 +3,11 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamRequest;
 use PHPUnit_Framework_TestCase;
 
 class RequestFactoryTest extends PHPUnit_Framework_TestCase
@@ -100,6 +102,23 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                 new ScheduleRequest(
                     Sport::MLB(),
                     ScheduleType::DELETED()
+                ),
+            ],
+
+            'team' => [
+                '/sport/v2/baseball/MLB/teams/2015/teams_MLB.xml',
+                new TeamRequest(
+                    Sport::MLB(),
+                    '2015'
+                ),
+            ],
+
+            'player' => [
+                '/sport/v2/baseball/MLB/players/2015/players_12345_MLB.xml',
+                new PlayerRequest(
+                    Sport::MLB(),
+                    '2015',
+                    12345
                 ),
             ],
         ];
