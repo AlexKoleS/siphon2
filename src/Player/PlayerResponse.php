@@ -25,7 +25,9 @@ class PlayerResponse implements
         $this->setSport($sport);
         $this->setSeason($season);
         $this->setTeam($team);
+
         $this->players = [];
+        $this->seasonDetails = [];
     }
 
     /**
@@ -124,10 +126,15 @@ class PlayerResponse implements
      * Add a player to the response.
      *
      * @param Player $player The player to add.
+     * @param PlayerSeasonDetails|null $seasonDetails The player's season details.
      */
-    public function add(Player $player)
+    public function add(Player $player, PlayerSeasonDetails $seasonDetails = null)
     {
         $this->players[$player->id()] = $player;
+
+        if ($seasonDetails) {
+            $this->seasonDetails[$player->id()] = $seasonDetails;
+        }
     }
 
     /**
@@ -138,6 +145,7 @@ class PlayerResponse implements
     public function remove(Player $player)
     {
         unset($this->players[$player->id()]);
+        unset($this->seasonDetails[$player->id()]);
     }
 
     /**
@@ -146,6 +154,23 @@ class PlayerResponse implements
     public function clear()
     {
         $this->players = [];
+        $this->seasonDetails = [];
+    }
+
+    /**
+     * Get the season details for the given player, if present.
+     *
+     * @param Player $player The player.
+     *
+     * @return PlayerSeasonDetails|null
+     */
+    public function findSeasonDetails(Player $player)
+    {
+        if (isset($this->seasonDetails[$player->id()])) {
+            return $this->seasonDetails[$player->id()];
+        }
+
+        return null;
     }
 
     /**
@@ -164,4 +189,5 @@ class PlayerResponse implements
     private $type;
     private $team;
     private $players;
+    private $seasonDetails;
 }

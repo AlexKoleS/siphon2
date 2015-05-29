@@ -21,6 +21,8 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
         $this->player1->id->returns('<team 1>');
         $this->player2->id->returns('<team 2>');
 
+        $this->seasonDetails = Phony::fullMock(PlayerSeasonDetails::class)->mock();
+
         $this->response = new PlayerResponse(
             Sport::NFL(),
             $this->season,
@@ -132,6 +134,27 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
             ],
             iterator_to_array($this->response)
         );
+
+        $this->assertNull(
+            $this->response->findSeasonDetails(
+                $this->player1->mock()
+            )
+        );
+    }
+
+    public function testAddWithSeasonDetails()
+    {
+        $this->response->add(
+            $this->player1->mock(),
+            $this->seasonDetails
+        );
+
+        $this->assertSame(
+            $this->seasonDetails,
+            $this->response->findSeasonDetails(
+                $this->player1->mock()
+            )
+        );
     }
 
     public function testAddDoesNotDuplicate()
@@ -149,12 +172,18 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails);
         $this->response->remove($this->player1->mock());
 
         $this->assertSame(
             [],
             iterator_to_array($this->response)
+        );
+
+        $this->assertNull(
+            $this->response->findSeasonDetails(
+                $this->player1->mock()
+            )
         );
     }
 
@@ -172,13 +201,19 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
 
     public function testClear()
     {
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails);
         $this->response->add($this->player2->mock());
 
         $this->response->clear();
 
         $this->assertTrue(
             $this->response->isEmpty()
+        );
+
+        $this->assertNull(
+            $this->response->findSeasonDetails(
+                $this->player1->mock()
+            )
         );
     }
 
