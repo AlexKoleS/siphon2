@@ -5,6 +5,7 @@ use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Team\TeamFactoryTrait;
+use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
 
 /**
@@ -57,7 +58,13 @@ class PlayerReader implements PlayerReaderInterface
 
         foreach ($xml->xpath('.//player') as $player) {
             $response->add(
-                $this->createPlayer($player)
+                $this->createPlayer($player),
+                new PlayerSeasonDetails(
+                    XPath::stringOrNull($player, "season-details/number"),
+                    XPath::string($player, "season-details/position[@type='primary']/name[@type='short']"),
+                    XPath::string($player, "season-details/position[@type='primary']/name[count(@type)=0]"),
+                    XPath::string($player, "season-details/active") === 'true'
+                )
             );
         }
 

@@ -26,7 +26,7 @@ class PlayerResponse implements
         $this->setSeason($season);
         $this->setTeam($team);
 
-        $this->players = [];
+        $this->players       = [];
         $this->seasonDetails = [];
     }
 
@@ -125,7 +125,7 @@ class PlayerResponse implements
     /**
      * Add a player to the response.
      *
-     * @param Player $player The player to add.
+     * @param Player                   $player        The player to add.
      * @param PlayerSeasonDetails|null $seasonDetails The player's season details.
      */
     public function add(Player $player, PlayerSeasonDetails $seasonDetails = null)
@@ -153,7 +153,7 @@ class PlayerResponse implements
      */
     public function clear()
     {
-        $this->players = [];
+        $this->players       = [];
         $this->seasonDetails = [];
     }
 

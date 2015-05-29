@@ -36,115 +36,62 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->response->add(new Player('/sport/baseball/player:43566', 'Alfredo', 'Aceves'));
-        $this->response->add(new Player('/sport/baseball/player:43263', 'Jonathan', 'Albaladejo'));
-        $this->response->add(new Player('/sport/baseball/player:41689', 'Angel', 'Berroa'));
-        $this->response->add(new Player('/sport/baseball/player:43452', 'Andrew', 'Brackman'));
-        $this->response->add(new Player('/sport/baseball/player:41998', 'Brian', 'Bruney'));
-        $this->response->add(new Player('/sport/baseball/player:40900', 'A.J.', 'Burnett'));
-        $this->response->add(new Player('/sport/baseball/player:42503', 'Melky', 'Cabrera'));
-        $this->response->add(new Player('/sport/baseball/player:42272', 'Robinson', 'Cano'));
-        $this->response->add(new Player('/sport/baseball/player:41567', 'Kevin', 'Cash'));
-        $this->response->add(new Player('/sport/baseball/player:43456', 'Francisco', 'Cervelli'));
-        $this->response->add(new Player('/sport/baseball/player:43216', 'Joba', 'Chamberlain'));
-        $this->response->add(new Player('/sport/baseball/player:43726', 'Anthony', 'Claggett'));
-        $this->response->add(new Player('/sport/baseball/player:43569', 'Phil', 'Coke'));
-        $this->response->add(new Player('/sport/baseball/player:41557', 'Johnny', 'Damon'));
-        $this->response->add(new Player('/sport/baseball/player:43727', 'Wilkin', 'De La Rosa'));
-        $this->response->add(new Player('/sport/baseball/player:43198', 'Shelley', 'Duncan'));
-        $this->response->add(new Player('/sport/baseball/player:43625', 'Michael', 'Dunn'));
-        $this->response->add(new Player('/sport/baseball/player:43764', 'Christian', 'Garcia'));
-        $this->response->add(new Player('/sport/baseball/player:43513', 'Brett', 'Gardner'));
-        $this->response->add(new Player('/sport/baseball/player:41467', 'Chad', 'Gaudin'));
-        $this->response->add(new Player('/sport/baseball/player:42170', 'Freddy', 'Guzman'));
-        $this->response->add(new Player('/sport/baseball/player:43626', 'Eric', 'Hacker'));
-        $this->response->add(new Player('/sport/baseball/player:41536', 'Jerry', 'Hairston Jr.'));
-        $this->response->add(new Player('/sport/baseball/player:41572', 'Eric', 'Hinske'));
-        $this->response->add(new Player('/sport/baseball/player:42710', 'Jason', 'Hirsh'));
-        $this->response->add(new Player('/sport/baseball/player:42760', 'Philip', 'Hughes'));
-        $this->response->add(new Player('/sport/baseball/player:43112', 'Steven', 'Jackson'));
-        $this->response->add(new Player('/sport/baseball/player:41511', 'Derek', 'Jeter'));
-        $this->response->add(new Player('/sport/baseball/player:43241', 'Ian', 'Kennedy'));
-        $this->response->add(new Player('/sport/baseball/player:40839', 'Damaso', 'Marte'));
-        $this->response->add(new Player('/sport/baseball/player:41517', 'Hideki', 'Matsui'));
-        $this->response->add(new Player('/sport/baseball/player:43786', 'Mark', 'Melancon'));
-        $this->response->add(new Player('/sport/baseball/player:43454', 'Juan', 'Miranda'));
-        $this->response->add(new Player('/sport/baseball/player:41463', 'Sergio', 'Mitre'));
-        $this->response->add(new Player('/sport/baseball/player:41581', 'Jose', 'Molina'));
-        $this->response->add(new Player('/sport/baseball/player:42057', 'Xavier', 'Nady'));
-        $this->response->add(new Player('/sport/baseball/player:43771', 'Ramiro', 'Pena'));
-        $this->response->add(new Player('/sport/baseball/player:40721', 'Andy', 'Pettitte'));
-        $this->response->add(new Player('/sport/baseball/player:41507', 'Jorge', 'Posada'));
-        $this->response->add(new Player('/sport/baseball/player:43188', 'Edwar', 'Ramirez'));
-        $this->response->add(new Player('/sport/baseball/player:41799', 'Cody', 'Ransom'));
-        $this->response->add(new Player('/sport/baseball/player:40518', 'Mariano', 'Rivera'));
-        $this->response->add(new Player('/sport/baseball/player:43512', 'David', 'Robertson'));
-        $this->response->add(new Player('/sport/baseball/player:41513', 'Alex', 'Rodriguez'));
-        $this->response->add(new Player('/sport/baseball/player:41140', 'CC', 'Sabathia'));
-        $this->response->add(new Player('/sport/baseball/player:42683', 'Humberto', 'Sanchez'));
-        $this->response->add(new Player('/sport/baseball/player:42205', 'Nick', 'Swisher'));
-        $this->response->add(new Player('/sport/baseball/player:41634', 'Mark', 'Teixeira'));
-        $this->response->add(new Player('/sport/baseball/player:40397', 'Brett', 'Tomko'));
-        $this->response->add(new Player('/sport/baseball/player:41163', 'Josh', 'Towers'));
-        $this->response->add(new Player('/sport/baseball/player:42886', 'Jose', 'Veras'));
+        $this->response->add(new Player('/sport/baseball/player:43566', 'Alfredo',  'Aceves'),       new PlayerSeasonDetails('91', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:43263', 'Jonathan', 'Albaladejo'),   new PlayerSeasonDetails('63', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:41689', 'Angel',    'Berroa'),       new PlayerSeasonDetails('14', '3B', 'Third Base',        false));
+        $this->response->add(new Player('/sport/baseball/player:43452', 'Andrew',   'Brackman'),     new PlayerSeasonDetails('64', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:41998', 'Brian',    'Bruney'),       new PlayerSeasonDetails('38', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:40900', 'A.J.',     'Burnett'),      new PlayerSeasonDetails('34', 'SP', 'Starter',           true));
+        $this->response->add(new Player('/sport/baseball/player:42503', 'Melky',    'Cabrera'),      new PlayerSeasonDetails('53', 'RF', 'Right Outfield',    true));
+        $this->response->add(new Player('/sport/baseball/player:42272', 'Robinson', 'Cano'),         new PlayerSeasonDetails('24', '2B', 'Second Base',       true));
+        $this->response->add(new Player('/sport/baseball/player:41567', 'Kevin',    'Cash'),         new PlayerSeasonDetails('17', 'C',  'Catcher',           false));
+        $this->response->add(new Player('/sport/baseball/player:43456', 'Francisco', 'Cervelli'),     new PlayerSeasonDetails('75', 'C',  'Catcher',           true));
+        $this->response->add(new Player('/sport/baseball/player:43216', 'Joba',     'Chamberlain'),  new PlayerSeasonDetails('62', 'SP', 'Starter',           true));
+        $this->response->add(new Player('/sport/baseball/player:43726', 'Anthony',  'Claggett'),     new PlayerSeasonDetails('67', 'RP', 'Reliever',          false));
+        $this->response->add(new Player('/sport/baseball/player:43569', 'Phil',     'Coke'),         new PlayerSeasonDetails('48', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:41557', 'Johnny',   'Damon'),        new PlayerSeasonDetails('18', 'LF', 'Left Outfield',     true));
+        $this->response->add(new Player('/sport/baseball/player:43727', 'Wilkin',   'De La Rosa'),   new PlayerSeasonDetails('68', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:43198', 'Shelley',  'Duncan'),       new PlayerSeasonDetails('28', 'RF', 'Right Outfield',    true));
+        $this->response->add(new Player('/sport/baseball/player:43625', 'Michael',  'Dunn'),         new PlayerSeasonDetails('85', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:43764', 'Christian', 'Garcia'),       new PlayerSeasonDetails('70', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:43513', 'Brett',    'Gardner'),      new PlayerSeasonDetails('11', 'CF', 'Center Outfield',   true));
+        $this->response->add(new Player('/sport/baseball/player:41467', 'Chad',     'Gaudin'),       new PlayerSeasonDetails('49', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:42170', 'Freddy',   'Guzman'),       new PlayerSeasonDetails(null, 'LF', 'Left Outfield',     true));
+        $this->response->add(new Player('/sport/baseball/player:43626', 'Eric',     'Hacker'),       new PlayerSeasonDetails('71', 'RP', 'Reliever',          false));
+        $this->response->add(new Player('/sport/baseball/player:41536', 'Jerry',    'Hairston Jr.'), new PlayerSeasonDetails(null, '2B', 'Second Base',       true));
+        $this->response->add(new Player('/sport/baseball/player:41572', 'Eric',     'Hinske'),       new PlayerSeasonDetails(null, 'RF', 'Right Outfield',    true));
+        $this->response->add(new Player('/sport/baseball/player:42710', 'Jason',    'Hirsh'),        new PlayerSeasonDetails('48', 'RP', 'Reliever',          false));
+        $this->response->add(new Player('/sport/baseball/player:42760', 'Philip',   'Hughes'),       new PlayerSeasonDetails('65', 'SP', 'Starter',           true));
+        $this->response->add(new Player('/sport/baseball/player:43112', 'Steven',   'Jackson'),      new PlayerSeasonDetails('80', 'SP', 'Starter',           false));
+        $this->response->add(new Player('/sport/baseball/player:41511', 'Derek',    'Jeter'),        new PlayerSeasonDetails('2',  'SS', 'Shortstop',         true));
+        $this->response->add(new Player('/sport/baseball/player:43241', 'Ian',      'Kennedy'),      new PlayerSeasonDetails('31', 'SP', 'Starter',           false));
+        $this->response->add(new Player('/sport/baseball/player:40839', 'Damaso',   'Marte'),        new PlayerSeasonDetails('43', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:41517', 'Hideki',   'Matsui'),       new PlayerSeasonDetails('55', 'DH', 'Designated Hitter', true));
+        $this->response->add(new Player('/sport/baseball/player:43786', 'Mark',     'Melancon'),     new PlayerSeasonDetails('39', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:43454', 'Juan',     'Miranda'),      new PlayerSeasonDetails('72', '1B', 'First Base',        true));
+        $this->response->add(new Player('/sport/baseball/player:41463', 'Sergio',   'Mitre'),        new PlayerSeasonDetails('61', 'SP', 'Starter',           true));
+        $this->response->add(new Player('/sport/baseball/player:41581', 'Jose',     'Molina'),       new PlayerSeasonDetails('26', 'C',  'Catcher',           true));
+        $this->response->add(new Player('/sport/baseball/player:42057', 'Xavier',   'Nady'),         new PlayerSeasonDetails('22', 'RF', 'Right Outfield',    true));
+        $this->response->add(new Player('/sport/baseball/player:43771', 'Ramiro',   'Pena'),         new PlayerSeasonDetails('19', '3B', 'Third Base',        true));
+        $this->response->add(new Player('/sport/baseball/player:40721', 'Andy',     'Pettitte'),     new PlayerSeasonDetails('46', 'SP', 'Starter',           true));
+        $this->response->add(new Player('/sport/baseball/player:41507', 'Jorge',    'Posada'),       new PlayerSeasonDetails('20', 'C',  'Catcher',           true));
+        $this->response->add(new Player('/sport/baseball/player:43188', 'Edwar',    'Ramirez'),      new PlayerSeasonDetails('36', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:41799', 'Cody',     'Ransom'),       new PlayerSeasonDetails('12', '3B', 'Third Base',        true));
+        $this->response->add(new Player('/sport/baseball/player:40518', 'Mariano',  'Rivera'),       new PlayerSeasonDetails('42', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:43512', 'David',    'Robertson'),    new PlayerSeasonDetails('30', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:41513', 'Alex',     'Rodriguez'),    new PlayerSeasonDetails('13', '3B', 'Third Base',        true));
+        $this->response->add(new Player('/sport/baseball/player:41140', 'CC',       'Sabathia'),     new PlayerSeasonDetails('52', 'SP', 'Starter',           true));
+        $this->response->add(new Player('/sport/baseball/player:42683', 'Humberto', 'Sanchez'),      new PlayerSeasonDetails('77', 'RP', 'Reliever',          false));
+        $this->response->add(new Player('/sport/baseball/player:42205', 'Nick',     'Swisher'),      new PlayerSeasonDetails('33', 'RF', 'Right Outfield',    true));
+        $this->response->add(new Player('/sport/baseball/player:41634', 'Mark',     'Teixeira'),     new PlayerSeasonDetails('25', '1B', 'First Base',        true));
+        $this->response->add(new Player('/sport/baseball/player:40397', 'Brett',    'Tomko'),        new PlayerSeasonDetails('28', 'RP', 'Reliever',          false));
+        $this->response->add(new Player('/sport/baseball/player:41163', 'Josh',     'Towers'),       new PlayerSeasonDetails('12', 'RP', 'Reliever',          true));
+        $this->response->add(new Player('/sport/baseball/player:42886', 'Jose',     'Veras'),        new PlayerSeasonDetails('41', 'RP', 'Reliever',          false));
 
         // Player #42341 was altered in the XML to only include a single name, which
         // does occur occassionally. The XML omits the first-name, but the Siphon
         // objects instead omit the last name, which is arguably more accurate.
-        $this->response->add(new Player('/sport/baseball/player:42341', 'Wang', null));
-
-        // new SeasonDetails('/sport/baseball/player:43566', '2009', '91', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:43263', '2009', '63', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:41689', '2009', '14', '3B', 'Third Base', false),
-        // new SeasonDetails('/sport/baseball/player:43452', '2009', '64', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:41998', '2009', '38', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:40900', '2009', '34', 'SP', 'Starter', true),
-        // new SeasonDetails('/sport/baseball/player:42503', '2009', '53', 'RF', 'Right Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:42272', '2009', '24', '2B', 'Second Base', true),
-        // new SeasonDetails('/sport/baseball/player:41567', '2009', '17', 'C', 'Catcher', false),
-        // new SeasonDetails('/sport/baseball/player:43456', '2009', '75', 'C', 'Catcher', true),
-        // new SeasonDetails('/sport/baseball/player:43216', '2009', '62', 'SP', 'Starter', true),
-        // new SeasonDetails('/sport/baseball/player:43726', '2009', '67', 'RP', 'Reliever', false),
-        // new SeasonDetails('/sport/baseball/player:43569', '2009', '48', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:41557', '2009', '18', 'LF', 'Left Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:43727', '2009', '68', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:43198', '2009', '28', 'RF', 'Right Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:43625', '2009', '85', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:43764', '2009', '70', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:43513', '2009', '11', 'CF', 'Center Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:41467', '2009', '49', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:42170', '2009', null, 'LF', 'Left Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:43626', '2009', '71', 'RP', 'Reliever', false),
-        // new SeasonDetails('/sport/baseball/player:41536', '2009', null, '2B', 'Second Base', true),
-        // new SeasonDetails('/sport/baseball/player:41572', '2009', null, 'RF', 'Right Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:42710', '2009', '48', 'RP', 'Reliever', false),
-        // new SeasonDetails('/sport/baseball/player:42760', '2009', '65', 'SP', 'Starter', true),
-        // new SeasonDetails('/sport/baseball/player:43112', '2009', '80', 'SP', 'Starter', false),
-        // new SeasonDetails('/sport/baseball/player:41511', '2009', '2', 'SS', 'Shortstop', true),
-        // new SeasonDetails('/sport/baseball/player:43241', '2009', '31', 'SP', 'Starter', false),
-        // new SeasonDetails('/sport/baseball/player:40839', '2009', '43', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:41517', '2009', '55', 'DH', 'Designated Hitter', true),
-        // new SeasonDetails('/sport/baseball/player:43786', '2009', '39', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:43454', '2009', '72', '1B', 'First Base', true),
-        // new SeasonDetails('/sport/baseball/player:41463', '2009', '61', 'SP', 'Starter', true),
-        // new SeasonDetails('/sport/baseball/player:41581', '2009', '26', 'C', 'Catcher', true),
-        // new SeasonDetails('/sport/baseball/player:42057', '2009', '22', 'RF', 'Right Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:43771', '2009', '19', '3B', 'Third Base', true),
-        // new SeasonDetails('/sport/baseball/player:40721', '2009', '46', 'SP', 'Starter', true),
-        // new SeasonDetails('/sport/baseball/player:41507', '2009', '20', 'C', 'Catcher', true),
-        // new SeasonDetails('/sport/baseball/player:43188', '2009', '36', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:41799', '2009', '12', '3B', 'Third Base', true),
-        // new SeasonDetails('/sport/baseball/player:40518', '2009', '42', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:43512', '2009', '30', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:41513', '2009', '13', '3B', 'Third Base', true),
-        // new SeasonDetails('/sport/baseball/player:41140', '2009', '52', 'SP', 'Starter', true),
-        // new SeasonDetails('/sport/baseball/player:42683', '2009', '77', 'RP', 'Reliever', false),
-        // new SeasonDetails('/sport/baseball/player:42205', '2009', '33', 'RF', 'Right Outfield', true),
-        // new SeasonDetails('/sport/baseball/player:41634', '2009', '25', '1B', 'First Base', true),
-        // new SeasonDetails('/sport/baseball/player:40397', '2009', '28', 'RP', 'Reliever', false),
-        // new SeasonDetails('/sport/baseball/player:41163', '2009', '12', 'RP', 'Reliever', true),
-        // new SeasonDetails('/sport/baseball/player:42886', '2009', '41', 'RP', 'Reliever', false),
-        // new SeasonDetails('/sport/baseball/player:42341', '2009', '40', 'SP', 'Starter', true),
+        $this->response->add(new Player('/sport/baseball/player:42341', 'Wang',     null),           new PlayerSeasonDetails('40', 'SP', 'Starter',           true));
 
         $this->reader = new PlayerReader(
             $this->xmlReader()->mock()
