@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Player\ImageRequest;
 use Icecave\Siphon\Player\PlayerRequest;
+use Icecave\Siphon\Player\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Team\TeamRequest;
 
@@ -47,6 +48,15 @@ interface RequestVisitorInterface
      * @return mixed
      */
     public function visitPlayerRequest(PlayerRequest $request);
+
+    /**
+     * Visit the given request.
+     *
+     * @param PlayerStatisticsRequest $request
+     *
+     * @return mixed
+     */
+    public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request);
 
     /**
      * Visit the given request.

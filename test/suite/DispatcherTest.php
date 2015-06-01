@@ -11,6 +11,9 @@ use Icecave\Siphon\Player\ImageResponse;
 use Icecave\Siphon\Player\PlayerReaderInterface;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\PlayerResponse;
+use Icecave\Siphon\Player\PlayerStatisticsReaderInterface;
+use Icecave\Siphon\Player\PlayerStatisticsRequest;
+use Icecave\Siphon\Player\PlayerStatisticsResponse;
 use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleReaderInterface;
@@ -25,13 +28,14 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->urlBuilder     = Phony::mock(UrlBuilderInterface::class);
-        $this->xmlReader      = Phony::mock(XmlReaderInterface::class);
-        $this->atomReader     = Phony::mock(AtomReaderInterface::class);
-        $this->scheduleReader = Phony::mock(ScheduleReaderInterface::class);
-        $this->teamReader     = Phony::mock(TeamReaderInterface::class);
-        $this->playerReader   = Phony::mock(PlayerReaderInterface::class);
-        $this->imageReader    = Phony::mock(ImageReaderInterface::class);
+        $this->urlBuilder        = Phony::mock(UrlBuilderInterface::class);
+        $this->xmlReader         = Phony::mock(XmlReaderInterface::class);
+        $this->atomReader        = Phony::mock(AtomReaderInterface::class);
+        $this->scheduleReader    = Phony::mock(ScheduleReaderInterface::class);
+        $this->teamReader        = Phony::mock(TeamReaderInterface::class);
+        $this->playerReader      = Phony::mock(PlayerReaderInterface::class);
+        $this->playerStatsReader = Phony::mock(PlayerStatisticsReaderInterface::class);
+        $this->imageReader       = Phony::mock(ImageReaderInterface::class);
 
         $this->dispatcher = new Dispatcher(
             $this->urlBuilder->mock(),
@@ -40,6 +44,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->scheduleReader->mock(),
             $this->teamReader->mock(),
             $this->playerReader->mock(),
+            $this->playerStatsReader->mock(),
             $this->imageReader->mock()
         );
     }
@@ -108,6 +113,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             PlayerRequest::class,
             PlayerResponse::class,
             $this->playerReader
+        );
+    }
+
+    public function testPlayerStatisticsRequest()
+    {
+        $this->dispatchTest(
+            PlayerStatisticsRequest::class,
+            PlayerStatisticsResponse::class,
+            $this->playerStatsReader
         );
     }
 

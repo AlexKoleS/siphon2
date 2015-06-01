@@ -11,6 +11,9 @@ use Icecave\Siphon\Player\ImageRequest;
 use Icecave\Siphon\Player\PlayerReader;
 use Icecave\Siphon\Player\PlayerReaderInterface;
 use Icecave\Siphon\Player\PlayerRequest;
+use Icecave\Siphon\Player\PlayerStatisticsReader;
+use Icecave\Siphon\Player\PlayerStatisticsReaderInterface;
+use Icecave\Siphon\Player\PlayerStatisticsRequest;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Reader\UrlBuilder;
@@ -49,6 +52,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new ScheduleReader($xmlReader),
             new TeamReader($xmlReader),
             new PlayerReader($xmlReader),
+            new PlayerStatisticsReader($xmlReader),
             new ImageReader($xmlReader)
         );
     }
@@ -60,15 +64,17 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         ScheduleReaderInterface $scheduleReader,
         TeamReaderInterface $teamReader,
         PlayerReaderInterface $playerReader,
+        PlayerStatisticsReaderInterface $playerStatisticsReader,
         ImageReaderInterface $imageReader
     ) {
-        $this->urlBuilder     = $urlBuilder;
-        $this->xmlReader      = $xmlReader;
-        $this->atomReader     = $atomReader;
-        $this->scheduleReader = $scheduleReader;
-        $this->teamReader     = $teamReader;
-        $this->playerReader   = $playerReader;
-        $this->imageReader    = $imageReader;
+        $this->urlBuilder             = $urlBuilder;
+        $this->xmlReader              = $xmlReader;
+        $this->atomReader             = $atomReader;
+        $this->scheduleReader         = $scheduleReader;
+        $this->teamReader             = $teamReader;
+        $this->playerReader           = $playerReader;
+        $this->playerStatisticsReader = $playerStatisticsReader;
+        $this->imageReader            = $imageReader;
     }
 
     /**
@@ -168,6 +174,20 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public function visitPlayerRequest(PlayerRequest $request)
     {
         return $this->playerReader->read($request);
+    }
+
+    /**
+     * Visit the given request.
+     *
+     * @access private
+     *
+     * @param PlayerStatisticsRequest $request
+     *
+     * @return mixed
+     */
+    public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request)
+    {
+        return $this->playerStatisticsReader->read($request);
     }
 
     /**
