@@ -21,7 +21,8 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
         $this->player1->id->returns('<team 1>');
         $this->player2->id->returns('<team 2>');
 
-        $this->seasonDetails = Phony::fullMock(PlayerSeasonDetails::class)->mock();
+        $this->seasonDetails1 = Phony::fullMock(PlayerSeasonDetails::class)->mock();
+        $this->seasonDetails2 = Phony::fullMock(PlayerSeasonDetails::class)->mock();
 
         $this->response = new PlayerResponse(
             Sport::NFL(),
@@ -83,7 +84,7 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
             $this->response->isEmpty()
         );
 
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
 
         $this->assertFalse(
             $this->response->isEmpty()
@@ -97,7 +98,7 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
             count($this->response)
         );
 
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
 
         $this->assertSame(
             1,
@@ -107,18 +108,18 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetIterator()
     {
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
 
-        $this->response->add($this->player1->mock());
-        $this->response->add($this->player2->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
+        $this->response->add($this->player2->mock(), $this->seasonDetails2);
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->player1->mock(),
-                $this->player2->mock(),
+                [$this->player1->mock(), $this->seasonDetails1],
+                [$this->player2->mock(), $this->seasonDetails2],
             ],
             iterator_to_array($this->response)
         );
@@ -126,45 +127,24 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->player1->mock(),
+                [$this->player1->mock(), $this->seasonDetails1],
             ],
             iterator_to_array($this->response)
-        );
-
-        $this->assertNull(
-            $this->response->findSeasonDetails(
-                $this->player1->mock()
-            )
-        );
-    }
-
-    public function testAddWithSeasonDetails()
-    {
-        $this->response->add(
-            $this->player1->mock(),
-            $this->seasonDetails
-        );
-
-        $this->assertSame(
-            $this->seasonDetails,
-            $this->response->findSeasonDetails(
-                $this->player1->mock()
-            )
         );
     }
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->player1->mock());
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
 
-        $this->assertSame(
+        $this->assertEquals(
             [
-                $this->player1->mock(),
+                [$this->player1->mock(), $this->seasonDetails1],
             ],
             iterator_to_array($this->response)
         );
@@ -172,28 +152,22 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->response->add($this->player1->mock(), $this->seasonDetails);
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
         $this->response->remove($this->player1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
-        );
-
-        $this->assertNull(
-            $this->response->findSeasonDetails(
-                $this->player1->mock()
-            )
         );
     }
 
     public function testRemoveUnknownRequest()
     {
-        $this->response->add($this->player1->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
         $this->response->remove($this->player1->mock());
         $this->response->remove($this->player1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
@@ -201,19 +175,13 @@ class PlayerResponseTest extends PHPUnit_Framework_TestCase
 
     public function testClear()
     {
-        $this->response->add($this->player1->mock(), $this->seasonDetails);
-        $this->response->add($this->player2->mock());
+        $this->response->add($this->player1->mock(), $this->seasonDetails1);
+        $this->response->add($this->player2->mock(), $this->seasonDetails2);
 
         $this->response->clear();
 
         $this->assertTrue(
             $this->response->isEmpty()
-        );
-
-        $this->assertNull(
-            $this->response->findSeasonDetails(
-                $this->player1->mock()
-            )
         );
     }
 

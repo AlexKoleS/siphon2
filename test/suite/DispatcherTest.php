@@ -5,6 +5,9 @@ use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Atom\AtomResponse;
+use Icecave\Siphon\Player\ImageReaderInterface;
+use Icecave\Siphon\Player\ImageRequest;
+use Icecave\Siphon\Player\ImageResponse;
 use Icecave\Siphon\Player\PlayerReaderInterface;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\PlayerResponse;
@@ -28,6 +31,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->scheduleReader = Phony::mock(ScheduleReaderInterface::class);
         $this->teamReader     = Phony::mock(TeamReaderInterface::class);
         $this->playerReader   = Phony::mock(PlayerReaderInterface::class);
+        $this->imageReader    = Phony::mock(ImageReaderInterface::class);
 
         $this->dispatcher = new Dispatcher(
             $this->urlBuilder->mock(),
@@ -35,7 +39,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->atomReader->mock(),
             $this->scheduleReader->mock(),
             $this->teamReader->mock(),
-            $this->playerReader->mock()
+            $this->playerReader->mock(),
+            $this->imageReader->mock()
         );
     }
 
@@ -103,6 +108,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             PlayerRequest::class,
             PlayerResponse::class,
             $this->playerReader
+        );
+    }
+
+    public function testImageRequest()
+    {
+        $this->dispatchTest(
+            ImageRequest::class,
+            ImageResponse::class,
+            $this->imageReader
         );
     }
 

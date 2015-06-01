@@ -10,9 +10,9 @@ use Icecave\Siphon\Team\TeamInterface;
 use IteratorAggregate;
 
 /**
- * The response from a player feed.
+ * The response from a player image feed.
  */
-class PlayerResponse implements
+class ImageResponse implements
     ResponseInterface,
     Countable,
     IteratorAggregate
@@ -112,7 +112,7 @@ class PlayerResponse implements
     /**
      * Iterate the players.
      *
-     * @return mixed<tuple<Player, SeasonDetails>>
+     * @return mixed<tuple<Player, string, string>>
      */
     public function getIterator()
     {
@@ -124,12 +124,13 @@ class PlayerResponse implements
     /**
      * Add a player to the response.
      *
-     * @param Player              $player        The player to add.
-     * @param PlayerSeasonDetails $seasonDetails The player's season details.
+     * @param Player $player     The player to add.
+     * @param string $smallImage The URL of the small (thumbnail) head-shot image.
+     * @param string $largeImage The URL of the large head-shot image.
      */
-    public function add(Player $player, PlayerSeasonDetails $seasonDetails)
+    public function add(Player $player, $smallImage, $largeImage)
     {
-        $this->players[$player->id()] = [$player, $seasonDetails];
+        $this->players[$player->id()] = [$player, $smallImage, $largeImage];
     }
 
     /**
@@ -159,7 +160,7 @@ class PlayerResponse implements
      */
     public function accept(ResponseVisitorInterface $visitor)
     {
-        return $visitor->visitPlayerResponse($this);
+        return $visitor->visitImageResponse($this);
     }
 
     private $sport;

@@ -5,9 +5,9 @@ use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 
 /**
- * A request to the player feed.
+ * A request to the player image feed.
  */
-class PlayerRequest implements RequestInterface
+class ImageRequest implements RequestInterface
 {
     use PlayerRequestTrait;
 
@@ -20,6 +20,6 @@ class PlayerRequest implements RequestInterface
      */
     public function accept(RequestVisitorInterface $visitor)
     {
-        return $visitor->visitPlayerRequest($this);
+        return $visitor->visitImageRequest($this);
     }
 }

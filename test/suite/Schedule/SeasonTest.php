@@ -63,7 +63,7 @@ class SeasonTest extends PHPUnit_Framework_TestCase
         $this->season->add($this->comp1->mock());
         $this->season->add($this->comp2->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 $this->comp1->mock(),
                 $this->comp2->mock(),
@@ -79,7 +79,7 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 
         $this->season->remove($this->comp1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 $this->comp2->mock(),
             ],
@@ -91,7 +91,7 @@ class SeasonTest extends PHPUnit_Framework_TestCase
     {
         $this->season->remove($this->comp1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->season)
         );

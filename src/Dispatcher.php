@@ -5,6 +5,9 @@ use GuzzleHttp\Client as HttpClient;
 use Icecave\Siphon\Atom\AtomReader;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Player\ImageReader;
+use Icecave\Siphon\Player\ImageReaderInterface;
+use Icecave\Siphon\Player\ImageRequest;
 use Icecave\Siphon\Player\PlayerReader;
 use Icecave\Siphon\Player\PlayerReaderInterface;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -45,7 +48,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new AtomReader($xmlReader),
             new ScheduleReader($xmlReader),
             new TeamReader($xmlReader),
-            new PlayerReader($xmlReader)
+            new PlayerReader($xmlReader),
+            new ImageReader($xmlReader)
         );
     }
 
@@ -55,7 +59,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         AtomReaderInterface $atomReader,
         ScheduleReaderInterface $scheduleReader,
         TeamReaderInterface $teamReader,
-        PlayerReaderInterface $playerReader
+        PlayerReaderInterface $playerReader,
+        ImageReaderInterface $imageReader
     ) {
         $this->urlBuilder     = $urlBuilder;
         $this->xmlReader      = $xmlReader;
@@ -63,6 +68,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $this->scheduleReader = $scheduleReader;
         $this->teamReader     = $teamReader;
         $this->playerReader   = $playerReader;
+        $this->imageReader    = $imageReader;
     }
 
     /**
@@ -164,10 +170,25 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         return $this->playerReader->read($request);
     }
 
+    /**
+     * Visit the given request.
+     *
+     * @access private
+     *
+     * @param ImageRequest $request
+     *
+     * @return mixed
+     */
+    public function visitImageRequest(ImageRequest $request)
+    {
+        return $this->imageReader->read($request);
+    }
+
     private $urlBuilder;
     private $xmlReader;
     private $atomReader;
     private $scheduleReader;
     private $teamReader;
     private $playerReader;
+    private $imageReader;
 }

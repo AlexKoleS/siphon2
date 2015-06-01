@@ -82,7 +82,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetIterator()
     {
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
@@ -90,7 +90,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         $this->response->add($this->season1->mock());
         $this->response->add($this->season2->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 $this->season1->mock(),
                 $this->season2->mock(),
@@ -103,7 +103,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->response->add($this->season1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 $this->season1->mock(),
             ],
@@ -116,7 +116,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         $this->response->add($this->season1->mock());
         $this->response->add($this->season1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [
                 $this->season1->mock(),
             ],
@@ -129,7 +129,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         $this->response->add($this->season1->mock());
         $this->response->remove($this->season1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
@@ -141,7 +141,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         $this->response->remove($this->season1->mock());
         $this->response->remove($this->season1->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );

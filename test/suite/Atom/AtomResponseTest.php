@@ -62,7 +62,7 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetIterator()
     {
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
@@ -121,7 +121,7 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
         $this->response->add('<url 1>', DateTime::fromUnixTime(1));
         $this->response->remove('<url 1>');
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
@@ -133,7 +133,7 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
         $this->response->remove('<url 1>');
         $this->response->remove('<url 1>');
 
-        $this->assertSame(
+        $this->assertEquals(
             [],
             iterator_to_array($this->response)
         );
