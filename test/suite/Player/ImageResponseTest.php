@@ -3,7 +3,7 @@ namespace Icecave\Siphon\Player;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
-use Icecave\Siphon\Schedule\SeasonInterface;
+use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamInterface;
 use PHPUnit_Framework_TestCase;
@@ -12,7 +12,7 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->season = Phony::mock(SeasonInterface::class)->mock();
+        $this->season = Phony::fullMock(Season::class)->mock();
         $this->team   = Phony::mock(TeamInterface::class)->mock();
 
         $this->player1 = Phony::fullMock(Player::class);
@@ -50,7 +50,7 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
             $this->response->season()
         );
 
-        $season = Phony::mock(SeasonInterface::class)->mock();
+        $season = Phony::fullMock(Season::class)->mock();
         $this->response->setSeason($season);
 
         $this->assertSame(

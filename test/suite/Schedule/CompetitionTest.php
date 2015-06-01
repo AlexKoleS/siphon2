@@ -19,7 +19,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         $this->player2->id->returns('<player 2>');
 
         $this->startTime = DateTime::fromUnixTime(0);
-        $this->season    = Phony::mock(SeasonInterface::class)->mock();
+        $this->season    = Phony::fullMock(Season::class)->mock();
         $this->homeTeam  = Phony::mock(TeamInterface::class)->mock();
         $this->awayTeam  = Phony::mock(TeamInterface::class)->mock();
 

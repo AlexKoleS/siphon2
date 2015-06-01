@@ -111,7 +111,7 @@ class ScheduleReader implements ScheduleReaderInterface
     private function createCompetition(
         SimpleXMLElement $element,
         Sport $sport,
-        SeasonInterface $season
+        Season $season
     ) {
         $competition = new Competition(
             strval($element->id),

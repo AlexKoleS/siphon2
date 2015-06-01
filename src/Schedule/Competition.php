@@ -16,7 +16,7 @@ class Competition
      * @param CompetitionStatus $status    The status of the competition.
      * @param DateTime          $startTime The time at which the competition begins.
      * @param Sport             $sport     The sport (eg, baseball, football, etc).
-     * @param SeasonInterface   $season    The season in which the compeititon is played.
+     * @param Season            $season    The season in which the compeititon is played.
      * @param TeamInterface     $homeTeam  The home team.
      * @param TeamInterface     $awayTeam  The away team.
      */
@@ -25,7 +25,7 @@ class Competition
         CompetitionStatus $status,
         DateTime $startTime,
         Sport $sport,
-        SeasonInterface $season,
+        Season $season,
         TeamInterface $homeTeam,
         TeamInterface $awayTeam
     ) {
@@ -82,7 +82,7 @@ class Competition
     /**
      * Get the season.
      *
-     * @return SeasonInterface The season.
+     * @return Season The season.
      */
     public function season()
     {

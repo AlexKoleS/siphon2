@@ -10,8 +10,8 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->season1 = Phony::mock(SeasonInterface::class);
-        $this->season2 = Phony::mock(SeasonInterface::class);
+        $this->season1 = Phony::fullMock(Season::class);
+        $this->season2 = Phony::fullMock(Season::class);
 
         $this->season1->id->returns('<season 1>');
         $this->season2->id->returns('<season 2>');

@@ -4,7 +4,7 @@ namespace Icecave\Siphon\Player;
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
-use Icecave\Siphon\Schedule\SeasonInterface;
+use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamInterface;
 use IteratorAggregate;
@@ -19,7 +19,7 @@ class ImageResponse implements
 {
     public function __construct(
         Sport $sport,
-        SeasonInterface $season,
+        Season $season,
         TeamInterface $team
     ) {
         $this->setSport($sport);
@@ -52,7 +52,7 @@ class ImageResponse implements
     /**
      * Get the requested season.
      *
-     * @return SeasonInterface The requested season.
+     * @return Season The requested season.
      */
     public function season()
     {
@@ -62,9 +62,9 @@ class ImageResponse implements
     /**
      * Set the requested season.
      *
-     * @param SeasonInterface $season The requested season.
+     * @param Season $season The requested season.
      */
-    public function setSeason(SeasonInterface $season)
+    public function setSeason(Season $season)
     {
         $this->season = $season;
     }

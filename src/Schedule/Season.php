@@ -9,7 +9,6 @@ use IteratorAggregate;
  * A season within a schedule, a container for competitions.
  */
 class Season implements
-    SeasonInterface,
     Countable,
     IteratorAggregate
 {
