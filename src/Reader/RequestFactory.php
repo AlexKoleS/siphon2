@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Player\ImageRequest;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
@@ -48,6 +49,8 @@ class RequestFactory implements RequestFactoryInterface
         } elseif ($request = $this->createTeamRequest($components)) {
             return $request;
         } elseif ($request = $this->createPlayerRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createImageRequest($components)) {
             return $request;
         }
 
@@ -180,6 +183,32 @@ class RequestFactory implements RequestFactoryInterface
             $matches
         )) {
             return new PlayerRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                $matches[4]
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a ImageRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return ImageRequest|null
+     */
+    private function createImageRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/player-images/([^/]+)/players_(\d+)_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new ImageRequest(
                 Sport::findByComponents($matches[1], $matches[2]),
                 $matches[3],
                 $matches[4]
