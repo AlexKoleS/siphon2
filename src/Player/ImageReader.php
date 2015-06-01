@@ -40,7 +40,7 @@ class ImageReader implements ImageReaderInterface
             ->xmlReader
             ->read(
                 sprintf(
-                    '/sport/v2/%s/%s/player-images/%s/players_%d_%s.xml',
+                    '/sport/v2/%s/%s/player-images/%s/player-images_%d_%s.xml',
                     $request->sport()->sport(),
                     $request->sport()->league(),
                     $request->seasonName(),

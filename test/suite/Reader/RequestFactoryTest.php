@@ -124,7 +124,7 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
             ],
 
             'player images' => [
-                '/sport/v2/baseball/MLB/player-images/2015/players_12345_MLB.xml',
+                '/sport/v2/baseball/MLB/player-images/2015/player-images_12345_MLB.xml',
                 new ImageRequest(
                     Sport::MLB(),
                     '2015',

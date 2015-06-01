@@ -204,7 +204,7 @@ class RequestFactory implements RequestFactoryInterface
         $matches = [];
 
         if (preg_match(
-            '{^/sport/v2/([a-z]+)/([A-Z]+)/player-images/([^/]+)/players_(\d+)_\2\.xml$}',
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/player-images/([^/]+)/player-images_(\d+)_\2\.xml$}',
             $components->path,
             $matches
         )) {

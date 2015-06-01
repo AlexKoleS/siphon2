@@ -82,7 +82,7 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
         $this
             ->xmlReader
             ->read
-            ->calledWith('/sport/v2/baseball/MLB/player-images/2015/players_2955_MLB.xml');
+            ->calledWith('/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml');
 
         $this->assertEquals(
             $this->response,
