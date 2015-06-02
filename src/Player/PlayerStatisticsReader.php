@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Player;
 
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
@@ -61,6 +62,13 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
             ->xmlReader
             ->read($resource)
             ->xpath('.//season-content')[0];
+
+        // Sometimes the feed contains no team or player information. Since
+        // this information is required to build a meaningful response, we treat
+        // this condition equivalent to a not found error.
+        if (!$xml->{'team-content'}) {
+            throw new NotFoundException;
+        }
 
         $response = new PlayerStatisticsResponse(
             $request->sport(),

@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Player;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Season;
@@ -88,6 +89,17 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
             $this->response,
             $response
         );
+    }
+
+    public function testReadEmpty()
+    {
+        $this->setUpXmlReader('Player/empty.xml');
+
+        $this->setExpectedException(NotFoundException::class);
+
+        $this
+            ->reader
+            ->read($this->request);
     }
 
     public function testReadWithUnsupportedRequest()
