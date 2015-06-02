@@ -97,6 +97,15 @@ class Serializer implements SerializerInterface
         );
     }
 
+    /**
+     * Unserialize a statistics collection encoded in version 1.
+     *
+     * @param array<integer,string>       $table  The string table.
+     * @param array<tuple<object,object>> $groups The encoded groups.
+     *
+     * @return StatisticsCollection
+     * @throws InvalidArgumentException if the serialization data is malformed.
+     */
     private function unserializeVersion1(array $table, array $groups)
     {
         $decodedGroups = [];
