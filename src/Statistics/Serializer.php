@@ -17,16 +17,19 @@ use InvalidArgumentException;
  *
  * The final result is a JSON array with three elements. The first element is
  * the serialization version. The second element is the string table encoded as
- * an array. The third element is an array of encoded StatisticGroup objects.
+ * an array. The third element is a flattened data array of encoded StatisticGroup
+ * objects.
  *
- * Each group is encoded a 2-tuple of scopes and statistics. The group's
- * position in the result is used to determine the string table index for the
- * group's key.  For example the key of the first group in a result is given at
- * $table[0].
+ * The data array contains the following elements for each group, in order:
  *
- * Within a group, both the key and value of scopes are stored in the string
- * table. Statistics values are already numeric and hence only the key is stored
- * in the string table.
+ * - The number of scope entries in the group.
+ * - The number of statistics entries in the group.
+ * - The string table index for the key of the first scope
+ * - The string table index for the value of the first scope
+ * - .. (key / value indices repeated for each of the scopes) ...
+ * - The string table index for the key of the first statistic
+ * - The value of the first statistic
+ * - ... (key index / values repeated for each of the statistics) ...
  */
 class Serializer implements SerializerInterface
 {
@@ -40,7 +43,7 @@ class Serializer implements SerializerInterface
     public function serialize(StatisticsCollection $collection)
     {
         $table  = [];
-        $groups = [];
+        $data   = [];
         $store  = function ($string) use (&$table) {
             return array_key_exists($string, $table)
                 ? ($table[$string])
@@ -55,27 +58,24 @@ class Serializer implements SerializerInterface
 
         // Encode the groups ...
         foreach ($collection as $group) {
-            $scopes = [];
-            $stats  = [];
+            $data[] = count($group->scopes());
+            $data[] = count($group->statistics());
 
             foreach ($group->scopes() as $k => $v) {
-                $scopes[$store($k)] = $store($v);
+                $data[] = $store($k);
+                $data[] = $store($v);
             }
 
             foreach ($group->statistics() as $k => $v) {
-                $stats[$store($k)] = $v;
+                $data[] = $store($k);
+                $data[] = $v;
             }
-
-            $groups[] = [
-                (object) $scopes,
-                (object) $stats,
-            ];
         }
 
         return Serialization::serialize(
             1, // version 1
             array_flip($table),
-            $groups
+            $data
         );
     }
 
@@ -91,8 +91,8 @@ class Serializer implements SerializerInterface
     {
         return Serialization::unserialize(
             $buffer,
-            function ($table, $groups) {
-                return $this->unserializeVersion1($table, $groups);
+            function ($table, $data) {
+                return $this->unserializeVersion1($table, $data);
             }
         );
     }
@@ -100,53 +100,52 @@ class Serializer implements SerializerInterface
     /**
      * Unserialize a statistics collection encoded in version 1.
      *
-     * @param array<integer,string>       $table  The string table.
-     * @param array<tuple<object,object>> $groups The encoded groups.
+     * @param array<integer,string> $table The string table.
+     * @param array<integer|float>  $data  The encoded groups.
      *
      * @return StatisticsCollection
      * @throws InvalidArgumentException if the serialization data is malformed.
      */
-    private function unserializeVersion1(array $table, array $groups)
+    private function unserializeVersion1($table, $data)
     {
-        $decodedGroups = [];
-
-        foreach ($groups as $groupkeyIndex => $group) {
-            if (!is_array($group) || 2 !== count($group)) {
-                throw new InvalidArgumentException(
-                    'Invalid statistics format: Groups must be a 2-tuple.'
-                );
-            }
-
-            list($scopes, $stats) = $group;
-
-            if (!is_object($scopes)) {
-                throw new InvalidArgumentException(
-                    'Invalid statistics format: Group scopes must be an object.'
-                );
-            } elseif (!is_object($stats)) {
-                throw new InvalidArgumentException(
-                    'Invalid statistics format: Group statistics must be an object.'
-                );
-            }
-
-            $decodedScopes = [];
-            $decodedStats  = [];
-
-            foreach ($scopes as $keyIndex => $valueIndex) {
-                $decodedScopes[$table[$keyIndex]] = $table[$valueIndex];
-            }
-
-            foreach ($stats as $keyIndex => $value) {
-                $decodedStats[$table[$keyIndex]] = $value;
-            }
-
-            $decodedGroups[] = new StatisticsGroup(
-                $table[$groupkeyIndex],
-                $decodedScopes,
-                $decodedStats
+        if (!is_array($table)) {
+            throw new InvalidArgumentException(
+                'Invalid statistics format: String table must be an array.'
+            );
+        } elseif (!is_array($data) || count($data) % 2) {
+            throw new InvalidArgumentException(
+                'Invalid statistics format: Group data must be an array with an even number of elements.'
             );
         }
 
-        return new StatisticsCollection($decodedGroups);
+        $groups = [];
+        $index  = 0;
+
+        while ($index < count($data)) {
+            $numScopes = $data[$index++];
+            $numStats  = $data[$index++];
+
+            $scopes = [];
+            while ($numScopes--) {
+                $key          = $table[$data[$index++]];
+                $value        = $table[$data[$index++]];
+                $scopes[$key] = $value;
+            }
+
+            $stats = [];
+            while ($numStats--) {
+                $key         = $table[$data[$index++]];
+                $value       = $data[$index++];
+                $stats[$key] = $value;
+            }
+
+            $groups[] = new StatisticsGroup(
+                $table[count($groups)],
+                $scopes,
+                $stats
+            );
+        }
+
+        return new StatisticsCollection($groups);
     }
 }

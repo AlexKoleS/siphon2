@@ -13,58 +13,49 @@ class SerializerTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider serializationTestVectors
      */
-    public function testSerialize($buffer, StatisticsCollection $collection)
-    {
-        $this->assertSame(
-            $buffer,
-            $this->serializer->serialize($collection)
-        );
-    }
-
-    /**
-     * @dataProvider serializationTestVectors
-     */
-    public function testUnserialize($buffer, StatisticsCollection $collection)
+    public function testSerialize(StatisticsCollection $collection)
     {
         $this->assertEquals(
             $collection,
-            $this->serializer->unserialize($buffer)
+            $this->serializer->unserialize(
+                $this->serializer->serialize($collection)
+            )
         );
     }
 
-    public function testUnserializeWithMalformedGroup()
+    public function testUnserializeInvalidStringTable()
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Invalid statistics format: Groups must be a 2-tuple.'
+            'Invalid statistics format: String table must be an array.'
         );
 
         $this->serializer->unserialize(
-            '[1,["group"],[[]]]'
+            '[1,null,null]'
         );
     }
 
-    public function testUnserializeWithMalformedGroupScope()
+    public function testUnserializeWithInvalidDataArray()
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Invalid statistics format: Group scopes must be an object.'
+            'Invalid statistics format: Group data must be an array with an even number of elements.'
         );
 
         $this->serializer->unserialize(
-            '[1,["group"],[[null,null]]]'
+            '[1,[],null]'
         );
     }
 
-    public function testUnserializeWithMalformedGroupStatistics()
+    public function testUnserializeWithOddDataArray()
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Invalid statistics format: Group statistics must be an object.'
+            'Invalid statistics format: Group data must be an array with an even number of elements.'
         );
 
         $this->serializer->unserialize(
-            '[1,["group"],[[{},null]]]'
+            '[1,[],[1,2,3]]'
         );
     }
 
@@ -72,17 +63,14 @@ class SerializerTest extends PHPUnit_Framework_TestCase
     {
         return [
             'empty' => [
-                '[1,[],[]]',
                 new StatisticsCollection,
             ],
             'empty group' => [
-                '[1,["group"],[[{},{}]]]',
                 new StatisticsCollection(
                     [new StatisticsGroup('group')]
                 ),
             ],
             'single group' => [
-                '[1,["group","sc1","v1","sc2","v2","st1","st2"],[[{"1":2,"3":4},{"5":100,"6":200}]]]',
                 new StatisticsCollection(
                     [
                         new StatisticsGroup(
@@ -100,7 +88,6 @@ class SerializerTest extends PHPUnit_Framework_TestCase
                 ),
             ],
             'multiple groups' => [
-                '[1,["g1","g2","sc1","v1","sc2","v2","st1","st2","st3"],[[{"2":3,"4":5},{"6":100,"7":200}],[{"2":3,"4":5},{"7":250,"8":350}]]]',
                 new StatisticsCollection(
                     [
                         new StatisticsGroup(
