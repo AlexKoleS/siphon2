@@ -133,7 +133,6 @@ trait PlayerResponseTrait
     }
 
     private $sport;
-    private $type;
     private $team;
     private $entries;
 }

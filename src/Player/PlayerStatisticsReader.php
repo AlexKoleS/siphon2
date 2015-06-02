@@ -5,6 +5,7 @@ use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Statistics\StatisticsFactoryTrait;
+use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
@@ -36,26 +37,36 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
     {
         if (!$this->isSupported($request)) {
             throw new InvalidArgumentException('Unsupported request.');
+        } elseif (StatisticsType::COMBINED() === $request->type()) {
+            $resource = sprintf(
+                '/sport/v2/%s/%s/player-stats/%s/player_stats_%d_%s.xml',
+                $request->sport()->sport(),
+                $request->sport()->league(),
+                $request->seasonName(),
+                $request->teamId(),
+                $request->sport()->league()
+            );
+        } else { // split stats
+            $resource = sprintf(
+                '/sport/v2/%s/%s/player-split-stats/%s/player_split_stats_%d_%s.xml',
+                $request->sport()->sport(),
+                $request->sport()->league(),
+                $request->seasonName(),
+                $request->teamId(),
+                $request->sport()->league()
+            );
         }
 
         $xml = $this
             ->xmlReader
-            ->read(
-                sprintf(
-                    '/sport/v2/%s/%s/player-stats/%s/player_stats_%d_%s.xml',
-                    $request->sport()->sport(),
-                    $request->sport()->league(),
-                    $request->seasonName(),
-                    $request->teamId(),
-                    $request->sport()->league()
-                )
-            )
+            ->read($resource)
             ->xpath('.//season-content')[0];
 
         $response = new PlayerStatisticsResponse(
             $request->sport(),
             $this->createSeason($xml->season),
-            $this->createTeam($xml->{'team-content'}->team)
+            $this->createTeam($xml->{'team-content'}->team),
+            $request->type()
         );
 
         foreach ($xml->xpath('.//player-content') as $element) {

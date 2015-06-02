@@ -6,6 +6,7 @@ use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
+use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamInterface;
 use PHPUnit_Framework_TestCase;
 
@@ -28,7 +29,8 @@ class PlayerStatisticsResponseTest extends PHPUnit_Framework_TestCase
         $this->response = new PlayerStatisticsResponse(
             Sport::NFL(),
             $this->season,
-            $this->team
+            $this->team,
+            StatisticsType::COMBINED()
         );
     }
 
@@ -76,6 +78,21 @@ class PlayerStatisticsResponseTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $team,
             $this->response->team()
+        );
+    }
+
+    public function testType()
+    {
+        $this->assertSame(
+            StatisticsType::COMBINED(),
+            $this->response->type()
+        );
+
+        $this->response->setType(StatisticsType::SPLIT());
+
+        $this->assertSame(
+            StatisticsType::SPLIT(),
+            $this->response->type()
         );
     }
 

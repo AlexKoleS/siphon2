@@ -4,7 +4,9 @@ namespace Icecave\Siphon\Player;
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
+use Icecave\Siphon\Statistics\StatisticsType;
 use IteratorAggregate;
 
 /**
@@ -15,7 +17,45 @@ class PlayerStatisticsResponse implements
     Countable,
     IteratorAggregate
 {
-    use PlayerResponseTrait;
+    use PlayerResponseTrait {
+        __construct as private initialize;
+    }
+
+    /**
+     * @param Sport          $sport      The sport to request.
+     * @param string         $seasonName The season name.
+     * @param string|integer $teamId     The team ID.
+     * @param StatisticsType $type       The type of statistics to fetch.
+     */
+    public function __construct(
+        Sport $sport,
+        $seasonName,
+        $teamId,
+        StatisticsType $type
+    ) {
+        $this->initialize($sport, $seasonName, $teamId);
+        $this->setType($type);
+    }
+
+    /**
+     * Get the requested statistics type.
+     *
+     * @return StatisticsType The requested statistics type.
+     */
+    public function type()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the requested statistics type.
+     *
+     * @param StatisticsType $type The requested statistics type.
+     */
+    public function setType(StatisticsType $type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * Add a player to the response.
@@ -39,4 +79,6 @@ class PlayerStatisticsResponse implements
     {
         return $visitor->visitPlayerStatisticsResponse($this);
     }
+
+    private $type;
 }

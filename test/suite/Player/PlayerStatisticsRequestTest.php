@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Player;
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Statistics\StatisticsType;
 use PHPUnit_Framework_TestCase;
 
 class PlayerStatisticsRequestTest extends PHPUnit_Framework_TestCase
@@ -69,6 +70,21 @@ class PlayerStatisticsRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             123,
             $this->request->teamId()
+        );
+    }
+
+    public function testType()
+    {
+        $this->assertSame(
+            StatisticsType::COMBINED(),
+            $this->request->type()
+        );
+
+        $this->request->setType(StatisticsType::SPLIT());
+
+        $this->assertSame(
+            StatisticsType::SPLIT(),
+            $this->request->type()
         );
     }
 
