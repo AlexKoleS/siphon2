@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Player\ImageRequest;
+use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
@@ -129,6 +130,13 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                     Sport::MLB(),
                     '2015',
                     12345
+                ),
+            ],
+
+            'player injuries' => [
+                '/sport/v2/baseball/MLB/injuries/injuries_MLB.xml',
+                new InjuryRequest(
+                    Sport::MLB()
                 ),
             ],
         ];
