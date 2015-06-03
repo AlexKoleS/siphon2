@@ -75,10 +75,10 @@
 
     <p>    interface
     <strong>TeamReaderInterface</strong>        implements
-        <a href="../../../Icecave/Siphon/ReaderInterface.html"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a></p>
+        <a href="../../../Icecave/Siphon/Reader/ReaderInterface.html"><abbr title="Icecave\Siphon\Reader\ReaderInterface">ReaderInterface</abbr></a></p>
 
             <div class="description">
-            <p>Read data from team feeds.</p>                    </div>
+            <p>Client for reading team feeds.</p>                    </div>
     
     
     
@@ -88,30 +88,21 @@
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    mixed
+                    <a href="../../../Icecave/Siphon/Reader/ResponseInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseInterface">ResponseInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_readAtomEntry">readAtomEntry</a>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry)
-                                            <p>Read a feed based on an atom entry.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../Icecave/Siphon/ReaderInterface.html#method_readAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a></small></div>
+                    <a href="#method_read">read</a>(<a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a> $request)
+                                            <p>Make a request and return the response.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Icecave/Siphon/Reader/ReaderInterface.html#method_read"><abbr title="Icecave\Siphon\Reader\ReaderInterface">ReaderInterface</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
                     boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_supportsAtomEntry">supportsAtomEntry</a>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry, array $parameters = array())
-                                            <p>Check if the given atom entry can be used by this reader.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../Icecave/Siphon/ReaderInterface.html#method_supportsAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    <abbr title="Icecave\Siphon\Team\array&lt;TeamInterface&gt;">array&lt;TeamInterface&gt;</abbr>
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_read">read</a>(string $sport, string $league, string $season)
-                                            <p>Read a team feed.</p>                </div>
-                <div class="col-md-2"></div>
+                    <a href="#method_isSupported">isSupported</a>(<a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a> $request)
+                                            <p>Check if the given request is supported.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Icecave/Siphon/Reader/ReaderInterface.html#method_isSupported"><abbr title="Icecave\Siphon\Reader\ReaderInterface">ReaderInterface</abbr></a></small></div>
             </div>
             </div>
 
@@ -120,22 +111,22 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method_readAtomEntry">
-        <div class="location">in <a href="../../../Icecave/Siphon/ReaderInterface.html#method_readAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a> at line 20</div>
-        <code>                    mixed
-    <strong>readAtomEntry</strong>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry)</code>
+                    <h3 id="method_read">
+        <div class="location">in <a href="../../../Icecave/Siphon/Reader/ReaderInterface.html#method_read"><abbr title="Icecave\Siphon\Reader\ReaderInterface">ReaderInterface</abbr></a> at line 17</div>
+        <code>                    <a href="../../../Icecave/Siphon/Reader/ResponseInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseInterface">ResponseInterface</abbr></a>
+    <strong>read</strong>(<a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a> $request)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Read a feed based on an atom entry.</p>                                </div>
+                                    <p>Make a request and return the response.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></td>
-                <td>$atomEntry</td>
-                <td>The atom entry.</td>
+                <td><a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a></td>
+                <td>$request</td>
+                <td>The request.</td>
             </tr>
             </table>
 
@@ -144,9 +135,8 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>mixed</td>
-            <td>
-</td>
+            <td><a href="../../../Icecave/Siphon/Reader/ResponseInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseInterface">ResponseInterface</abbr></a></td>
+            <td>The response.</td>
         </tr>
     </table>
 
@@ -155,8 +145,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>if this atom entry is not supported.</td>
+                <td><abbr title="Icecave\Siphon\Reader\InvalidArgumentException">InvalidArgumentException</abbr></td>
+                <td>if the request is not supported.</td>
             </tr>
             </table>
 
@@ -166,27 +156,23 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_supportsAtomEntry">
-        <div class="location">in <a href="../../../Icecave/Siphon/ReaderInterface.html#method_supportsAtomEntry"><abbr title="Icecave\Siphon\ReaderInterface">ReaderInterface</abbr></a> at line 30</div>
+                    <h3 id="method_isSupported">
+        <div class="location">in <a href="../../../Icecave/Siphon/Reader/ReaderInterface.html#method_isSupported"><abbr title="Icecave\Siphon\Reader\ReaderInterface">ReaderInterface</abbr></a> at line 24</div>
         <code>                    boolean
-    <strong>supportsAtomEntry</strong>(<abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr> $atomEntry, array $parameters = array())</code>
+    <strong>isSupported</strong>(<a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a> $request)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Check if the given atom entry can be used by this reader.</p>                                </div>
+                                    <p>Check if the given request is supported.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Icecave\Siphon\Atom\AtomEntry">AtomEntry</abbr></td>
-                <td>$atomEntry</td>
-                <td>The atom entry.</td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$parameters</td>
-                <td>&amp;$parameters Populated with reader-specific parameters represented by the atom entry.</td>
+                <td><a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a></td>
+                <td>$request</td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -196,55 +182,7 @@
                     <table class="table table-condensed">
         <tr>
             <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_read">
-        <div class="location">at line 22</div>
-        <code>                    <abbr title="Icecave\Siphon\Team\array&lt;TeamInterface&gt;">array&lt;TeamInterface&gt;</abbr>
-    <strong>read</strong>(string $sport, string $league, string $season)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Read a team feed.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$sport</td>
-                <td>The sport (eg, baseball, football, etc)</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$league</td>
-                <td>The league (eg, MLB, NFL, etc)</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$season</td>
-                <td>The season name.</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Icecave\Siphon\Team\array&lt;TeamInterface&gt;">array&lt;TeamInterface&gt;</abbr></td>
-            <td>
-</td>
+            <td>True if the given request is supported; otherwise, false.</td>
         </tr>
     </table>
 

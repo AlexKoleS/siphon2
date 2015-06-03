@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Icecave\Siphon\Schedule\Competition | icecave/siphon API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Icecave_Siphon_Schedule_Competition" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">icecave/siphon API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../Icecave.html">Icecave</a></li>
+                                        <li><a href="../../../Icecave/Siphon.html">Siphon</a></li>
+                                        <li><a href="../../../Icecave/Siphon/Schedule.html">Schedule</a></li>
+    
+                <li>Competition</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>Competition</h1>
+    </div>
+
+    <p>    class
+    <strong>Competition</strong></p>
+
+            <div class="description">
+            <p>A sports competition (ie, "event" / "game" / "match" / etc).</p>                    </div>
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(string $id, <a href="../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a> $status, <abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $startTime, <a href="../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport, <a href="../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a> $season, <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a> $homeTeam, <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a> $awayTeam)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_id">id</a>()
+                                            <p>Get the competition ID.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_status">status</a>()
+                                            <p>Get the competition status.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_startTime">startTime</a>()
+                                            <p>Get the time at which the competition begins.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_sport">sport</a>()
+                                            <p>Get the sport.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_season">season</a>()
+                                            <p>Get the season.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_homeTeam">homeTeam</a>()
+                                            <p>Get the home team.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_awayTeam">awayTeam</a>()
+                                            <p>Get the away team.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Icecave\Siphon\Schedule\array&lt;Player&gt;">array&lt;Player&gt;</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_notablePlayers">notablePlayers</a>()
+                                            <p>Get any "notable" players for this competition.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addNotablePlayer">addNotablePlayer</a>(<a href="../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player)
+                                            <p>Add a notable player to the competition.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeNotablePlayer">removeNotablePlayer</a>(<a href="../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player)
+                                            <p>Remove a notable player from the competition.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 23</div>
+        <code>                    
+    <strong>__construct</strong>(string $id, <a href="../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a> $status, <abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $startTime, <a href="../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport, <a href="../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a> $season, <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a> $homeTeam, <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a> $awayTeam)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$id</td>
+                <td>The competition ID.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a></td>
+                <td>$status</td>
+                <td>The status of the competition.</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+                <td>$startTime</td>
+                <td>The time at which the competition begins.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+                <td>$sport</td>
+                <td>The sport (eg, baseball, football, etc).</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a></td>
+                <td>$season</td>
+                <td>The season in which the compeititon is played.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a></td>
+                <td>$homeTeam</td>
+                <td>The home team.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a></td>
+                <td>$awayTeam</td>
+                <td>The away team.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_id">
+        <div class="location">at line 47</div>
+        <code>                    string
+    <strong>id</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the competition ID.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>The competition ID.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_status">
+        <div class="location">at line 57</div>
+        <code>                    <a href="../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a>
+    <strong>status</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the competition status.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Icecave/Siphon/Schedule/CompetitionStatus.html"><abbr title="Icecave\Siphon\Schedule\CompetitionStatus">CompetitionStatus</abbr></a></td>
+            <td>The competition status.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_startTime">
+        <div class="location">at line 67</div>
+        <code>                    <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>
+    <strong>startTime</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the time at which the competition begins.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+            <td>The competition start time.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_sport">
+        <div class="location">at line 77</div>
+        <code>                    <a href="../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a>
+    <strong>sport</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the sport.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+            <td>The sport.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_season">
+        <div class="location">at line 87</div>
+        <code>                    <a href="../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a>
+    <strong>season</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the season.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a></td>
+            <td>The season.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_homeTeam">
+        <div class="location">at line 97</div>
+        <code>                    <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a>
+    <strong>homeTeam</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the home team.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a></td>
+            <td>The home team.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_awayTeam">
+        <div class="location">at line 107</div>
+        <code>                    <a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a>
+    <strong>awayTeam</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the away team.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a></td>
+            <td>The away team.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_notablePlayers">
+        <div class="location">at line 120</div>
+        <code>                    <abbr title="Icecave\Siphon\Schedule\array&lt;Player&gt;">array&lt;Player&gt;</abbr>
+    <strong>notablePlayers</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get any "notable" players for this competition.</p>                    <p>This includes:
+ - MLB starting pitchers</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Icecave\Siphon\Schedule\array&lt;Player&gt;">array&lt;Player&gt;</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addNotablePlayer">
+        <div class="location">at line 130</div>
+        <code>                    
+    <strong>addNotablePlayer</strong>(<a href="../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Add a notable player to the competition.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a></td>
+                <td>$player</td>
+                <td>The player to add.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeNotablePlayer">
+        <div class="location">at line 140</div>
+        <code>                    
+    <strong>removeNotablePlayer</strong>(<a href="../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Remove a notable player from the competition.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a></td>
+                <td>$player</td>
+                <td>The player to remove.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Icecave\Siphon\Player\Statistics\PlayerStatisticsResponse | icecave/siphon API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../css/sami.css">
+        <script src="../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../js/typeahead.min.js"></script>
+        <script src="../../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Icecave_Siphon_Player_Statistics_PlayerStatisticsResponse" data-root-path="../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../index.html">icecave/siphon API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../Icecave.html">Icecave</a></li>
+                                        <li><a href="../../../../Icecave/Siphon.html">Siphon</a></li>
+                                        <li><a href="../../../../Icecave/Siphon/Player.html">Player</a></li>
+                                        <li><a href="../../../../Icecave/Siphon/Player/Statistics.html">Statistics</a></li>
+    
+                <li>PlayerStatisticsResponse</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>PlayerStatisticsResponse</h1>
+    </div>
+
+    <p>    class
+    <strong>PlayerStatisticsResponse</strong>        implements
+        <a href="../../../../Icecave/Siphon/Reader/ResponseInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseInterface">ResponseInterface</abbr></a>, <a href="http://php.net/Countable"><abbr title="Countable">Countable</abbr></a>, <a href="http://php.net/IteratorAggregate"><abbr title="IteratorAggregate">IteratorAggregate</abbr></a></p>
+
+            <div class="description">
+            <p>The response from a player statistics feed.</p>                    </div>
+    
+            <h2>Traits</h2>
+
+        <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-6">
+                                            <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">Icecave\Siphon\Player\PlayerResponseTrait</abbr></a>
+                                    </div>
+                <div class="col-md-6">
+                    Common implementation for response that operate per sport + season + team.
+                </div>
+            </div>
+            </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport, string $seasonName, string|integer $teamId, <a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a> $type)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_sport">sport</a>()
+                                            <p>Get the requested sport.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_sport"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setSport">setSport</a>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport)
+                                            <p>Set the requested sport.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_setSport"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_season">season</a>()
+                                            <p>Get the requested season.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_season"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setSeason">setSeason</a>(<a href="../../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a> $season)
+                                            <p>Set the requested season.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_setSeason"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_team">team</a>()
+                                            <p>Get the requested team.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_team"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTeam">setTeam</a>(<a href="../../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a> $team)
+                                            <p>Set the requested team.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_setTeam"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isEmpty">isEmpty</a>()
+                                            <p>Check if the response contains players.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_isEmpty"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_count">count</a>()
+                                            <p>Get the number of players in the response.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_count"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;Player,">mixed&lt;tuple&lt;Player,</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getIterator">getIterator</a>()
+                                            <p>Iterate the players.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_getIterator"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_remove">remove</a>(<a href="../../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player)
+                                            <p>Remove a player from the response.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_remove"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_clear">clear</a>()
+                                            <p>Remove all players from the response.</p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_clear"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_type">type</a>()
+                                            <p>Get the requested statistics type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setType">setType</a>(<a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a> $type)
+                                            <p>Set the requested statistics type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_add">add</a>(<a href="../../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player, <a href="../../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a> $statistics)
+                                            <p>Add a player to the response.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_accept">accept</a>(<a href="../../../../Icecave/Siphon/Reader/ResponseVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr></a> $visitor)
+                                            <p>Dispatch a call to the given visitor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 32</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport, string $seasonName, string|integer $teamId, <a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+                <td>$sport</td>
+                <td>The sport to request.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$seasonName</td>
+                <td>The season name.</td>
+            </tr>
+                    <tr>
+                <td>string|integer</td>
+                <td>$teamId</td>
+                <td>The team ID.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a></td>
+                <td>$type</td>
+                <td>The type of statistics to fetch.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_sport">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_sport"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 30</div>
+        <code>                    <a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a>
+    <strong>sport</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the requested sport.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+            <td>The requested sport.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSport">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_setSport"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 40</div>
+        <code>                    
+    <strong>setSport</strong>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the requested sport.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+                <td>$sport</td>
+                <td>The requested sport.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_season">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_season"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 50</div>
+        <code>                    <a href="../../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a>
+    <strong>season</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the requested season.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a></td>
+            <td>The requested season.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setSeason">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_setSeason"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 60</div>
+        <code>                    
+    <strong>setSeason</strong>(<a href="../../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a> $season)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the requested season.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Schedule/Season.html"><abbr title="Icecave\Siphon\Schedule\Season">Season</abbr></a></td>
+                <td>$season</td>
+                <td>The requested season.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_team">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_team"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 70</div>
+        <code>                    <a href="../../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a>
+    <strong>team</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the requested team.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a></td>
+            <td>The requested team.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTeam">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_setTeam"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 80</div>
+        <code>                    
+    <strong>setTeam</strong>(<a href="../../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a> $team)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the requested team.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Team/TeamInterface.html"><abbr title="Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></a></td>
+                <td>$team</td>
+                <td>The requested team.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isEmpty">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_isEmpty"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 90</div>
+        <code>                    
+    <strong>isEmpty</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Check if the response contains players.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_count">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_count"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 100</div>
+        <code>                    integer
+    <strong>count</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the number of players in the response.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getIterator">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_getIterator"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 110</div>
+        <code>                    <abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;Player,">mixed&lt;tuple&lt;Player,</abbr>
+    <strong>getIterator</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Iterate the players.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Icecave\Siphon\Player\mixed&lt;tuple&lt;Player,">mixed&lt;tuple&lt;Player,</abbr></td>
+            <td>mixed>></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_remove">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_remove"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 122</div>
+        <code>                    
+    <strong>remove</strong>(<a href="../../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Remove a player from the response.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a></td>
+                <td>$player</td>
+                <td>The player to remove.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clear">
+        <div class="location">in <a href="../../../../Icecave/Siphon/Player/PlayerResponseTrait.html#method_clear"><abbr title="Icecave\Siphon\Player\PlayerResponseTrait">PlayerResponseTrait</abbr></a> at line 130</div>
+        <code>                    
+    <strong>clear</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Remove all players from the response.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_type">
+        <div class="location">at line 47</div>
+        <code>                    <a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a>
+    <strong>type</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the requested statistics type.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a></td>
+            <td>The requested statistics type.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setType">
+        <div class="location">at line 57</div>
+        <code>                    
+    <strong>setType</strong>(<a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a> $type)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the requested statistics type.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a></td>
+                <td>$type</td>
+                <td>The requested statistics type.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_add">
+        <div class="location">at line 68</div>
+        <code>                    
+    <strong>add</strong>(<a href="../../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a> $player, <a href="../../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a> $statistics)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Add a player to the response.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Player/Player.html"><abbr title="Icecave\Siphon\Player\Player">Player</abbr></a></td>
+                <td>$player</td>
+                <td>The player to add.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a></td>
+                <td>$statistics</td>
+                <td>The player's statistics.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_accept">
+        <div class="location">at line 80</div>
+        <code>                    mixed
+    <strong>accept</strong>(<a href="../../../../Icecave/Siphon/Reader/ResponseVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr></a> $visitor)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Dispatch a call to the given visitor.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Icecave/Siphon/Reader/ResponseVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr></a></td>
+                <td>$visitor</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

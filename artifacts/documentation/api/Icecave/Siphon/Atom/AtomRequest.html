@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Icecave\Siphon\Atom\AtomRequest | icecave/siphon API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Icecave_Siphon_Atom_AtomRequest" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">icecave/siphon API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../Icecave.html">Icecave</a></li>
+                                        <li><a href="../../../Icecave/Siphon.html">Siphon</a></li>
+                                        <li><a href="../../../Icecave/Siphon/Atom.html">Atom</a></li>
+    
+                <li>AtomRequest</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>AtomRequest</h1>
+    </div>
+
+    <p>    class
+    <strong>AtomRequest</strong>        implements
+        <a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a></p>
+
+            <div class="description">
+            <p>A request to the atom feed.</p>                    </div>
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_updatedTime">updatedTime</a>()
+                                            <p>Set the updated time limit.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setUpdatedTime">setUpdatedTime</a>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)
+                                            <p>Set the updated time limit.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_feed">feed</a>()
+                                            <p>Get the feed.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setFeed">setFeed</a>($feed)
+                                            <p>Set the feed.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_limit">limit</a>()
+                                            <p>Get the result limit.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLimit">setLimit</a>(integer $limit)
+                                            <p>Set the result limit.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_order">order</a>()
+                                            <p>Get the result ordering.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setOrder">setOrder</a>(integer $order)
+                                            <p>Set the result ordering.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_accept">accept</a>(<a href="../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a> $visitor)
+                                            <p>Dispatch a call to the given visitor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_serialize">serialize</a>()
+                                            <p>Serialize the request to a buffer.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unserialize">unserialize</a>(string $buffer)
+                                            <p>Unserialize a serialized request from a buffer.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 21</div>
+        <code>                    
+    <strong>__construct</strong>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+                <td>$updatedTime</td>
+                <td>Limit results to feeds updated after this time.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$feed</td>
+                <td>Limit results to feeds of the given type, or null for any type.</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$limit</td>
+                <td>The maximum number of results to return.</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$order</td>
+                <td>The sort order (one of SORT<em>ASC or SORT</em>DESC).</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_updatedTime">
+        <div class="location">at line 40</div>
+        <code>                    <abbr title="Icecave\Chrono\DateTime">DateTime</abbr>
+    <strong>updatedTime</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the updated time limit.</p>                    <p>Results are limited to feeds updated after this time.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+            <td>The updated time.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setUpdatedTime">
+        <div class="location">at line 52</div>
+        <code>                    
+    <strong>setUpdatedTime</strong>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the updated time limit.</p>                    <p>Results are limited to feeds updated after this time.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+                <td>$updatedTime</td>
+                <td>The updated time.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_feed">
+        <div class="location">at line 64</div>
+        <code>                    string|null
+    <strong>feed</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the feed.</p>                    <p>Results are limited to feeds of the given type.</p>            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td>The feed filter, or null if all feeds are returned.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFeed">
+        <div class="location">at line 76</div>
+        <code>                    string|null
+    <strong>setFeed</strong>($feed)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the feed.</p>                    <p>Results are limited to feeds of the given type.</p>            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$feed</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|null</td>
+            <td>The feed filter, or null if all feeds are returned.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_limit">
+        <div class="location">at line 86</div>
+        <code>                    integer
+    <strong>limit</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the result limit.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer</td>
+            <td>The maximum number of results to return.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLimit">
+        <div class="location">at line 96</div>
+        <code>                    
+    <strong>setLimit</strong>(integer $limit)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the result limit.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$limit</td>
+                <td>The maximum number of results to return.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_order">
+        <div class="location">at line 110</div>
+        <code>                    integer
+    <strong>order</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Get the result ordering.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer</td>
+            <td>One of SORT<em>ASC or SORT</em>DESC.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setOrder">
+        <div class="location">at line 120</div>
+        <code>                    
+    <strong>setOrder</strong>(integer $order)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Set the result ordering.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$order</td>
+                <td>One of SORT<em>ASC or SORT</em>DESC.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_accept">
+        <div class="location">at line 136</div>
+        <code>                    mixed
+    <strong>accept</strong>(<a href="../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a> $visitor)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Dispatch a call to the given visitor.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a></td>
+                <td>$visitor</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_serialize">
+        <div class="location">at line 146</div>
+        <code>                    string
+    <strong>serialize</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Serialize the request to a buffer.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unserialize">
+        <div class="location">at line 162</div>
+        <code>                    
+    <strong>unserialize</strong>(string $buffer)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Unserialize a serialized request from a buffer.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$buffer</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
