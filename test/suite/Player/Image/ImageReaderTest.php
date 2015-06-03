@@ -1,8 +1,9 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Image;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
+use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;

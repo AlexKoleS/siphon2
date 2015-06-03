@@ -2,10 +2,10 @@
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Siphon\Atom\AtomResponse;
-use Icecave\Siphon\Player\ImageResponse;
+use Icecave\Siphon\Player\Image\ImageResponse;
 use Icecave\Siphon\Player\Injury\InjuryResponse;
 use Icecave\Siphon\Player\PlayerResponse;
-use Icecave\Siphon\Player\PlayerStatisticsResponse;
+use Icecave\Siphon\Player\Statistics\PlayerStatisticsResponse;
 use Icecave\Siphon\Schedule\ScheduleResponse;
 use Icecave\Siphon\Team\TeamResponse;
 

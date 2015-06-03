@@ -3,12 +3,14 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
-use Icecave\Siphon\Player\ImageRequest;
+use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
+use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamRequest;
 use PHPUnit_Framework_TestCase;
 
@@ -121,6 +123,26 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                     Sport::MLB(),
                     '2015',
                     12345
+                ),
+            ],
+
+            'player statistics (combined)' => [
+                '/sport/v2/baseball/MLB/player-stats/2015/player_stats_12345_MLB.xml',
+                new PlayerStatisticsRequest(
+                    Sport::MLB(),
+                    '2015',
+                    12345,
+                    StatisticsType::COMBINED()
+                ),
+            ],
+
+            'player statistics (split)' => [
+                '/sport/v2/baseball/MLB/player-split-stats/2015/player_split_stats_12345_MLB.xml',
+                new PlayerStatisticsRequest(
+                    Sport::MLB(),
+                    '2015',
+                    12345,
+                    StatisticsType::SPLIT()
                 ),
             ],
 

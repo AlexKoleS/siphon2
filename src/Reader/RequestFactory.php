@@ -3,12 +3,14 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
-use Icecave\Siphon\Player\ImageRequest;
+use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
+use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamRequest;
 use InvalidArgumentException;
 use stdClass;
@@ -50,6 +52,8 @@ class RequestFactory implements RequestFactoryInterface
         } elseif ($request = $this->createTeamRequest($components)) {
             return $request;
         } elseif ($request = $this->createPlayerRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createPlayerStatisticsRequest($components)) {
             return $request;
         } elseif ($request = $this->createImageRequest($components)) {
             return $request;
@@ -189,6 +193,44 @@ class RequestFactory implements RequestFactoryInterface
                 Sport::findByComponents($matches[1], $matches[2]),
                 $matches[3],
                 $matches[4]
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a PlayerStatisticsRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return PlayerStatisticsRequest|null
+     */
+    private function createPlayerStatisticsRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/player-stats/([^/]+)/player_stats_(\d+)_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new PlayerStatisticsRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                $matches[4],
+                StatisticsType::COMBINED()
+            );
+        } elseif (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/player-split-stats/([^/]+)/player_split_stats_(\d+)_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new PlayerStatisticsRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                $matches[4],
+                StatisticsType::SPLIT()
             );
         }
 

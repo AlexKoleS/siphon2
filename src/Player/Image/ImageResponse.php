@@ -1,7 +1,9 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Image;
 
 use Countable;
+use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Player\PlayerResponseTrait;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use IteratorAggregate;

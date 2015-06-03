@@ -1,6 +1,7 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Image;
 
+use Icecave\Siphon\Player\PlayerRequestTrait;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Reader\SportRequestInterface;
 

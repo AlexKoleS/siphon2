@@ -1,24 +1,22 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Image;
 
+use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
-use Icecave\Siphon\Statistics\StatisticsFactoryTrait;
-use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
 
 /**
- * Client for reading player statistics feeds.
+ * Client for reading player image feeds.
  */
-class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
+class ImageReader implements ImageReaderInterface
 {
     use PlayerFactoryTrait;
     use SeasonFactoryTrait;
-    use StatisticsFactoryTrait;
     use TeamFactoryTrait;
 
     public function __construct(XmlReaderInterface $xmlReader)
@@ -38,29 +36,20 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
     {
         if (!$this->isSupported($request)) {
             throw new InvalidArgumentException('Unsupported request.');
-        } elseif (StatisticsType::COMBINED() === $request->type()) {
-            $resource = sprintf(
-                '/sport/v2/%s/%s/player-stats/%s/player_stats_%d_%s.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->seasonName(),
-                $request->teamId(),
-                $request->sport()->league()
-            );
-        } else { // split stats
-            $resource = sprintf(
-                '/sport/v2/%s/%s/player-split-stats/%s/player_split_stats_%d_%s.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->seasonName(),
-                $request->teamId(),
-                $request->sport()->league()
-            );
         }
 
         $xml = $this
             ->xmlReader
-            ->read($resource)
+            ->read(
+                sprintf(
+                    '/sport/v2/%s/%s/player-images/%s/player-images_%d_%s.xml',
+                    $request->sport()->sport(),
+                    $request->sport()->league(),
+                    $request->seasonName(),
+                    $request->teamId(),
+                    $request->sport()->league()
+                )
+            )
             ->xpath('.//season-content')[0];
 
         // Sometimes the feed contains no team or player information. Since
@@ -70,17 +59,17 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
             throw new NotFoundException;
         }
 
-        $response = new PlayerStatisticsResponse(
+        $response = new ImageResponse(
             $request->sport(),
             $this->createSeason($xml->season),
-            $this->createTeam($xml->{'team-content'}->team),
-            $request->type()
+            $this->createTeam($xml->{'team-content'}->team)
         );
 
         foreach ($xml->xpath('.//player-content') as $element) {
             $response->add(
                 $this->createPlayer($element->player),
-                $this->createStatisticsCollection($element)
+                XPath::string($element, 'image/url'),
+                XPath::string($element, 'image/thumbnailurl')
             );
         }
 
@@ -94,8 +83,6 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
      */
     public function isSupported(RequestInterface $request)
     {
-        return $request instanceof PlayerStatisticsRequest;
+        return $request instanceof ImageRequest;
     }
-
-    private $xmlReader;
 }

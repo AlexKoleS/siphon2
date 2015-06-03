@@ -1,7 +1,8 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Image;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;

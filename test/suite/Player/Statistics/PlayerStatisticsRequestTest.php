@@ -1,16 +1,17 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Statistics;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Statistics\StatisticsType;
 use PHPUnit_Framework_TestCase;
 
-class ImageRequestTest extends PHPUnit_Framework_TestCase
+class PlayerStatisticsRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->request = new ImageRequest(
+        $this->request = new PlayerStatisticsRequest(
             Sport::NFL(),
             '<season>',
             123
@@ -72,13 +73,28 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testType()
+    {
+        $this->assertSame(
+            StatisticsType::COMBINED(),
+            $this->request->type()
+        );
+
+        $this->request->setType(StatisticsType::SPLIT());
+
+        $this->assertSame(
+            StatisticsType::SPLIT(),
+            $this->request->type()
+        );
+    }
+
     public function testAccept()
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
         $this->request->accept($visitor->mock());
 
-        $visitor->visitImageRequest->calledWith($this->request);
+        $visitor->visitPlayerStatisticsRequest->calledWith($this->request);
     }
 
     public function testSerialize()
