@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file has been trimmed to reduce the size of the test suite. -->
+
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/football</id>
+            <name>football</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/football/league:1</id>
+                <name>National Football League</name>
+                <name type="nick">NFL</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/football/season:96</id>
+                    <name>2014-2015</name>
+                    <details>
+                        <start-date>2014-08-01</start-date>
+                        <end-date>2015-02-09</end-date>
+                    </details>
+                </season>
+                <team-content>
+                    <team>
+                        <id>/sport/football/team:23</id>
+                        <name>Arizona</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/football/player:338</id>
+                            <name type="first">John</name>
+                            <name type="last">Abraham</name>
+                        </player>
+                        <stat-group>
+                            <key>regular-season-home-stats</key>
+                            <scope str="home" type="home-away"/>
+                            <scope str="Week 1" type="season-phase-from"/>
+                            <scope str="Week 18" type="season-phase-to"/>
+                            <stat num="1" type="games_played"/>
+                            <stat num="1" type="games_started"/>
+                        </stat-group>
+                        <stat-group>
+                            <key>regular-season-vs-opponent-stats</key>
+                            <scope str="Week 1" type="season-phase-from"/>
+                            <scope str="Week 18" type="season-phase-to"/>
+                            <scope str="/sport/football/team:11" type="opp-team-id"/>
+                            <scope str="/sport/football/season:96" type="season-id"/>
+                            <stat num="1" type="games_played"/>
+                            <stat num="1" type="games_started"/>
+                        </stat-group>
+                    </player-content>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file has been trimmed to reduce the size of the test suite. -->
+
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/football</id>
+            <name>football</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/football/league:1</id>
+                <name>National Football League</name>
+                <name type="nick">NFL</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/football/season:96</id>
+                    <name>2014-2015</name>
+                    <details>
+                        <start-date>2014-08-01</start-date>
+                        <end-date>2015-02-09</end-date>
+                    </details>
+                </season>
+                <team-content>
+                    <meta>
+                        <property name="last-played-competition-id">/sport/football/competition:46700</property>
+                    </meta>
+                    <team>
+                        <id>/sport/football/team:23</id>
+                        <name>Arizona</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/football/player:338</id>
+                            <name type="first">John</name>
+                            <name type="last">Abraham</name>
+                        </player>
+                        <stat-group>
+                            <key>regular-season-stats</key>
+                            <scope str="Week 1" type="season-phase-from"/>
+                            <scope str="Week 18" type="season-phase-to"/>
+                            <stat num="1" type="games_played"/>
+                            <stat num="1" type="games_started"/>
+                        </stat-group>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/football/player:35195</id>
+                            <name type="first">Sam</name>
+                            <name type="last">Acho</name>
+                        </player>
+                        <stat-group>
+                            <key>regular-season-stats</key>
+                            <scope str="Week 1" type="season-phase-from"/>
+                            <scope str="Week 18" type="season-phase-to"/>
+                            <stat num="16" type="games_played"/>
+                            <stat num="3" type="games_started"/>
+                            <stat num="3" type="interception_returned_longest_yards"/>
+                            <stat num="1" type="defense_interceptions"/>
+                            <stat num="3" type="defense_interception_yards"/>
+                            <stat num="21" type="defense_solo_tackles"/>
+                            <stat num="7" type="defense_assisted_tackles"/>
+                            <stat num="2" type="defense_special_teams_solo_tackles"/>
+                            <stat num="1" type="defense_special_teams_assisted_tackles"/>
+                            <stat num="1.0" type="defense_sacks"/>
+                            <stat num="15.0" type="defense_sack_yards"/>
+                            <stat num="4.0" type="defense_tackles_for_loss"/>
+                            <stat num="3" type="defense_pass_defenses"/>
+                        </stat-group>
+                        <stat-group>
+                            <key>post-season-stats</key>
+                            <scope str="Wildcard" type="season-phase-from"/>
+                            <scope str="Super Bowl" type="season-phase-to"/>
+                            <stat num="1" type="games_played"/>
+                            <stat num="1" type="games_started"/>
+                            <stat num="2" type="defense_solo_tackles"/>
+                            <stat num="5" type="defense_assisted_tackles"/>
+                            <stat num="1.0" type="defense_sacks"/>
+                            <stat num="1" type="defense_forced_fumbles"/>
+                        </stat-group>
+                    </player-content>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

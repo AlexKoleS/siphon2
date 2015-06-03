@@ -5,8 +5,6 @@ use Eloquent\Enumeration\AbstractEnumeration;
 
 /**
  * The status of a competition.
- *
- * @api
  */
 class CompetitionStatus extends AbstractEnumeration
 {

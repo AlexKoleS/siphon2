@@ -1,10 +1,14 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
+use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Atom\AtomEntry;
-use Icecave\Siphon\XmlReaderTestTrait;
+use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\XmlReaderTestTrait;
+use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamRef;
 use PHPUnit_Framework_TestCase;
 
 class ScheduleReaderTest extends PHPUnit_Framework_TestCase
@@ -13,6 +17,15 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->request = new ScheduleRequest(
+            Sport::MLB()
+        );
+
+        $this->response = new ScheduleResponse(
+            Sport::MLB(),
+            ScheduleType::FULL()
+        );
+
         $season = new Season(
             '/sport/baseball/season:851',
             '2010',
@@ -20,89 +33,94 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             Date::fromIsoString('2010-11-15')
         );
 
-        $season->add(
-            new Competition(
-                '/sport/baseball/competition:294647',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-27T20:40:00-04:00'),
-                'baseball',
-                'MLB',
-                '/sport/baseball/team:2956',
-                '/sport/baseball/team:2968'
+        $comp1 = new Competition(
+            '/sport/baseball/competition:294647',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2010-04-27T20:40:00-04:00'),
+            Sport::MLB(),
+            $season,
+            new TeamRef('/sport/baseball/team:2956', 'Colorado'),
+            new TeamRef('/sport/baseball/team:2968', 'Arizona')
+        );
+
+        $comp1->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:42675',
+                'Ubaldo',
+                'Jimenez'
             )
         );
 
-        $season->add(
-            new Competition(
-                '/sport/baseball/competition:293835',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-27T22:05:00-04:00'),
-                'baseball',
-                'MLB',
-                '/sport/baseball/team:2979',
-                '/sport/baseball/team:2980'
+        $comp1->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:41499',
+                'Edwin',
+                'Jackson'
             )
         );
 
-        $season->add(
-            new Competition(
-                '/sport/baseball/competition:295678',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-27T22:15:00-04:00'),
-                'baseball',
-                'MLB',
-                '/sport/baseball/team:2962',
-                '/sport/baseball/team:2958'
+        $comp2 = new Competition(
+            '/sport/baseball/competition:293835',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2010-04-27T22:05:00-04:00'),
+            Sport::MLB(),
+            $season,
+            new TeamRef('/sport/baseball/team:2979', 'LA Angels'),
+            new TeamRef('/sport/baseball/team:2980', 'Cleveland')
+        );
+
+        $comp2->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:42548',
+                'Joe',
+                'Saunders'
             )
         );
 
-        $this->expected = new Schedule;
-        $this->expected->add($season);
-
-        $season = new Season(
-            '/sport/hockey/season:19',
-            '2009-2010',
-            Date::fromIsoString('2009-10-01'),
-            Date::fromIsoString('2010-06-30')
-        );
-
-        $season->add(
-            new Competition(
-                '/sport/hockey/competition:32577',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-16T22:00:00-04:00'),
-                'hockey',
-                'NHL',
-                '/sport/hockey/team:19',
-                '/sport/hockey/team:20'
+        $comp2->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:43367',
+                'Mitch',
+                'Talbot'
             )
         );
 
-        $season->add(
-            new Competition(
-                '/sport/hockey/competition:32539',
-                CompetitionStatus::SCHEDULED(),
-                DateTime::fromIsoString('2010-04-25T19:00:00-04:00'),
-                'hockey',
-                'NHL',
-                '/sport/hockey/team:12',
-                '/sport/hockey/team:13'
+        $comp3 = new Competition(
+            '/sport/baseball/competition:295678',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2010-04-27T22:15:00-04:00'),
+            Sport::MLB(),
+            $season,
+            new TeamRef('/sport/baseball/team:2962', 'San Francisco'),
+            new TeamRef('/sport/baseball/team:2958', 'Philadelphia')
+        );
+
+        $comp3->addNotablePlayer(
+            new Player(
+                '/sport/baseball/player:41429',
+                'Todd',
+                'Wellemeyer'
             )
         );
 
-        $this->expectedDeleted = new Schedule;
-        $this->expectedDeleted->add($season);
+        $season->add($comp1);
+        $season->add($comp2);
+        $season->add($comp3);
+
+        $this->response->add($season);
 
         $this->reader = new ScheduleReader(
             $this->xmlReader()->mock()
         );
     }
 
-    public function testRead()
+    public function testReadFullSchedule()
     {
         $this->setUpXmlReader('Schedule/schedule.xml');
 
-        $schedule = $this->reader->read('baseball', 'MLB');
+        $response = $this
+            ->reader
+            ->read($this->request);
 
         $this
             ->xmlReader
@@ -110,16 +128,21 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
 
         $this->assertEquals(
-            $this->expected,
-            $schedule
+            $this->response,
+            $response
         );
     }
 
-    public function testReadWithLimit()
+    public function testReadLimitedSchedule()
     {
         $this->setUpXmlReader('Schedule/schedule.xml');
 
-        $schedule = $this->reader->read('baseball', 'MLB', ScheduleLimit::DAYS_2());
+        $this->request->setType(ScheduleType::LIMIT_2_DAYS());
+        $this->response->setType(ScheduleType::LIMIT_2_DAYS());
+
+        $response = $this
+            ->reader
+            ->read($this->request);
 
         $this
             ->xmlReader
@@ -127,250 +150,76 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
 
         $this->assertEquals(
-            $this->expected,
-            $schedule
+            $this->response,
+            $response
         );
     }
 
-    public function testReadDeleted()
-    {
-        $this->setUpXmlReader('Schedule/deleted.xml');
-
-        $schedule = $this->reader->readDeleted('hockey', 'NHL');
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/hockey/NHL/games-deleted/games_deleted_NHL.xml');
-
-        $this->assertEquals(
-            $this->expectedDeleted,
-            $schedule
-        );
-    }
-
-    public function testReadAtomEntry()
+    public function testReadDeletedSchedule()
     {
         $this->setUpXmlReader('Schedule/schedule.xml');
 
-        $result = $this->reader->readAtomEntry(
-            new AtomEntry(
-                '<url>',
-                '/sport/v2/baseball/MLB/schedule/schedule_MLB.xml',
-                [],
-                DateTime::fromUnixTime(0)
-            )
-        );
+        $this->request->setType(ScheduleType::DELETED());
+        $this->response->setType(ScheduleType::DELETED());
+
+        $response = $this
+            ->reader
+            ->read($this->request);
 
         $this
             ->xmlReader
             ->read
-            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+            ->calledWith('/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml');
 
         $this->assertEquals(
-            $this->expected,
-            $result
+            $this->response,
+            $response
         );
     }
 
-    public function testReadAtomEntryWithLimit()
-    {
-        $this->setUpXmlReader('Schedule/schedule.xml');
-
-        $result = $this->reader->readAtomEntry(
-            new AtomEntry(
-                '<url>',
-                '/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml',
-                [],
-                DateTime::fromUnixTime(0)
-            )
-        );
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
-
-        $this->assertEquals(
-            $this->expected,
-            $result
-        );
-    }
-
-    public function testReadAtomEntryDeleted()
-    {
-        $this->setUpXmlReader('Schedule/deleted.xml');
-
-        $result = $this->reader->readAtomEntry(
-            new AtomEntry(
-                '<url>',
-                '/sport/v2/hockey/NHL/games-deleted/games_deleted_NHL.xml',
-                [],
-                DateTime::fromUnixTime(0)
-            )
-        );
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/hockey/NHL/games-deleted/games_deleted_NHL.xml');
-
-        $this->assertEquals(
-            $this->expectedDeleted,
-            $result
-        );
-    }
-
-    public function testReadAtomEntryFailure()
+    public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Unsupported atom entry.'
+            'Unsupported request.'
         );
 
-        $this->reader->readAtomEntry(
-            new AtomEntry(
-                '<atom-url>',
-                '<atom-resource>',
-                ['foo' => 'bar'],
-                DateTime::fromUnixTime(0)
-            )
+        $this->reader->read(
+            Phony::mock(RequestInterface::class)->mock()
         );
     }
 
-    public function testSupportsAtomEntry()
+    public function testReadNotFound()
     {
+        $this->setUpXmlReaderNotFound();
+
+        $response = $this
+            ->reader
+            ->read($this->request);
+
+        $this
+            ->xmlReader
+            ->read
+            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+
+        $this->response->clear();
+
+        $this->assertEquals(
+            $this->response,
+            $response
+        );
+    }
+
+    public function testIsSupported()
+    {
+        $this->assertTrue(
+            $this->reader->isSupported($this->request)
+        );
+
         $this->assertFalse(
-            $this->reader->supportsAtomEntry(
-                new AtomEntry(
-                    '<atom-url>',
-                    '<atom-resource>',
-                    ['foo' => 'bar'],
-                    DateTime::fromUnixTime(0)
-                )
+            $this->reader->isSupported(
+                Phony::mock(RequestInterface::class)->mock()
             )
-        );
-
-        $this->assertFalse(
-            $this->reader->supportsAtomEntry(
-                new AtomEntry(
-                    '<atom-url>',
-                    '<atom-resource>',
-                    [],
-                    DateTime::fromUnixTime(0)
-                )
-            )
-        );
-
-        $this->assertTrue(
-            $this->reader->supportsAtomEntry(
-                new AtomEntry(
-                    '<url>',
-                    '/sport/v2/baseball/MLB/schedule/schedule_MLB.xml',
-                    [],
-                    DateTime::fromUnixTime(0)
-                )
-            )
-        );
-
-        $this->assertTrue(
-            $this->reader->supportsAtomEntry(
-                new AtomEntry(
-                    '<url>',
-                    '/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml',
-                    [],
-                    DateTime::fromUnixTime(0)
-                )
-            )
-        );
-
-        $this->assertTrue(
-            $this->reader->supportsAtomEntry(
-                new AtomEntry(
-                    '<url>',
-                    '/sport/v2/hockey/NHL/games-deleted/games_deleted_NHL.xml',
-                    [],
-                    DateTime::fromUnixTime(0)
-                )
-            )
-        );
-    }
-
-    public function testSupportsAtomEntryParameters()
-    {
-        $entry = new AtomEntry(
-            '<atom-url>',
-            '/sport/v2/baseball/MLB/schedule/schedule_MLB.xml',
-            [],
-            DateTime::fromUnixTime(0)
-        );
-
-        $parameters = [];
-
-        $this->assertTrue(
-            $this->reader->supportsAtomEntry($entry, $parameters)
-        );
-
-        $this->assertSame(
-            [
-                'sport'   => 'baseball',
-                'league'  => 'MLB',
-                'limit'   => ScheduleLimit::NONE(),
-                'deleted' => false,
-            ],
-            $parameters
-        );
-    }
-
-    public function testSupportsAtomEntryParametersWithLimit()
-    {
-        $entry = new AtomEntry(
-            '<atom-url>',
-            '/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml',
-            [],
-            DateTime::fromUnixTime(0)
-        );
-
-        $parameters = [];
-
-        $this->assertTrue(
-            $this->reader->supportsAtomEntry($entry, $parameters)
-        );
-
-        $this->assertSame(
-            [
-                'sport'   => 'baseball',
-                'league'  => 'MLB',
-                'limit'   => ScheduleLimit::DAYS_2(),
-                'deleted' => false,
-            ],
-            $parameters
-        );
-    }
-
-    public function testSupportsAtomEntryParametersDeleted()
-    {
-        $entry = new AtomEntry(
-            '<atom-url>',
-            '/sport/v2/hockey/NHL/games-deleted/games_deleted_NHL.xml',
-            [],
-            DateTime::fromUnixTime(0)
-        );
-
-        $parameters = [];
-
-        $this->assertTrue(
-            $this->reader->supportsAtomEntry($entry, $parameters)
-        );
-
-        $this->assertSame(
-            [
-                'sport'   => 'hockey',
-                'league'  => 'NHL',
-                'limit'   => null,
-                'deleted' => true,
-            ],
-            $parameters
         );
     }
 }

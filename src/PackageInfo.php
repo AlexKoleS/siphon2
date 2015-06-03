@@ -1,9 +1,6 @@
 <?php
 namespace Icecave\Siphon;
 
-/**
- * @api
- */
 class PackageInfo
 {
     const NAME    = 'Siphon';
