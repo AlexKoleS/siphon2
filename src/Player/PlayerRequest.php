@@ -1,13 +1,13 @@
 <?php
 namespace Icecave\Siphon\Player;
 
-use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
+use Icecave\Siphon\Reader\SportRequestInterface;
 
 /**
  * A request to the player feed.
  */
-class PlayerRequest implements RequestInterface
+class PlayerRequest implements SportRequestInterface
 {
     use PlayerRequestTrait;
 

@@ -1,15 +1,15 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
+use Icecave\Siphon\Reader\SportRequestInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Util\Serialization;
 
 /**
  * A request to the schedule feed.
  */
-class ScheduleRequest implements RequestInterface
+class ScheduleRequest implements SportRequestInterface
 {
     /**
      * @param Sport        $sport The sport to request.

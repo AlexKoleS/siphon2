@@ -1,8 +1,8 @@
 <?php
 namespace Icecave\Siphon\Player;
 
-use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
+use Icecave\Siphon\Reader\SportRequestInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Util\Serialization;
@@ -10,7 +10,7 @@ use Icecave\Siphon\Util\Serialization;
 /**
  * A request to the player statistics feed.
  */
-class PlayerStatisticsRequest implements RequestInterface
+class PlayerStatisticsRequest implements SportRequestInterface
 {
     use PlayerRequestTrait {
         __construct as private initialize;
