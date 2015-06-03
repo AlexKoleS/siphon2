@@ -8,6 +8,9 @@ use Icecave\Siphon\Atom\AtomResponse;
 use Icecave\Siphon\Player\ImageReaderInterface;
 use Icecave\Siphon\Player\ImageRequest;
 use Icecave\Siphon\Player\ImageResponse;
+use Icecave\Siphon\Player\Injury\InjuryReaderInterface;
+use Icecave\Siphon\Player\Injury\InjuryRequest;
+use Icecave\Siphon\Player\Injury\InjuryResponse;
 use Icecave\Siphon\Player\PlayerReaderInterface;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\PlayerResponse;
@@ -36,6 +39,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->playerReader      = Phony::mock(PlayerReaderInterface::class);
         $this->playerStatsReader = Phony::mock(PlayerStatisticsReaderInterface::class);
         $this->imageReader       = Phony::mock(ImageReaderInterface::class);
+        $this->injuryReader      = Phony::mock(InjuryReaderInterface::class);
 
         $this->dispatcher = new Dispatcher(
             $this->urlBuilder->mock(),
@@ -45,7 +49,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->teamReader->mock(),
             $this->playerReader->mock(),
             $this->playerStatsReader->mock(),
-            $this->imageReader->mock()
+            $this->imageReader->mock(),
+            $this->injuryReader->mock()
         );
     }
 
@@ -131,6 +136,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             ImageRequest::class,
             ImageResponse::class,
             $this->imageReader
+        );
+    }
+
+    public function testInjuryRequest()
+    {
+        $this->dispatchTest(
+            InjuryRequest::class,
+            InjuryResponse::class,
+            $this->injuryReader
         );
     }
 

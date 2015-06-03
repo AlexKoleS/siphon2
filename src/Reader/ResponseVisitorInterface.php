@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Siphon\Atom\AtomResponse;
 use Icecave\Siphon\Player\ImageResponse;
+use Icecave\Siphon\Player\Injury\InjuryResponse;
 use Icecave\Siphon\Player\PlayerResponse;
 use Icecave\Siphon\Player\PlayerStatisticsResponse;
 use Icecave\Siphon\Schedule\ScheduleResponse;
@@ -66,4 +67,13 @@ interface ResponseVisitorInterface
      * @return mixed
      */
     public function visitImageResponse(ImageResponse $response);
+
+    /**
+     * Visit the given response.
+     *
+     * @param InjuryResponse $response
+     *
+     * @return mixed
+     */
+    public function visitInjuryResponse(InjuryResponse $response);
 }

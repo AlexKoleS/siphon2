@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Injury;
 
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
@@ -7,25 +7,23 @@ use Icecave\Chrono\DateTime;
 /**
  * Information about a specific injury.
  */
-class Injury implements InjuryInterface
+class Injury
 {
     public function __construct(
         $id,
-        $playerId,
-        $type,
+        $location,
         InjuryStatus $status,
         $statusInformation,
-        $note,
-        Date $date,
+        $statusNote,
+        Date $startDate,
         DateTime $updatedTime = null
     ) {
         $this->id                = $id;
-        $this->playerId          = $playerId;
-        $this->type              = $type;
+        $this->location          = $location;
         $this->status            = $status;
         $this->statusInformation = $statusInformation;
-        $this->note              = $note;
-        $this->date              = $date;
+        $this->statusNote        = $statusNote;
+        $this->startDate         = $startDate;
         $this->updatedTime       = $updatedTime;
     }
 
@@ -40,25 +38,13 @@ class Injury implements InjuryInterface
     }
 
     /**
-     * Get the player ID.
+     * Get the location of the injury.
      *
-     * @return string The player ID.
+     * @return string The injury location.
      */
-    public function playerId()
+    public function location()
     {
-        return $this->playerId;
-    }
-
-    /**
-     * The type of injury.
-     *
-     * This may be a body location of a very brief description of the injury.
-     *
-     * @return string The injury type.
-     */
-    public function type()
-    {
-        return $this->type;
+        return $this->location;
     }
 
     /**
@@ -82,13 +68,13 @@ class Injury implements InjuryInterface
     }
 
     /**
-     * Get a human-readable note about the injury.
+     * Get a human-readable note about the injury status.
      *
      * @return string The note.
      */
-    public function note()
+    public function statusNote()
     {
-        return $this->note;
+        return $this->statusNote;
     }
 
     /**
@@ -96,9 +82,9 @@ class Injury implements InjuryInterface
      *
      * @return Date The injury start date.
      */
-    public function date()
+    public function startDate()
     {
-        return $this->date;
+        return $this->startDate;
     }
 
     /**
@@ -112,11 +98,10 @@ class Injury implements InjuryInterface
     }
 
     private $id;
-    private $playerId;
-    private $type;
+    private $location;
     private $status;
     private $statusInformation;
-    private $note;
-    private $date;
+    private $statusNote;
+    private $startDate;
     private $updatedTime;
 }

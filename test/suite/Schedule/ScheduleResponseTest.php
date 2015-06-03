@@ -135,7 +135,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRemoveUnknownRequest()
+    public function testRemoveUnknownSeason()
     {
         $this->response->add($this->season1->mock());
         $this->response->remove($this->season1->mock());

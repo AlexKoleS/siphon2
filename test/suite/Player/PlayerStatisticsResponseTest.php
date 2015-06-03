@@ -20,8 +20,8 @@ class PlayerStatisticsResponseTest extends PHPUnit_Framework_TestCase
         $this->player1 = Phony::fullMock(Player::class);
         $this->player2 = Phony::fullMock(Player::class);
 
-        $this->player1->id->returns('<team 1>');
-        $this->player2->id->returns('<team 2>');
+        $this->player1->id->returns('<player 1>');
+        $this->player2->id->returns('<player 2>');
 
         $this->statistics1 = Phony::fullMock(StatisticsCollection::class)->mock();
         $this->statistics2 = Phony::fullMock(StatisticsCollection::class)->mock();
@@ -179,7 +179,7 @@ class PlayerStatisticsResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRemoveUnknownRequest()
+    public function testRemoveUnknownPlayer()
     {
         $this->response->add($this->player1->mock(), $this->statistics1);
         $this->response->remove($this->player1->mock());

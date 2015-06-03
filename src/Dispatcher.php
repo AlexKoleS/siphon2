@@ -8,6 +8,9 @@ use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Player\ImageReader;
 use Icecave\Siphon\Player\ImageReaderInterface;
 use Icecave\Siphon\Player\ImageRequest;
+use Icecave\Siphon\Player\Injury\InjuryReader;
+use Icecave\Siphon\Player\Injury\InjuryReaderInterface;
+use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerReader;
 use Icecave\Siphon\Player\PlayerReaderInterface;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -53,7 +56,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new TeamReader($xmlReader),
             new PlayerReader($xmlReader),
             new PlayerStatisticsReader($xmlReader),
-            new ImageReader($xmlReader)
+            new ImageReader($xmlReader),
+            new InjuryReader($xmlReader)
         );
     }
 
@@ -65,7 +69,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         TeamReaderInterface $teamReader,
         PlayerReaderInterface $playerReader,
         PlayerStatisticsReaderInterface $playerStatisticsReader,
-        ImageReaderInterface $imageReader
+        ImageReaderInterface $imageReader,
+        InjuryReaderInterface $injuryReader
     ) {
         $this->urlBuilder             = $urlBuilder;
         $this->xmlReader              = $xmlReader;
@@ -75,6 +80,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $this->playerReader           = $playerReader;
         $this->playerStatisticsReader = $playerStatisticsReader;
         $this->imageReader            = $imageReader;
+        $this->injuryReader           = $injuryReader;
     }
 
     /**
@@ -204,6 +210,18 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         return $this->imageReader->read($request);
     }
 
+    /**
+     * Visit the given request.
+     *
+     * @param InjuryRequest $request
+     *
+     * @return mixed
+     */
+    public function visitInjuryRequest(InjuryRequest $request)
+    {
+        return $this->injuryReader->read($request);
+    }
+
     private $urlBuilder;
     private $xmlReader;
     private $atomReader;
@@ -211,4 +229,5 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     private $teamReader;
     private $playerReader;
     private $imageReader;
+    private $injuryReader;
 }

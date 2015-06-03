@@ -1,27 +1,27 @@
 <?php
-namespace Icecave\Siphon\Team;
+namespace Icecave\Siphon\Player\Injury;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
-use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 use PHPUnit_Framework_TestCase;
 
-class TeamResponseTest extends PHPUnit_Framework_TestCase
+class InjuryResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->season = Phony::fullMock(Season::class)->mock();
+        $this->player1 = Phony::fullMock(Player::class);
+        $this->player2 = Phony::fullMock(Player::class);
 
-        $this->team1 = Phony::mock(TeamInterface::class);
-        $this->team2 = Phony::mock(TeamInterface::class);
+        $this->player1->id->returns('<player 1>');
+        $this->player2->id->returns('<player 2>');
 
-        $this->team1->id->returns('<team 1>');
-        $this->team2->id->returns('<team 2>');
+        $this->injury1 = Phony::fullMock(Injury::class)->mock();
+        $this->injury2 = Phony::fullMock(Injury::class)->mock();
 
-        $this->response = new TeamResponse(
-            Sport::NFL(),
-            $this->season
+        $this->response = new InjuryResponse(
+            Sport::NFL()
         );
     }
 
@@ -40,29 +40,13 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSeason()
-    {
-        $this->assertSame(
-            $this->season,
-            $this->response->season()
-        );
-
-        $season = Phony::fullMock(Season::class)->mock();
-        $this->response->setSeason($season);
-
-        $this->assertSame(
-            $season,
-            $this->response->season()
-        );
-    }
-
     public function testIsEmpty()
     {
         $this->assertTrue(
             $this->response->isEmpty()
         );
 
-        $this->response->add($this->team1->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
 
         $this->assertFalse(
             $this->response->isEmpty()
@@ -76,7 +60,7 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
             count($this->response)
         );
 
-        $this->response->add($this->team1->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
 
         $this->assertSame(
             1,
@@ -91,13 +75,13 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
             iterator_to_array($this->response)
         );
 
-        $this->response->add($this->team1->mock());
-        $this->response->add($this->team2->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
+        $this->response->add($this->player2->mock(), $this->injury2);
 
         $this->assertEquals(
             [
-                $this->team1->mock(),
-                $this->team2->mock(),
+                [$this->player1->mock(), $this->injury1],
+                [$this->player2->mock(), $this->injury2],
             ],
             iterator_to_array($this->response)
         );
@@ -105,11 +89,11 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $this->response->add($this->team1->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
 
         $this->assertEquals(
             [
-                $this->team1->mock(),
+                [$this->player1->mock(), $this->injury1],
             ],
             iterator_to_array($this->response)
         );
@@ -117,12 +101,12 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->team1->mock());
-        $this->response->add($this->team1->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
+        $this->response->add($this->player1->mock(), $this->injury1);
 
         $this->assertEquals(
             [
-                $this->team1->mock(),
+                [$this->player1->mock(), $this->injury1],
             ],
             iterator_to_array($this->response)
         );
@@ -130,8 +114,8 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->response->add($this->team1->mock());
-        $this->response->remove($this->team1->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
+        $this->response->remove($this->player1->mock());
 
         $this->assertEquals(
             [],
@@ -139,11 +123,11 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRemoveUnknownTeam()
+    public function testRemoveUnknownPlayer()
     {
-        $this->response->add($this->team1->mock());
-        $this->response->remove($this->team1->mock());
-        $this->response->remove($this->team1->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
+        $this->response->remove($this->player1->mock());
+        $this->response->remove($this->player1->mock());
 
         $this->assertEquals(
             [],
@@ -153,8 +137,8 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
 
     public function testClear()
     {
-        $this->response->add($this->team1->mock());
-        $this->response->add($this->team2->mock());
+        $this->response->add($this->player1->mock(), $this->injury1);
+        $this->response->add($this->player2->mock(), $this->injury2);
 
         $this->response->clear();
 
@@ -169,6 +153,6 @@ class TeamResponseTest extends PHPUnit_Framework_TestCase
 
         $this->response->accept($visitor->mock());
 
-        $visitor->visitTeamResponse->calledWith($this->response);
+        $visitor->visitInjuryResponse->calledWith($this->response);
     }
 }

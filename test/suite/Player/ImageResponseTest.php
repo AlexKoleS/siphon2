@@ -18,8 +18,8 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
         $this->player1 = Phony::fullMock(Player::class);
         $this->player2 = Phony::fullMock(Player::class);
 
-        $this->player1->id->returns('<team 1>');
-        $this->player2->id->returns('<team 2>');
+        $this->player1->id->returns('<player 1>');
+        $this->player2->id->returns('<player 2>');
 
         $this->response = new ImageResponse(
             Sport::NFL(),
@@ -158,7 +158,7 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRemoveUnknownRequest()
+    public function testRemoveUnknownPlayer()
     {
         $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
         $this->response->remove($this->player1->mock());

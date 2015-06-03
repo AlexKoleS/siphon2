@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Injury;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 

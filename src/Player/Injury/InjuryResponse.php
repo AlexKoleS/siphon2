@@ -1,23 +1,27 @@
 <?php
-namespace Icecave\Siphon\Player;
+namespace Icecave\Siphon\Player\Injury;
 
-use Icecave\Siphon\Schedule\Season;
+use Countable;
+use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Sport;
-use Icecave\Siphon\Team\TeamInterface;
+use IteratorAggregate;
 
 /**
- * Common implementation for response that operate per sport + season + team.
+ * A response from the player injury feed.
  */
-trait PlayerResponseTrait
+class InjuryResponse implements
+    ResponseInterface,
+    Countable,
+    IteratorAggregate
 {
-    public function __construct(
-        Sport $sport,
-        Season $season,
-        TeamInterface $team
-    ) {
+    /**
+     * @param Sport $sport The sport to request.
+     */
+    public function __construct(Sport $sport)
+    {
         $this->setSport($sport);
-        $this->setSeason($season);
-        $this->setTeam($team);
 
         $this->entries = [];
     }
@@ -43,46 +47,6 @@ trait PlayerResponseTrait
     }
 
     /**
-     * Get the requested season.
-     *
-     * @return Season The requested season.
-     */
-    public function season()
-    {
-        return $this->season;
-    }
-
-    /**
-     * Set the requested season.
-     *
-     * @param Season $season The requested season.
-     */
-    public function setSeason(Season $season)
-    {
-        $this->season = $season;
-    }
-
-    /**
-     * Get the requested team.
-     *
-     * @return TeamInterface The requested team.
-     */
-    public function team()
-    {
-        return $this->team;
-    }
-
-    /**
-     * Set the requested team.
-     *
-     * @param TeamInterface $team The requested team.
-     */
-    public function setTeam(TeamInterface $team)
-    {
-        $this->team = $team;
-    }
-
-    /**
      * Check if the response contains players.
      *
      * @param boolean True if the response is empty; otherwise, false.
@@ -105,13 +69,24 @@ trait PlayerResponseTrait
     /**
      * Iterate the players.
      *
-     * @return mixed<tuple<Player, mixed>>
+     * @return mixed<tuple<Player, Injury>>
      */
     public function getIterator()
     {
         foreach ($this->entries as $entry) {
             yield $entry;
         }
+    }
+
+    /**
+     * Add a player to the response.
+     *
+     * @param Player $player The player to add.
+     * @param Injury $injury The injury details.
+     */
+    public function add(Player $player, Injury $injury)
+    {
+        $this->entries[$player->id()] = [$player, $injury];
     }
 
     /**
@@ -132,7 +107,18 @@ trait PlayerResponseTrait
         $this->entries = [];
     }
 
+    /**
+     * Dispatch a call to the given visitor.
+     *
+     * @param ResponseVisitorInterface $visitor
+     *
+     * @return mixed
+     */
+    public function accept(ResponseVisitorInterface $visitor)
+    {
+        return $visitor->visitInjuryResponse($this);
+    }
+
     private $sport;
-    private $team;
     private $entries;
 }
