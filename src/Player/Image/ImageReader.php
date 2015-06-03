@@ -68,8 +68,8 @@ class ImageReader implements ImageReaderInterface
         foreach ($xml->xpath('.//player-content') as $element) {
             $response->add(
                 $this->createPlayer($element->player),
-                XPath::string($element, 'image/url'),
-                XPath::string($element, 'image/thumbnailurl')
+                XPath::string($element, 'image/thumbnailurl'),
+                XPath::string($element, 'image/url')
             );
         }
 
