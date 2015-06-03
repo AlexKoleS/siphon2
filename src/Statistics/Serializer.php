@@ -129,7 +129,10 @@ class Serializer implements SerializerInterface
             while ($numScopes--) {
                 $key          = $table[$data[$index++]];
                 $value        = $table[$data[$index++]];
-                $scopes[$key] = $value;
+
+                // numeric strings are serialized as numbers to save space, but
+                // the group expects only strings
+                $scopes[$key] = strval($value);
             }
 
             $stats = [];

@@ -23,6 +23,23 @@ class SerializerTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testNumericStringsAreSerializedAsNumbers()
+    {
+        $this->assertEquals(
+            '[1,["group","s",3],[1,0,1,2]]',
+            $this->serializer->serialize(
+                new StatisticsCollection(
+                    [
+                        new StatisticsGroup(
+                            'group',
+                            ['s' => '3']
+                        ),
+                    ]
+                )
+            )
+        );
+    }
+
     public function testUnserializeInvalidStringTable()
     {
         $this->setExpectedException(
@@ -111,6 +128,16 @@ class SerializerTest extends PHPUnit_Framework_TestCase
                                 'st2' => 250,
                                 'st3' => 350,
                             ]
+                        ),
+                    ]
+                ),
+            ],
+            'numeric scope value (regression)' => [
+                new StatisticsCollection(
+                    [
+                        new StatisticsGroup(
+                            'group',
+                            ['s' => '3']
                         ),
                     ]
                 ),
