@@ -97,4 +97,12 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
             $request->sport()
         );
     }
+
+    public function testToString()
+    {
+        $this->assertSame(
+            'image(NFL <season> team:123)',
+            strval($this->request)
+        );
+    }
 }

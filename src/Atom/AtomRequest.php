@@ -172,6 +172,20 @@ class AtomRequest implements RequestInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'atom(%s%s limit:%s %s)',
+            $this->updatedTime->isoString(),
+            $this->feed ? ' feed:' . $this->feed : '',
+            $this->limit,
+            $this->order === SORT_ASC ? 'asc' : 'desc'
+        );
+    }
+
     private $updatedTime;
     private $feed;
     private $limit;

@@ -55,4 +55,12 @@ class InjuryRequestTest extends PHPUnit_Framework_TestCase
             $request->sport()
         );
     }
+
+    public function testToString()
+    {
+        $this->assertSame(
+            'injury(NFL)',
+            strval($this->request)
+        );
+    }
 }

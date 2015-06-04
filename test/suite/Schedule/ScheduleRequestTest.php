@@ -75,4 +75,26 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
             $request->type()
         );
     }
+
+    public function testToString()
+    {
+        $this->assertSame(
+            'schedule(NFL)',
+            strval($this->request)
+        );
+
+        $this->request->setType(ScheduleType::DELETED());
+
+        $this->assertSame(
+            'schedule(NFL deleted)',
+            strval($this->request)
+        );
+
+        $this->request->setType(ScheduleType::LIMIT_2_DAYS());
+
+        $this->assertSame(
+            'schedule(NFL 2 days)',
+            strval($this->request)
+        );
+    }
 }

@@ -121,4 +121,24 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
             $request
         );
     }
+
+    public function testToString()
+    {
+        $this->assertSame(
+            'atom(1970-01-01T00:02:03+00:00 limit:5000 asc)',
+            strval($this->request)
+        );
+
+        $this->request = new AtomRequest(
+            $this->updatedTime,
+            '/foo',
+            1234,
+            SORT_DESC
+        );
+
+        $this->assertSame(
+            'atom(1970-01-01T00:02:03+00:00 feed:/foo limit:1234 desc)',
+            strval($this->request)
+        );
+    }
 }

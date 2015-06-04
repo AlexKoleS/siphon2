@@ -113,4 +113,19 @@ class PlayerStatisticsRequestTest extends PHPUnit_Framework_TestCase
             $request->sport()
         );
     }
+
+    public function testToString()
+    {
+        $this->assertSame(
+            'player-statistics(NFL <season> team:123 combined)',
+            strval($this->request)
+        );
+
+        $this->request->setType(StatisticsType::SPLIT());
+
+        $this->assertSame(
+            'player-statistics(NFL <season> team:123 split)',
+            strval($this->request)
+        );
+    }
 }

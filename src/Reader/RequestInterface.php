@@ -16,4 +16,9 @@ interface RequestInterface extends Serializable
      * @return mixed
      */
     public function accept(RequestVisitorInterface $visitor);
+
+    /**
+     * @return string
+     */
+    public function __toString();
 }

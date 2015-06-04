@@ -23,4 +23,17 @@ class ImageRequest implements SportRequestInterface
     {
         return $visitor->visitImageRequest($this);
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'image(%s %s team:%d)',
+            $this->sport->key(),
+            $this->seasonName,
+            $this->teamId
+        );
+    }
 }

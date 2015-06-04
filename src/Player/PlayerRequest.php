@@ -22,4 +22,17 @@ class PlayerRequest implements SportRequestInterface
     {
         return $visitor->visitPlayerRequest($this);
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'player(%s %s team:%d)',
+            $this->sport->key(),
+            $this->seasonName,
+            $this->teamId
+        );
+    }
 }

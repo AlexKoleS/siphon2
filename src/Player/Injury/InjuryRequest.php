@@ -79,5 +79,16 @@ class InjuryRequest implements SportRequestInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'injury(%s)',
+            $this->sport->key()
+        );
+    }
+
     private $sport;
 }

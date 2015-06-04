@@ -103,5 +103,19 @@ class PlayerStatisticsRequest implements SportRequestInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'player-statistics(%s %s team:%d %s)',
+            $this->sport->key(),
+            $this->seasonName,
+            $this->teamId,
+            $this->type->value()
+        );
+    }
+
     private $type;
 }

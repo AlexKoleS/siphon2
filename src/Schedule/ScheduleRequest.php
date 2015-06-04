@@ -107,6 +107,30 @@ class ScheduleRequest implements SportRequestInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if (ScheduleType::FULL() === $this->type) {
+            return sprintf(
+                'schedule(%s)',
+                $this->sport->key()
+            );
+        } elseif (ScheduleType::DELETED() === $this->type) {
+            return sprintf(
+                'schedule(%s deleted)',
+                $this->sport->key()
+            );
+        } else {
+            return sprintf(
+                'schedule(%s %d days)',
+                $this->sport->key(),
+                $this->type->value()
+            );
+        }
+    }
+
     private $sport;
     private $type;
 }

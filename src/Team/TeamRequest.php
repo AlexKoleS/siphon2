@@ -103,6 +103,18 @@ class TeamRequest implements SportRequestInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'team(%s %s)',
+            $this->sport->key(),
+            $this->seasonName
+        );
+    }
+
     private $sport;
     private $seasonName;
 }
