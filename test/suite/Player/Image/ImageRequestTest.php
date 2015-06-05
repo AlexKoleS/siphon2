@@ -47,7 +47,7 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testId()
+    public function testTeamId()
     {
         $this->assertSame(
             123,
@@ -62,7 +62,7 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIdWithString()
+    public function testTeamIdWithString()
     {
         $this->request->setTeamId('/sport/football/team:123');
 
