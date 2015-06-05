@@ -74,7 +74,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testHomeTeamId()
+    public function testHomeTeam()
     {
         $this->assertSame(
             $this->homeTeam,
@@ -82,7 +82,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAwayTeamId()
+    public function testAwayTeam()
     {
         $this->assertSame(
             $this->awayTeam,
