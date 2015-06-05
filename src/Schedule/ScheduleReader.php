@@ -9,6 +9,7 @@ use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Team\TeamRef;
 use InvalidArgumentException;
 use SimpleXMLElement;
@@ -18,8 +19,10 @@ use SimpleXMLElement;
  */
 class ScheduleReader implements ScheduleReaderInterface
 {
+    use CompetitionFactoryTrait;
     use PlayerFactoryTrait;
     use SeasonFactoryTrait;
+    use TeamFactoryTrait;
 
     public function __construct(XmlReaderInterface $xmlReader)
     {
@@ -83,13 +86,19 @@ class ScheduleReader implements ScheduleReaderInterface
             $season = $this->createSeason($element->season);
 
             foreach ($element->competition as $competitionElement) {
-                $season->add(
-                    $this->createCompetition(
-                        $competitionElement,
-                        $request->sport(),
-                        $season
-                    )
+                $competition = $this->createCompetition(
+                    $competitionElement,
+                    $request->sport(),
+                    $season
                 );
+
+                foreach ($competitionElement->xpath('.//player') as $playerElement) {
+                    $competition->addNotablePlayer(
+                        $this->createPlayer($playerElement)
+                    );
+                }
+
+                $season->add($competition);
             }
 
             $response->add($season);
@@ -106,46 +115,6 @@ class ScheduleReader implements ScheduleReaderInterface
     public function isSupported(RequestInterface $request)
     {
         return $request instanceof ScheduleRequest;
-    }
-
-    private function createCompetition(
-        SimpleXMLElement $element,
-        Sport $sport,
-        Season $season
-    ) {
-        $competition = new Competition(
-            strval($element->id),
-            CompetitionStatus::memberByValue(
-                strval($element->{'result-scope'}->{'competition-status'})
-            ),
-            DateTime::fromIsoString(
-                $element->{'start-date'}
-            ),
-            $sport,
-            $season,
-            $this->createTeamReference(
-                $element->{'home-team-content'}->{'team'}
-            ),
-            $this->createTeamReference(
-                $element->{'away-team-content'}->{'team'}
-            )
-        );
-
-        foreach ($element->xpath('.//player') as $playerElement) {
-            $competition->addNotablePlayer(
-                $this->createPlayer($playerElement)
-            );
-        }
-
-        return $competition;
-    }
-
-    private function createTeamReference(SimpleXMLElement $element)
-    {
-        return new TeamRef(
-            strval($element->id),
-            strval($element->name)
-        );
     }
 
     private $xmlReader;
