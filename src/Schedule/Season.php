@@ -94,7 +94,7 @@ class Season implements
     /**
      * Iterate over the competitions.
      *
-     * @return mixed<Competition>
+     * @return mixed<CompetitionInterface>
      */
     public function getIterator()
     {
@@ -106,9 +106,9 @@ class Season implements
     /**
      * Add a competition to the season.
      *
-     * @param Competition $competition The competition to add.
+     * @param CompetitionInterface $competition The competition to add.
      */
-    public function add(Competition $competition)
+    public function add(CompetitionInterface $competition)
     {
         $this->competitions[$competition->id()] = $competition;
     }
@@ -116,9 +116,9 @@ class Season implements
     /**
      * Remove a competition from the season.
      *
-     * @param Competition $competition The competition to remove.
+     * @param CompetitionInterface $competition The competition to remove.
      */
-    public function remove(Competition $competition)
+    public function remove(CompetitionInterface $competition)
     {
         unset($this->competitions[$competition->id()]);
     }

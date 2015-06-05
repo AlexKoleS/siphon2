@@ -9,8 +9,8 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->comp1 = Phony::fullMock(Competition::class);
-        $this->comp2 = Phony::fullMock(Competition::class);
+        $this->comp1 = Phony::mock(CompetitionInterface::class);
+        $this->comp2 = Phony::mock(CompetitionInterface::class);
 
         $this->comp1->id->returns('<comp 1>');
         $this->comp2->id->returns('<comp 2>');
