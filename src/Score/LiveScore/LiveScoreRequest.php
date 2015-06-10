@@ -111,6 +111,18 @@ class LiveScoreRequest implements SportRequestInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf(
+            'live-score(%s competition:%d)',
+            $this->sport->key(),
+            $this->competitionId
+        );
+    }
+
     private $sport;
     private $competitionId;
 }

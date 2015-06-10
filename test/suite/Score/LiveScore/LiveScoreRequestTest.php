@@ -81,4 +81,12 @@ class LiveScoreRequestTest extends PHPUnit_Framework_TestCase
             $request->sport()
         );
     }
+
+    public function testToString()
+    {
+        $this->assertSame(
+            'live-score(NFL competition:123)',
+            strval($this->request)
+        );
+    }
 }
