@@ -2,7 +2,6 @@
 namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamInterface;
 

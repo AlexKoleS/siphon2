@@ -58,9 +58,9 @@ class LiveScoreRequest implements SportRequestInterface
      * If a string ID is given it is validated against the sport, and the
      * numeric portion is extracted.
      *
-     * @param string|integer The string or numeric competition ID.
+     * @param string|integer $competitionId The string or numeric competition ID.
      */
-    public function setCompetitionId($seasonName)
+    public function setCompetitionId($competitionId)
     {
         $this->competitionId = IdParser::parse(
             $competitionId,

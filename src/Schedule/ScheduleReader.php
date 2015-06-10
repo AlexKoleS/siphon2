@@ -1,8 +1,6 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-use Icecave\Chrono\Date;
-use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
@@ -10,9 +8,7 @@ use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamFactoryTrait;
-use Icecave\Siphon\Team\TeamRef;
 use InvalidArgumentException;
-use SimpleXMLElement;
 
 /**
  * Client for reading schedule feeds.

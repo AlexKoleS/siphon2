@@ -2,9 +2,7 @@
 namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
-use Icecave\Siphon\Util\XPath;
 use SimpleXMLElement;
 
 /**
@@ -57,5 +55,5 @@ trait CompetitionFactoryTrait
         );
     }
 
-    protected abstract function createTeam(SimpleXMLElement $element);
+    abstract protected function createTeam(SimpleXMLElement $element);
 }

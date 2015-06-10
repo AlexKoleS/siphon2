@@ -1,126 +1,64 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
-use Icecave\Siphon\Schedule\Season;
-use Icecave\Siphon\Sport;
-use IteratorAggregate;
+use Icecave\Siphon\Schedule\CompetitionInterface;
+use Icecave\Siphon\Score\Score;
 
 /**
  * The response from a team feed.
  */
-class LiveScoreResponse implements
-    ResponseInterface,
-    Countable,
-    IteratorAggregate
+class LiveScoreResponse implements ResponseInterface
 {
-    public function __construct(Sport $sport, Season $season)
+    public function __construct(
+        CompetitionInterface $competition,
+        Score $score
+        // $scope
+)
     {
-        $this->setSport($sport);
-        $this->setSeason($season);
-        $this->teams = [];
+        $this->setCompetition($competition);
+        $this->setScore($score);
     }
 
     /**
-     * Get the requested sport.
+     * Get the requested competition.
      *
-     * @return Sport The requested sport.
+     * @return CompetitionInterface
      */
-    public function sport()
+    public function competition()
     {
-        return $this->sport;
+        return $this->competition;
     }
 
     /**
-     * Set the requested sport.
+     * Set the requested competition.
      *
-     * @param Sport $sport The requested sport.
+     * @param CompetitionInterface $competition
      */
-    public function setSport(Sport $sport)
+    public function setCompetition(CompetitionInterface $competition)
     {
-        $this->sport = $sport;
+        $this->competition = $competition;
     }
 
     /**
-     * Get the requested season.
+     * Get the competition score.
      *
-     * @return Season The requested season.
+     * @return Score
      */
-    public function season()
+    public function score()
     {
-        return $this->season;
+        return $this->score;
     }
 
     /**
-     * Set the requested season.
+     * Set the score.
      *
-     * @param Season $season The requested season.
+     * @param Score $score
      */
-    public function setSeason(Season $season)
+    public function setScore(Score $score)
     {
-        $this->season = $season;
-    }
-
-    /**
-     * Check if the response contains teams.
-     *
-     * @param boolean True if the response is empty; otherwise, false.
-     */
-    public function isEmpty()
-    {
-        return empty($this->teams);
-    }
-
-    /**
-     * Get the number of teams in the response.
-     *
-     * @return integer
-     */
-    public function count()
-    {
-        return count($this->teams);
-    }
-
-    /**
-     * Iterate the teams.
-     *
-     * @return mixed<TeamInterface>
-     */
-    public function getIterator()
-    {
-        foreach ($this->teams as $team) {
-            yield $team;
-        }
-    }
-
-    /**
-     * Add a team to the response.
-     *
-     * @param TeamInterface $team The team to add.
-     */
-    public function add(TeamInterface $team)
-    {
-        $this->teams[$team->id()] = $team;
-    }
-
-    /**
-     * Remove a team from the response.
-     *
-     * @param TeamInterface $team The team to remove.
-     */
-    public function remove(TeamInterface $team)
-    {
-        unset($this->teams[$team->id()]);
-    }
-
-    /**
-     * Remove all teams from the response.
-     */
-    public function clear()
-    {
-        $this->teams = [];
+        $this->score = $score;
     }
 
     /**
@@ -132,10 +70,10 @@ class LiveScoreResponse implements
      */
     public function accept(ResponseVisitorInterface $visitor)
     {
-        return $visitor->visitTeamResponse($this);
+        return $visitor->visitLiveScoreResponse($this);
     }
 
-    private $sport;
-    private $type;
-    private $teams;
+    private $competition;
+    private $score;
+    // private $scope;
 }
