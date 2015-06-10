@@ -1,18 +1,17 @@
 <?php
-namespace Icecave\Siphon\Player\Image;
+namespace Icecave\Siphon\Score\LiveScore;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Sport;
 use PHPUnit_Framework_TestCase;
 
-class ImageRequestTest extends PHPUnit_Framework_TestCase
+class LiveScoreRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->request = new ImageRequest(
+        $this->request = new LiveScoreRequest(
             Sport::NFL(),
-            '<season>',
             123
         );
     }
@@ -32,43 +31,28 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSeasonName()
-    {
-        $this->assertSame(
-            '<season>',
-            $this->request->seasonName()
-        );
-
-        $this->request->setSeasonName('<other>');
-
-        $this->assertSame(
-            '<other>',
-            $this->request->seasonName()
-        );
-    }
-
-    public function testTeamId()
+    public function testCompetitionId()
     {
         $this->assertSame(
             123,
-            $this->request->teamId()
+            $this->request->competitionId()
         );
 
-        $this->request->setTeamId(456);
+        $this->request->setCompetitionId(456);
 
         $this->assertSame(
             456,
-            $this->request->teamId()
+            $this->request->competitionId()
         );
     }
 
-    public function testTeamIdWithString()
+    public function testCompetitionIdWithString()
     {
-        $this->request->setTeamId('/sport/football/team:123');
+        $this->request->setCompetitionId('/sport/football/competition:123');
 
         $this->assertSame(
             123,
-            $this->request->teamId()
+            $this->request->competitionId()
         );
     }
 
@@ -78,7 +62,7 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
 
         $this->request->accept($visitor->mock());
 
-        $visitor->visitImageRequest->calledWith($this->request);
+        $visitor->visitLiveScoreRequest->calledWith($this->request);
     }
 
     public function testSerialize()
@@ -95,14 +79,6 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             Sport::NFL(),
             $request->sport()
-        );
-    }
-
-    public function testToString()
-    {
-        $this->assertSame(
-            'image(NFL <season> team:123)',
-            strval($this->request)
         );
     }
 }

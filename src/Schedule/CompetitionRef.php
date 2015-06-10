@@ -2,21 +2,19 @@
 namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamInterface;
 
 /**
- * A sports competition (ie, "event" / "game" / "match" / etc).
+ * A reference to a sports competition (ie, "event" / "game" / "match" / etc).
  */
-class Competition implements CompetitionInterface
+class CompetitionRef implements CompetitionInterface
 {
     /**
      * @param string            $id        The competition ID.
      * @param CompetitionStatus $status    The status of the competition.
      * @param DateTime          $startTime The time at which the competition begins.
      * @param Sport             $sport     The sport (eg, baseball, football, etc).
-     * @param Season            $season    The season in which the compeititon is played.
      * @param TeamInterface     $homeTeam  The home team.
      * @param TeamInterface     $awayTeam  The away team.
      */
@@ -25,7 +23,6 @@ class Competition implements CompetitionInterface
         CompetitionStatus $status,
         DateTime $startTime,
         Sport $sport,
-        Season $season,
         TeamInterface $homeTeam,
         TeamInterface $awayTeam
     ) {
@@ -33,10 +30,8 @@ class Competition implements CompetitionInterface
         $this->status         = $status;
         $this->startTime      = $startTime;
         $this->sport          = $sport;
-        $this->season         = $season;
         $this->homeTeam       = $homeTeam;
         $this->awayTeam       = $awayTeam;
-        $this->notablePlayers = [];
     }
 
     /**
@@ -80,16 +75,6 @@ class Competition implements CompetitionInterface
     }
 
     /**
-     * Get the season.
-     *
-     * @return Season The season.
-     */
-    public function season()
-    {
-        return $this->season;
-    }
-
-    /**
      * Get the home team.
      *
      * @return TeamInterface The home team.
@@ -109,45 +94,10 @@ class Competition implements CompetitionInterface
         return $this->awayTeam;
     }
 
-    /**
-     * Get any "notable" players for this competition.
-     *
-     * This includes:
-     *  - MLB starting pitchers
-     *
-     * @return array<Player>
-     */
-    public function notablePlayers()
-    {
-        return array_values($this->notablePlayers);
-    }
-
-    /**
-     * Add a notable player to the competition.
-     *
-     * @param Player $player The player to add.
-     */
-    public function addNotablePlayer(Player $player)
-    {
-        $this->notablePlayers[$player->id()] = $player;
-    }
-
-    /**
-     * Remove a notable player from the competition.
-     *
-     * @param Player $player The player to remove.
-     */
-    public function removeNotablePlayer(Player $player)
-    {
-        unset($this->notablePlayers[$player->id()]);
-    }
-
     private $id;
     private $status;
     private $startTime;
     private $sport;
-    private $season;
     private $homeTeam;
     private $awayTeam;
-    private $notablePlayers;
 }

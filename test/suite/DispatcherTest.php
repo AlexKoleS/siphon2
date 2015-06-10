@@ -22,6 +22,9 @@ use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleResponse;
+use Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface;
+use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
+use Icecave\Siphon\Score\LiveScore\LiveScoreResponse;
 use Icecave\Siphon\Team\TeamReaderInterface;
 use Icecave\Siphon\Team\TeamRequest;
 use Icecave\Siphon\Team\TeamResponse;
@@ -40,6 +43,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->playerStatsReader = Phony::mock(PlayerStatisticsReaderInterface::class);
         $this->imageReader       = Phony::mock(ImageReaderInterface::class);
         $this->injuryReader      = Phony::mock(InjuryReaderInterface::class);
+        $this->liveScoreReader   = Phony::mock(LiveScoreReaderInterface::class);
 
         $this->dispatcher = new Dispatcher(
             $this->urlBuilder->mock(),
@@ -50,7 +54,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->playerReader->mock(),
             $this->playerStatsReader->mock(),
             $this->imageReader->mock(),
-            $this->injuryReader->mock()
+            $this->injuryReader->mock(),
+            $this->liveScoreReader->mock()
         );
     }
 
@@ -145,6 +150,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             InjuryRequest::class,
             InjuryResponse::class,
             $this->injuryReader
+        );
+    }
+
+    public function testLiveScoreRequest()
+    {
+        $this->dispatchTest(
+            LiveScoreRequest::class,
+            LiveScoreResponse::class,
+            $this->liveScoreReader
         );
     }
 

@@ -76,12 +76,12 @@ trait PlayerRequestTrait
     }
 
     /**
-     * Set the team ID of the requested team.
+     * Set the ID of the requested team.
      *
      * If a string ID is given it is validated against the sport, and the
      * numeric portion is extracted.
      *
-     * @param string|integer The string or numeric team ID.
+     * @param string|integer $teamId The string or numeric team ID.
      */
     public function setTeamId($teamId)
     {

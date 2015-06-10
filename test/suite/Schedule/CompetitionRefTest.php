@@ -8,7 +8,7 @@ use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamInterface;
 use PHPUnit_Framework_TestCase;
 
-class CompetitionTest extends PHPUnit_Framework_TestCase
+class CompetitionRefTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -19,16 +19,14 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         $this->player2->id->returns('<player 2>');
 
         $this->startTime = DateTime::fromUnixTime(0);
-        $this->season    = Phony::fullMock(Season::class)->mock();
         $this->homeTeam  = Phony::mock(TeamInterface::class)->mock();
         $this->awayTeam  = Phony::mock(TeamInterface::class)->mock();
 
-        $this->competition = new Competition(
+        $this->competition = new CompetitionRef(
             '<id>',
             CompetitionStatus::IN_PROGRESS(),
             $this->startTime,
             Sport::NFL(),
-            $this->season,
             $this->homeTeam,
             $this->awayTeam
         );
@@ -58,14 +56,6 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSeason()
-    {
-        $this->assertSame(
-            $this->season,
-            $this->competition->season()
-        );
-    }
-
     public function testSport()
     {
         $this->assertSame(
@@ -87,45 +77,6 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $this->awayTeam,
             $this->competition->awayTeam()
-        );
-    }
-
-    public function testAddNotablePlayer()
-    {
-        $this->competition->addNotablePlayer($this->player1->mock());
-        $this->competition->addNotablePlayer($this->player2->mock());
-
-        $this->assertSame(
-            [
-                $this->player1->mock(),
-                $this->player2->mock(),
-            ],
-            $this->competition->notablePlayers()
-        );
-    }
-
-    public function testRemoveNotablePlayer()
-    {
-        $this->competition->addNotablePlayer($this->player1->mock());
-        $this->competition->addNotablePlayer($this->player2->mock());
-
-        $this->competition->removeNotablePlayer($this->player1->mock());
-
-        $this->assertSame(
-            [
-                $this->player2->mock(),
-            ],
-            $this->competition->notablePlayers()
-        );
-    }
-
-    public function testRemoveNotablePlayerWithUnknownPlayer()
-    {
-        $this->competition->removeNotablePlayer($this->player1->mock());
-
-        $this->assertSame(
-            [],
-            $this->competition->notablePlayers()
         );
     }
 }
