@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\Score\Period;
+namespace Icecave\Siphon\Score;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 use Icecave\Siphon\Sport;

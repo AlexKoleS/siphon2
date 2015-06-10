@@ -1,5 +1,5 @@
 <?php
-namespace Icecave\Siphon\Score\Period;
+namespace Icecave\Siphon\Score;
 
 use PHPUnit_Framework_TestCase;
 
