@@ -14,9 +14,7 @@ class LiveScoreResponse implements ResponseInterface
     public function __construct(
         CompetitionInterface $competition,
         Score $score
-        // $scope
-)
-    {
+    ) {
         $this->setCompetition($competition);
         $this->setScore($score);
     }
@@ -75,5 +73,4 @@ class LiveScoreResponse implements ResponseInterface
 
     private $competition;
     private $score;
-    // private $scope;
 }

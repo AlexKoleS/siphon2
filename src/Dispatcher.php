@@ -26,6 +26,9 @@ use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleReader;
 use Icecave\Siphon\Schedule\ScheduleReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleRequest;
+use Icecave\Siphon\Score\LiveScore\LiveScoreReader;
+use Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface;
+use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
 use Icecave\Siphon\Team\TeamReader;
 use Icecave\Siphon\Team\TeamReaderInterface;
 use Icecave\Siphon\Team\TeamRequest;
@@ -57,7 +60,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new PlayerReader($xmlReader),
             new PlayerStatisticsReader($xmlReader),
             new ImageReader($xmlReader),
-            new InjuryReader($xmlReader)
+            new InjuryReader($xmlReader),
+            new LiveScoreReader($xmlReader)
         );
     }
 
@@ -70,7 +74,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         PlayerReaderInterface $playerReader,
         PlayerStatisticsReaderInterface $playerStatisticsReader,
         ImageReaderInterface $imageReader,
-        InjuryReaderInterface $injuryReader
+        InjuryReaderInterface $injuryReader,
+        LiveScoreReaderInterface $liveScoreReader
     ) {
         $this->urlBuilder             = $urlBuilder;
         $this->xmlReader              = $xmlReader;
@@ -81,6 +86,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $this->playerStatisticsReader = $playerStatisticsReader;
         $this->imageReader            = $imageReader;
         $this->injuryReader           = $injuryReader;
+        $this->liveScoreReader        = $liveScoreReader;
     }
 
     /**
@@ -222,6 +228,18 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         return $this->injuryReader->read($request);
     }
 
+    /**
+     * Visit the given request.
+     *
+     * @param LiveScoreRequest $request
+     *
+     * @return mixed
+     */
+    public function visitLiveScoreRequest(LiveScoreRequest $request)
+    {
+        return $this->liveScoreReader->read($request);
+    }
+
     private $urlBuilder;
     private $xmlReader;
     private $atomReader;
@@ -230,4 +248,5 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     private $playerReader;
     private $imageReader;
     private $injuryReader;
+    private $liveScoreReader;
 }

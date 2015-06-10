@@ -3,6 +3,12 @@ namespace Icecave\Siphon\Score\Period;
 
 class Period
 {
+    /**
+     * @param PeriodType $type      The period type.
+     * @param integer    $number    The sequential period number.
+     * @param integer    $homeScore The home team score for this period.
+     * @param integer    $awayScore The away team score for this period.
+     */
     public function __construct(
         PeriodType $type,
         $number,
@@ -27,6 +33,18 @@ class Period
 
     /**
      * Get the sequential period number.
+     *
+     * Period numbers begin at one for each period type, for example in an NHL
+     * game that has run to include all three shootout periods, the periods would
+     * be numbered like so.
+     *
+     * - PERIOD 1
+     * - PERIOD 2
+     * - PERIOD 3
+     * - OVERTIME 1
+     * - SHOOTOUT 1
+     * - SHOOTOUT 2
+     * - SHOOTOUT 3
      *
      * @return integer
      */

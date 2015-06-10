@@ -56,12 +56,10 @@ class LiveScoreResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAccept()
     {
-        $this->markTestSkipped();
-
         $visitor = Phony::mock(ResponseVisitorInterface::class);
 
         $this->response->accept($visitor->mock());
 
-        $visitor->visitPlayerResponse->calledWith($this->response);
+        $visitor->visitLiveScoreResponse->calledWith($this->response);
     }
 }
