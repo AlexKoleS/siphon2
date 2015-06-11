@@ -11,6 +11,7 @@ class InjuryStatus extends AbstractEnumeration
     const OUT               = 'out';          // not scheduled to play
 
     // MLB ...
+    const DISABLED_7_DAY    = '7-day DL';
     const DISABLED_15_DAY   = '15-day DL';
     const DISABLED_60_DAY   = '60-day DL';
 
