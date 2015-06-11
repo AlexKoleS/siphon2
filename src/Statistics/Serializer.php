@@ -80,7 +80,7 @@ class Serializer implements SerializerInterface
     }
 
     /**
-     * Dersialize a statistics collection from a string.
+     * Deserialize a statistics collection from a string.
      *
      * @param string $buffer
      *

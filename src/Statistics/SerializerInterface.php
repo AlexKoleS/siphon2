@@ -16,7 +16,7 @@ interface SerializerInterface
     public function serialize(StatisticsCollection $statistics);
 
     /**
-     * Dersialize a statistics collection from a string.
+     * Deserialize a statistics collection from a string.
      *
      * @param string $buffer
      *

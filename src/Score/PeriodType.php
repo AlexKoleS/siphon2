@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score;
 
 use Eloquent\Enumeration\AbstractEnumeration;
+use Eloquent\Enumeration\Exception\UndefinedMemberException;
 use Icecave\Siphon\Sport;
 use InvalidArgumentException;
 
@@ -19,13 +20,13 @@ class PeriodType extends AbstractEnumeration
      * Returns a single member by value.
      *
      * @param Sport        $sport           The sport.
-     * @param scalar       $value           The value associated with the member.
+     * @param string       $value           The value associated with the member.
      * @param boolean|null $isCaseSensitive True if the search should be case sensitive.
      *
-     * @return ValueMultitonInterface             The first member with the supplied value.
-     * @throws Exception\UndefinedMemberException If no associated member is found.
+     * @return PeriodType               The first member with the supplied value.
+     * @throws UndefinedMemberException If no associated member is found.
      */
-    final public static function memberBySportAndValue(Sport $sport, $value, $isCaseSensitive = null)
+    public static function memberBySportAndValue(Sport $sport, $value, $isCaseSensitive = null)
     {
         $member = static::memberByValue($value, $isCaseSensitive);
 
@@ -36,6 +37,37 @@ class PeriodType extends AbstractEnumeration
         throw new InvalidArgumentException(
             $sport . ' does not use the ' . $member . ' period type.'
         );
+    }
+
+    /**
+     * Returns a single member by code.
+     *
+     * @param string $value The value associated with the member.
+     *
+     * @return PeriodType               The member with the supplied code.
+     * @throws UndefinedMemberException If no associated member is found.
+     */
+    public static function memberByCode($code)
+    {
+        foreach (self::members() as $member) {
+            if ($member->code() === $code) {
+                return $member;
+            }
+        }
+
+        throw new UndefinedMemberException(
+            __CLASS__,
+            'code',
+            $code
+        );
+    }
+
+    /**
+     * Get the single-character code for this period type.
+     */
+    public function code()
+    {
+        return $this->key()[0];
     }
 
     /**
