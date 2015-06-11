@@ -11,9 +11,11 @@ trait TeamFactoryTrait
 {
     private function createTeam(SimpleXMLElement $element)
     {
+        $name         = XPath::stringOrNull($element, "name[@type='first']");
         $abbreviation = XPath::stringOrNull($element, "name[@type='short']");
+        $nickname     = XPath::stringOrNull($element, "name[@type='nick']");
 
-        if (null === $abbreviation) {
+        if (null === $name || null === $abbreviation) {
             return new TeamRef(
                 strval($element->id),
                 XPath::string($element, 'name')
@@ -22,9 +24,9 @@ trait TeamFactoryTrait
 
         return new Team(
             strval($element->id),
-            XPath::string($element, "name[@type='first']"),
+            $name,
             $abbreviation,
-            XPath::stringOrNull($element, "name[@type='nick']")
+            $nickname
         );
     }
 }

@@ -24,6 +24,8 @@
                     <team>
                         <id>/sport/hockey/team:7</id>
                         <name>Pittsburgh</name>
+                        <!-- Some live score feeds include the short name, but not other necessary data. -->
+                        <name type="short">PIT</name>
                     </team>
                     <stat-group>
                         <scope type="competition"/>
