@@ -27,7 +27,7 @@ class SerializerTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Invalid score format: Period data must be an array with element count that is a multiple of four.'
+            'Invalid score format: Period data must be an array.'
         );
 
         $this->serializer->unserialize(
@@ -35,11 +35,11 @@ class SerializerTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUnserializeWithInvalidDataArrayElementCount()
+    public function testUnserializeWithInvalidDataArrayPacking()
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'Invalid score format: Period data must be an array with element count that is a multiple of four.'
+            'Invalid score format: No period type provided.'
         );
 
         $this->serializer->unserialize(
