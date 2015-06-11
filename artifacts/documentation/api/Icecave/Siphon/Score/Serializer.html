@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Icecave\Siphon\Statistics\SerializerInterface | icecave/siphon API</title>
+    <title>Icecave\Siphon\Score\Serializer | icecave/siphon API</title>
 
             <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
@@ -16,7 +16,7 @@
     
     </head>
 
-    <body id="class" data-name="class:Icecave_Siphon_Statistics_SerializerInterface" data-root-path="../../../">
+    <body id="class" data-name="class:Icecave_Siphon_Score_Serializer" data-root-path="../../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -59,25 +59,26 @@
 
                         <div class="namespace-breadcrumbs">
             <ol class="breadcrumb">
-                <li><span class="label label-default">interface</span></li>
+                <li><span class="label label-default">class</span></li>
                                                             <li><a href="../../../Icecave.html">Icecave</a></li>
                                         <li><a href="../../../Icecave/Siphon.html">Siphon</a></li>
-                                        <li><a href="../../../Icecave/Siphon/Statistics.html">Statistics</a></li>
+                                        <li><a href="../../../Icecave/Siphon/Score.html">Score</a></li>
     
-                <li>SerializerInterface</li>
+                <li>Serializer</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>SerializerInterface</h1>
+        <h1>Serializer</h1>
     </div>
 
-    <p>    interface
-    <strong>SerializerInterface</strong></p>
+    <p>    class
+    <strong>Serializer</strong>        implements
+        <a href="../../../Icecave/Siphon/Score/SerializerInterface.html"><abbr title="Icecave\Siphon\Score\SerializerInterface">SerializerInterface</abbr></a></p>
 
             <div class="description">
-            <p>Statistics serializer.</p>                    </div>
+            <p>Score serializer.</p>                    </div>
     
     
     
@@ -90,17 +91,17 @@
                     string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_serialize">serialize</a>(<a href="../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a> $statistics)
-                                            <p>Serialize a statistics collection to a string.</p>                </div>
+                    <a href="#method_serialize">serialize</a>(<a href="../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a> $score)
+                                            <p>Serialize a score to a string.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a>
+                    <a href="../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_unserialize">unserialize</a>(string $buffer)
-                                            <p>Deserialize a statistics collection from a string.</p>                </div>
+                                            <p>Deserialize a score from a string.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -111,20 +112,20 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_serialize">
-        <div class="location">at line 16</div>
+        <div class="location">at line 19</div>
         <code>                    string
-    <strong>serialize</strong>(<a href="../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a> $statistics)</code>
+    <strong>serialize</strong>(<a href="../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a> $score)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Serialize a statistics collection to a string.</p>                                </div>
+                                    <p>Serialize a score to a string.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a></td>
-                <td>$statistics</td>
+                <td><a href="../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a></td>
+                <td>$score</td>
                 <td>
 </td>
             </tr>
@@ -149,13 +150,13 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_unserialize">
-        <div class="location">at line 26</div>
-        <code>                    <a href="../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a>
+        <div class="location">at line 44</div>
+        <code>                    <a href="../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a>
     <strong>unserialize</strong>(string $buffer)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Deserialize a statistics collection from a string.</p>                                </div>
+                                    <p>Deserialize a score from a string.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -173,7 +174,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../../Icecave/Siphon/Statistics/StatisticsCollection.html"><abbr title="Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr></a></td>
+            <td><a href="../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -184,7 +185,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Icecave\Siphon\Statistics\InvalidArgumentException">InvalidArgumentException</abbr></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>if the serialization data is malformed.</td>
             </tr>
             </table>
