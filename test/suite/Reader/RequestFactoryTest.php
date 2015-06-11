@@ -9,6 +9,7 @@ use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
+use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamRequest;
@@ -159,6 +160,14 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                 '/sport/v2/baseball/MLB/injuries/injuries_MLB.xml',
                 new InjuryRequest(
                     Sport::MLB()
+                ),
+            ],
+
+            'live scores' => [
+                '/sport/v2/baseball/MLB/livescores/livescores_12345.xml',
+                new LiveScoreRequest(
+                    Sport::MLB(),
+                    12345
                 ),
             ],
         ];

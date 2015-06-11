@@ -9,6 +9,7 @@ use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
+use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamRequest;
@@ -58,6 +59,8 @@ class RequestFactory implements RequestFactoryInterface
         } elseif ($request = $this->createImageRequest($components)) {
             return $request;
         } elseif ($request = $this->createInjuryRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createLiveScoreRequest($components)) {
             return $request;
         }
 
@@ -281,6 +284,31 @@ class RequestFactory implements RequestFactoryInterface
         )) {
             return new InjuryRequest(
                 Sport::findByComponents($matches[1], $matches[2])
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a LiveScoreRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return LiveScoreRequest|null
+     */
+    private function createLiveScoreRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/livescores/livescores_(\d+)\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new LiveScoreRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3]
             );
         }
 
