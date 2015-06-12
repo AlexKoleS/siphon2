@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
+use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
@@ -60,6 +61,29 @@ class LiveScoreResponse implements ResponseInterface
     }
 
     /**
+     * Get the current game time, if available.
+     *
+     * The game time is only available when a period is in progress. Some sports
+     * do not use a game time at all.
+     *
+     * @return Duration|null The current game time, or null if it is not available.
+     */
+    public function gameTime()
+    {
+        return $this->gameTime;
+    }
+
+    /**
+     * Set the current game time, if available.
+     *
+     * @param Duration|null $gameTime The current game time, or null if it is not available.
+     */
+    public function setGameTime(Duration $gameTime = null)
+    {
+        $this->gameTime = $gameTime;
+    }
+
+    /**
      * Dispatch a call to the given visitor.
      *
      * @param ResponseVisitorInterface $visitor
@@ -73,4 +97,5 @@ class LiveScoreResponse implements ResponseInterface
 
     private $competition;
     private $score;
+    private $gameTime;
 }

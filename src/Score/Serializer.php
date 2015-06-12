@@ -23,7 +23,7 @@ class Serializer implements SerializerInterface
 
         foreach ($score as $period) {
             if ($code !== $period->type()->code()) {
-                $code = $period->type()->code();
+                $code   = $period->type()->code();
                 $data[] = $code;
             }
 

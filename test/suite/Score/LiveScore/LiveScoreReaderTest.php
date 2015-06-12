@@ -3,6 +3,7 @@ namespace Icecave\Siphon\Score\LiveScore;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
+use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\CompetitionRef;
@@ -43,28 +44,34 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
 
-        $this->assertEquals(
-            new LiveScoreResponse(
-                new CompetitionRef(
-                    '/sport/hockey/competition:23816',
-                    CompetitionStatus::IN_PROGRESS(),
-                    DateTime::fromIsoString('2009-01-28T14:00:00.000-05:00'),
-                    Sport::NHL(),
-                    new TeamRef('/sport/hockey/team:7', 'Pittsburgh'),
-                    new TeamRef('/sport/hockey/team:6', 'NY Rangers')
-                ),
-                new Score(
-                    [
-                        new Period(PeriodType::PERIOD(),   1, 2, 0),
-                        new Period(PeriodType::PERIOD(),   2, 0, 0),
-                        new Period(PeriodType::PERIOD(),   3, 1, 3),
-                        new Period(PeriodType::OVERTIME(), 1, 0, 0),
-                        new Period(PeriodType::SHOOTOUT(), 1, 0, 0),
-                        new Period(PeriodType::SHOOTOUT(), 2, 0, 1),
-                        new Period(PeriodType::SHOOTOUT(), 3, 0, 0),
-                    ]
-                )
+        $expected = new LiveScoreResponse(
+            new CompetitionRef(
+                '/sport/hockey/competition:23816',
+                CompetitionStatus::IN_PROGRESS(),
+                DateTime::fromIsoString('2009-01-28T14:00:00.000-05:00'),
+                Sport::NHL(),
+                new TeamRef('/sport/hockey/team:7', 'Pittsburgh'),
+                new TeamRef('/sport/hockey/team:6', 'NY Rangers')
             ),
+            new Score(
+                [
+                    new Period(PeriodType::PERIOD(),   1, 2, 0),
+                    new Period(PeriodType::PERIOD(),   2, 0, 0),
+                    new Period(PeriodType::PERIOD(),   3, 1, 3),
+                    new Period(PeriodType::OVERTIME(), 1, 0, 0),
+                    new Period(PeriodType::SHOOTOUT(), 1, 0, 0),
+                    new Period(PeriodType::SHOOTOUT(), 2, 0, 1),
+                    new Period(PeriodType::SHOOTOUT(), 3, 0, 0),
+                ]
+            )
+        );
+
+        $expected->setGameTime(
+            Duration::fromComponents(0, 0, 0, 2, 55)
+        );
+
+        $this->assertEquals(
+            $expected,
             $response
         );
     }

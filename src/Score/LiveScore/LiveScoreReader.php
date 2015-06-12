@@ -1,6 +1,7 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
+use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
@@ -55,7 +56,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
             )
             ->xpath('.//competition')[0];
 
-        return new LiveScoreResponse(
+        $response = new LiveScoreResponse(
             $this->createCompetition(
                 $xml,
                 $request->sport()
@@ -67,6 +68,24 @@ class LiveScoreReader implements LiveScoreReaderInterface
                 )
             )
         );
+
+        $gameTime = XPath::stringOrNull($xml, './/clock');
+
+        if ($gameTime !== null) {
+            list($hours, $minutes, $seconds) = explode(':', $gameTime);
+
+            $response->setGameTime(
+                Duration::fromComponents(
+                    0,
+                    0,
+                    intval($hours),
+                    intval($minutes),
+                    intval($seconds)
+                )
+            );
+        }
+
+        return $response;
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Score;
@@ -51,6 +52,28 @@ class LiveScoreResponseTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $score,
             $this->response->score()
+        );
+    }
+
+    public function testGameTime()
+    {
+        $this->assertNull(
+            $this->response->gameTime()
+        );
+
+        $gameTime = new Duration(123);
+
+        $this->response->setGameTime($gameTime);
+
+        $this->assertSame(
+            $gameTime,
+            $this->response->gameTime()
+        );
+
+        $this->response->setGameTime(null);
+
+        $this->assertNull(
+            $this->response->gameTime()
         );
     }
 
