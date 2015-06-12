@@ -130,8 +130,8 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
         $response = $this->reader->read(
             new LiveScoreRequest(
-                Sport::MLB(),
-                288425
+                Sport::NBA(),
+                778888
             )
         );
 
@@ -143,6 +143,26 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $this->assertNull(
             $response->currentPeriod()
         );
+    }
+
+    public function testReadNormalizesPeriodType()
+    {
+        $this->setUpXmlReader('Score/livescores-complete.xml');
+
+        $response = $this->reader->read(
+            new LiveScoreRequest(
+                Sport::NBA(),
+                778888
+            )
+        );
+
+        // All period types should be quarter (rather than just 'period') ...
+        foreach ($response->score() as $period) {
+            $this->assertSame(
+                PeriodType::QUARTER(),
+                $period->type()
+            );
+        }
     }
 
     public function testReadWithUnsupportedRequest()

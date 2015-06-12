@@ -198,7 +198,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
 
             if (!isset($result[$key])) {
                 $result[$key] = (object) [
-                    'type' => PeriodType::memberBySportAndValue(
+                    'type' => $this->createPeriodType(
                         $sport,
                         strval($group->scope['type'])
                     ),
@@ -215,6 +215,15 @@ class LiveScoreReader implements LiveScoreReaderInterface
                 $result[$key]->{$team} += intval($score['num']);
             }
         }
+    }
+
+    private function createPeriodType(Sport $sport, $type)
+    {
+        if ($type === 'period') {
+            return PeriodType::memberBySport($sport);
+        }
+
+        return PeriodType::memberBySportAndValue($sport, $type);
     }
 
     private $xmlReader;

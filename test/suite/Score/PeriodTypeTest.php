@@ -19,6 +19,16 @@ class PeriodTypeTest extends PHPUnit_Framework_TestCase
         ];
     }
 
+    public function testMemberBySport()
+    {
+        foreach (Sport::members() as $sport) {
+            $this->assertSame(
+                current($this->sports[$sport->key()]),
+                PeriodType::memberBySport($sport)
+            );
+        }
+    }
+
     public function testMemberBySportAndValue()
     {
         foreach (Sport::members() as $sport) {

@@ -17,6 +17,30 @@ class PeriodType extends AbstractEnumeration
     const EXTRA_INNING = 'extra-inning'; // MLB
 
     /**
+     * Return the default period type for the given sport.
+     *
+     * @param Sport $sport The sport.
+     *
+     * @return PeriodType The first member with the supplied value.
+     */
+    public static function memberBySport(Sport $sport)
+    {
+        if (Sport::NFL() === $sport) {
+            return self::QUARTER();
+        } elseif (Sport::NCAAF() === $sport) {
+            return self::QUARTER();
+        } elseif (Sport::NBA() === $sport) {
+            return self::QUARTER();
+        } elseif (Sport::NCAAB() === $sport) {
+            return self::HALF();
+        } elseif (Sport::MLB() === $sport) {
+            return self::INNING();
+        } else { // NHL
+            return self::PERIOD();
+        }
+    }
+
+    /**
      * Returns a single member by value.
      *
      * @param Sport        $sport           The sport.
