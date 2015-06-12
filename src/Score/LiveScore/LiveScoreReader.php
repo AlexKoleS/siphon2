@@ -5,6 +5,7 @@ use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
+use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\PeriodType;
 use Icecave\Siphon\Score\Score;
@@ -56,18 +57,42 @@ class LiveScoreReader implements LiveScoreReaderInterface
             )
             ->xpath('.//competition')[0];
 
-        $response = new LiveScoreResponse(
-            $this->createCompetition(
-                $xml,
-                $request->sport()
-            ),
-            new Score(
-                $this->createPeriods(
-                    $xml,
-                    $request->sport()
-                )
-            )
+        $competition = $this->createCompetition(
+            $xml,
+            $request->sport()
         );
+
+        $periods = $this->createPeriods(
+            $xml,
+            $request->sport()
+        );
+
+        $response = new LiveScoreResponse(
+            $competition,
+            new Score($periods)
+        );
+
+        if (!$competition->status()->anyOf(
+            CompetitionStatus::POSTPONED(),
+            CompetitionStatus::SHORTENED(),
+            CompetitionStatus::CANCELLED(),
+            CompetitionStatus::COMPLETE()
+        )) {
+            $scope = $xml->{'result-scope'}->scope;
+
+            foreach ($periods as $period) {
+                $type   = strval($scope['type']);
+                $number = intval($scope['num']);
+
+                if (
+                       $type === $period->type()->value()
+                    && $number === $period->number()
+                ) {
+                    $response->setCurrentPeriod($period);
+                    break;
+                }
+            }
+        }
 
         $gameTime = XPath::stringOrNull($xml, './/clock');
 

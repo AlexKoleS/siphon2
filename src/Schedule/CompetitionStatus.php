@@ -17,6 +17,6 @@ class CompetitionStatus extends AbstractEnumeration
     const POSTPONED      = 'postponed';
     const SHORTENED      = 'shortened';
     const CANCELLED      = 'cancelled';
-    const OTHER          = 'other';
     const COMPLETE       = 'complete';
+    const OTHER          = 'other';
 }

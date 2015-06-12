@@ -5,6 +5,7 @@ use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
+use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\Score;
 
 /**
@@ -61,6 +62,26 @@ class LiveScoreResponse implements ResponseInterface
     }
 
     /**
+     * Get the current period.
+     *
+     * @return Period|null The current period, if there is one.
+     */
+    public function currentPeriod()
+    {
+        return $this->currentPeriod;
+    }
+
+    /**
+     * Set the current period.
+     *
+     * @param Period|null $period The current period, if there is one.
+     */
+    public function setCurrentPeriod(Period $period = null)
+    {
+        $this->currentPeriod = $period;
+    }
+
+    /**
      * Get the current game time, if available.
      *
      * The game time is only available when a period is in progress. Some sports
@@ -97,5 +118,6 @@ class LiveScoreResponse implements ResponseInterface
 
     private $competition;
     private $score;
+    private $currentPeriod;
     private $gameTime;
 }

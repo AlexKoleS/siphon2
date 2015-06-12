@@ -5,6 +5,8 @@ use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
+use Icecave\Siphon\Score\Period;
+use Icecave\Siphon\Score\PeriodType;
 use Icecave\Siphon\Score\Score;
 use PHPUnit_Framework_TestCase;
 
@@ -52,6 +54,28 @@ class LiveScoreResponseTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $score,
             $this->response->score()
+        );
+    }
+
+    public function testCurrentPeriod()
+    {
+        $this->assertNull(
+            $this->response->currentPeriod()
+        );
+
+        $period = new Period(PeriodType::PERIOD(), 1);
+
+        $this->response->setCurrentPeriod($period);
+
+        $this->assertSame(
+            $period,
+            $this->response->currentPeriod()
+        );
+
+        $this->response->setCurrentPeriod(null);
+
+        $this->assertNull(
+            $this->response->currentPeriod()
         );
     }
 

@@ -44,6 +44,8 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
 
+        $currentPeriod = new Period(PeriodType::SHOOTOUT(), 3, 0, 0);
+
         $expected = new LiveScoreResponse(
             new CompetitionRef(
                 '/sport/hockey/competition:23816',
@@ -61,10 +63,12 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                     new Period(PeriodType::OVERTIME(), 1, 0, 0),
                     new Period(PeriodType::SHOOTOUT(), 1, 0, 0),
                     new Period(PeriodType::SHOOTOUT(), 2, 0, 1),
-                    new Period(PeriodType::SHOOTOUT(), 3, 0, 0),
+                    $currentPeriod,
                 ]
             )
         );
+
+        $expected->setCurrentPeriod($currentPeriod);
 
         $expected->setGameTime(
             Duration::fromComponents(0, 0, 0, 2, 55)
@@ -80,37 +84,64 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/livescores-baseball.xml');
 
-        $this->assertEquals(
-            new LiveScoreResponse(
-                new CompetitionRef(
-                    '/sport/baseball/competition:288425',
-                    CompetitionStatus::IN_PROGRESS(),
-                    DateTime::fromIsoString('2009-01-28T11:00:00.000-05:00'),
-                    Sport::MLB(),
-                    new TeamRef('/sport/baseball/team:2968', 'Arizona'),
-                    new TeamRef('/sport/baseball/team:2975', 'St. Louis')
-                ),
-                new Score(
-                    [
-                        new Period(PeriodType::INNING(),       1, 0, 0),
-                        new Period(PeriodType::INNING(),       2, 0, 1),
-                        new Period(PeriodType::INNING(),       3, 0, 0),
-                        new Period(PeriodType::INNING(),       4, 1, 2),
-                        new Period(PeriodType::INNING(),       5, 0, 0),
-                        new Period(PeriodType::INNING(),       6, 0, 0),
-                        new Period(PeriodType::INNING(),       7, 0, 1),
-                        new Period(PeriodType::INNING(),       8, 0, 3),
-                        new Period(PeriodType::INNING(),       9, 6, 0),
-                        new Period(PeriodType::EXTRA_INNING(), 1, 0, 0),
-                    ]
-                )
+        $currentPeriod = new Period(PeriodType::EXTRA_INNING(), 1, 0, 0);
+
+        $expected = new LiveScoreResponse(
+            new CompetitionRef(
+                '/sport/baseball/competition:288425',
+                CompetitionStatus::IN_PROGRESS(),
+                DateTime::fromIsoString('2009-01-28T11:00:00.000-05:00'),
+                Sport::MLB(),
+                new TeamRef('/sport/baseball/team:2968', 'Arizona'),
+                new TeamRef('/sport/baseball/team:2975', 'St. Louis')
             ),
+            new Score(
+                [
+                    new Period(PeriodType::INNING(),       1, 0, 0),
+                    new Period(PeriodType::INNING(),       2, 0, 1),
+                    new Period(PeriodType::INNING(),       3, 0, 0),
+                    new Period(PeriodType::INNING(),       4, 1, 2),
+                    new Period(PeriodType::INNING(),       5, 0, 0),
+                    new Period(PeriodType::INNING(),       6, 0, 0),
+                    new Period(PeriodType::INNING(),       7, 0, 1),
+                    new Period(PeriodType::INNING(),       8, 0, 3),
+                    new Period(PeriodType::INNING(),       9, 6, 0),
+                    $currentPeriod,
+                ]
+            )
+        );
+
+        $expected->setCurrentPeriod($currentPeriod);
+
+        $this->assertEquals(
+            $expected,
             $this->reader->read(
                 new LiveScoreRequest(
                     Sport::MLB(),
                     288425
                 )
             )
+        );
+    }
+
+    public function testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded()
+    {
+        $this->setUpXmlReader('Score/livescores-complete.xml');
+
+        $response = $this->reader->read(
+            new LiveScoreRequest(
+                Sport::MLB(),
+                288425
+            )
+        );
+
+        $this->assertSame(
+            CompetitionStatus::COMPLETE(),
+            $response->competition()->status()
+        );
+
+        $this->assertNull(
+            $response->currentPeriod()
         );
     }
 
