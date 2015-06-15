@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Icecave\Siphon\Score\LiveScore\LiveScoreResponse | icecave/siphon API</title>
+    <title>Icecave\Siphon\Score\BoxScore\BoxScoreRequest | icecave/siphon API</title>
 
             <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap-theme.min.css">
@@ -16,7 +16,7 @@
     
     </head>
 
-    <body id="class" data-name="class:Icecave_Siphon_Score_LiveScore_LiveScoreResponse" data-root-path="../../../../">
+    <body id="class" data-name="class:Icecave_Siphon_Score_BoxScore_BoxScoreRequest" data-root-path="../../../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -63,23 +63,23 @@
                                                             <li><a href="../../../../Icecave.html">Icecave</a></li>
                                         <li><a href="../../../../Icecave/Siphon.html">Siphon</a></li>
                                         <li><a href="../../../../Icecave/Siphon/Score.html">Score</a></li>
-                                        <li><a href="../../../../Icecave/Siphon/Score/LiveScore.html">LiveScore</a></li>
+                                        <li><a href="../../../../Icecave/Siphon/Score/BoxScore.html">BoxScore</a></li>
     
-                <li>LiveScoreResponse</li>
+                <li>BoxScoreRequest</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>LiveScoreResponse</h1>
+        <h1>BoxScoreRequest</h1>
     </div>
 
     <p>    class
-    <strong>LiveScoreResponse</strong>        implements
-        <a href="../../../../Icecave/Siphon/Reader/ResponseInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseInterface">ResponseInterface</abbr></a></p>
+    <strong>BoxScoreRequest</strong>        implements
+        <a href="../../../../Icecave/Siphon/Reader/SportRequestInterface.html"><abbr title="Icecave\Siphon\Reader\SportRequestInterface">SportRequestInterface</abbr></a></p>
 
             <div class="description">
-            <p>The response from a live score feed.</p>                    </div>
+            <p>A request to the box score feed.</p>                    </div>
     
     
     
@@ -92,18 +92,18 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a> $competition, <a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a> $score)
+                    <a href="#method___construct">__construct</a>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport, string $seasonName, string|integer $competitionId)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a>
+                    <a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_competition">competition</a>()
-                                            <p>Get the requested competition.</p>                </div>
+                    <a href="#method_sport">sport</a>()
+                                            <p>Get the requested sport.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -111,35 +111,17 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setCompetition">setCompetition</a>(<a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a> $competition)
-                                            <p>Set the requested competition.</p>                </div>
+                    <a href="#method_setSport">setSport</a>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport)
+                                            <p>Set the requested sport.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a>
+                    string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_score">score</a>()
-                                            <p>Get the competition score.</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_setScore">setScore</a>(<a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a> $score)
-                                            <p>Set the score.</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    <a href="../../../../Icecave/Siphon/Score/Period.html"><abbr title="Icecave\Siphon\Score\Period">Period</abbr></a>|null
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_currentPeriod">currentPeriod</a>()
-                                            <p>Get the current period.</p>                </div>
+                    <a href="#method_seasonName">seasonName</a>()
+                                            <p>Get the name of the requested season.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -147,17 +129,17 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setCurrentPeriod">setCurrentPeriod</a>(<a href="../../../../Icecave/Siphon/Score/Period.html"><abbr title="Icecave\Siphon\Score\Period">Period</abbr></a> $period = null)
-                                            <p>Set the current period.</p>                </div>
+                    <a href="#method_setSeasonName">setSeasonName</a>(string $seasonName)
+                                            <p>Set the name of the requested season.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Icecave\Chrono\TimeSpan\Duration">Duration</abbr>|null
+                    integer
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_gameTime">gameTime</a>()
-                                            <p>Get the current game time, if available.</p>                </div>
+                    <a href="#method_competitionId">competitionId</a>()
+                                            <p>Get the ID of the requested competition.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -165,8 +147,8 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setGameTime">setGameTime</a>(<abbr title="Icecave\Chrono\TimeSpan\Duration">Duration</abbr> $gameTime = null)
-                                            <p>Set the current game time, if available.</p>                </div>
+                    <a href="#method_setCompetitionId">setCompetitionId</a>(string|integer $competitionId)
+                                            <p>Set the ID of the requested competition.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -174,8 +156,36 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_accept">accept</a>(<a href="../../../../Icecave/Siphon/Reader/ResponseVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr></a> $visitor)
+                    <a href="#method_accept">accept</a>(<a href="../../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a> $visitor)
                                             <p>Dispatch a call to the given visitor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_serialize">serialize</a>()
+                                            <p>Serialize the request to a buffer.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unserialize">unserialize</a>(string $buffer)
+                                            <p>Unserialize a serialized request from a buffer.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___toString">__toString</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -186,9 +196,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 16</div>
+        <div class="location">at line 20</div>
         <code>                    
-    <strong>__construct</strong>(<a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a> $competition, <a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a> $score)</code>
+    <strong>__construct</strong>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport, string $seasonName, string|integer $competitionId)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -196,71 +206,19 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a></td>
-                <td>$competition</td>
-                <td>
-</td>
+                <td><a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+                <td>$sport</td>
+                <td>The sport to request.</td>
             </tr>
                     <tr>
-                <td><a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a></td>
-                <td>$score</td>
-                <td>
-</td>
+                <td>string</td>
+                <td>$seasonName</td>
+                <td>The season name.</td>
             </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_competition">
-        <div class="location">at line 29</div>
-        <code>                    <a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a>
-    <strong>competition</strong>()</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Get the requested competition.</p>                                </div>
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_setCompetition">
-        <div class="location">at line 39</div>
-        <code>                    
-    <strong>setCompetition</strong>(<a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a> $competition)</code>
-    </h3>
-    <div class="details">
-                    <div class="method-description">
-                                    <p>Set the requested competition.</p>                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../../Icecave/Siphon/Schedule/CompetitionInterface.html"><abbr title="Icecave\Siphon\Schedule\CompetitionInterface">CompetitionInterface</abbr></a></td>
-                <td>$competition</td>
-                <td>
-</td>
+                <td>string|integer</td>
+                <td>$competitionId</td>
+                <td>The competition ID.</td>
             </tr>
             </table>
 
@@ -272,23 +230,22 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_score">
-        <div class="location">at line 49</div>
-        <code>                    <a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a>
-    <strong>score</strong>()</code>
+                    <h3 id="method_sport">
+        <div class="location">at line 32</div>
+        <code>                    <a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a>
+    <strong>sport</strong>()</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Get the competition score.</p>                                </div>
+                                    <p>Get the requested sport.</p>                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a></td>
-            <td>
-</td>
+            <td><a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+            <td>The requested sport.</td>
         </tr>
     </table>
 
@@ -299,23 +256,22 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setScore">
-        <div class="location">at line 59</div>
+                    <h3 id="method_setSport">
+        <div class="location">at line 42</div>
         <code>                    
-    <strong>setScore</strong>(<a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a> $score)</code>
+    <strong>setSport</strong>(<a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a> $sport)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Set the score.</p>                                </div>
+                                    <p>Set the requested sport.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../../Icecave/Siphon/Score/Score.html"><abbr title="Icecave\Siphon\Score\Score">Score</abbr></a></td>
-                <td>$score</td>
-                <td>
-</td>
+                <td><a href="../../../../Icecave/Siphon/Sport.html"><abbr title="Icecave\Siphon\Sport">Sport</abbr></a></td>
+                <td>$sport</td>
+                <td>The requested sport.</td>
             </tr>
             </table>
 
@@ -327,22 +283,22 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_currentPeriod">
-        <div class="location">at line 69</div>
-        <code>                    <a href="../../../../Icecave/Siphon/Score/Period.html"><abbr title="Icecave\Siphon\Score\Period">Period</abbr></a>|null
-    <strong>currentPeriod</strong>()</code>
+                    <h3 id="method_seasonName">
+        <div class="location">at line 52</div>
+        <code>                    string
+    <strong>seasonName</strong>()</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Get the current period.</p>                                </div>
+                                    <p>Get the name of the requested season.</p>                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../../../Icecave/Siphon/Score/Period.html"><abbr title="Icecave\Siphon\Score\Period">Period</abbr></a>|null</td>
-            <td>The current period, if there is one.</td>
+            <td>string</td>
+            <td>The season name.</td>
         </tr>
     </table>
 
@@ -353,22 +309,22 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setCurrentPeriod">
-        <div class="location">at line 79</div>
+                    <h3 id="method_setSeasonName">
+        <div class="location">at line 62</div>
         <code>                    
-    <strong>setCurrentPeriod</strong>(<a href="../../../../Icecave/Siphon/Score/Period.html"><abbr title="Icecave\Siphon\Score\Period">Period</abbr></a> $period = null)</code>
+    <strong>setSeasonName</strong>(string $seasonName)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Set the current period.</p>                                </div>
+                                    <p>Set the name of the requested season.</p>                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../../Icecave/Siphon/Score/Period.html"><abbr title="Icecave\Siphon\Score\Period">Period</abbr></a></td>
-                <td>$period</td>
-                <td>The current period, if there is one.</td>
+                <td>string</td>
+                <td>$seasonName</td>
+                <td>The season name.</td>
             </tr>
             </table>
 
@@ -380,23 +336,22 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_gameTime">
-        <div class="location">at line 92</div>
-        <code>                    <abbr title="Icecave\Chrono\TimeSpan\Duration">Duration</abbr>|null
-    <strong>gameTime</strong>()</code>
+                    <h3 id="method_competitionId">
+        <div class="location">at line 72</div>
+        <code>                    integer
+    <strong>competitionId</strong>()</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Get the current game time, if available.</p>                    <p>The game time is only available when a period is in progress. Some sports
-do not use a game time at all.</p>            </div>
+                                    <p>Get the ID of the requested competition.</p>                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td><abbr title="Icecave\Chrono\TimeSpan\Duration">Duration</abbr>|null</td>
-            <td>The current game time, or null if it is not available.</td>
+            <td>integer</td>
+            <td>The numeric competition ID.</td>
         </tr>
     </table>
 
@@ -407,22 +362,23 @@ do not use a game time at all.</p>            </div>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setGameTime">
-        <div class="location">at line 102</div>
+                    <h3 id="method_setCompetitionId">
+        <div class="location">at line 85</div>
         <code>                    
-    <strong>setGameTime</strong>(<abbr title="Icecave\Chrono\TimeSpan\Duration">Duration</abbr> $gameTime = null)</code>
+    <strong>setCompetitionId</strong>(string|integer $competitionId)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
-                                    <p>Set the current game time, if available.</p>                                </div>
+                                    <p>Set the ID of the requested competition.</p>                    <p>If a string ID is given it is validated against the sport, and the
+numeric portion is extracted.</p>            </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Icecave\Chrono\TimeSpan\Duration">Duration</abbr></td>
-                <td>$gameTime</td>
-                <td>The current game time, or null if it is not available.</td>
+                <td>string|integer</td>
+                <td>$competitionId</td>
+                <td>The string or numeric competition ID.</td>
             </tr>
             </table>
 
@@ -435,9 +391,9 @@ do not use a game time at all.</p>            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_accept">
-        <div class="location">at line 114</div>
+        <div class="location">at line 101</div>
         <code>                    mixed
-    <strong>accept</strong>(<a href="../../../../Icecave/Siphon/Reader/ResponseVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr></a> $visitor)</code>
+    <strong>accept</strong>(<a href="../../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a> $visitor)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
@@ -447,7 +403,7 @@ do not use a game time at all.</p>            </div>
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../../Icecave/Siphon/Reader/ResponseVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr></a></td>
+                <td><a href="../../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a></td>
                 <td>$visitor</td>
                 <td>
 </td>
@@ -460,6 +416,86 @@ do not use a game time at all.</p>            </div>
                     <table class="table table-condensed">
         <tr>
             <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_serialize">
+        <div class="location">at line 111</div>
+        <code>                    string
+    <strong>serialize</strong>()</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Serialize the request to a buffer.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unserialize">
+        <div class="location">at line 126</div>
+        <code>                    
+    <strong>unserialize</strong>(string $buffer)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Unserialize a serialized request from a buffer.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$buffer</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___toString">
+        <div class="location">at line 141</div>
+        <code>                    string
+    <strong>__toString</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
             <td>
 </td>
         </tr>
