@@ -74,8 +74,6 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
 
     public function testAccept()
     {
-        $this->markTestSkipped();
-
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
         $this->request->accept($visitor->mock());
