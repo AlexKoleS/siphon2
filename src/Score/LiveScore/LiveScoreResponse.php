@@ -9,7 +9,7 @@ use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\Score;
 
 /**
- * The response from a team feed.
+ * The response from a live score feed.
  */
 class LiveScoreResponse implements ResponseInterface
 {

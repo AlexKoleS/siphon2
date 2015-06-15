@@ -9,6 +9,7 @@ use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
+use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
 use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
@@ -61,6 +62,8 @@ class RequestFactory implements RequestFactoryInterface
         } elseif ($request = $this->createInjuryRequest($components)) {
             return $request;
         } elseif ($request = $this->createLiveScoreRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createBoxScoreRequest($components)) {
             return $request;
         }
 
@@ -309,6 +312,32 @@ class RequestFactory implements RequestFactoryInterface
             return new LiveScoreRequest(
                 Sport::findByComponents($matches[1], $matches[2]),
                 $matches[3]
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a BoxScoreRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return BoxScoreRequest|null
+     */
+    private function createBoxScoreRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/boxscores/([^/]+)/boxscore_\2_(\d+)\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new BoxScoreRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                $matches[4]
             );
         }
 

@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/baseball</id>
+            <name>baseball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/baseball/league:1219</id>
+                <name>Major League Baseball</name>
+                <name type="nick">MLB</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/baseball/season:850</id>
+                    <name>2009</name>
+                    <details>
+                        <start-date>2009-02-24</start-date>
+                        <end-date>2009-11-05</end-date>
+                    </details>
+                </season>
+                <competition xsi:type="sport:baseball-competition">
+                    <id>/sport/baseball/competition:291828</id>
+                    <start-date>2009-10-21T20:05:00-04:00</start-date>
+                    <result-scope>
+                        <competition-status>complete</competition-status>
+                    </result-scope>
+                    <home-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2958</id>
+                            <name>Philadelphia</name>
+                        </team>
+                        <stat-group>
+                            <key>results</key>
+                            <stat num="10" type="runs"/>
+                            <stat num="8" type="hits"/>
+                        </stat-group>
+                        <stat-group>
+                            <key>game-stats</key>
+                            <stat num="1" type="games_played"/>
+                            <stat num="1" type="games_won"/>
+                            <stat num="31" type="at_bats"/>
+                            <stat num="8" type="hits"/>
+                            <stat num="10" type="runs"/>
+                            <stat num="3" type="runs_inning_1"/>
+                            <stat num="1" type="runs_inning_2"/>
+                            <stat num="2" type="runs_inning_4"/>
+                            <stat num="2" type="runs_inning_6"/>
+                            <stat num="1" type="runs_inning_7"/>
+                            <stat num="1" type="runs_inning_8"/>
+                            <stat num="4" type="home_runs"/>
+                            <stat num="2" type="doubles"/>
+                            <stat num="9" type="runs_batted_in"/>
+                            <stat num="4" type="walks"/>
+                            <stat num="10" type="strikeouts"/>
+                            <stat num="1" type="sacrifice_hits"/>
+                            <stat num="8" type="left_on_base"/>
+                            <stat num="5" type="team_left_on_base"/>
+                            <stat num="3" type="two_out_left_on_base"/>
+                            <stat num="3" type="hit_by_pitch"/>
+                            <stat num="3" type="rlisp_two_out"/>
+                            <stat num="27" type="outs_pitched"/>
+                            <stat num="4" type="earned_runs_against"/>
+                            <stat num="4.0" type="earned_run_average"/>
+                            <stat num="22" type="total_bases"/>
+                            <stat num="0.7096774" type="slugging_percentage"/>
+                            <stat num="0.2580645" type="batting_average"/>
+                            <stat num="0.39473686" type="on_base_percentage"/>
+                            <stat num="1.1044142544269562" type="on_base_plus_slugging"/>
+                        </stat-group>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:42863</id>
+                                <name type="first">Cole</name>
+                                <name type="last">Hamels</name>
+                                <throws>left</throws>
+                                <bats>left</bats>
+                            </player>
+                            <stat-group>
+                                <key>game-stats</key>
+                                <stat num="1" type="games_played"/>
+                                <stat num="1" type="games_started"/>
+                                <stat num="1" type="at_bats"/>
+                                <stat num="1" type="strikeouts"/>
+                                <stat num="1" type="sacrifice_hits"/>
+                                <stat num="1" type="pitcher_games_played"/>
+                                <stat num="1" type="no_decisions"/>
+                                <stat num="1" type="pitcher_games_started"/>
+                                <stat num="13" type="outs_pitched"/>
+                                <stat num="6.230769" type="earned_run_average"/>
+                                <stat num="1.3846154" type="whip"/>
+                                <stat num="5" type="pitcher_hits"/>
+                                <stat num="3" type="pitcher_runs"/>
+                                <stat num="3" type="pitcher_earned_runs"/>
+                                <stat num="1" type="pitcher_walks"/>
+                                <stat num="3" type="pitcher_strikeouts"/>
+                                <stat num="3" type="pitcher_home_runs"/>
+                                <stat num="94" type="pitches_thrown"/>
+                                <stat num="94" type="starting_pitches_thrown"/>
+                                <stat num="62" type="strikes_thrown"/>
+                                <stat num="5" type="ground_ball_outs"/>
+                                <stat num="5" type="fly_ball_outs"/>
+                                <stat num="19" type="batters_faced"/>
+                            </stat-group>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                                <batting-order>9</batting-order>
+                                <batting-order-slot>1</batting-order-slot>
+                                <position type="primary">
+                                    <id>/sport/baseball/player-result-position:1</id>
+                                    <name>Starter</name>
+                                    <name type="short">SP</name>
+                                </position>
+                            </lineup>
+                        </player-content>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:43078</id>
+                                <name type="first">J.A.</name>
+                                <name type="last">Happ</name>
+                                <throws>left</throws>
+                                <bats>left</bats>
+                            </player>
+                            <stat-group>
+                                <key>game-stats</key>
+                                <stat num="1" type="games_played"/>
+                                <stat num="1" type="pitcher_games_played"/>
+                                <stat num="1" type="outs_pitched"/>
+                                <stat num="3.0" type="whip"/>
+                                <stat num="1" type="pitcher_walks"/>
+                                <stat num="7" type="pitches_thrown"/>
+                                <stat num="3" type="strikes_thrown"/>
+                                <stat num="1" type="fly_ball_outs"/>
+                                <stat num="2" type="batters_faced"/>
+                                <stat num="1" type="inherited_runners"/>
+                            </stat-group>
+                            <lineup>
+                                <pitching-order>2</pitching-order>
+                                <batting-order>9</batting-order>
+                                <batting-order-slot>2</batting-order-slot>
+                                <position type="primary">
+                                    <id>/sport/baseball/player-result-position:2</id>
+                                    <name>Reliever</name>
+                                    <name type="short">RP</name>
+                                </position>
+                            </lineup>
+                        </player-content>
+                        <events xsi:type="sport:baseball-competition-events">
+                            <sacrifice>
+                                <id>/sport/baseball/competition-event/sacrifice:18431</id>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:42863</id>
+                                        <name type="first">Cole</name>
+                                        <name type="last">Hamels</name>
+                                        <throws>left</throws>
+                                        <bats>left</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:3</id>
+                                        <name>batter</name>
+                                    </player-role>
+                                </player-role-grouping>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:43419</id>
+                                        <name type="first">Ramon</name>
+                                        <name type="last">Troncoso</name>
+                                        <throws>right</throws>
+                                        <bats>right</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:1</id>
+                                        <name>pitcher</name>
+                                    </player-role>
+                                </player-role-grouping>
+                                <type>hit</type>
+                            </sacrifice>
+                            <hit-by-pitch>
+                                <id>/sport/baseball/competition-event/hit-by-pitch:39933</id>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:41736</id>
+                                        <name type="first">Jimmy</name>
+                                        <name type="last">Rollins</name>
+                                        <throws>right</throws>
+                                        <bats>switch</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:3</id>
+                                        <name>batter</name>
+                                    </player-role>
+                                </player-role-grouping>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:43488</id>
+                                        <name type="first">Clayton</name>
+                                        <name type="last">Kershaw</name>
+                                        <throws>left</throws>
+                                        <bats>left</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:1</id>
+                                        <name>pitcher</name>
+                                    </player-role>
+                                </player-role-grouping>
+                            </hit-by-pitch>
+                            <hit-by-pitch>
+                                <id>/sport/baseball/competition-event/hit-by-pitch:39931</id>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:41736</id>
+                                        <name type="first">Jimmy</name>
+                                        <name type="last">Rollins</name>
+                                        <throws>right</throws>
+                                        <bats>switch</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:3</id>
+                                        <name>batter</name>
+                                    </player-role>
+                                </player-role-grouping>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:43419</id>
+                                        <name type="first">Ramon</name>
+                                        <name type="last">Troncoso</name>
+                                        <throws>right</throws>
+                                        <bats>right</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:1</id>
+                                        <name>pitcher</name>
+                                    </player-role>
+                                </player-role-grouping>
+                            </hit-by-pitch>
+                            <hit-by-pitch>
+                                <id>/sport/baseball/competition-event/hit-by-pitch:39932</id>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:42310</id>
+                                        <name type="first">Shane</name>
+                                        <name type="last">Victorino</name>
+                                        <throws>right</throws>
+                                        <bats>switch</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:3</id>
+                                        <name>batter</name>
+                                    </player-role>
+                                </player-role-grouping>
+                                <player-role-grouping>
+                                    <player xsi:type="sport:baseball-player">
+                                        <id>/sport/baseball/player:42127</id>
+                                        <name type="first">George</name>
+                                        <name type="last">Sherrill</name>
+                                        <throws>left</throws>
+                                        <bats>left</bats>
+                                    </player>
+                                    <player-role>
+                                        <id>/sport/baseball/player-role:1</id>
+                                        <name>pitcher</name>
+                                    </player-role>
+                                </player-role-grouping>
+                            </hit-by-pitch>
+                        </events>
+                    </home-team-content>
+                    <away-team-content>
+                        <team>
+                            <id>/sport/baseball/team:2967</id>
+                            <name>LA Dodgers</name>
+                        </team>
+                        <stat-group>
+                            <key>results</key>
+                            <stat num="4" type="runs"/>
+                            <stat num="8" type="hits"/>
+                        </stat-group>
+                        <stat-group>
+                            <key>game-stats</key>
+                            <stat num="1" type="games_played"/>
+                            <stat num="1" type="games_lost"/>
+                            <stat num="35" type="at_bats"/>
+                            <stat num="8" type="hits"/>
+                            <stat num="4" type="runs"/>
+                            <stat num="1" type="runs_inning_1"/>
+                            <stat num="1" type="runs_inning_2"/>
+                            <stat num="1" type="runs_inning_5"/>
+                            <stat num="1" type="runs_inning_8"/>
+                            <stat num="3" type="home_runs"/>
+                            <stat num="1" type="doubles"/>
+                            <stat num="4" type="runs_batted_in"/>
+                            <stat num="3" type="walks"/>
+                            <stat num="7" type="strikeouts"/>
+                            <stat num="15" type="left_on_base"/>
+                            <stat num="7" type="team_left_on_base"/>
+                            <stat num="3" type="two_out_left_on_base"/>
+                            <stat num="3" type="rlisp_two_out"/>
+                            <stat num="24" type="outs_pitched"/>
+                            <stat num="1" type="wild_pitches"/>
+                            <stat num="3" type="hit_batters"/>
+                            <stat num="10" type="earned_runs_against"/>
+                            <stat num="11.25" type="earned_run_average"/>
+                            <stat num="18" type="total_bases"/>
+                            <stat num="0.51428574" type="slugging_percentage"/>
+                            <stat num="0.22857143" type="batting_average"/>
+                            <stat num="0.28947368" type="on_base_percentage"/>
+                            <stat num="0.8037594258785248" type="on_base_plus_slugging"/>
+                        </stat-group>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:40838</id>
+                                <name type="first">Vicente</name>
+                                <name type="last">Padilla</name>
+                                <throws>right</throws>
+                                <bats>right</bats>
+                            </player>
+                            <stat-group>
+                                <key>game-stats</key>
+                                <stat num="1" type="games_played"/>
+                                <stat num="1" type="games_started"/>
+                                <stat num="1" type="at_bats"/>
+                                <stat num="1" type="pitcher_games_played"/>
+                                <stat num="1" type="losses"/>
+                                <stat num="1" type="pitcher_games_started"/>
+                                <stat num="9" type="outs_pitched"/>
+                                <stat num="18.0" type="earned_run_average"/>
+                                <stat num="2.0" type="whip"/>
+                                <stat num="4" type="pitcher_hits"/>
+                                <stat num="6" type="pitcher_runs"/>
+                                <stat num="6" type="pitcher_earned_runs"/>
+                                <stat num="2" type="pitcher_walks"/>
+                                <stat num="3" type="pitcher_strikeouts"/>
+                                <stat num="2" type="pitcher_home_runs"/>
+                                <stat num="55" type="pitches_thrown"/>
+                                <stat num="55" type="starting_pitches_thrown"/>
+                                <stat num="34" type="strikes_thrown"/>
+                                <stat num="4" type="ground_ball_outs"/>
+                                <stat num="2" type="fly_ball_outs"/>
+                                <stat num="15" type="batters_faced"/>
+                            </stat-group>
+                            <lineup>
+                                <pitching-order>1</pitching-order>
+                                <batting-order>9</batting-order>
+                                <batting-order-slot>1</batting-order-slot>
+                                <position type="primary">
+                                    <id>/sport/baseball/player-result-position:1</id>
+                                    <name>Starter</name>
+                                    <name type="short">SP</name>
+                                </position>
+                            </lineup>
+                        </player-content>
+                        <player-content xsi:type="sport:baseball-competition-player-content">
+                            <player xsi:type="sport:baseball-player">
+                                <id>/sport/baseball/player:43419</id>
+                                <name type="first">Ramon</name>
+                                <name type="last">Troncoso</name>
+                                <throws>right</throws>
+                                <bats>right</bats>
+                            </player>
+                            <stat-group>
+                                <key>game-stats</key>
+                                <stat num="1" type="games_played"/>
+                                <stat num="1" type="pitcher_games_played"/>
+                                <stat num="2" type="outs_pitched"/>
+                                <stat num="1.5" type="whip"/>
+                                <stat num="1" type="pitcher_walks"/>
+                                <stat num="1" type="pitcher_hit_by_pitch"/>
+                                <stat num="1" type="pitcher_sacrifice_hits"/>
+                                <stat num="19" type="pitches_thrown"/>
+                                <stat num="8" type="strikes_thrown"/>
+                                <stat num="2" type="ground_ball_outs"/>
+                                <stat num="4" type="batters_faced"/>
+                                <stat num="1" type="inherited_runners"/>
+                            </stat-group>
+                            <lineup>
+                                <pitching-order>2</pitching-order>
+                                <batting-order>9</batting-order>
+                                <batting-order-slot>2</batting-order-slot>
+                                <position type="primary">
+                                    <id>/sport/baseball/player-result-position:2</id>
+                                    <name>Reliever</name>
+                                    <name type="short">RP</name>
+                                </position>
+                            </lineup>
+                        </player-content>
+                    </away-team-content>
+                    <details>
+                        <competition-type>League Championship</competition-type>
+                        <day>false</day>
+                        <neutral-site>false</neutral-site>
+                        <date-tbd>false</date-tbd>
+                        <attendance>46214</attendance>
+                        <venue>
+                            <id>/sport/baseball/venue:3010</id>
+                            <name>Citizens Bank Park</name>
+                            <name type="short">CBB</name>
+                            <location>
+                                <city>Philadelphia</city>
+                                <state>Pennsylvania</state>
+                                <country>USA</country>
+                                <timezone>US/Eastern</timezone>
+                            </location>
+                            <season-details>
+                                <capacity>43000</capacity>
+                                <field-type>
+                                    <id>/sport/baseball/field-type:1</id>
+                                    <name>Grass</name>
+                                </field-type>
+                            </season-details>
+                        </venue>
+                    </details>
+                    <official-content>
+                        <official>
+                            <id>/sport/baseball/official:8404</id>
+                            <name type="first">Ted</name>
+                            <name type="last">Barrett</name>
+                            <season-details>
+                                <number>65</number>
+                            </season-details>
+                        </official>
+                        <position type="primary">
+                            <id>/sport/baseball/official-result-position:6</id>
+                            <name>Right Field</name>
+                            <name type="short">RF</name>
+                        </position>
+                    </official-content>
+                    <official-content>
+                        <official>
+                            <id>/sport/baseball/official:8344</id>
+                            <name type="first">Tom</name>
+                            <name type="last">Hallion</name>
+                            <season-details>
+                                <number>20</number>
+                            </season-details>
+                        </official>
+                        <position type="primary">
+                            <id>/sport/baseball/official-result-position:1</id>
+                            <name>Homeplate</name>
+                            <name type="short">Home</name>
+                        </position>
+                    </official-content>
+                    <official-content>
+                        <official>
+                            <id>/sport/baseball/official:8358</id>
+                            <name type="first">Randy</name>
+                            <name type="last">Marsh</name>
+                            <season-details>
+                                <number>30</number>
+                            </season-details>
+                        </official>
+                        <position type="primary">
+                            <id>/sport/baseball/official-result-position:3</id>
+                            <name>Second Base</name>
+                            <name type="short">2nd</name>
+                        </position>
+                    </official-content>
+                    <official-content>
+                        <official>
+                            <id>/sport/baseball/official:8337</id>
+                            <name type="first">Gary</name>
+                            <name type="last">Cederstrom</name>
+                            <season-details>
+                                <number>38</number>
+                            </season-details>
+                        </official>
+                        <position type="primary">
+                            <id>/sport/baseball/official-result-position:2</id>
+                            <name>First Base</name>
+                            <name type="short">1st</name>
+                        </position>
+                    </official-content>
+                    <official-content>
+                        <official>
+                            <id>/sport/baseball/official:8333</id>
+                            <name type="first">Sam</name>
+                            <name type="last">Holbrook</name>
+                            <season-details>
+                                <number>34</number>
+                            </season-details>
+                        </official>
+                        <position type="primary">
+                            <id>/sport/baseball/official-result-position:5</id>
+                            <name>Left Field</name>
+                            <name type="short">LF</name>
+                        </position>
+                    </official-content>
+                    <official-content>
+                        <official>
+                            <id>/sport/baseball/official:8394</id>
+                            <name type="first">Bruce</name>
+                            <name type="last">Dreckman</name>
+                            <season-details>
+                                <number>1</number>
+                            </season-details>
+                        </official>
+                        <position type="primary">
+                            <id>/sport/baseball/official-result-position:4</id>
+                            <name>Third Base</name>
+                            <name type="short">3rd</name>
+                        </position>
+                    </official-content>
+                    <betting>
+                        <over-under closing="true">
+                            <id>/sport/baseball/odds:1138663</id>
+                            <total>8.5</total>
+                            <over-odds>
+                                <american>-109</american>
+                            </over-odds>
+                            <under-odds>
+                                <american>-101</american>
+                            </under-odds>
+                        </over-under>
+                        <point-spread closing="true">
+                            <id>/sport/baseball/odds:1138662</id>
+                            <home-handicap>-1.5</home-handicap>
+                            <home-odds>
+                                <american>154</american>
+                            </home-odds>
+                            <away-odds>
+                                <american>-164</american>
+                            </away-odds>
+                        </point-spread>
+                        <money-line>
+                            <id>/sport/baseball/odds:1138661</id>
+                            <home-odds>
+                                <american>-143</american>
+                            </home-odds>
+                            <away-odds>
+                                <american>135</american>
+                            </away-odds>
+                        </money-line>
+                        <home-rotation-number>904</home-rotation-number>
+                        <away-rotation-number>903</away-rotation-number>
+                    </betting>
+                </competition>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>
