@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Score\BoxScore;
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Competition;
@@ -151,6 +152,128 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                             'batting_average'       => 0.22857143,
                             'on_base_percentage'    => 0.28947368,
                             'on_base_plus_slugging' => 0.8037594258785248,
+                        ]
+                    ),
+                ]
+            )
+        );
+
+        $expected->add(
+            new Player('/sport/baseball/player:42863', 'Cole', 'Hamels'),
+            new StatisticsCollection(
+                [
+                    new StatisticsGroup(
+                        'game-stats',
+                        [],
+                        [
+                            'games_played'            => 1,
+                            'games_started'           => 1,
+                            'at_bats'                 => 1,
+                            'strikeouts'              => 1,
+                            'sacrifice_hits'          => 1,
+                            'pitcher_games_played'    => 1,
+                            'no_decisions'            => 1,
+                            'pitcher_games_started'   => 1,
+                            'outs_pitched'            => 13,
+                            'earned_run_average'      => 6.2307689999999996,
+                            'whip'                    => 1.3846153999999999,
+                            'pitcher_hits'            => 5,
+                            'pitcher_runs'            => 3,
+                            'pitcher_earned_runs'     => 3,
+                            'pitcher_walks'           => 1,
+                            'pitcher_strikeouts'      => 3,
+                            'pitcher_home_runs'       => 3,
+                            'pitches_thrown'          => 94,
+                            'starting_pitches_thrown' => 94,
+                            'strikes_thrown'          => 62,
+                            'ground_ball_outs'        => 5,
+                            'fly_ball_outs'           => 5,
+                            'batters_faced'           => 19,
+                        ]
+                    ),
+                ]
+            )
+        );
+
+        $expected->add(
+            new Player('/sport/baseball/player:43078', 'J.A.', 'Happ'),
+            new StatisticsCollection(
+                [
+                    new StatisticsGroup(
+                        'game-stats',
+                        [],
+                        [
+                            'games_played'         => 1,
+                            'pitcher_games_played' => 1,
+                            'outs_pitched'         => 1,
+                            'whip'                 => 3.0,
+                            'pitcher_walks'        => 1,
+                            'pitches_thrown'       => 7,
+                            'strikes_thrown'       => 3,
+                            'fly_ball_outs'        => 1,
+                            'batters_faced'        => 2,
+                            'inherited_runners'    => 1,
+                        ]
+                    ),
+                ]
+            )
+        );
+
+        $expected->add(
+            new Player('/sport/baseball/player:40838', 'Vicente', 'Padilla'),
+            new StatisticsCollection(
+                [
+                    new StatisticsGroup(
+                        'game-stats',
+                        [],
+                        [
+                            'games_played'            => 1,
+                            'games_started'           => 1,
+                            'at_bats'                 => 1,
+                            'pitcher_games_played'    => 1,
+                            'losses'                  => 1,
+                            'pitcher_games_started'   => 1,
+                            'outs_pitched'            => 9,
+                            'earned_run_average'      => 18.0,
+                            'whip'                    => 2.0,
+                            'pitcher_hits'            => 4,
+                            'pitcher_runs'            => 6,
+                            'pitcher_earned_runs'     => 6,
+                            'pitcher_walks'           => 2,
+                            'pitcher_strikeouts'      => 3,
+                            'pitcher_home_runs'       => 2,
+                            'pitches_thrown'          => 55,
+                            'starting_pitches_thrown' => 55,
+                            'strikes_thrown'          => 34,
+                            'ground_ball_outs'        => 4,
+                            'fly_ball_outs'           => 2,
+                            'batters_faced'           => 15,
+                        ]
+                    ),
+                ]
+            )
+        );
+
+        $expected->add(
+            new Player('/sport/baseball/player:43419', 'Ramon', 'Troncoso'),
+            new StatisticsCollection(
+                [
+                    new StatisticsGroup(
+                        'game-stats',
+                        [],
+                        [
+                            'games_played'           => 1,
+                            'pitcher_games_played'   => 1,
+                            'outs_pitched'           => 2,
+                            'whip'                   => 1.5,
+                            'pitcher_walks'          => 1,
+                            'pitcher_hit_by_pitch'   => 1,
+                            'pitcher_sacrifice_hits' => 1,
+                            'pitches_thrown'         => 19,
+                            'strikes_thrown'         => 8,
+                            'ground_ball_outs'       => 2,
+                            'batters_faced'          => 4,
+                            'inherited_runners'      => 1,
                         ]
                     ),
                 ]
