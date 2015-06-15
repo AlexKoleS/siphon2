@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <team-sport-content>
+        <sport>
+            <id>/sport/basketball</id>
+            <name>basketball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/basketball/league:403878</id>
+                <name>National Basketball Association</name>
+                <name type="nick">NBA</name>
+            </league>
+            <competition>
+                <id>/sport/basketball/competition:896346</id>
+                <start-date>2015-06-14T20:00:00.000-04:00</start-date>
+                <result-scope>
+                    <competition-status>in-progress</competition-status>
+                    <scope num="1" type="period"/>
+                    <scope-status>in-progress</scope-status>
+                    <clock>00:02:46</clock>
+                    <update-date>2015-06-14T20:29:41.000-04:00</update-date>
+                </result-scope>
+                <home-team-content>
+                    <team>
+                        <id>/sport/basketball/team:404119</id>
+                        <name>Golden State</name>
+                        <name type="short">GS</name>
+                    </team>
+                    <stat-group>
+                        <scope type="competition"/>
+                        <stat num="16" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="1" type="period"/>
+                        <stat num="16" type="score"/>
+                    </stat-group>
+                </home-team-content>
+                <away-team-content>
+                    <team>
+                        <id>/sport/basketball/team:404213</id>
+                        <name>Cleveland</name>
+                        <name type="short">CLE</name>
+                    </team>
+                    <stat-group>
+                        <scope type="competition"/>
+                        <stat num="17" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="1" type="period"/>
+                        <stat num="17" type="score"/>
+                    </stat-group>
+                </away-team-content>
+            </competition>
+        </league-content>
+    </team-sport-content>
+</sport:content>

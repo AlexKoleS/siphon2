@@ -124,6 +124,26 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @group regression
+     */
+    public function testReadSetsCurrentPeriodBasedOnNormalizedPeriodType()
+    {
+        $this->setUpXmlReader('Score/livescores-current-period.xml');
+
+        $response = $this->reader->read(
+            new LiveScoreRequest(
+                Sport::NBA(),
+                403878
+            )
+        );
+
+        $this->assertEquals(
+            new Period(PeriodType::QUARTER(), 1, 16, 17),
+            $response->currentPeriod()
+        );
+    }
+
     public function testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded()
     {
         $this->setUpXmlReader('Score/livescores-complete.xml');

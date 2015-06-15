@@ -81,11 +81,14 @@ class LiveScoreReader implements LiveScoreReaderInterface
             $scope = $xml->{'result-scope'}->scope;
 
             foreach ($periods as $period) {
-                $type   = strval($scope['type']);
                 $number = intval($scope['num']);
+                $type   = $this->createPeriodType(
+                    $request->sport(),
+                    strval($scope['type'])
+                );
 
                 if (
-                       $type === $period->type()->value()
+                       $type === $period->type()
                     && $number === $period->number()
                 ) {
                     $response->setCurrentPeriod($period);
