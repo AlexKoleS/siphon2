@@ -18,4 +18,4 @@
 <!-- references -->
 [Build Status]: http://img.shields.io/travis/IcecaveStudios/siphon/develop.svg?style=flat-square
 [Test Coverage]: http://img.shields.io/coveralls/IcecaveStudios/siphon/develop.svg?style=flat-square
-[SemVer]: http://img.shields.io/:semver-0.1.1-yellow.svg?style=flat-square
+[SemVer]: http://img.shields.io/:semver-0.2.0-yellow.svg?style=flat-square
