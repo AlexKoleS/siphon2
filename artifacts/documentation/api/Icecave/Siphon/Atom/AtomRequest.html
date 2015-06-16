@@ -75,7 +75,8 @@
 
     <p>    class
     <strong>AtomRequest</strong>        implements
-        <a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a></p>
+        <a href="../../../Icecave/Siphon/Reader/RequestInterface.html"><abbr title="Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr></a>
+</p>
 
             <div class="description">
             <p>A request to the atom feed.</p>                    </div>
@@ -91,7 +92,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)
+                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Siphon\Atom\Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -110,7 +111,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setUpdatedTime">setUpdatedTime</a>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)
+                    <a href="#method_setUpdatedTime">setUpdatedTime</a>(<abbr title="Icecave\Siphon\Atom\Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)
                                             <p>Set the updated time limit.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -173,7 +174,7 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_accept">accept</a>(<a href="../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a> $visitor)
+                    <a href="#method_accept">accept</a>(<abbr title="Icecave\Siphon\Atom\Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr> $visitor)
                                             <p>Dispatch a call to the given visitor.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -215,7 +216,7 @@
                     <h3 id="method___construct">
         <div class="location">at line 21</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)</code>
+    <strong>__construct</strong>(<abbr title="Icecave\Siphon\Atom\Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime, string|null $feed = null, integer $limit = 5000, integer $order = SORT_ASC)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -223,7 +224,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+                <td><abbr title="Icecave\Siphon\Atom\Icecave\Chrono\DateTime">DateTime</abbr></td>
                 <td>$updatedTime</td>
                 <td>Limit results to feeds updated after this time.</td>
             </tr>
@@ -281,7 +282,7 @@
                     <h3 id="method_setUpdatedTime">
         <div class="location">at line 52</div>
         <code>                    
-    <strong>setUpdatedTime</strong>(<abbr title="Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)</code>
+    <strong>setUpdatedTime</strong>(<abbr title="Icecave\Siphon\Atom\Icecave\Chrono\DateTime">DateTime</abbr> $updatedTime)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
@@ -291,7 +292,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><abbr title="Icecave\Chrono\DateTime">DateTime</abbr></td>
+                <td><abbr title="Icecave\Siphon\Atom\Icecave\Chrono\DateTime">DateTime</abbr></td>
                 <td>$updatedTime</td>
                 <td>The updated time.</td>
             </tr>
@@ -477,7 +478,7 @@
                     <h3 id="method_accept">
         <div class="location">at line 136</div>
         <code>                    mixed
-    <strong>accept</strong>(<a href="../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a> $visitor)</code>
+    <strong>accept</strong>(<abbr title="Icecave\Siphon\Atom\Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr> $visitor)</code>
     </h3>
     <div class="details">
                     <div class="method-description">
@@ -487,7 +488,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../Icecave/Siphon/Reader/RequestVisitorInterface.html"><abbr title="Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></a></td>
+                <td><abbr title="Icecave\Siphon\Atom\Icecave\Siphon\Reader\RequestVisitorInterface">RequestVisitorInterface</abbr></td>
                 <td>$visitor</td>
                 <td>
 </td>
