@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <team-sport-content>
+        <sport>
+            <id>/sport/basketball</id>
+            <name>basketball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/basketball/league:403878</id>
+                <name>National Basketball Association</name>
+                <name type="nick">NBA</name>
+            </league>
+            <competition>
+                <id>/sport/basketball/competition:778888</id>
+                <start-date>2009-01-28T13:30:00.000-05:00</start-date>
+                <result-scope>
+                    <competition-status>complete</competition-status>
+                    <scope num="4" type="period"/>
+                    <scope-status>complete</scope-status>
+                    <update-date>2009-01-28T13:35:22.000-05:00</update-date>
+                </result-scope>
+                <home-team-content>
+                    <team>
+                        <id>/sport/basketball/team:404171</id>
+                        <name>Miami</name>
+                    </team>
+                    <stat-group>
+                        <scope type="competition"/>
+                        <stat num="94" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="1" type="period"/>
+                        <stat num="24" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="2" type="period"/>
+                        <stat num="28" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="3" type="period"/>
+                        <stat num="22" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="4" type="period"/>
+                        <stat num="20" type="score"/>
+                    </stat-group>
+                </home-team-content>
+                <away-team-content>
+                    <team>
+                        <id>/sport/basketball/team:404117</id>
+                        <name>New Jersey</name>
+                    </team>
+                    <stat-group>
+                        <scope type="competition"/>
+                        <stat num="99" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="1" type="period"/>
+                        <stat num="22" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="2" type="period"/>
+                        <stat num="29" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="3" type="period"/>
+                        <stat num="25" type="score"/>
+                    </stat-group>
+                    <stat-group>
+                        <scope num="4" type="period"/>
+                        <stat num="23" type="score"/>
+                    </stat-group>
+                </away-team-content>
+            </competition>
+        </league-content>
+    </team-sport-content>
+</sport:content>

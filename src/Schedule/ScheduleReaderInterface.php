@@ -1,18 +1,11 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
+use Icecave\Siphon\Reader\ReaderInterface;
+
 /**
  * Client for reading schedule feeds.
  */
-interface ScheduleReaderInterface
+interface ScheduleReaderInterface extends ReaderInterface
 {
-    /**
-     * Read a schedule feed.
-     *
-     * @param string $sport  The sport (eg, baseball, football, etc)
-     * @param string $league The league (eg, MLB, NFL, etc)
-     *
-     * @return Schedule
-     */
-    public function read($sport, $league);
 }

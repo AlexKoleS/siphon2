@@ -1,106 +1,116 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
-use Icecave\Chrono\Date;
-use Icecave\Chrono\DateTime;
-use Icecave\Siphon\XmlReaderInterface;
-use SimpleXMLElement;
+use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Player\PlayerFactoryTrait;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
+use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\XmlReaderInterface;
+use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamFactoryTrait;
+use InvalidArgumentException;
 
 /**
  * Client for reading schedule feeds.
  */
 class ScheduleReader implements ScheduleReaderInterface
 {
+    use CompetitionFactoryTrait;
+    use PlayerFactoryTrait;
+    use SeasonFactoryTrait;
+    use TeamFactoryTrait;
+
     public function __construct(XmlReaderInterface $xmlReader)
     {
         $this->xmlReader = $xmlReader;
     }
 
     /**
-     * Read a schedule feed.
+     * Make a request and return the response.
      *
-     * @param string $sport  The sport (eg, baseball, football, etc)
-     * @param string $league The league (eg, MLB, NFL, etc)
+     * @param RequestInterface The request.
      *
-     * @return Schedule
+     * @return ResponseInterface        The response.
+     * @throws InvalidArgumentException if the request is not supported.
      */
-    public function read($sport, $league)
+    public function read(RequestInterface $request)
     {
-        $sport  = strtolower($sport);
-        $league = strtoupper($league);
+        if (!$this->isSupported($request)) {
+            throw new InvalidArgumentException('Unsupported request.');
+        } elseif (ScheduleType::FULL() === $request->type()) {
+            $resource = sprintf(
+                '/sport/v2/%s/%s/schedule/schedule_%s.xml',
+                $request->sport()->sport(),
+                $request->sport()->league(),
+                $request->sport()->league()
+            );
+        } elseif (ScheduleType::DELETED() === $request->type()) {
+            $resource = sprintf(
+                '/sport/v2/%s/%s/games-deleted/games_deleted_%s.xml',
+                $request->sport()->sport(),
+                $request->sport()->league(),
+                $request->sport()->league()
+            );
+        } else {
+            $resource = sprintf(
+                '/sport/v2/%s/%s/schedule/schedule_%s_%d_days.xml',
+                $request->sport()->sport(),
+                $request->sport()->league(),
+                $request->sport()->league(),
+                $request->type()->value()
+            );
+        }
 
-        $xml = $this
-            ->xmlReader
-            ->read(
-                sprintf(
-                    '/sport/v2/%s/%s/schedule/schedule_%s.xml',
-                    $sport,
-                    $league,
-                    $league
-                )
-            )
-            ->xpath('//season-content');
+        $response = new ScheduleResponse(
+            $request->sport(),
+            $request->type()
+        );
 
-        $schedule = new Schedule;
+        try {
+            $xml = $this
+                ->xmlReader
+                ->read($resource)
+                ->xpath('.//season-content');
+        } catch (NotFoundException $e) {
+            // If a well-formed request is not found it appears to means there
+            // are no upcoming seasons within the timeframe given by the request's
+            // schedule type.
+            return $response;
+        }
 
         foreach ($xml as $element) {
             $season = $this->createSeason($element->season);
-            $schedule->add($season);
 
             foreach ($element->competition as $competitionElement) {
-                $season->add(
-                    $this->createCompetition(
-                        $sport,
-                        $league,
-                        $competitionElement
-                    )
+                $competition = $this->createCompetition(
+                    $competitionElement,
+                    $request->sport(),
+                    $season
                 );
+
+                foreach ($competitionElement->xpath('.//player') as $playerElement) {
+                    $competition->addNotablePlayer(
+                        $this->createPlayer($playerElement)
+                    );
+                }
+
+                $season->add($competition);
             }
+
+            $response->add($season);
         }
 
-        return $schedule;
+        return $response;
     }
 
-    private function createSeason(SimpleXMLElement $element)
+    /**
+     * Check if the given request is supported.
+     *
+     * @return boolean True if the given request is supported; otherwise, false.
+     */
+    public function isSupported(RequestInterface $request)
     {
-        $startDate = Date::fromIsoString(
-            $element->details->{'start-date'}
-        );
-
-        $endDate = Date::fromIsoString(
-            $element->details->{'end-date'}
-        );
-
-        return new Season(
-            strval($element->id),
-            strval($element->name),
-            $startDate,
-            $endDate
-        );
-    }
-
-    private function createCompetition(
-        $sport,
-        $league,
-        SimpleXMLElement $element
-    ) {
-        $status = CompetitionStatus::memberByValue(
-            strval($element->{'result-scope'}->{'competition-status'})
-        );
-
-        $startTime = DateTime::fromIsoString(
-            $element->{'start-date'}
-        );
-
-        return new Competition(
-            strval($element->id),
-            $status,
-            $startTime,
-            $sport,
-            $league,
-            strval($element->{'home-team-content'}->{'team'}->{'id'}),
-            strval($element->{'away-team-content'}->{'team'}->{'id'})
-        );
+        return $request instanceof ScheduleRequest;
     }
 
     private $xmlReader;

@@ -2,26 +2,26 @@
 namespace Icecave\Siphon\Team;
 
 /**
- * Represents a team in a team sport.
+ * A sports team.
  */
-class Team
+class Team implements TeamInterface
 {
     /**
      * @param string      $id
      * @param string      $name
-     * @param string|null $nickname
      * @param string      $abbreviation
+     * @param string|null $nickname
      */
     public function __construct(
         $id,
         $name,
-        $nickname,
-        $abbreviation
+        $abbreviation,
+        $nickname = null
     ) {
         $this->id           = $id;
         $this->name         = $name;
-        $this->nickname     = $nickname;
         $this->abbreviation = $abbreviation;
+        $this->nickname     = $nickname;
     }
 
     /**

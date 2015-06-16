@@ -3,6 +3,9 @@ namespace Icecave\Siphon\Schedule;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 
+/**
+ * The status of a competition.
+ */
 class CompetitionStatus extends AbstractEnumeration
 {
     const SCHEDULED      = 'scheduled';
@@ -14,6 +17,6 @@ class CompetitionStatus extends AbstractEnumeration
     const POSTPONED      = 'postponed';
     const SHORTENED      = 'shortened';
     const CANCELLED      = 'cancelled';
-    const OTHER          = 'other';
     const COMPLETE       = 'complete';
+    const OTHER          = 'other';
 }

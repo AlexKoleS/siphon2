@@ -9,6 +9,12 @@ class SeasonTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $this->comp1 = Phony::mock(CompetitionInterface::class);
+        $this->comp2 = Phony::mock(CompetitionInterface::class);
+
+        $this->comp1->id->returns('<comp 1>');
+        $this->comp2->id->returns('<comp 2>');
+
         $this->startDate = Date::fromUnixTime(0);
         $this->endDate   = Date::fromUnixTime(1);
 
@@ -52,22 +58,111 @@ class SeasonTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCompetitions()
+    public function testAdd()
     {
-        $comp1 = Phony::fullMock(Competition::class)->mock();
-        $comp2 = Phony::fullMock(Competition::class)->mock();
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
 
-        $this->assertSame(
+        $this->assertEquals(
+            [
+                $this->comp1->mock(),
+                $this->comp2->mock(),
+            ],
+            iterator_to_array($this->season)
+        );
+    }
+
+    public function testRemove()
+    {
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
+
+        $this->season->remove($this->comp1->mock());
+
+        $this->assertEquals(
+            [
+                $this->comp2->mock(),
+            ],
+            iterator_to_array($this->season)
+        );
+    }
+
+    public function testRemoveWithUnknownCompetition()
+    {
+        $this->season->remove($this->comp1->mock());
+
+        $this->assertEquals(
             [],
-            $this->season->competitions()
+            iterator_to_array($this->season)
+        );
+    }
+
+    public function testClear()
+    {
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
+
+        $this->season->clear();
+
+        $this->assertTrue(
+            $this->season->isEmpty()
+        );
+    }
+
+    public function testIsEmpty()
+    {
+        $this->assertTrue(
+            $this->season->isEmpty()
         );
 
-        $this->season->add($comp1);
-        $this->season->add($comp2);
+        $this->season->add($this->comp1->mock());
+
+        $this->assertFalse(
+            $this->season->isEmpty()
+        );
+    }
+
+    public function testCount()
+    {
+        $this->assertSame(
+            0,
+            count($this->season)
+        );
+
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
 
         $this->assertSame(
-            [$comp1, $comp2],
-            $this->season->competitions()
+            2,
+            count($this->season)
+        );
+
+        $this->season->remove($this->comp1->mock());
+
+        $this->assertSame(
+            1,
+            count($this->season)
+        );
+
+        $this->season->remove($this->comp2->mock());
+
+        $this->assertSame(
+            0,
+            count($this->season)
+        );
+    }
+
+    public function testGetIterator()
+    {
+        $this->season->add($this->comp1->mock());
+        $this->season->add($this->comp2->mock());
+
+        $this->assertEquals(
+            [
+                $this->comp1->mock(),
+                $this->comp2->mock(),
+            ],
+            iterator_to_array($this->season)
         );
     }
 }

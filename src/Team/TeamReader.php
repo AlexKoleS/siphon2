@@ -1,65 +1,76 @@
 <?php
 namespace Icecave\Siphon\Team;
 
-use Icecave\Siphon\XmlReaderInterface;
+use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\XmlReaderInterface;
+use Icecave\Siphon\Schedule\SeasonFactoryTrait;
+use Icecave\Siphon\Util\XPath;
+use InvalidArgumentException;
 
 /**
  * Client for reading team feeds.
  */
 class TeamReader implements TeamReaderInterface
 {
+    use SeasonFactoryTrait;
+    use TeamFactoryTrait;
+
     public function __construct(XmlReaderInterface $xmlReader)
     {
         $this->xmlReader = $xmlReader;
     }
 
     /**
-     * Read a team feed.
+     * Make a request and return the response.
      *
-     * @param string $sport  The sport (eg, baseball, football, etc)
-     * @param string $league The league (eg, MLB, NFL, etc)
-     * @param string $season The season name.
+     * @param RequestInterface The request.
      *
-     * @return array<Team>
+     * @return ResponseInterface        The response.
+     * @throws InvalidArgumentException if the request is not supported.
      */
-    public function read($sport, $league, $season)
+    public function read(RequestInterface $request)
     {
-        $sport  = strtolower($sport);
-        $league = strtoupper($league);
+        if (!$this->isSupported($request)) {
+            throw new InvalidArgumentException('Unsupported request.');
+        }
 
         $xml = $this
             ->xmlReader
             ->read(
                 sprintf(
                     '/sport/v2/%s/%s/teams/%s/teams_%s.xml',
-                    $sport,
-                    $league,
-                    $season,
-                    $league
+                    $request->sport()->sport(),
+                    $request->sport()->league(),
+                    $request->seasonName(),
+                    $request->sport()->league()
                 )
             )
-            ->xpath('//team');
+            ->xpath('.//season-content')[0];
 
-        $teams = [];
+        $season = $this->createSeason($xml->season);
 
-        foreach ($xml as $team) {
-            $elements = $team->xpath("name[@type='nick']");
+        $response = new TeamResponse(
+            $request->sport(),
+            $season
+        );
 
-            if ($elements) {
-                $nickname = strval($elements[0]);
-            } else {
-                $nickname = null;
-            }
-
-            $teams[] = new Team(
-                strval($team->id),
-                strval($team->xpath("name[@type='first']")[0]),
-                $nickname,
-                strval($team->xpath("name[@type='short']")[0])
+        foreach ($xml->xpath('.//team') as $team) {
+            $response->add(
+                $this->createTeam($team)
             );
         }
 
-        return $teams;
+        return $response;
+    }
+
+    /**
+     * Check if the given request is supported.
+     *
+     * @return boolean True if the given request is supported; otherwise, false.
+     */
+    public function isSupported(RequestInterface $request)
+    {
+        return $request instanceof TeamRequest;
     }
 
     private $xmlReader;

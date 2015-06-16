@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/baseball</id>
+            <name>baseball</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/baseball/league:1219</id>
+                <name>Major League Baseball</name>
+                <name type="nick">MLB</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/baseball/season:927</id>
+                    <name>2015</name>
+                    <details>
+                        <start-date>2015-02-01</start-date>
+                        <end-date>2015-11-30</end-date>
+                    </details>
+                </season>
+                <team-content>
+                    <team>
+                        <id>/sport/baseball/team:2955</id>
+                        <name>San Diego</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43559</id>
+                            <name type="first">Yonder</name>
+                            <name type="last">Alonso</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466910.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466910.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:104275</id>
+                            <name type="first">Alexi</name>
+                            <name type="last">Amarista</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466883.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466883.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:42165</id>
+                            <name type="first">Clint</name>
+                            <name type="last">Barmes</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466864.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466864.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:41227</id>
+                            <name type="first">Joaquin</name>
+                            <name type="last">Benoit</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466862.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466862.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:105775</id>
+                            <name type="first">Andrew</name>
+                            <name type="last">Cashner</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466836.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466836.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:116554</id>
+                            <name type="first">Odrisamer</name>
+                            <name type="last">Despaigne</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466913.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466913.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:104398</id>
+                            <name type="first">Tim</name>
+                            <name type="last">Federowicz</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466865.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466865.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:117235</id>
+                            <name type="first">Frank</name>
+                            <name type="last">Garces</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466867.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466867.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:109207</id>
+                            <name type="first">Jedd</name>
+                            <name type="last">Gyorko</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466918.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466918.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:42600</id>
+                            <name type="first">Josh</name>
+                            <name type="last">Johnson</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466840.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466840.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43779</id>
+                            <name type="first">Shawn</name>
+                            <name type="last">Kelley</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466832.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466832.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:42874</id>
+                            <name type="first">Matt</name>
+                            <name type="last">Kemp</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466908.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466908.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43241</id>
+                            <name type="first">Ian</name>
+                            <name type="last">Kennedy</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466831.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466831.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43916</id>
+                            <name type="first">Craig</name>
+                            <name type="last">Kimbrel</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8433731.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8433731.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:106268</id>
+                            <name type="first">Cory</name>
+                            <name type="last">Luebke</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466879.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466879.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:104395</id>
+                            <name type="first">Will</name>
+                            <name type="last">Middlebrooks</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466900.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466900.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43118</id>
+                            <name type="first">Brandon</name>
+                            <name type="last">Morrow</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466829.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466829.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:44043</id>
+                            <name type="first">Wil</name>
+                            <name type="last">Myers</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466916.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466916.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:41582</id>
+                            <name type="first">Wil</name>
+                            <name type="last">Nieves</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466834.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466834.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:104375</id>
+                            <name type="first">Derek</name>
+                            <name type="last">Norris</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466902.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466902.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43926</id>
+                            <name type="first">Tyson</name>
+                            <name type="last">Ross</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466896.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466896.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:42814</id>
+                            <name type="first">James</name>
+                            <name type="last">Shields</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/7788700.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/7788700.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:104915</id>
+                            <name type="first">Yangervis</name>
+                            <name type="last">Solarte</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466869.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466869.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:113194</id>
+                            <name type="first">Cory</name>
+                            <name type="last">Spangenberg</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466898.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466898.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43749</id>
+                            <name type="first">Dale</name>
+                            <name type="last">Thayer</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466884.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466884.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43211</id>
+                            <name type="first">Justin</name>
+                            <name type="last">Upton</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466845.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466845.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:42148</id>
+                            <name type="first">Melvin</name>
+                            <name type="last">Upton Jr.</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8433756.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8433756.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:43564</id>
+                            <name type="first">Will</name>
+                            <name type="last">Venable</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466833.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466833.jpg</url>
+                        </image>
+                    </player-content>
+                    <player-content>
+                        <player>
+                            <id>/sport/baseball/player:106675</id>
+                            <name type="first">Nick</name>
+                            <name type="last">Vincent</name>
+                        </player>
+                        <image>
+                            <thumbnailurl>http://thumb.usatodaysportsimages.com/image/thumb/250-250/8466841.jpg</thumbnailurl>
+                            <url>http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466841.jpg</url>
+                        </image>
+                    </player-content>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

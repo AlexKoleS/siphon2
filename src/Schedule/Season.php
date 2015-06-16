@@ -1,12 +1,16 @@
 <?php
 namespace Icecave\Siphon\Schedule;
 
+use Countable;
 use Icecave\Chrono\Date;
+use IteratorAggregate;
 
 /**
- * A sporting season.
+ * A season within a schedule, a container for competitions.
  */
-class Season
+class Season implements
+    Countable,
+    IteratorAggregate
 {
     /**
      * @param string $id        The season ID.
@@ -68,23 +72,63 @@ class Season
     }
 
     /**
-     * Add a competition to the season.
+     * Check if the season contains competitions.
      *
-     * @param Competition $competition The competition to add.
+     * @param boolean True if the season is empty; otherwise, false.
      */
-    public function add(Competition $competition)
+    public function isEmpty()
     {
-        $this->competitions[] = $competition;
+        return empty($this->competitions);
     }
 
     /**
-     * Get the competitions in the season.
+     * Get the number of competitions in the collection.
      *
-     * @return array<Competition>
+     * @return integer The number of competitions in the collection.
      */
-    public function competitions()
+    public function count()
     {
-        return $this->competitions;
+        return count($this->competitions);
+    }
+
+    /**
+     * Iterate over the competitions.
+     *
+     * @return mixed<CompetitionInterface>
+     */
+    public function getIterator()
+    {
+        foreach ($this->competitions as $competition) {
+            yield $competition;
+        }
+    }
+
+    /**
+     * Add a competition to the season.
+     *
+     * @param CompetitionInterface $competition The competition to add.
+     */
+    public function add(CompetitionInterface $competition)
+    {
+        $this->competitions[$competition->id()] = $competition;
+    }
+
+    /**
+     * Remove a competition from the season.
+     *
+     * @param CompetitionInterface $competition The competition to remove.
+     */
+    public function remove(CompetitionInterface $competition)
+    {
+        unset($this->competitions[$competition->id()]);
+    }
+
+    /**
+     * Remove all competitions from the season.
+     */
+    public function clear()
+    {
+        $this->competitions = [];
     }
 
     private $id;

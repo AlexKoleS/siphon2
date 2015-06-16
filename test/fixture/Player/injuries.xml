@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/football</id>
+            <name>football</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/football/league:1</id>
+                <name>National Football League</name>
+                <name type="nick">NFL</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/football/season:65</id>
+                    <name>2007-2008</name>
+                    <details>
+                        <start-date>2007-08-01</start-date>
+                        <end-date>2008-02-28</end-date>
+                    </details>
+                </season>
+                <team-content>
+                    <team>
+                        <id>/sport/football/team:2</id>
+                        <name>Atlanta</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/football/player:1633</id>
+                            <name type="first">Rod</name>
+                            <name type="last">Coleman</name>
+                        </player>
+                        <injury>
+                            <id>/sport/football/injury:13715</id>
+                            <location>
+                                <id>/sport/football/injury-location:38</id>
+                                <name>Quadricep</name>
+                            </location>
+                            <start-date>2007-05-24</start-date>
+                            <injury-status>
+                                <id>/sport/football/injury-status:23989</id>
+                                <status>out</status>
+                                <display-status>Early Sept</display-status>
+                                <note>Underwent surgery April 30th to repair a ruptured right quadriceps that could keep him sidelined into September.</note>
+                            </injury-status>
+                        </injury>
+                    </player-content>
+                </team-content>
+                <team-content>
+                    <team>
+                        <id>/sport/football/team:16</id>
+                        <name>Chicago</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/football/player:11743</id>
+                            <name type="first">Tank</name>
+                            <name type="last">Johnson</name>
+                        </player>
+                        <injury>
+                            <id>/sport/football/injury:13717</id>
+                            <location>
+                                <id>/sport/football/injury-location:37</id>
+                                <name>Suspension</name>
+                            </location>
+                            <start-date>2007-06-04</start-date>
+                            <injury-status>
+                                <id>/sport/football/injury-status:23991</id>
+                                <status>out</status>
+                                <display-status>Elig Nov 11</display-status>
+                                <note>Suspended for the first eight games of the season for violating the new personal conduct policy. He can trim two games off his suspension if he has no further legal incidents.</note>
+                            </injury-status>
+                            <last-updated>2007-06-04T10:58:42-03:00</last-updated>
+                        </injury>
+                    </player-content>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

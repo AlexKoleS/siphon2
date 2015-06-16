@@ -2,13 +2,14 @@
 namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
-use Icecave\Siphon\XmlReaderInterface;
+use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\XmlReaderInterface;
+use Icecave\Siphon\Util\URL;
 use InvalidArgumentException;
 
 /**
- * Read and parse atom feeds.
- *
- * Atom feeds are used to determine when any of the data feeds have been updated.
+ * Client for reading atom feeds.
  */
 class AtomReader implements AtomReaderInterface
 {
@@ -18,71 +19,70 @@ class AtomReader implements AtomReaderInterface
     }
 
     /**
-     * Fetch a list of feeds that have been updated since the given time.
+     * Make a request and return the response.
      *
-     * @param DateTime    $threshold Feeds updated after this time point are included in the result.
-     * @param string|null $feed      Limit results to feeds of the given type, or null for any type.
-     * @param integer     $limit     The maximum number of results to return.
-     * @param integer     $order     The sort order (one of SORT_ASC or SORT_DESC).
+     * @param RequestInterface The request.
      *
-     * @return AtomResult
+     * @return ResponseInterface        The response.
+     * @throws InvalidArgumentException if the request is not supported.
      */
-    public function read(
-        DateTime $threshold,
-        $feed = null,
-        $limit = 5000,
-        $order = SORT_ASC
-    ) {
+    public function read(RequestInterface $request)
+    {
+        if (!$this->isSupported($request)) {
+            throw new InvalidArgumentException('Unsupported request.');
+        }
+
         $xml = $this->xmlReader->read(
             '/Atom',
-            $this->buildParameters(
-                $threshold,
-                $feed,
-                $limit,
-                $order
-            )
+            $this->buildParameters($request)
         );
 
-        $result = new AtomResult(
+        $response = new AtomResponse(
             DateTime::fromIsoString($xml->updated)
         );
 
         foreach ($xml->entry as $entry) {
-            $result->add(
-                new AtomEntry(
-                    strval($entry->link['href']),
-                    DateTime::fromIsoString($entry->updated)
-                )
+            $response->add(
+                URL::stripParameter(strval($entry->link['href']), 'apiKey'),
+                DateTime::fromIsoString($entry->updated)
             );
         }
 
-        return $result;
+        return $response;
     }
 
-    private function buildParameters(
-        DateTime $threshold,
-        $feed,
-        $limit,
-        $order
-    ) {
-        if (!is_int($limit) || $limit < 1) {
-            throw new InvalidArgumentException('Limit must be a positive integer.');
-        } elseif ($order === SORT_ASC) {
-            $order = 'asc';
-        } elseif ($order === SORT_DESC) {
-            $order = 'desc';
-        } else {
-            throw new InvalidArgumentException('Sort order must be SORT_ASC or SORT_DESC.');
-        }
+    /**
+     * Check if the given request is supported.
+     *
+     * @return boolean True if the given request is supported; otherwise, false.
+     */
+    public function isSupported(RequestInterface $request)
+    {
+        return $request instanceof AtomRequest;
+    }
 
+    /**
+     * Build the URL parameters for the given request.
+     *
+     * @param AtomRequest $request
+     *
+     * @return array
+     */
+    private function buildParameters(AtomRequest $request)
+    {
         $parameters = [
-            'newerThan' => $threshold->isoString(),
-            'maxCount'  => $limit,
-            'order'     => $order,
+            'newerThan' => $request->updatedTime()->isoString(),
+            'maxCount'  => $request->limit(),
         ];
 
-        if ($feed) {
-            $parameters['feed'] = $feed;
+        if (SORT_ASC === $request->order()) {
+            $parameters['order'] = 'asc';
+        } else {
+            $parameters['order'] = 'desc';
+        }
+
+        if (null !== $request->feed()) {
+            $parameters['feed'] = $request->feed();
         }
 
         return $parameters;

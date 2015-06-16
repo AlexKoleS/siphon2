@@ -7,59 +7,43 @@ class PeriodTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->scope = new Period(
+        $this->period = new Period(
+            PeriodType::INNING(),
             1,
-            2
-        );
-    }
-
-    public function testStatus()
-    {
-        $this->assertSame(
-            ScopeStatus::COMPLETE(),
-            $this->scope->status()
-        );
-
-        $this->scope->setStatus(
-            ScopeStatus::IN_PROGRESS()
-        );
-
-        $this->assertSame(
-            ScopeStatus::IN_PROGRESS(),
-            $this->scope->status()
+            10,
+            20
         );
     }
 
     public function testType()
     {
         $this->assertSame(
-            PeriodType::PERIOD(),
-            $this->scope->type()
-        );
-
-        $this->scope->setType(
-            PeriodType::SHOOTOUT()
-        );
-
-        $this->assertSame(
-            PeriodType::SHOOTOUT(),
-            $this->scope->type()
+            PeriodType::INNING(),
+            $this->period->type()
         );
     }
 
-    public function testHomeTeamPoints()
+    public function testNumber()
     {
         $this->assertSame(
             1,
-            $this->scope->homeTeamPoints()
+            $this->period->number()
         );
     }
 
-    public function testAwayTeamPoints()
+    public function testHomeScore()
     {
         $this->assertSame(
-            2,
-            $this->scope->awayTeamPoints()
+            10,
+            $this->period->homeScore()
+        );
+    }
+
+    public function testAwayScore()
+    {
+        $this->assertSame(
+            20,
+            $this->period->awayScore()
         );
     }
 }

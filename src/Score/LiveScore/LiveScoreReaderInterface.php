@@ -1,11 +1,11 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
-use Icecave\Siphon\Score\ScoreReaderInterface;
+use Icecave\Siphon\Reader\ReaderInterface;
 
 /**
  * Client for reading live score feeds.
  */
-interface LiveScoreReaderInterface extends ScoreReaderInterface
+interface LiveScoreReaderInterface extends ReaderInterface
 {
 }

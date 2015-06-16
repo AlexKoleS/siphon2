@@ -1,49 +1,30 @@
 <?php
 namespace Icecave\Siphon\Score;
 
-/**
- * Period for team sports.
- */
-class Period implements ScopeInterface
+class Period
 {
     /**
-     * @param integer $homeTeamPoints The number of points made by the home team.
-     * @param integer $awayTeamPoints The number of points made by the away team.
+     * @param PeriodType $type      The period type.
+     * @param integer    $number    The sequential period number.
+     * @param integer    $homeScore The home team score for this period.
+     * @param integer    $awayScore The away team score for this period.
      */
     public function __construct(
-        $homeTeamPoints = 0,
-        $awayTeamPoints = 0
+        PeriodType $type,
+        $number,
+        $homeScore = 0,
+        $awayScore = 0
     ) {
-        $this->status         = ScopeStatus::COMPLETE();
-        $this->type           = PeriodType::PERIOD();
-        $this->homeTeamPoints = $homeTeamPoints;
-        $this->awayTeamPoints = $awayTeamPoints;
+        $this->type      = $type;
+        $this->number    = $number;
+        $this->homeScore = $homeScore;
+        $this->awayScore = $awayScore;
     }
 
     /**
-     * Get the status of the scope.
+     * Get the scope type.
      *
-     * @return ScopeStatus
-     */
-    public function status()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the status of the scope.
-     *
-     * @param ScopeStatus $status
-     */
-    public function setStatus(ScopeStatus $status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * Get the type of the period.
-     *
-     * @return PeriodType The period type.
+     * @return PeriodType
      */
     public function type()
     {
@@ -51,37 +32,49 @@ class Period implements ScopeInterface
     }
 
     /**
-     * Set the type of the period.
+     * Get the sequential period number.
      *
-     * @param PeriodType $type The period type.
-     */
-    public function setType(PeriodType $type)
-    {
-        return $this->type = $type;
-    }
-
-    /**
-     * Get the number of runs made by the home team.
+     * Period numbers begin at one for each period type, for example in an NHL
+     * game that has run to include all three shootout periods, the periods would
+     * be numbered like so.
      *
-     * @return integer
-     */
-    public function homeTeamPoints()
-    {
-        return $this->homeTeamPoints;
-    }
-
-    /**
-     * Get the number of points made by the away team.
+     * - PERIOD 1
+     * - PERIOD 2
+     * - PERIOD 3
+     * - OVERTIME 1
+     * - SHOOTOUT 1
+     * - SHOOTOUT 2
+     * - SHOOTOUT 3
      *
      * @return integer
      */
-    public function awayTeamPoints()
+    public function number()
     {
-        return $this->awayTeamPoints;
+        return $this->number;
     }
 
-    private $status;
+    /**
+     * Get the home team score.
+     *
+     * @return integer
+     */
+    public function homeScore()
+    {
+        return $this->homeScore;
+    }
+
+    /**
+     * Get the away team score.
+     *
+     * @return integer
+     */
+    public function awayScore()
+    {
+        return $this->awayScore;
+    }
+
     private $type;
-    private $homeTeamPoints;
-    private $awayTeamPoints;
+    private $number;
+    private $homeScore;
+    private $awayScore;
 }

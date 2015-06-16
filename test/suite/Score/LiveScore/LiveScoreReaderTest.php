@@ -1,21 +1,20 @@
 <?php
 namespace Icecave\Siphon\Score\LiveScore;
 
+use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\DateTime;
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\XmlReaderTestTrait;
+use Icecave\Siphon\Schedule\CompetitionRef;
 use Icecave\Siphon\Schedule\CompetitionStatus;
-use Icecave\Siphon\Score\Innings;
-use Icecave\Siphon\Score\InningsType;
 use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\PeriodType;
-use Icecave\Siphon\Score\ScopeStatus;
-use Icecave\Siphon\XmlReaderTestTrait;
+use Icecave\Siphon\Score\Score;
+use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamRef;
 use PHPUnit_Framework_TestCase;
 
-/**
- * @covers Icecave\Siphon\Score\LiveScore\LiveScoreReader
- * @covers Icecave\Siphon\Score\LiveScore\InningsLiveScoreFactory
- * @covers Icecave\Siphon\Score\LiveScore\PeriodLiveScoreFactory
- */
 class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 {
     use XmlReaderTestTrait;
@@ -27,180 +26,192 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testReadWithPeriods()
+    public function testRead()
     {
-        $this->setUpXmlReader('Score/LiveScore/livescores-period.xml');
+        $this->setUpXmlReader('Score/livescores.xml');
 
-        $liveScore = $this->reader->read(
-            'football',
-            'NFL',
-            '/path/to/sport:12345'
-        );
+        $response = $this
+            ->reader
+            ->read(
+                new LiveScoreRequest(
+                    Sport::NHL(),
+                    23816
+                )
+            );
 
         $this
-            ->xmlReader()
+            ->xmlReader
             ->read
-            ->calledWith('/sport/v2/football/NFL/livescores/livescores_12345.xml');
+            ->calledWith('/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
 
-        $scope1 = new Period(
-            3, // home team points
-            7  // away team points
+        $currentPeriod = new Period(PeriodType::SHOOTOUT(), 3, 0, 0);
+
+        $expected = new LiveScoreResponse(
+            new CompetitionRef(
+                '/sport/hockey/competition:23816',
+                CompetitionStatus::IN_PROGRESS(),
+                DateTime::fromIsoString('2009-01-28T14:00:00.000-05:00'),
+                Sport::NHL(),
+                new TeamRef('/sport/hockey/team:7', 'Pittsburgh'),
+                new TeamRef('/sport/hockey/team:6', 'NY Rangers')
+            ),
+            new Score(
+                [
+                    new Period(PeriodType::PERIOD(),   1, 2, 0),
+                    new Period(PeriodType::PERIOD(),   2, 0, 0),
+                    new Period(PeriodType::PERIOD(),   3, 1, 3),
+                    new Period(PeriodType::OVERTIME(), 1, 0, 0),
+                    new Period(PeriodType::SHOOTOUT(), 1, 0, 0),
+                    new Period(PeriodType::SHOOTOUT(), 2, 0, 1),
+                    $currentPeriod,
+                ]
+            )
         );
-        $scope1->setStatus(ScopeStatus::COMPLETE());
 
-        $scope2 = new Period(
-            3, // home team points
-            0  // away team points
+        $expected->setCurrentPeriod($currentPeriod);
+
+        $expected->setGameTime(
+            Duration::fromComponents(0, 0, 0, 2, 55)
         );
-        $scope2->setStatus(ScopeStatus::IN_PROGRESS());
-
-        $expected = new PeriodLiveScore;
-        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-        $expected->setGameTime(Duration::fromComponents(0, 0, 0, 14, 51));
-        $expected->add($scope1);
-        $expected->add($scope2);
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $response
         );
     }
 
-    public function testReadWithSpecialPeriods()
+    public function testReadBaseball()
     {
-        $this->setUpXmlReader('Score/LiveScore/livescores-period-special.xml');
+        $this->setUpXmlReader('Score/livescores-baseball.xml');
 
-        $liveScore = $this->reader->read(
-            'hockey',
-            'NHL',
-            '/path/to/sport:12345'
+        $currentPeriod = new Period(PeriodType::EXTRA_INNING(), 1, 0, 0);
+
+        $expected = new LiveScoreResponse(
+            new CompetitionRef(
+                '/sport/baseball/competition:288425',
+                CompetitionStatus::IN_PROGRESS(),
+                DateTime::fromIsoString('2009-01-28T11:00:00.000-05:00'),
+                Sport::MLB(),
+                new TeamRef('/sport/baseball/team:2968', 'Arizona'),
+                new TeamRef('/sport/baseball/team:2975', 'St. Louis')
+            ),
+            new Score(
+                [
+                    new Period(PeriodType::INNING(),       1, 0, 0),
+                    new Period(PeriodType::INNING(),       2, 0, 1),
+                    new Period(PeriodType::INNING(),       3, 0, 0),
+                    new Period(PeriodType::INNING(),       4, 1, 2),
+                    new Period(PeriodType::INNING(),       5, 0, 0),
+                    new Period(PeriodType::INNING(),       6, 0, 0),
+                    new Period(PeriodType::INNING(),       7, 0, 1),
+                    new Period(PeriodType::INNING(),       8, 0, 3),
+                    new Period(PeriodType::INNING(),       9, 6, 0),
+                    $currentPeriod,
+                ]
+            )
         );
 
-        $this
-            ->xmlReader()
-            ->read
-            ->calledWith('/sport/v2/hockey/NHL/livescores/livescores_12345.xml');
-
-        $scope1 = new Period(
-            2, // home team points
-            0  // away team points
-        );
-        $scope1->setStatus(ScopeStatus::COMPLETE());
-
-        $scope2 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope2->setStatus(ScopeStatus::COMPLETE());
-
-        $scope3 = new Period(
-            1, // home team points
-            3  // away team points
-        );
-        $scope3->setStatus(ScopeStatus::COMPLETE());
-
-        $scope4 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope4->setStatus(ScopeStatus::COMPLETE());
-        $scope4->setType(PeriodType::OVERTIME());
-
-        $scope5 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope5->setStatus(ScopeStatus::COMPLETE());
-        $scope5->setType(PeriodType::SHOOTOUT());
-
-        $scope6 = new Period(
-            0, // home team points
-            1  // away team points
-        );
-        $scope6->setStatus(ScopeStatus::COMPLETE());
-        $scope6->setType(PeriodType::SHOOTOUT());
-
-        $scope7 = new Period(
-            0, // home team points
-            0  // away team points
-        );
-        $scope7->setStatus(ScopeStatus::IN_PROGRESS());
-        $scope7->setType(PeriodType::SHOOTOUT());
-
-        $expected = new PeriodLiveScore;
-        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-        $expected->add($scope1);
-        $expected->add($scope2);
-        $expected->add($scope3);
-        $expected->add($scope4);
-        $expected->add($scope5);
-        $expected->add($scope6);
-        $expected->add($scope7);
+        $expected->setCurrentPeriod($currentPeriod);
 
         $this->assertEquals(
             $expected,
-            $liveScore
+            $this->reader->read(
+                new LiveScoreRequest(
+                    Sport::MLB(),
+                    288425
+                )
+            )
         );
     }
 
-    public function testReadWithInnings()
+    /**
+     * @group regression
+     */
+    public function testReadSetsCurrentPeriodBasedOnNormalizedPeriodType()
     {
-        $this->setUpXmlReader('Score/LiveScore/livescores-innings.xml');
+        $this->setUpXmlReader('Score/livescores-current-period.xml');
 
-        $liveScore = $this->reader->read(
-            'baseball',
-            'MLB',
-            '/path/to/sport:12345'
+        $response = $this->reader->read(
+            new LiveScoreRequest(
+                Sport::NBA(),
+                403878
+            )
         );
-
-        $this
-            ->xmlReader()
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/livescores/livescores_12345.xml');
-
-        $scope1 = new Innings(
-            0, // home team runs
-            0, // away team runs
-            1, // home team hits
-            0, // away team hits
-            0, // home team errors
-            0  // away team errors
-        );
-        $scope1->setStatus(ScopeStatus::COMPLETE());
-
-        $scope2 = new Innings(
-            0, // home team runs
-            1, // away team runs
-            2, // home team hits
-            2, // away team hits
-            0, // home team errors
-            0  // away team errors
-        );
-        $scope2->setStatus(ScopeStatus::IN_PROGRESS());
-
-        $expected = new InningsLiveScore;
-        $expected->setCompetitionStatus(CompetitionStatus::IN_PROGRESS());
-        $expected->setCurrentInningsType(InningsType::BOTTOM());
-        $expected->add($scope1);
-        $expected->add($scope2);
 
         $this->assertEquals(
-            $expected,
-            $liveScore
+            new Period(PeriodType::QUARTER(), 1, 16, 17),
+            $response->currentPeriod()
         );
     }
 
-    public function testReadWithUnsupportedCompetition()
+    public function testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded()
+    {
+        $this->setUpXmlReader('Score/livescores-complete.xml');
+
+        $response = $this->reader->read(
+            new LiveScoreRequest(
+                Sport::NBA(),
+                778888
+            )
+        );
+
+        $this->assertSame(
+            CompetitionStatus::COMPLETE(),
+            $response->competition()->status()
+        );
+
+        $this->assertNull(
+            $response->currentPeriod()
+        );
+    }
+
+    public function testReadNormalizesPeriodType()
+    {
+        $this->setUpXmlReader('Score/livescores-complete.xml');
+
+        $response = $this->reader->read(
+            new LiveScoreRequest(
+                Sport::NBA(),
+                778888
+            )
+        );
+
+        // All period types should be quarter (rather than just 'period') ...
+        foreach ($response->score() as $period) {
+            $this->assertSame(
+                PeriodType::QUARTER(),
+                $period->type()
+            );
+        }
+    }
+
+    public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'The provided competition could not be handled by any of the known live score factories.'
+            'Unsupported request.'
         );
 
-        $liveScore = $this->reader->read(
-            'unknown-sport',
-            'unknown-league',
-            '/path/to/sport:12345'
+        $this->reader->read(
+            Phony::mock(RequestInterface::class)->mock()
+        );
+    }
+
+    public function testIsSupported()
+    {
+        $this->assertTrue(
+            $this->reader->isSupported(
+                new LiveScoreRequest(
+                    Sport::MLB(),
+                    288425
+                )
+            )
+        );
+
+        $this->assertFalse(
+            $this->reader->isSupported(
+                Phony::mock(RequestInterface::class)->mock()
+            )
         );
     }
 }

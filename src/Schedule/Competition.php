@@ -2,37 +2,41 @@
 namespace Icecave\Siphon\Schedule;
 
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Sport;
+use Icecave\Siphon\Team\TeamInterface;
 
 /**
  * A sports competition (ie, "event" / "game" / "match" / etc).
  */
-class Competition
+class Competition implements CompetitionInterface
 {
     /**
-     * @param string            $id         The competition ID.
-     * @param CompetitionStatus $status     The status of the competition.
-     * @param DateTime          $startTime  The time at which the competition begins.
-     * @param string            $sport      The sport (eg, baseball, football, etc).
-     * @param string            $league     The league (eg, MLB, NFL, etc).
-     * @param string            $homeTeamId The ID of the home team.
-     * @param string            $awayTeamId The ID of the away team.
+     * @param string            $id        The competition ID.
+     * @param CompetitionStatus $status    The status of the competition.
+     * @param DateTime          $startTime The time at which the competition begins.
+     * @param Sport             $sport     The sport (eg, baseball, football, etc).
+     * @param Season            $season    The season in which the compeititon is played.
+     * @param TeamInterface     $homeTeam  The home team.
+     * @param TeamInterface     $awayTeam  The away team.
      */
     public function __construct(
         $id,
         CompetitionStatus $status,
         DateTime $startTime,
-        $sport,
-        $league,
-        $homeTeamId,
-        $awayTeamId
+        Sport $sport,
+        Season $season,
+        TeamInterface $homeTeam,
+        TeamInterface $awayTeam
     ) {
-        $this->id         = $id;
-        $this->status     = $status;
-        $this->startTime  = $startTime;
-        $this->sport      = $sport;
-        $this->league     = $league;
-        $this->homeTeamId = $homeTeamId;
-        $this->awayTeamId = $awayTeamId;
+        $this->id             = $id;
+        $this->status         = $status;
+        $this->startTime      = $startTime;
+        $this->sport          = $sport;
+        $this->season         = $season;
+        $this->homeTeam       = $homeTeam;
+        $this->awayTeam       = $awayTeam;
+        $this->notablePlayers = [];
     }
 
     /**
@@ -68,7 +72,7 @@ class Competition
     /**
      * Get the sport.
      *
-     * @return string The sport (eg, baseball, football, etc).
+     * @return Sport The sport.
      */
     public function sport()
     {
@@ -76,40 +80,74 @@ class Competition
     }
 
     /**
-     * Get the league.
+     * Get the season.
      *
-     * @return string The league (eg, MLB, NFL, etc).
+     * @return Season The season.
      */
-    public function league()
+    public function season()
     {
-        return $this->league;
+        return $this->season;
     }
 
     /**
-     * Get the ID of the home team.
+     * Get the home team.
      *
-     * @return string The home team ID.
+     * @return TeamInterface The home team.
      */
-    public function homeTeamId()
+    public function homeTeam()
     {
-        return $this->homeTeamId;
+        return $this->homeTeam;
     }
 
     /**
-     * Get the ID of the away team.
+     * Get the away team.
      *
-     * @return string The away team ID.
+     * @return TeamInterface The away team.
      */
-    public function awayTeamId()
+    public function awayTeam()
     {
-        return $this->awayTeamId;
+        return $this->awayTeam;
+    }
+
+    /**
+     * Get any "notable" players for this competition.
+     *
+     * This includes:
+     *  - MLB starting pitchers
+     *
+     * @return array<Player>
+     */
+    public function notablePlayers()
+    {
+        return array_values($this->notablePlayers);
+    }
+
+    /**
+     * Add a notable player to the competition.
+     *
+     * @param Player $player The player to add.
+     */
+    public function addNotablePlayer(Player $player)
+    {
+        $this->notablePlayers[$player->id()] = $player;
+    }
+
+    /**
+     * Remove a notable player from the competition.
+     *
+     * @param Player $player The player to remove.
+     */
+    public function removeNotablePlayer(Player $player)
+    {
+        unset($this->notablePlayers[$player->id()]);
     }
 
     private $id;
     private $status;
     private $startTime;
     private $sport;
-    private $league;
-    private $homeTeamId;
-    private $awayTeamId;
+    private $season;
+    private $homeTeam;
+    private $awayTeam;
+    private $notablePlayers;
 }
