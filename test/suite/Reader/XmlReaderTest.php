@@ -5,6 +5,7 @@ use Eloquent\Phony\Phpunit\Phony;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\XmlParseException;
 use GuzzleHttp\Message\RequestInterface as HttpRequestInterface;
 use GuzzleHttp\Message\ResponseInterface as HttpResponseInterface;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
@@ -120,6 +121,25 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this
             ->httpClient
             ->get
+            ->throws($exception);
+
+        $this->setExpectedException(
+            ServiceUnavailableException::class,
+            'Service unavailable.'
+        );
+
+        $this->reader->read(
+            'path/to/feed'
+        );
+    }
+
+    public function testXmlParseErrorWithServiceUnavailableException()
+    {
+        $exception = new XmlParseException('The exception!');
+
+        $this
+            ->response
+            ->xml
             ->throws($exception);
 
         $this->setExpectedException(
