@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="374" assertions="648" failures="0" errors="0" time="27.060726">
+    <testsuite name="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" tests="6" assertions="11" failures="0" errors="0" time="0.478124">
+      <testcase name="testRead" class="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" line="27" assertions="4" time="0.281494"/>
+      <testcase name="testReadWithSpecificFeed" class="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" line="74" assertions="1" time="0.045708"/>
+      <testcase name="testReadWithLimit" class="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" line="96" assertions="1" time="0.046217"/>
+      <testcase name="testReadDescending" class="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" line="117" assertions="1" time="0.044449"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" line="138" assertions="2" time="0.034619"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Atom\AtomReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomReaderTest.php" line="150" assertions="2" time="0.025637"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" tests="9" assertions="17" failures="0" errors="0" time="0.157089">
+      <testcase name="testUpdatedTime" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="18" assertions="2" time="0.013035"/>
+      <testcase name="testFeed" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="35" assertions="3" time="0.012804"/>
+      <testcase name="testLimit" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="55" assertions="2" time="0.010564"/>
+      <testcase name="testLimitWithInvalidValue" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="70" assertions="2" time="0.010877"/>
+      <testcase name="testOrder" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="80" assertions="2" time="0.010379"/>
+      <testcase name="testOrderWithInvalidValue" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="95" assertions="2" time="0.010249"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="105" assertions="1" time="0.038722"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="114" assertions="1" time="0.038033"/>
+      <testcase name="testToString" class="Icecave\Siphon\Atom\AtomRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomRequestTest.php" line="125" assertions="2" time="0.012426"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" tests="10" assertions="14" failures="0" errors="0" time="0.237352">
+      <testcase name="testUpdatedTime" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="18" assertions="2" time="0.010561"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="35" assertions="2" time="0.010615"/>
+      <testcase name="testCount" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="48" assertions="2" time="0.010939"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="63" assertions="2" time="0.059947"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="88" assertions="1" time="0.035250"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="103" assertions="1" time="0.035081"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="119" assertions="1" time="0.009646"/>
+      <testcase name="testRemoveUnknownRequest" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="130" assertions="1" time="0.010433"/>
+      <testcase name="testClear" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="142" assertions="1" time="0.010974"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Atom\AtomResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Atom/AtomResponseTest.php" line="154" assertions="1" time="0.043906"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" tests="12" assertions="31" failures="0" errors="0" time="2.111700">
+      <testcase name="testCreate" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="67" assertions="2" time="0.212660"/>
+      <testcase name="testUrlBuilder" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="82" assertions="1" time="0.100500"/>
+      <testcase name="testXmlReader" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="90" assertions="1" time="0.101392"/>
+      <testcase name="testReadAtomRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="98" assertions="3" time="0.189811"/>
+      <testcase name="testScheduleRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="107" assertions="3" time="0.181681"/>
+      <testcase name="testTeamRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="116" assertions="3" time="0.186563"/>
+      <testcase name="testPlayerRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="125" assertions="3" time="0.183317"/>
+      <testcase name="testPlayerStatisticsRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="134" assertions="3" time="0.181358"/>
+      <testcase name="testImageRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="143" assertions="3" time="0.190233"/>
+      <testcase name="testInjuryRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="152" assertions="3" time="0.182681"/>
+      <testcase name="testLiveScoreRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="161" assertions="3" time="0.193181"/>
+      <testcase name="testBoxScoreRequest" class="Icecave\Siphon\DispatcherTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/DispatcherTest.php" line="170" assertions="3" time="0.208323"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Image\ImageReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageReaderTest.php" tests="4" assertions="7" failures="0" errors="0" time="0.597439">
+      <testcase name="testRead" class="Icecave\Siphon\Player\Image\ImageReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageReaderTest.php" line="76" assertions="2" time="0.517971"/>
+      <testcase name="testReadEmpty" class="Icecave\Siphon\Player\Image\ImageReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageReaderTest.php" line="95" assertions="1" time="0.028384"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Player\Image\ImageReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageReaderTest.php" line="106" assertions="2" time="0.021876"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Player\Image\ImageReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageReaderTest.php" line="118" assertions="2" time="0.029208"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" tests="7" assertions="11" failures="0" errors="0" time="0.104751">
+      <testcase name="testSport" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="20" assertions="2" time="0.013292"/>
+      <testcase name="testSeasonName" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="35" assertions="2" time="0.010434"/>
+      <testcase name="testTeamId" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="50" assertions="2" time="0.010238"/>
+      <testcase name="testTeamIdWithString" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="65" assertions="1" time="0.010076"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="75" assertions="1" time="0.031120"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="84" assertions="2" time="0.019353"/>
+      <testcase name="testToString" class="Icecave\Siphon\Player\Image\ImageRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageRequestTest.php" line="101" assertions="1" time="0.010238"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" tests="12" assertions="18" failures="0" errors="0" time="1.526126">
+      <testcase name="testSport" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="32" assertions="2" time="0.145125"/>
+      <testcase name="testSeason" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="47" assertions="2" time="0.136303"/>
+      <testcase name="testTeam" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="63" assertions="2" time="0.137746"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="79" assertions="2" time="0.119556"/>
+      <testcase name="testCount" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="92" assertions="2" time="0.118930"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="107" assertions="2" time="0.120620"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="126" assertions="1" time="0.115839"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="138" assertions="1" time="0.120715"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="151" assertions="1" time="0.126077"/>
+      <testcase name="testRemoveUnknownPlayer" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="162" assertions="1" time="0.130561"/>
+      <testcase name="testClear" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="174" assertions="1" time="0.120705"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\Image\ImageResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Image/ImageResponseTest.php" line="186" assertions="1" time="0.133949"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Injury\InjuryReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryReaderTest.php" tests="3" assertions="6" failures="0" errors="0" time="0.187446">
+      <testcase name="testRead" class="Icecave\Siphon\Player\Injury\InjuryReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryReaderTest.php" line="53" assertions="2" time="0.139566"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Player\Injury\InjuryReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryReaderTest.php" line="72" assertions="2" time="0.024515"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Player\Injury\InjuryReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryReaderTest.php" line="84" assertions="2" time="0.023365"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Injury\InjuryRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryRequestTest.php" tests="4" assertions="6" failures="0" errors="0" time="0.067200">
+      <testcase name="testSport" class="Icecave\Siphon\Player\Injury\InjuryRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryRequestTest.php" line="18" assertions="2" time="0.012089"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\Injury\InjuryRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryRequestTest.php" line="33" assertions="1" time="0.031283"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Player\Injury\InjuryRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryRequestTest.php" line="42" assertions="2" time="0.014443"/>
+      <testcase name="testToString" class="Icecave\Siphon\Player\Injury\InjuryRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryRequestTest.php" line="59" assertions="1" time="0.009385"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" tests="10" assertions="14" failures="0" errors="0" time="1.280924">
+      <testcase name="testSport" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="28" assertions="2" time="0.129700"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="43" assertions="2" time="0.121535"/>
+      <testcase name="testCount" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="56" assertions="2" time="0.118376"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="71" assertions="2" time="0.124876"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="90" assertions="1" time="0.117835"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="102" assertions="1" time="0.143929"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="115" assertions="1" time="0.126132"/>
+      <testcase name="testRemoveUnknownPlayer" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="126" assertions="1" time="0.130548"/>
+      <testcase name="testClear" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="138" assertions="1" time="0.121631"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\Injury\InjuryResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryResponseTest.php" line="150" assertions="1" time="0.146362"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" tests="7" assertions="7" failures="0" errors="0" time="0.121987">
+      <testcase name="testId" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="23" assertions="1" time="0.011671"/>
+      <testcase name="testLocation" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="31" assertions="1" time="0.011755"/>
+      <testcase name="testStatus" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="39" assertions="1" time="0.012450"/>
+      <testcase name="testStatusInformation" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="47" assertions="1" time="0.011796"/>
+      <testcase name="testStatusNote" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="55" assertions="1" time="0.011800"/>
+      <testcase name="testStartDate" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="63" assertions="1" time="0.027917"/>
+      <testcase name="testUpdatedTime" class="Icecave\Siphon\Player\Injury\InjuryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Injury/InjuryTest.php" line="71" assertions="1" time="0.034598"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\PlayerReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerReaderTest.php" tests="4" assertions="7" failures="0" errors="0" time="1.314588">
+      <testcase name="testRead" class="Icecave\Siphon\Player\PlayerReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerReaderTest.php" line="102" assertions="2" time="1.196399"/>
+      <testcase name="testReadEmpty" class="Icecave\Siphon\Player\PlayerReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerReaderTest.php" line="121" assertions="1" time="0.047598"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Player\PlayerReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerReaderTest.php" line="132" assertions="2" time="0.036376"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Player\PlayerReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerReaderTest.php" line="144" assertions="2" time="0.034215"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" tests="7" assertions="11" failures="0" errors="0" time="0.093552">
+      <testcase name="testSport" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="20" assertions="2" time="0.012627"/>
+      <testcase name="testSeasonName" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="35" assertions="2" time="0.010280"/>
+      <testcase name="testTeamId" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="50" assertions="2" time="0.010526"/>
+      <testcase name="testTeamIdWithString" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="65" assertions="1" time="0.007340"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="75" assertions="1" time="0.027396"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="84" assertions="2" time="0.016667"/>
+      <testcase name="testToString" class="Icecave\Siphon\Player\PlayerRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerRequestTest.php" line="101" assertions="1" time="0.008716"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" tests="12" assertions="18" failures="0" errors="0" time="1.993974">
+      <testcase name="testSport" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="34" assertions="2" time="0.137307"/>
+      <testcase name="testSeason" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="49" assertions="2" time="0.139657"/>
+      <testcase name="testTeam" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="65" assertions="2" time="0.164767"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="81" assertions="2" time="0.167672"/>
+      <testcase name="testCount" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="94" assertions="2" time="0.164090"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="109" assertions="2" time="0.174112"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="128" assertions="1" time="0.167613"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="140" assertions="1" time="0.168674"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="153" assertions="1" time="0.167241"/>
+      <testcase name="testRemoveUnknownPlayer" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="164" assertions="1" time="0.172023"/>
+      <testcase name="testClear" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="176" assertions="1" time="0.177696"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\PlayerResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerResponseTest.php" line="188" assertions="1" time="0.193123"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\PlayerSeasonDetailsTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerSeasonDetailsTest.php" tests="4" assertions="4" failures="0" errors="0" time="0.038664">
+      <testcase name="testNumber" class="Icecave\Siphon\Player\PlayerSeasonDetailsTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerSeasonDetailsTest.php" line="18" assertions="1" time="0.009780"/>
+      <testcase name="testPosition" class="Icecave\Siphon\Player\PlayerSeasonDetailsTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerSeasonDetailsTest.php" line="26" assertions="1" time="0.009516"/>
+      <testcase name="testPositionName" class="Icecave\Siphon\Player\PlayerSeasonDetailsTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerSeasonDetailsTest.php" line="34" assertions="1" time="0.009694"/>
+      <testcase name="testIsActive" class="Icecave\Siphon\Player\PlayerSeasonDetailsTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerSeasonDetailsTest.php" line="42" assertions="1" time="0.009674"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\PlayerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerTest.php" tests="5" assertions="5" failures="0" errors="0" time="0.048574">
+      <testcase name="testId" class="Icecave\Siphon\Player\PlayerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerTest.php" line="17" assertions="1" time="0.009685"/>
+      <testcase name="testFirstName" class="Icecave\Siphon\Player\PlayerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerTest.php" line="25" assertions="1" time="0.009755"/>
+      <testcase name="testLastName" class="Icecave\Siphon\Player\PlayerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerTest.php" line="33" assertions="1" time="0.009778"/>
+      <testcase name="testDisplayName" class="Icecave\Siphon\Player\PlayerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerTest.php" line="41" assertions="1" time="0.009672"/>
+      <testcase name="testDisplayNameWithEmptyLastName" class="Icecave\Siphon\Player\PlayerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/PlayerTest.php" line="49" assertions="1" time="0.009684"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsReaderTest.php" tests="5" assertions="9" failures="0" errors="0" time="0.419759">
+      <testcase name="testRead" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsReaderTest.php" line="50" assertions="2" time="0.190392"/>
+      <testcase name="testReadSplitStats" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsReaderTest.php" line="133" assertions="2" time="0.146292"/>
+      <testcase name="testReadEmpty" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsReaderTest.php" line="188" assertions="1" time="0.033467"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsReaderTest.php" line="199" assertions="2" time="0.024884"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsReaderTest.php" line="211" assertions="2" time="0.024724"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" tests="8" assertions="14" failures="0" errors="0" time="0.131524">
+      <testcase name="testSport" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="21" assertions="2" time="0.014220"/>
+      <testcase name="testSeasonName" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="36" assertions="2" time="0.012174"/>
+      <testcase name="testTeamId" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="51" assertions="2" time="0.012259"/>
+      <testcase name="testTeamIdWithString" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="66" assertions="1" time="0.012145"/>
+      <testcase name="testType" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="76" assertions="2" time="0.014316"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="91" assertions="1" time="0.034633"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="100" assertions="2" time="0.022601"/>
+      <testcase name="testToString" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsRequestTest.php" line="117" assertions="2" time="0.009176"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" tests="13" assertions="20" failures="0" errors="0" time="2.324448">
+      <testcase name="testSport" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="38" assertions="2" time="0.176120"/>
+      <testcase name="testSeason" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="53" assertions="2" time="0.189875"/>
+      <testcase name="testTeam" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="69" assertions="2" time="0.194881"/>
+      <testcase name="testType" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="85" assertions="2" time="0.174559"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="100" assertions="2" time="0.168367"/>
+      <testcase name="testCount" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="113" assertions="2" time="0.169921"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="128" assertions="2" time="0.170455"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="147" assertions="1" time="0.169209"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="159" assertions="1" time="0.181092"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="172" assertions="1" time="0.179044"/>
+      <testcase name="testRemoveUnknownPlayer" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="183" assertions="1" time="0.186952"/>
+      <testcase name="testClear" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="195" assertions="1" time="0.176422"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Player\Statistics\PlayerStatisticsResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Player/Statistics/PlayerStatisticsResponseTest.php" line="207" assertions="1" time="0.187551"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Reader\RequestFactoryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/RequestFactoryTest.php" tests="17" assertions="18" failures="0" errors="0" time="0.363477">
+      <testsuite name="Icecave\Siphon\Reader\RequestFactoryTest::testCreate" tests="16" assertions="16" failures="0" errors="0" time="0.352296">
+        <testcase name="testCreate with data set &quot;atom&quot;" assertions="1" time="0.038389"/>
+        <testcase name="testCreate with data set &quot;atom with feed&quot;" assertions="1" time="0.041202"/>
+        <testcase name="testCreate with data set &quot;atom with limit&quot;" assertions="1" time="0.034762"/>
+        <testcase name="testCreate with data set &quot;atom with asc order&quot;" assertions="1" time="0.036542"/>
+        <testcase name="testCreate with data set &quot;atom with desc order&quot;" assertions="1" time="0.038273"/>
+        <testcase name="testCreate with data set &quot;schedule&quot;" assertions="1" time="0.013297"/>
+        <testcase name="testCreate with data set &quot;schedule with limit&quot;" assertions="1" time="0.013635"/>
+        <testcase name="testCreate with data set &quot;schedule with deleted competitions&quot;" assertions="1" time="0.016245"/>
+        <testcase name="testCreate with data set &quot;team&quot;" assertions="1" time="0.014755"/>
+        <testcase name="testCreate with data set &quot;player&quot;" assertions="1" time="0.015700"/>
+        <testcase name="testCreate with data set &quot;player statistics (combined)&quot;" assertions="1" time="0.014956"/>
+        <testcase name="testCreate with data set &quot;player statistics (split)&quot;" assertions="1" time="0.014603"/>
+        <testcase name="testCreate with data set &quot;player images&quot;" assertions="1" time="0.014350"/>
+        <testcase name="testCreate with data set &quot;player injuries&quot;" assertions="1" time="0.009964"/>
+        <testcase name="testCreate with data set &quot;live scores&quot;" assertions="1" time="0.016541"/>
+        <testcase name="testCreate with data set &quot;box scores&quot;" assertions="1" time="0.019082"/>
+      </testsuite>
+      <testcase name="testCreateWithUnsupportedUrl" class="Icecave\Siphon\Reader\RequestFactoryTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/RequestFactoryTest.php" line="37" assertions="2" time="0.011181"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" tests="7" assertions="9" failures="0" errors="0" time="0.072134">
+      <testcase name="testBuild" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="14" assertions="1" time="0.009514"/>
+      <testcase name="testBuildWithParameters" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="24" assertions="1" time="0.011326"/>
+      <testcase name="testBuildWithInvalidResource" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="39" assertions="2" time="0.010637"/>
+      <testcase name="testExtract" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="49" assertions="1" time="0.009854"/>
+      <testcase name="testExtractWithNoPath" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="62" assertions="1" time="0.010081"/>
+      <testcase name="testExtractWithParameters" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="75" assertions="1" time="0.009785"/>
+      <testcase name="testExtractWithUnrecognizedUrl" class="Icecave\Siphon\Reader\UrlBuilderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/UrlBuilderTest.php" line="88" assertions="2" time="0.010937"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Reader\XmlReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/XmlReaderTest.php" tests="5" assertions="11" failures="0" errors="0" time="0.691430">
+      <testcase name="testRead" class="Icecave\Siphon\Reader\XmlReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/XmlReaderTest.php" line="44" assertions="3" time="0.161821"/>
+      <testcase name="testReadWithHttpClientException" class="Icecave\Siphon\Reader\XmlReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/XmlReaderTest.php" line="70" assertions="2" time="0.140664"/>
+      <testcase name="testReadWithNotFoundException" class="Icecave\Siphon\Reader\XmlReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/XmlReaderTest.php" line="89" assertions="2" time="0.179023"/>
+      <testcase name="testReadWithGenericException" class="Icecave\Siphon\Reader\XmlReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/XmlReaderTest.php" line="117" assertions="2" time="0.099215"/>
+      <testcase name="testXmlParseErrorWithServiceUnavailableException" class="Icecave\Siphon\Reader\XmlReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Reader/XmlReaderTest.php" line="136" assertions="2" time="0.110707"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" tests="6" assertions="6" failures="0" errors="0" time="0.716539">
+      <testcase name="testId" class="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" line="35" assertions="1" time="0.123443"/>
+      <testcase name="testStatus" class="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" line="43" assertions="1" time="0.119698"/>
+      <testcase name="testStartTime" class="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" line="51" assertions="1" time="0.120043"/>
+      <testcase name="testSport" class="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" line="59" assertions="1" time="0.116720"/>
+      <testcase name="testHomeTeam" class="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" line="67" assertions="1" time="0.115189"/>
+      <testcase name="testAwayTeam" class="Icecave\Siphon\Schedule\CompetitionRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionRefTest.php" line="75" assertions="1" time="0.121446"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" tests="10" assertions="10" failures="0" errors="0" time="1.487591">
+      <testcase name="testId" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="37" assertions="1" time="0.147751"/>
+      <testcase name="testStatus" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="45" assertions="1" time="0.144880"/>
+      <testcase name="testStartTime" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="53" assertions="1" time="0.144475"/>
+      <testcase name="testSeason" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="61" assertions="1" time="0.143869"/>
+      <testcase name="testSport" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="69" assertions="1" time="0.146236"/>
+      <testcase name="testHomeTeam" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="77" assertions="1" time="0.145285"/>
+      <testcase name="testAwayTeam" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="85" assertions="1" time="0.145896"/>
+      <testcase name="testAddNotablePlayer" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="93" assertions="1" time="0.156191"/>
+      <testcase name="testRemoveNotablePlayer" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="107" assertions="1" time="0.161334"/>
+      <testcase name="testRemoveNotablePlayerWithUnknownPlayer" class="Icecave\Siphon\Schedule\CompetitionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/CompetitionTest.php" line="122" assertions="1" time="0.151674"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" tests="6" assertions="12" failures="0" errors="0" time="0.972278">
+      <testcase name="testReadFullSchedule" class="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" line="117" assertions="2" time="0.286666"/>
+      <testcase name="testReadLimitedSchedule" class="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" line="136" assertions="2" time="0.282405"/>
+      <testcase name="testReadDeletedSchedule" class="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" line="158" assertions="2" time="0.275264"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" line="180" assertions="2" time="0.034372"/>
+      <testcase name="testReadNotFound" class="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" line="192" assertions="2" time="0.058184"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Schedule\ScheduleReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleReaderTest.php" line="213" assertions="2" time="0.035387"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Schedule\ScheduleRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleRequestTest.php" tests="5" assertions="11" failures="0" errors="0" time="0.097505">
+      <testcase name="testSport" class="Icecave\Siphon\Schedule\ScheduleRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleRequestTest.php" line="18" assertions="2" time="0.013343"/>
+      <testcase name="testType" class="Icecave\Siphon\Schedule\ScheduleRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleRequestTest.php" line="33" assertions="2" time="0.013634"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Schedule\ScheduleRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleRequestTest.php" line="48" assertions="1" time="0.033537"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Schedule\ScheduleRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleRequestTest.php" line="57" assertions="3" time="0.018248"/>
+      <testcase name="testToString" class="Icecave\Siphon\Schedule\ScheduleRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleRequestTest.php" line="79" assertions="3" time="0.018743"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" tests="11" assertions="16" failures="0" errors="0" time="0.856932">
+      <testcase name="testSport" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="25" assertions="2" time="0.071171"/>
+      <testcase name="testType" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="40" assertions="2" time="0.070701"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="55" assertions="2" time="0.074257"/>
+      <testcase name="testCount" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="68" assertions="2" time="0.074248"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="83" assertions="2" time="0.078033"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="102" assertions="1" time="0.071868"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="114" assertions="1" time="0.083021"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="127" assertions="1" time="0.079720"/>
+      <testcase name="testRemoveUnknownSeason" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="138" assertions="1" time="0.084952"/>
+      <testcase name="testClear" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="150" assertions="1" time="0.080030"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Schedule\ScheduleResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/ScheduleResponseTest.php" line="162" assertions="1" time="0.088931"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" tests="11" assertions="15" failures="0" errors="0" time="0.960889">
+      <testcase name="testId" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="29" assertions="1" time="0.081012"/>
+      <testcase name="testName" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="37" assertions="1" time="0.078807"/>
+      <testcase name="testStartDate" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="45" assertions="1" time="0.074377"/>
+      <testcase name="testEndDate" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="53" assertions="1" time="0.078780"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="61" assertions="1" time="0.089307"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="75" assertions="1" time="0.094824"/>
+      <testcase name="testRemoveWithUnknownCompetition" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="90" assertions="1" time="0.086103"/>
+      <testcase name="testClear" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="100" assertions="1" time="0.092152"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="112" assertions="2" time="0.088896"/>
+      <testcase name="testCount" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="125" assertions="4" time="0.103910"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Schedule\SeasonTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Schedule/SeasonTest.php" line="155" assertions="1" time="0.092721"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\BoxScore\BoxScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreReaderTest.php" tests="3" assertions="6" failures="0" errors="0" time="0.547735">
+      <testcase name="testRead" class="Icecave\Siphon\Score\BoxScore\BoxScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreReaderTest.php" line="31" assertions="2" time="0.508819"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Score\BoxScore\BoxScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreReaderTest.php" line="289" assertions="2" time="0.018778"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Score\BoxScore\BoxScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreReaderTest.php" line="301" assertions="2" time="0.020138"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" tests="7" assertions="11" failures="0" errors="0" time="0.107683">
+      <testcase name="testSport" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="20" assertions="2" time="0.012636"/>
+      <testcase name="testSeasonName" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="35" assertions="2" time="0.010654"/>
+      <testcase name="testCompetitionId" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="50" assertions="2" time="0.011151"/>
+      <testcase name="testCompetitionIdWithString" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="65" assertions="1" time="0.010515"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="75" assertions="1" time="0.032841"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="84" assertions="2" time="0.019517"/>
+      <testcase name="testToString" class="Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreRequestTest.php" line="101" assertions="1" time="0.010369"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" tests="12" assertions="18" failures="0" errors="0" time="1.966421">
+      <testcase name="testCompetition" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="36" assertions="2" time="0.179423"/>
+      <testcase name="testHomeTeamStatistics" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="53" assertions="2" time="0.152513"/>
+      <testcase name="testAwayTeamStatistics" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="70" assertions="2" time="0.153402"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="87" assertions="2" time="0.160138"/>
+      <testcase name="testCount" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="100" assertions="2" time="0.158774"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="115" assertions="2" time="0.166379"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="134" assertions="1" time="0.160519"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="146" assertions="1" time="0.165229"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="159" assertions="1" time="0.165142"/>
+      <testcase name="testRemoveUnknownPlayer" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="170" assertions="1" time="0.170443"/>
+      <testcase name="testClear" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="182" assertions="1" time="0.165734"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/BoxScore/BoxScoreResponseTest.php" line="194" assertions="1" time="0.168725"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" tests="7" assertions="14" failures="0" errors="0" time="0.884876">
+      <testcase name="testRead" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="29" assertions="2" time="0.273661"/>
+      <testcase name="testReadBaseball" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="83" assertions="1" time="0.388756"/>
+      <testcase name="testReadSetsCurrentPeriodBasedOnNormalizedPeriodType" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="130" assertions="1" time="0.058783"/>
+      <testcase name="testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="147" assertions="2" time="0.059782"/>
+      <testcase name="testReadNormalizesPeriodType" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="168" assertions="4" time="0.062094"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="188" assertions="2" time="0.020094"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreReaderTest.php" line="200" assertions="2" time="0.021705"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" tests="6" assertions="9" failures="0" errors="0" time="0.098869">
+      <testcase name="testSport" class="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" line="19" assertions="2" time="0.014057"/>
+      <testcase name="testCompetitionId" class="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" line="34" assertions="2" time="0.011434"/>
+      <testcase name="testCompetitionIdWithString" class="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" line="49" assertions="1" time="0.011066"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" line="59" assertions="1" time="0.033119"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" line="68" assertions="2" time="0.018570"/>
+      <testcase name="testToString" class="Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreRequestTest.php" line="85" assertions="1" time="0.010623"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreResponseTest.php" tests="5" assertions="11" failures="0" errors="0" time="0.441067">
+      <testcase name="testCompetition" class="Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreResponseTest.php" line="26" assertions="2" time="0.108994"/>
+      <testcase name="testScore" class="Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreResponseTest.php" line="43" assertions="2" time="0.101096"/>
+      <testcase name="testCurrentPeriod" class="Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreResponseTest.php" line="60" assertions="3" time="0.068300"/>
+      <testcase name="testGameTime" class="Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreResponseTest.php" line="82" assertions="3" time="0.068502"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/LiveScore/LiveScoreResponseTest.php" line="104" assertions="1" time="0.094175"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\PeriodTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTest.php" tests="4" assertions="4" failures="0" errors="0" time="0.045734">
+      <testcase name="testType" class="Icecave\Siphon\Score\PeriodTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTest.php" line="18" assertions="1" time="0.012739"/>
+      <testcase name="testNumber" class="Icecave\Siphon\Score\PeriodTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTest.php" line="26" assertions="1" time="0.010855"/>
+      <testcase name="testHomeScore" class="Icecave\Siphon\Score\PeriodTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTest.php" line="34" assertions="1" time="0.011025"/>
+      <testcase name="testAwayScore" class="Icecave\Siphon\Score\PeriodTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTest.php" line="42" assertions="1" time="0.011115"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" tests="8" assertions="86" failures="0" errors="0" time="0.616791">
+      <testcase name="testMemberBySport" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="22" assertions="6" time="0.049035"/>
+      <testcase name="testMemberBySportAndValue" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="32" assertions="13" time="0.114522"/>
+      <testcase name="testMemberBySportAndValueFailure" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="52" assertions="2" time="0.033161"/>
+      <testcase name="testMemberByCode" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="65" assertions="7" time="0.032004"/>
+      <testcase name="testMemberByCodeFailure" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="75" assertions="2" time="0.027897"/>
+      <testcase name="testCode" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="85" assertions="7" time="0.034764"/>
+      <testcase name="testCodesAreUnique" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="96" assertions="7" time="0.036741"/>
+      <testcase name="testUsedBy" class="Icecave\Siphon\Score\PeriodTypeTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/PeriodTypeTest.php" line="111" assertions="42" time="0.288667"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\ScoreTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/ScoreTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.033493">
+      <testcase name="testScore" class="Icecave\Siphon\Score\ScoreTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/ScoreTest.php" line="28" assertions="1" time="0.009498"/>
+      <testcase name="testCount" class="Icecave\Siphon\Score\ScoreTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/ScoreTest.php" line="36" assertions="1" time="0.011954"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Score\ScoreTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/ScoreTest.php" line="44" assertions="1" time="0.012041"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Score\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/SerializerTest.php" tests="5" assertions="7" failures="0" errors="0" time="0.115521">
+      <testsuite name="Icecave\Siphon\Score\SerializerTest::testSerialize" tests="3" assertions="3" failures="0" errors="0" time="0.093473">
+        <testcase name="testSerialize with data set &quot;empty&quot;" assertions="1" time="0.017404"/>
+        <testcase name="testSerialize with data set &quot;single period&quot;" assertions="1" time="0.026775"/>
+        <testcase name="testSerialize with data set &quot;multiple periods&quot;" assertions="1" time="0.049294"/>
+      </testsuite>
+      <testcase name="testUnserializeWithInvalidDataArray" class="Icecave\Siphon\Score\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/SerializerTest.php" line="26" assertions="2" time="0.011024"/>
+      <testcase name="testUnserializeWithInvalidDataArrayPacking" class="Icecave\Siphon\Score\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Score/SerializerTest.php" line="38" assertions="2" time="0.011024"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\SportTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/SportTest.php" tests="2" assertions="13" failures="0" errors="0" time="0.037665">
+      <testcase name="testFindByComponents" class="Icecave\Siphon\SportTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/SportTest.php" line="20" assertions="6" time="0.022543"/>
+      <testcase name="testSportAndLeague" class="Icecave\Siphon\SportTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/SportTest.php" line="30" assertions="7" time="0.015122"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Statistics\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/SerializerTest.php" tests="9" assertions="12" failures="0" errors="0" time="0.155949">
+      <testsuite name="Icecave\Siphon\Statistics\SerializerTest::testSerialize" tests="5" assertions="5" failures="0" errors="0" time="0.112867">
+        <testcase name="testSerialize with data set &quot;empty&quot;" assertions="1" time="0.015845"/>
+        <testcase name="testSerialize with data set &quot;empty group&quot;" assertions="1" time="0.019916"/>
+        <testcase name="testSerialize with data set &quot;single group&quot;" assertions="1" time="0.023879"/>
+        <testcase name="testSerialize with data set &quot;multiple groups&quot;" assertions="1" time="0.036900"/>
+        <testcase name="testSerialize with data set &quot;numeric scope value (regression)&quot;" assertions="1" time="0.016327"/>
+      </testsuite>
+      <testcase name="testNumericStringsAreSerializedAsNumbers" class="Icecave\Siphon\Statistics\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/SerializerTest.php" line="26" assertions="1" time="0.010569"/>
+      <testcase name="testUnserializeInvalidStringTable" class="Icecave\Siphon\Statistics\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/SerializerTest.php" line="43" assertions="2" time="0.010567"/>
+      <testcase name="testUnserializeWithInvalidDataArray" class="Icecave\Siphon\Statistics\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/SerializerTest.php" line="55" assertions="2" time="0.010855"/>
+      <testcase name="testUnserializeWithOddDataArray" class="Icecave\Siphon\Statistics\SerializerTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/SerializerTest.php" line="67" assertions="2" time="0.011091"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Statistics\StatisticsCollectionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsCollectionTest.php" tests="4" assertions="6" failures="0" errors="0" time="0.042737">
+      <testcase name="testConstructorWithNonGroup" class="Icecave\Siphon\Statistics\StatisticsCollectionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsCollectionTest.php" line="21" assertions="2" time="0.011186"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Statistics\StatisticsCollectionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsCollectionTest.php" line="31" assertions="2" time="0.011007"/>
+      <testcase name="testCount" class="Icecave\Siphon\Statistics\StatisticsCollectionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsCollectionTest.php" line="44" assertions="1" time="0.010169"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Statistics\StatisticsCollectionTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsCollectionTest.php" line="52" assertions="1" time="0.010375"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" tests="15" assertions="22" failures="0" errors="0" time="0.153395">
+      <testcase name="testConstructorWithInvalidKey" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="23" assertions="2" time="0.010756"/>
+      <testcase name="testConstructorWithInvalidScopeType" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="33" assertions="2" time="0.010752"/>
+      <testcase name="testConstructorWithInvalidScopeValue" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="46" assertions="2" time="0.010645"/>
+      <testcase name="testConstructorWithInvalidStatisticType" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="59" assertions="2" time="0.010754"/>
+      <testcase name="testConstructorWithInvalidStatisticValue" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="73" assertions="2" time="0.010596"/>
+      <testcase name="testKey" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="87" assertions="1" time="0.009715"/>
+      <testcase name="testScopes" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="95" assertions="1" time="0.009722"/>
+      <testcase name="testScopeByType" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="106" assertions="2" time="0.010426"/>
+      <testcase name="testStatistics" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="118" assertions="1" time="0.009864"/>
+      <testcase name="testStatisticsProjection" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="129" assertions="1" time="0.009930"/>
+      <testcase name="testStatisticsExpansion" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="139" assertions="1" time="0.010054"/>
+      <testcase name="testStatisticsExpansionWithExplicitDefault" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="150" assertions="1" time="0.010073"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="164" assertions="2" time="0.010733"/>
+      <testcase name="testCount" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="177" assertions="1" time="0.009896"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Statistics\StatisticsGroupTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Statistics/StatisticsGroupTest.php" line="185" assertions="1" time="0.009479"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Team\TeamReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamReaderTest.php" tests="5" assertions="8" failures="0" errors="0" time="0.672691">
+      <testcase name="testRead" class="Icecave\Siphon\Team\TeamReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamReaderTest.php" line="69" assertions="2" time="0.396418"/>
+      <testcase name="testReadWithoutNickName" class="Icecave\Siphon\Team\TeamReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamReaderTest.php" line="88" assertions="1" time="0.100909"/>
+      <testcase name="testReadIncludesTeamsOutsideConference" class="Icecave\Siphon\Team\TeamReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamReaderTest.php" line="113" assertions="1" time="0.111392"/>
+      <testcase name="testReadWithUnsupportedRequest" class="Icecave\Siphon\Team\TeamReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamReaderTest.php" line="139" assertions="2" time="0.031983"/>
+      <testcase name="testIsSupported" class="Icecave\Siphon\Team\TeamReaderTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamReaderTest.php" line="151" assertions="2" time="0.031989"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Team\TeamRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRefTest.php" tests="2" assertions="2" failures="0" errors="0" time="0.019376">
+      <testcase name="testId" class="Icecave\Siphon\Team\TeamRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRefTest.php" line="16" assertions="1" time="0.009714"/>
+      <testcase name="testName" class="Icecave\Siphon\Team\TeamRefTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRefTest.php" line="24" assertions="1" time="0.009662"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Team\TeamRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRequestTest.php" tests="5" assertions="8" failures="0" errors="0" time="0.087492">
+      <testcase name="testSport" class="Icecave\Siphon\Team\TeamRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRequestTest.php" line="19" assertions="2" time="0.013429"/>
+      <testcase name="testSeasonName" class="Icecave\Siphon\Team\TeamRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRequestTest.php" line="34" assertions="2" time="0.011358"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Team\TeamRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRequestTest.php" line="49" assertions="1" time="0.033981"/>
+      <testcase name="testSerialize" class="Icecave\Siphon\Team\TeamRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRequestTest.php" line="58" assertions="2" time="0.017938"/>
+      <testcase name="testToString" class="Icecave\Siphon\Team\TeamRequestTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamRequestTest.php" line="75" assertions="1" time="0.010786"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" tests="11" assertions="16" failures="0" errors="0" time="1.124324">
+      <testcase name="testSport" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="28" assertions="2" time="0.100504"/>
+      <testcase name="testSeason" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="43" assertions="2" time="0.121448"/>
+      <testcase name="testIsEmpty" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="59" assertions="2" time="0.100542"/>
+      <testcase name="testCount" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="72" assertions="2" time="0.099206"/>
+      <testcase name="testGetIterator" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="87" assertions="2" time="0.101688"/>
+      <testcase name="testAdd" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="106" assertions="1" time="0.089325"/>
+      <testcase name="testAddDoesNotDuplicate" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="118" assertions="1" time="0.094781"/>
+      <testcase name="testRemove" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="131" assertions="1" time="0.105942"/>
+      <testcase name="testRemoveUnknownTeam" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="142" assertions="1" time="0.097633"/>
+      <testcase name="testClear" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="154" assertions="1" time="0.101878"/>
+      <testcase name="testAccept" class="Icecave\Siphon\Team\TeamResponseTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamResponseTest.php" line="166" assertions="1" time="0.111377"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" tests="6" assertions="6" failures="0" errors="0" time="0.057731">
+      <testcase name="testId" class="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" line="18" assertions="1" time="0.008657"/>
+      <testcase name="testName" class="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" line="26" assertions="1" time="0.009738"/>
+      <testcase name="testNickname" class="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" line="34" assertions="1" time="0.009675"/>
+      <testcase name="testAbbreviation" class="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" line="42" assertions="1" time="0.009807"/>
+      <testcase name="testDisplayName" class="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" line="50" assertions="1" time="0.009861"/>
+      <testcase name="testDisplayNameWithoutNickname" class="Icecave\Siphon\Team\TeamTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Team/TeamTest.php" line="58" assertions="1" time="0.009993"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Util\IdParserTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/IdParserTest.php" tests="5" assertions="7" failures="0" errors="0" time="0.054557">
+      <testcase name="testParseInt" class="Icecave\Siphon\Util\IdParserTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/IdParserTest.php" line="9" assertions="1" time="0.010412"/>
+      <testcase name="testParseNumericString" class="Icecave\Siphon\Util\IdParserTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/IdParserTest.php" line="17" assertions="1" time="0.010342"/>
+      <testcase name="testParseString" class="Icecave\Siphon\Util\IdParserTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/IdParserTest.php" line="25" assertions="1" time="0.010534"/>
+      <testcase name="testParseStringWithInvalidType" class="Icecave\Siphon\Util\IdParserTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/IdParserTest.php" line="33" assertions="2" time="0.011607"/>
+      <testcase name="testParseStringWithInvalidSport" class="Icecave\Siphon\Util\IdParserTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/IdParserTest.php" line="43" assertions="2" time="0.011662"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" tests="8" assertions="14" failures="0" errors="0" time="0.133647">
+      <testcase name="testSerialize" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="9" assertions="1" time="0.009869"/>
+      <testcase name="testSerializeWithNonIntegerVersion" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="17" assertions="2" time="0.010955"/>
+      <testcase name="testSerializeWithInvalidIntegerVersion" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="27" assertions="2" time="0.010810"/>
+      <testcase name="testUnserialize" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="37" assertions="1" time="0.031599"/>
+      <testcase name="testUnserializeSelectsCorrectVersion" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="49" assertions="2" time="0.036082"/>
+      <testcase name="testUnserializeFailureWithUnsupportedVersion" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="64" assertions="2" time="0.013688"/>
+      <testcase name="testUnserializeFailureWithNonArray" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="77" assertions="2" time="0.010611"/>
+      <testcase name="testUnserializeFailureWithNoVersion" class="Icecave\Siphon\Util\SerializationTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/SerializationTest.php" line="89" assertions="2" time="0.010033"/>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Util\URLTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/URLTest.php" tests="9" assertions="9" failures="0" errors="0" time="0.082473">
+      <testsuite name="Icecave\Siphon\Util\URLTest::testStripParameter" tests="9" assertions="9" failures="0" errors="0" time="0.082473">
+        <testcase name="testStripParameter with data set &quot;not present&quot;" assertions="1" time="0.009362"/>
+        <testcase name="testStripParameter with data set &quot;only parameter&quot;" assertions="1" time="0.009139"/>
+        <testcase name="testStripParameter with data set &quot;only parameter, no value&quot;" assertions="1" time="0.009391"/>
+        <testcase name="testStripParameter with data set &quot;first parameter&quot;" assertions="1" time="0.009483"/>
+        <testcase name="testStripParameter with data set &quot;first parameter, no value&quot;" assertions="1" time="0.009107"/>
+        <testcase name="testStripParameter with data set &quot;last parameter&quot;" assertions="1" time="0.009102"/>
+        <testcase name="testStripParameter with data set &quot;last parameter, no value&quot;" assertions="1" time="0.008859"/>
+        <testcase name="testStripParameter with data set &quot;middle parameter&quot;" assertions="1" time="0.009209"/>
+        <testcase name="testStripParameter with data set &quot;middle parameter, no value&quot;" assertions="1" time="0.008821"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" tests="13" assertions="18" failures="0" errors="0" time="0.126504">
+      <testcase name="testElement" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="15" assertions="1" time="0.010570"/>
+      <testcase name="testElementFailure" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="23" assertions="2" time="0.007400"/>
+      <testcase name="testElementOrNull" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="33" assertions="1" time="0.011056"/>
+      <testcase name="testElementOrNullFailure" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="41" assertions="1" time="0.009764"/>
+      <testcase name="testString" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="48" assertions="1" time="0.009576"/>
+      <testcase name="testStringFailure" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="56" assertions="2" time="0.009944"/>
+      <testcase name="testStringOrNull" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="66" assertions="1" time="0.009612"/>
+      <testcase name="testStringOrNullFailure" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="74" assertions="1" time="0.009565"/>
+      <testcase name="testNumber" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="81" assertions="2" time="0.010454"/>
+      <testcase name="testNumberFailure" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="94" assertions="2" time="0.010403"/>
+      <testcase name="testNumberFailureWithNonNumeric" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="104" assertions="2" time="0.009916"/>
+      <testcase name="testNumberOrNull" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="114" assertions="1" time="0.009135"/>
+      <testcase name="testNumberOrNullFailure" class="Icecave\Siphon\Util\XPathTest" file="/home/travis/build/IcecaveStudios/siphon/test/suite/Util/XPathTest.php" line="122" assertions="1" time="0.009109"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
