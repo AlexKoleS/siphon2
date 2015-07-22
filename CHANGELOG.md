@@ -1,5 +1,11 @@
 # Siphon Changelog
 
+### 1.0.0 (2015-07-22)
+
+* **[NEW]** Added `isFinalized` flag to `BoxScoreResponse`
+* **[FIXED]** Wrapped Guzzle XML parse exceptions in Siphon `ServiceUnavailable` exception
+* **[FIXED]** Corrected documentation and type-hints on `PlayerStatisticsResponse` constructor
+
 ### 0.2.0 (2015-06-16)
 
 * **[BC]** Rewrote the entire library to use a request/response model.
