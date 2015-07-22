@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\XmlParseException;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
@@ -48,7 +49,13 @@ class XmlReader implements XmlReaderInterface
             throw new ServiceUnavailableException($e);
         }
 
-        return $response->xml();
+        try {
+            $xml = $response->xml();
+        } catch (XmlParseException $e) {
+            throw new ServiceUnavailableException($e);
+        }
+
+        return $xml;
     }
 
     private $urlBuilder;

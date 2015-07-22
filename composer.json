@@ -19,22 +19,22 @@
     ],
     "require": {
         "php": ">=5.5",
-        "eloquent/enumeration": "~5",
-        "guzzlehttp/guzzle": "~5",
-        "icecave/chrono": "~1.0.3"
+        "eloquent/enumeration": "^5",
+        "guzzlehttp/guzzle": "^5",
+        "icecave/chrono": "^1.0.3"
     },
     "require-dev": {
-        "eloquent/phony": "~0.2.0",
-        "icecave/archer": "~1"
+        "eloquent/phony": "^0.2",
+        "icecave/archer": "^1"
     },
     "autoload": {
         "psr-4": {
-            "Icecave\\Siphon\\": ["src", "src-internal"]
+            "Icecave\\Siphon\\": "src"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.2.x-dev"
+            "dev-develop": "1.0.x-dev"
         }
     }
 }

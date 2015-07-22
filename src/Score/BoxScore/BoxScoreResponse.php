@@ -26,6 +26,7 @@ class BoxScoreResponse implements
         $this->setCompetition($competition);
         $this->setHomeTeamStatistics($homeTeamStatistics);
         $this->setAwayTeamStatistics($awayTeamStatistics);
+        $this->setIsFinalized(false);
 
         $this->playerStatistics = [];
     }
@@ -88,6 +89,26 @@ class BoxScoreResponse implements
     public function setAwayTeamStatistics(StatisticsCollection $statistics)
     {
         $this->awayTeamStatistics = $statistics;
+    }
+
+    /**
+     * Check if the box score QA status is finalized.
+     *
+     * @return boolean
+     */
+    public function isFinalized()
+    {
+        return $this->isFinalized;
+    }
+
+    /**
+     * Check if the box score QA status is finalized.
+     *
+     * @return boolean
+     */
+    public function setIsFinalized($isFinalized)
+    {
+        return $this->isFinalized = $isFinalized;
     }
 
     /**
@@ -166,5 +187,6 @@ class BoxScoreResponse implements
     private $competition;
     private $homeTeamStatistics;
     private $awayTeamStatistics;
+    private $isFinalized;
     private $playerStatistics;
 }

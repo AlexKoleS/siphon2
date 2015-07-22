@@ -73,6 +73,12 @@ class BoxScoreReader implements BoxScoreReaderInterface
             $this->createStatisticsCollection($xml->competition->{'away-team-content'})
         );
 
+        $qaStatus = XPath::stringOrNull($xml, ".//competition/meta/property[@name='qa-status']");
+
+        if ('finalized' === $qaStatus) {
+            $response->setIsFinalized(true);
+        }
+
         foreach ($xml->xpath('.//player-content') as $element) {
             $response->add(
                 $this->createPlayer($element->player),

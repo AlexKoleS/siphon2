@@ -286,6 +286,25 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testReadFinalized()
+    {
+        $this->setUpXmlReader('Score/boxscores-finalized.xml');
+
+        $response = $this
+            ->reader
+            ->read(
+                new BoxScoreRequest(
+                    Sport::MLB(),
+                    '2009',
+                    291828
+                )
+            );
+
+        $this->assertTrue(
+            $response->isFinalized()
+        );
+    }
+
     public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException(
