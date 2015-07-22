@@ -6,9 +6,11 @@ use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerResponseTrait;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
 use Icecave\Siphon\Statistics\StatisticsType;
+use Icecave\Siphon\Team\TeamInterface;
 use IteratorAggregate;
 
 /**
@@ -24,18 +26,18 @@ class PlayerStatisticsResponse implements
     }
 
     /**
-     * @param Sport          $sport      The sport to request.
-     * @param string         $seasonName The season name.
-     * @param string|integer $teamId     The team ID.
-     * @param StatisticsType $type       The type of statistics to fetch.
+     * @param Sport          $sport  The sport to request.
+     * @param Season         $season The season.
+     * @param TeamInterface  $team   The team.
+     * @param StatisticsType $type   The type of statistics to fetch.
      */
     public function __construct(
         Sport $sport,
-        $seasonName,
-        $teamId,
+        Season $season,
+        TeamInterface $team,
         StatisticsType $type
     ) {
-        $this->initialize($sport, $seasonName, $teamId);
+        $this->initialize($sport, $season, $team);
         $this->setType($type);
     }
 
