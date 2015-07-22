@@ -105,7 +105,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Sport">Sport</abbr> $sport, string $seasonName, string|integer $teamId, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr> $type)
+                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Sport">Sport</abbr> $sport, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Schedule\Season">Season</abbr> $season, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr> $team, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr> $type)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -253,9 +253,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 32</div>
+        <div class="location">at line 34</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Sport">Sport</abbr> $sport, string $seasonName, string|integer $teamId, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr> $type)</code>
+    <strong>__construct</strong>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Sport">Sport</abbr> $sport, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Schedule\Season">Season</abbr> $season, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr> $team, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr> $type)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -268,14 +268,14 @@
                 <td>The sport to request.</td>
             </tr>
                     <tr>
-                <td>string</td>
-                <td>$seasonName</td>
-                <td>The season name.</td>
+                <td><abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Schedule\Season">Season</abbr></td>
+                <td>$season</td>
+                <td>The season.</td>
             </tr>
                     <tr>
-                <td>string|integer</td>
-                <td>$teamId</td>
-                <td>The team ID.</td>
+                <td><abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Team\TeamInterface">TeamInterface</abbr></td>
+                <td>$team</td>
+                <td>The team.</td>
             </tr>
                     <tr>
                 <td><abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></td>
@@ -566,7 +566,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_type">
-        <div class="location">at line 47</div>
+        <div class="location">at line 49</div>
         <code>                    <a href="../../../../Icecave/Siphon/Statistics/StatisticsType.html"><abbr title="Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr></a>
     <strong>type</strong>()</code>
     </h3>
@@ -592,7 +592,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_setType">
-        <div class="location">at line 57</div>
+        <div class="location">at line 59</div>
         <code>                    
     <strong>setType</strong>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsType">StatisticsType</abbr> $type)</code>
     </h3>
@@ -619,7 +619,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_add">
-        <div class="location">at line 68</div>
+        <div class="location">at line 70</div>
         <code>                    
     <strong>add</strong>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Player\Player">Player</abbr> $player, <abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Statistics\StatisticsCollection">StatisticsCollection</abbr> $statistics)</code>
     </h3>
@@ -651,7 +651,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_accept">
-        <div class="location">at line 80</div>
+        <div class="location">at line 82</div>
         <code>                    mixed
     <strong>accept</strong>(<abbr title="Icecave\Siphon\Player\Statistics\Icecave\Siphon\Reader\ResponseVisitorInterface">ResponseVisitorInterface</abbr> $visitor)</code>
     </h3>
