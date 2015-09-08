@@ -32,6 +32,9 @@ use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
 use Icecave\Siphon\Score\LiveScore\LiveScoreReader;
 use Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface;
 use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsReader;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsReaderInterface;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsRequest;
 use Icecave\Siphon\Team\TeamReader;
 use Icecave\Siphon\Team\TeamReaderInterface;
 use Icecave\Siphon\Team\TeamRequest;
@@ -62,6 +65,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new TeamReader($xmlReader),
             new PlayerReader($xmlReader),
             new PlayerStatisticsReader($xmlReader),
+            new TeamStatisticsReader($xmlReader),
             new ImageReader($xmlReader),
             new InjuryReader($xmlReader),
             new LiveScoreReader($xmlReader),
@@ -77,6 +81,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         TeamReaderInterface $teamReader,
         PlayerReaderInterface $playerReader,
         PlayerStatisticsReaderInterface $playerStatisticsReader,
+        TeamStatisticsReaderInterface $teamStatisticsReader,
         ImageReaderInterface $imageReader,
         InjuryReaderInterface $injuryReader,
         LiveScoreReaderInterface $liveScoreReader,
@@ -89,6 +94,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $this->teamReader             = $teamReader;
         $this->playerReader           = $playerReader;
         $this->playerStatisticsReader = $playerStatisticsReader;
+        $this->teamStatisticsReader   = $teamStatisticsReader;
         $this->imageReader            = $imageReader;
         $this->injuryReader           = $injuryReader;
         $this->liveScoreReader        = $liveScoreReader;
@@ -206,6 +212,20 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request)
     {
         return $this->playerStatisticsReader->read($request);
+    }
+
+    /**
+     * Visit the given request.
+     *
+     * @access private
+     *
+     * @param TeamStatisticsRequest $request
+     *
+     * @return mixed
+     */
+    public function visitTeamStatisticsRequest(TeamStatisticsRequest $request)
+    {
+        return $this->teamStatisticsReader->read($request);
     }
 
     /**

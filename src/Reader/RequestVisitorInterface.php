@@ -9,6 +9,7 @@ use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
 use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsRequest;
 use Icecave\Siphon\Team\TeamRequest;
 
 /**
@@ -60,6 +61,15 @@ interface RequestVisitorInterface
      * @return mixed
      */
     public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request);
+
+    /**
+     * Visit the given request.
+     *
+     * @param TeamStatisticsRequest $request
+     *
+     * @return mixed
+     */
+    public function visitTeamStatisticsRequest(TeamStatisticsRequest $request);
 
     /**
      * Visit the given request.

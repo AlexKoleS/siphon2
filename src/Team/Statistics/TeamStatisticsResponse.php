@@ -1,9 +1,9 @@
 <?php
-namespace Icecave\Siphon\Player\Statistics;
+namespace Icecave\Siphon\Team\Statistics;
 
 use Countable;
 use Icecave\Siphon\Player\Player;
-use Icecave\Siphon\Player\PlayerResponseTrait;
+use Icecave\Siphon\Team\TeamResponseTrait;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
@@ -14,30 +14,28 @@ use Icecave\Siphon\Team\TeamInterface;
 use IteratorAggregate;
 
 /**
- * The response from a player statistics feed.
+ * The response from a team statistics feed.
  */
-class PlayerStatisticsResponse implements
+class TeamStatisticsResponse implements
     ResponseInterface,
     Countable,
     IteratorAggregate
 {
-    use PlayerResponseTrait {
+    use TeamResponseTrait {
         __construct as private initialize;
     }
 
     /**
      * @param Sport          $sport  The sport.
      * @param Season         $season The season.
-     * @param TeamInterface  $team   The team.
      * @param StatisticsType $type   The type of statistics.
      */
     public function __construct(
         Sport $sport,
         Season $season,
-        TeamInterface $team,
         StatisticsType $type
     ) {
-        $this->initialize($sport, $season, $team);
+        $this->initialize($sport, $season);
         $this->setType($type);
     }
 
@@ -62,14 +60,14 @@ class PlayerStatisticsResponse implements
     }
 
     /**
-     * Add a player to the response.
+     * Add a team to the response.
      *
-     * @param Player               $player     The player to add.
-     * @param StatisticsCollection $statistics The player's statistics.
+     * @param TeamInterface        $team       The team to add.
+     * @param StatisticsCollection $statistics The team's statistics.
      */
-    public function add(Player $player, StatisticsCollection $statistics)
+    public function add(TeamInterface $team, StatisticsCollection $statistics)
     {
-        $this->entries[$player->id()] = [$player, $statistics];
+        $this->entries[$team->id()] = [$team, $statistics];
     }
 
     /**
@@ -81,7 +79,7 @@ class PlayerStatisticsResponse implements
      */
     public function accept(ResponseVisitorInterface $visitor)
     {
-        return $visitor->visitPlayerStatisticsResponse($this);
+        return $visitor->visitTeamStatisticsResponse($this);
     }
 
     private $type;

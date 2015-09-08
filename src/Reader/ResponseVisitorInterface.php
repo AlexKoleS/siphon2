@@ -9,6 +9,7 @@ use Icecave\Siphon\Player\Statistics\PlayerStatisticsResponse;
 use Icecave\Siphon\Schedule\ScheduleResponse;
 use Icecave\Siphon\Score\BoxScore\BoxScoreResponse;
 use Icecave\Siphon\Score\LiveScore\LiveScoreResponse;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsResponse;
 use Icecave\Siphon\Team\TeamResponse;
 
 /**
@@ -60,6 +61,15 @@ interface ResponseVisitorInterface
      * @return mixed
      */
     public function visitPlayerStatisticsResponse(PlayerStatisticsResponse $response);
+
+    /**
+     * Visit the given response.
+     *
+     * @param TeamStatisticsResponse $response
+     *
+     * @return mixed
+     */
+    public function visitTeamStatisticsResponse(TeamStatisticsResponse $response);
 
     /**
      * Visit the given response.
