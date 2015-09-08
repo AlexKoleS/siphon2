@@ -25,7 +25,7 @@ class TeamResponse implements
      */
     public function add(TeamInterface $team)
     {
-        $this->teams[$team->id()] = $team;
+        $this->entries[$team->id()] = $team;
     }
 
     /**
