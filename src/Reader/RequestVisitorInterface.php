@@ -47,6 +47,15 @@ interface RequestVisitorInterface
     /**
      * Visit the given request.
      *
+     * @param TeamStatisticsRequest $request
+     *
+     * @return mixed
+     */
+    public function visitTeamStatisticsRequest(TeamStatisticsRequest $request);
+
+    /**
+     * Visit the given request.
+     *
      * @param PlayerRequest $request
      *
      * @return mixed
@@ -61,15 +70,6 @@ interface RequestVisitorInterface
      * @return mixed
      */
     public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request);
-
-    /**
-     * Visit the given request.
-     *
-     * @param TeamStatisticsRequest $request
-     *
-     * @return mixed
-     */
-    public function visitTeamStatisticsRequest(TeamStatisticsRequest $request);
 
     /**
      * Visit the given request.

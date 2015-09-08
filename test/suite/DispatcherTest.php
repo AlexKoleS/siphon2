@@ -45,9 +45,9 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->atomReader        = Phony::mock(AtomReaderInterface::class);
         $this->scheduleReader    = Phony::mock(ScheduleReaderInterface::class);
         $this->teamReader        = Phony::mock(TeamReaderInterface::class);
+        $this->teamStatsReader   = Phony::mock(TeamStatisticsReaderInterface::class);
         $this->playerReader      = Phony::mock(PlayerReaderInterface::class);
         $this->playerStatsReader = Phony::mock(PlayerStatisticsReaderInterface::class);
-        $this->teamStatsReader   = Phony::mock(TeamStatisticsReaderInterface::class);
         $this->imageReader       = Phony::mock(ImageReaderInterface::class);
         $this->injuryReader      = Phony::mock(InjuryReaderInterface::class);
         $this->liveScoreReader   = Phony::mock(LiveScoreReaderInterface::class);
@@ -59,9 +59,9 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->atomReader->mock(),
             $this->scheduleReader->mock(),
             $this->teamReader->mock(),
+            $this->teamStatsReader->mock(),
             $this->playerReader->mock(),
             $this->playerStatsReader->mock(),
-            $this->teamStatsReader->mock(),
             $this->imageReader->mock(),
             $this->injuryReader->mock(),
             $this->liveScoreReader->mock(),
@@ -127,6 +127,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testTeamStatisticsRequest()
+    {
+        $this->dispatchTest(
+            TeamStatisticsRequest::class,
+            TeamStatisticsResponse::class,
+            $this->teamStatsReader
+        );
+    }
+
     public function testPlayerRequest()
     {
         $this->dispatchTest(
@@ -142,15 +151,6 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             PlayerStatisticsRequest::class,
             PlayerStatisticsResponse::class,
             $this->playerStatsReader
-        );
-    }
-
-    public function testTeamStatisticsRequest()
-    {
-        $this->dispatchTest(
-            TeamStatisticsRequest::class,
-            TeamStatisticsResponse::class,
-            $this->teamStatsReader
         );
     }
 

@@ -63,9 +63,9 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new AtomReader($xmlReader),
             new ScheduleReader($xmlReader),
             new TeamReader($xmlReader),
+            new TeamStatisticsReader($xmlReader),
             new PlayerReader($xmlReader),
             new PlayerStatisticsReader($xmlReader),
-            new TeamStatisticsReader($xmlReader),
             new ImageReader($xmlReader),
             new InjuryReader($xmlReader),
             new LiveScoreReader($xmlReader),
@@ -79,9 +79,9 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         AtomReaderInterface $atomReader,
         ScheduleReaderInterface $scheduleReader,
         TeamReaderInterface $teamReader,
+        TeamStatisticsReaderInterface $teamStatisticsReader,
         PlayerReaderInterface $playerReader,
         PlayerStatisticsReaderInterface $playerStatisticsReader,
-        TeamStatisticsReaderInterface $teamStatisticsReader,
         ImageReaderInterface $imageReader,
         InjuryReaderInterface $injuryReader,
         LiveScoreReaderInterface $liveScoreReader,
@@ -92,9 +92,9 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $this->atomReader             = $atomReader;
         $this->scheduleReader         = $scheduleReader;
         $this->teamReader             = $teamReader;
+        $this->teamStatisticsReader   = $teamStatisticsReader;
         $this->playerReader           = $playerReader;
         $this->playerStatisticsReader = $playerStatisticsReader;
-        $this->teamStatisticsReader   = $teamStatisticsReader;
         $this->imageReader            = $imageReader;
         $this->injuryReader           = $injuryReader;
         $this->liveScoreReader        = $liveScoreReader;
@@ -191,6 +191,20 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      *
      * @access private
      *
+     * @param TeamStatisticsRequest $request
+     *
+     * @return mixed
+     */
+    public function visitTeamStatisticsRequest(TeamStatisticsRequest $request)
+    {
+        return $this->teamStatisticsReader->read($request);
+    }
+
+    /**
+     * Visit the given request.
+     *
+     * @access private
+     *
      * @param PlayerRequest $request
      *
      * @return mixed
@@ -212,20 +226,6 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request)
     {
         return $this->playerStatisticsReader->read($request);
-    }
-
-    /**
-     * Visit the given request.
-     *
-     * @access private
-     *
-     * @param TeamStatisticsRequest $request
-     *
-     * @return mixed
-     */
-    public function visitTeamStatisticsRequest(TeamStatisticsRequest $request)
-    {
-        return $this->teamStatisticsReader->read($request);
     }
 
     /**

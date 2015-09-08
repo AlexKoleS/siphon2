@@ -47,6 +47,15 @@ interface ResponseVisitorInterface
     /**
      * Visit the given response.
      *
+     * @param TeamStatisticsResponse $response
+     *
+     * @return mixed
+     */
+    public function visitTeamStatisticsResponse(TeamStatisticsResponse $response);
+
+    /**
+     * Visit the given response.
+     *
      * @param PlayerResponse $response
      *
      * @return mixed
@@ -61,15 +70,6 @@ interface ResponseVisitorInterface
      * @return mixed
      */
     public function visitPlayerStatisticsResponse(PlayerStatisticsResponse $response);
-
-    /**
-     * Visit the given response.
-     *
-     * @param TeamStatisticsResponse $response
-     *
-     * @return mixed
-     */
-    public function visitTeamStatisticsResponse(TeamStatisticsResponse $response);
 
     /**
      * Visit the given response.
