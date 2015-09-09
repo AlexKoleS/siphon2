@@ -100,7 +100,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Siphon\Icecave\Siphon\Reader\UrlBuilderInterface">UrlBuilderInterface</abbr> $urlBuilder, <abbr title="Icecave\Siphon\Icecave\Siphon\Reader\XmlReaderInterface">XmlReaderInterface</abbr> $xmlReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Atom\AtomReaderInterface">AtomReaderInterface</abbr> $atomReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Schedule\ScheduleReaderInterface">ScheduleReaderInterface</abbr> $scheduleReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Team\TeamReaderInterface">TeamReaderInterface</abbr> $teamReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\PlayerReaderInterface">PlayerReaderInterface</abbr> $playerReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderInterface">PlayerStatisticsReaderInterface</abbr> $playerStatisticsReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Image\ImageReaderInterface">ImageReaderInterface</abbr> $imageReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Injury\InjuryReaderInterface">InjuryReaderInterface</abbr> $injuryReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface">LiveScoreReaderInterface</abbr> $liveScoreReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface">BoxScoreReaderInterface</abbr> $boxScoreReader)
+                    <a href="#method___construct">__construct</a>(<abbr title="Icecave\Siphon\Icecave\Siphon\Reader\UrlBuilderInterface">UrlBuilderInterface</abbr> $urlBuilder, <abbr title="Icecave\Siphon\Icecave\Siphon\Reader\XmlReaderInterface">XmlReaderInterface</abbr> $xmlReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Atom\AtomReaderInterface">AtomReaderInterface</abbr> $atomReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Schedule\ScheduleReaderInterface">ScheduleReaderInterface</abbr> $scheduleReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Team\TeamReaderInterface">TeamReaderInterface</abbr> $teamReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Team\Statistics\TeamStatisticsReaderInterface">TeamStatisticsReaderInterface</abbr> $teamStatisticsReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\PlayerReaderInterface">PlayerReaderInterface</abbr> $playerReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderInterface">PlayerStatisticsReaderInterface</abbr> $playerStatisticsReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Image\ImageReaderInterface">ImageReaderInterface</abbr> $imageReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Injury\InjuryReaderInterface">InjuryReaderInterface</abbr> $injuryReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface">LiveScoreReaderInterface</abbr> $liveScoreReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface">BoxScoreReaderInterface</abbr> $boxScoreReader)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -173,6 +173,15 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_visitTeamStatisticsRequest">visitTeamStatisticsRequest</a>(<abbr title="Icecave\Siphon\Icecave\Siphon\Team\Statistics\TeamStatisticsRequest">TeamStatisticsRequest</abbr> $request)
+                                            <p>Visit the given request.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_visitPlayerRequest">visitPlayerRequest</a>(<abbr title="Icecave\Siphon\Icecave\Siphon\Player\PlayerRequest">PlayerRequest</abbr> $request)
                                             <p>Visit the given request.</p>                </div>
                 <div class="col-md-2"></div>
@@ -230,7 +239,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_create">
-        <div class="location">at line 51</div>
+        <div class="location">at line 54</div>
         <code>        static            <abbr title="Icecave\Siphon\FactoryInterface">FactoryInterface</abbr>
     <strong>create</strong>(string $apiKey)</code>
     </h3>
@@ -267,9 +276,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 72</div>
+        <div class="location">at line 76</div>
         <code>                    
-    <strong>__construct</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Reader\UrlBuilderInterface">UrlBuilderInterface</abbr> $urlBuilder, <abbr title="Icecave\Siphon\Icecave\Siphon\Reader\XmlReaderInterface">XmlReaderInterface</abbr> $xmlReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Atom\AtomReaderInterface">AtomReaderInterface</abbr> $atomReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Schedule\ScheduleReaderInterface">ScheduleReaderInterface</abbr> $scheduleReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Team\TeamReaderInterface">TeamReaderInterface</abbr> $teamReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\PlayerReaderInterface">PlayerReaderInterface</abbr> $playerReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderInterface">PlayerStatisticsReaderInterface</abbr> $playerStatisticsReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Image\ImageReaderInterface">ImageReaderInterface</abbr> $imageReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Injury\InjuryReaderInterface">InjuryReaderInterface</abbr> $injuryReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface">LiveScoreReaderInterface</abbr> $liveScoreReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface">BoxScoreReaderInterface</abbr> $boxScoreReader)</code>
+    <strong>__construct</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Reader\UrlBuilderInterface">UrlBuilderInterface</abbr> $urlBuilder, <abbr title="Icecave\Siphon\Icecave\Siphon\Reader\XmlReaderInterface">XmlReaderInterface</abbr> $xmlReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Atom\AtomReaderInterface">AtomReaderInterface</abbr> $atomReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Schedule\ScheduleReaderInterface">ScheduleReaderInterface</abbr> $scheduleReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Team\TeamReaderInterface">TeamReaderInterface</abbr> $teamReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Team\Statistics\TeamStatisticsReaderInterface">TeamStatisticsReaderInterface</abbr> $teamStatisticsReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\PlayerReaderInterface">PlayerReaderInterface</abbr> $playerReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderInterface">PlayerStatisticsReaderInterface</abbr> $playerStatisticsReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Image\ImageReaderInterface">ImageReaderInterface</abbr> $imageReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Player\Injury\InjuryReaderInterface">InjuryReaderInterface</abbr> $injuryReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\LiveScore\LiveScoreReaderInterface">LiveScoreReaderInterface</abbr> $liveScoreReader, <abbr title="Icecave\Siphon\Icecave\Siphon\Score\BoxScore\BoxScoreReaderInterface">BoxScoreReaderInterface</abbr> $boxScoreReader)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -303,6 +312,12 @@
                     <tr>
                 <td><abbr title="Icecave\Siphon\Icecave\Siphon\Team\TeamReaderInterface">TeamReaderInterface</abbr></td>
                 <td>$teamReader</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Icecave\Siphon\Icecave\Siphon\Team\Statistics\TeamStatisticsReaderInterface">TeamStatisticsReaderInterface</abbr></td>
+                <td>$teamStatisticsReader</td>
                 <td>
 </td>
             </tr>
@@ -353,7 +368,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_urlBuilder">
-        <div class="location">at line 103</div>
+        <div class="location">at line 109</div>
         <code>                    <a href="../../Icecave/Siphon/Reader/UrlBuilderInterface.html"><abbr title="Icecave\Siphon\Reader\UrlBuilderInterface">UrlBuilderInterface</abbr></a>
     <strong>urlBuilder</strong>()</code>
     </h3>
@@ -380,7 +395,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_xmlReader">
-        <div class="location">at line 113</div>
+        <div class="location">at line 119</div>
         <code>                    <a href="../../Icecave/Siphon/Reader/XmlReaderInterface.html"><abbr title="Icecave\Siphon\Reader\XmlReaderInterface">XmlReaderInterface</abbr></a>
     <strong>xmlReader</strong>()</code>
     </h3>
@@ -407,7 +422,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_read">
-        <div class="location">at line 126</div>
+        <div class="location">at line 132</div>
         <code>                    <abbr title="Icecave\Siphon\ResponseInterface">ResponseInterface</abbr>
     <strong>read</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr> $request)</code>
     </h3>
@@ -452,7 +467,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_isSupported">
-        <div class="location">at line 136</div>
+        <div class="location">at line 142</div>
         <code>                    boolean
     <strong>isSupported</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Reader\RequestInterface">RequestInterface</abbr> $request)</code>
     </h3>
@@ -489,7 +504,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitAtomRequest">
-        <div class="location">at line 150</div>
+        <div class="location">at line 156</div>
         <code>                    mixed
     <strong>visitAtomRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Atom\AtomRequest">AtomRequest</abbr> $request)</code>
     </h3>
@@ -527,7 +542,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitScheduleRequest">
-        <div class="location">at line 164</div>
+        <div class="location">at line 170</div>
         <code>                    mixed
     <strong>visitScheduleRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Schedule\ScheduleRequest">ScheduleRequest</abbr> $request)</code>
     </h3>
@@ -565,7 +580,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitTeamRequest">
-        <div class="location">at line 178</div>
+        <div class="location">at line 184</div>
         <code>                    mixed
     <strong>visitTeamRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Team\TeamRequest">TeamRequest</abbr> $request)</code>
     </h3>
@@ -602,8 +617,46 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_visitTeamStatisticsRequest">
+        <div class="location">at line 198</div>
+        <code>                    mixed
+    <strong>visitTeamStatisticsRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Team\Statistics\TeamStatisticsRequest">TeamStatisticsRequest</abbr> $request)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Visit the given request.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Icecave\Siphon\Icecave\Siphon\Team\Statistics\TeamStatisticsRequest">TeamStatisticsRequest</abbr></td>
+                <td>$request</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_visitPlayerRequest">
-        <div class="location">at line 192</div>
+        <div class="location">at line 212</div>
         <code>                    mixed
     <strong>visitPlayerRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Player\PlayerRequest">PlayerRequest</abbr> $request)</code>
     </h3>
@@ -641,7 +694,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitPlayerStatisticsRequest">
-        <div class="location">at line 206</div>
+        <div class="location">at line 226</div>
         <code>                    mixed
     <strong>visitPlayerStatisticsRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest">PlayerStatisticsRequest</abbr> $request)</code>
     </h3>
@@ -679,7 +732,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitImageRequest">
-        <div class="location">at line 220</div>
+        <div class="location">at line 240</div>
         <code>                    mixed
     <strong>visitImageRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Player\Image\ImageRequest">ImageRequest</abbr> $request)</code>
     </h3>
@@ -717,7 +770,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitInjuryRequest">
-        <div class="location">at line 232</div>
+        <div class="location">at line 252</div>
         <code>                    mixed
     <strong>visitInjuryRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Player\Injury\InjuryRequest">InjuryRequest</abbr> $request)</code>
     </h3>
@@ -755,7 +808,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitLiveScoreRequest">
-        <div class="location">at line 244</div>
+        <div class="location">at line 264</div>
         <code>                    mixed
     <strong>visitLiveScoreRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Score\LiveScore\LiveScoreRequest">LiveScoreRequest</abbr> $request)</code>
     </h3>
@@ -793,7 +846,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_visitBoxScoreRequest">
-        <div class="location">at line 256</div>
+        <div class="location">at line 276</div>
         <code>                    mixed
     <strong>visitBoxScoreRequest</strong>(<abbr title="Icecave\Siphon\Icecave\Siphon\Score\BoxScore\BoxScoreRequest">BoxScoreRequest</abbr> $request)</code>
     </h3>

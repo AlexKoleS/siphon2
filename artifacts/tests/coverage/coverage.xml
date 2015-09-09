@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1437541081">
-  <project timestamp="1437541081">
+<coverage generated="1441767817">
+  <project timestamp="1441767817">
     <package name="Icecave\Siphon\Atom">
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Atom/AtomReader.php">
         <class name="AtomReader" namespace="Icecave\Siphon\Atom">
@@ -145,15 +145,12 @@
     <package name="Icecave\Siphon">
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Dispatcher.php">
         <class name="Dispatcher" namespace="Icecave\Siphon">
-          <metrics methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="57" coveredelements="57"/>
+          <metrics methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="45" elements="61" coveredelements="61"/>
         </class>
-        <line num="51" type="method" name="create" crap="1" count="1"/>
-        <line num="53" type="stmt" count="1"/>
-        <line num="54" type="stmt" count="1"/>
-        <line num="55" type="stmt" count="1"/>
+        <line num="54" type="method" name="create" crap="1" count="1"/>
+        <line num="56" type="stmt" count="1"/>
         <line num="57" type="stmt" count="1"/>
         <line num="58" type="stmt" count="1"/>
-        <line num="59" type="stmt" count="1"/>
         <line num="60" type="stmt" count="1"/>
         <line num="61" type="stmt" count="1"/>
         <line num="62" type="stmt" count="1"/>
@@ -164,47 +161,54 @@
         <line num="67" type="stmt" count="1"/>
         <line num="68" type="stmt" count="1"/>
         <line num="69" type="stmt" count="1"/>
-        <line num="72" type="method" name="__construct" crap="1" count="12"/>
+        <line num="70" type="stmt" count="1"/>
+        <line num="71" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="1"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="76" type="method" name="__construct" crap="1" count="13"/>
         <line num="78" type="stmt" count="1"/>
-        <line num="85" type="stmt" count="12"/>
-        <line num="86" type="stmt" count="12"/>
-        <line num="87" type="stmt" count="12"/>
-        <line num="88" type="stmt" count="12"/>
-        <line num="89" type="stmt" count="12"/>
-        <line num="90" type="stmt" count="12"/>
-        <line num="91" type="stmt" count="12"/>
-        <line num="92" type="stmt" count="12"/>
-        <line num="93" type="stmt" count="12"/>
-        <line num="94" type="stmt" count="12"/>
-        <line num="95" type="stmt" count="12"/>
-        <line num="96" type="stmt" count="12"/>
-        <line num="103" type="method" name="urlBuilder" crap="1" count="2"/>
-        <line num="105" type="stmt" count="2"/>
-        <line num="113" type="method" name="xmlReader" crap="1" count="1"/>
-        <line num="115" type="stmt" count="1"/>
-        <line num="126" type="method" name="read" crap="1" count="9"/>
-        <line num="128" type="stmt" count="9"/>
-        <line num="136" type="method" name="isSupported" crap="1" count="9"/>
-        <line num="138" type="stmt" count="9"/>
-        <line num="150" type="method" name="visitAtomRequest" crap="1" count="1"/>
-        <line num="152" type="stmt" count="1"/>
-        <line num="164" type="method" name="visitScheduleRequest" crap="1" count="1"/>
-        <line num="166" type="stmt" count="1"/>
-        <line num="178" type="method" name="visitTeamRequest" crap="1" count="1"/>
-        <line num="180" type="stmt" count="1"/>
-        <line num="192" type="method" name="visitPlayerRequest" crap="1" count="1"/>
-        <line num="194" type="stmt" count="1"/>
-        <line num="206" type="method" name="visitPlayerStatisticsRequest" crap="1" count="1"/>
-        <line num="208" type="stmt" count="1"/>
-        <line num="220" type="method" name="visitImageRequest" crap="1" count="1"/>
-        <line num="222" type="stmt" count="1"/>
-        <line num="232" type="method" name="visitInjuryRequest" crap="1" count="1"/>
-        <line num="234" type="stmt" count="1"/>
-        <line num="244" type="method" name="visitLiveScoreRequest" crap="1" count="1"/>
-        <line num="246" type="stmt" count="1"/>
-        <line num="256" type="method" name="visitBoxScoreRequest" crap="1" count="1"/>
-        <line num="258" type="stmt" count="1"/>
-        <metrics loc="271" ncloc="163" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="57" coveredelements="57"/>
+        <line num="90" type="stmt" count="13"/>
+        <line num="91" type="stmt" count="13"/>
+        <line num="92" type="stmt" count="13"/>
+        <line num="93" type="stmt" count="13"/>
+        <line num="94" type="stmt" count="13"/>
+        <line num="95" type="stmt" count="13"/>
+        <line num="96" type="stmt" count="13"/>
+        <line num="97" type="stmt" count="13"/>
+        <line num="98" type="stmt" count="13"/>
+        <line num="99" type="stmt" count="13"/>
+        <line num="100" type="stmt" count="13"/>
+        <line num="101" type="stmt" count="13"/>
+        <line num="102" type="stmt" count="13"/>
+        <line num="109" type="method" name="urlBuilder" crap="1" count="2"/>
+        <line num="111" type="stmt" count="2"/>
+        <line num="119" type="method" name="xmlReader" crap="1" count="1"/>
+        <line num="121" type="stmt" count="1"/>
+        <line num="132" type="method" name="read" crap="1" count="10"/>
+        <line num="134" type="stmt" count="10"/>
+        <line num="142" type="method" name="isSupported" crap="1" count="10"/>
+        <line num="144" type="stmt" count="10"/>
+        <line num="156" type="method" name="visitAtomRequest" crap="1" count="1"/>
+        <line num="158" type="stmt" count="1"/>
+        <line num="170" type="method" name="visitScheduleRequest" crap="1" count="1"/>
+        <line num="172" type="stmt" count="1"/>
+        <line num="184" type="method" name="visitTeamRequest" crap="1" count="1"/>
+        <line num="186" type="stmt" count="1"/>
+        <line num="198" type="method" name="visitTeamStatisticsRequest" crap="1" count="1"/>
+        <line num="200" type="stmt" count="1"/>
+        <line num="212" type="method" name="visitPlayerRequest" crap="1" count="1"/>
+        <line num="214" type="stmt" count="1"/>
+        <line num="226" type="method" name="visitPlayerStatisticsRequest" crap="1" count="1"/>
+        <line num="228" type="stmt" count="1"/>
+        <line num="240" type="method" name="visitImageRequest" crap="1" count="1"/>
+        <line num="242" type="stmt" count="1"/>
+        <line num="252" type="method" name="visitInjuryRequest" crap="1" count="1"/>
+        <line num="254" type="stmt" count="1"/>
+        <line num="264" type="method" name="visitLiveScoreRequest" crap="1" count="1"/>
+        <line num="266" type="stmt" count="1"/>
+        <line num="276" type="method" name="visitBoxScoreRequest" crap="1" count="1"/>
+        <line num="278" type="stmt" count="1"/>
+        <metrics loc="291" ncloc="174" classes="1" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="45" elements="61" coveredelements="61"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/PackageInfo.php">
         <class name="PackageInfo" namespace="Icecave\Siphon">
@@ -216,16 +220,16 @@
         <class name="Sport" namespace="Icecave\Siphon">
           <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="9" coveredelements="9"/>
         </class>
-        <line num="40" type="method" name="findByComponents" crap="2" count="12"/>
-        <line num="42" type="stmt" count="12"/>
-        <line num="43" type="method" name="anonymous function" crap="2" count="12"/>
-        <line num="44" type="stmt" count="12"/>
-        <line num="45" type="stmt" count="12"/>
-        <line num="47" type="stmt" count="12"/>
-        <line num="55" type="method" name="sport" crap="1" count="31"/>
-        <line num="57" type="stmt" count="31"/>
-        <line num="65" type="method" name="league" crap="1" count="23"/>
-        <line num="67" type="stmt" count="23"/>
+        <line num="40" type="method" name="findByComponents" crap="2" count="14"/>
+        <line num="42" type="stmt" count="14"/>
+        <line num="43" type="method" name="anonymous function" crap="2" count="14"/>
+        <line num="44" type="stmt" count="14"/>
+        <line num="45" type="stmt" count="14"/>
+        <line num="47" type="stmt" count="14"/>
+        <line num="55" type="method" name="sport" crap="1" count="34"/>
+        <line num="57" type="stmt" count="34"/>
+        <line num="65" type="method" name="league" crap="1" count="26"/>
+        <line num="67" type="stmt" count="26"/>
         <metrics loc="71" ncloc="46" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
       </file>
     </package>
@@ -798,9 +802,9 @@
         <class name="NotFoundException" namespace="Icecave\Siphon\Reader\Exception">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
-        <line num="12" type="method" name="__construct" crap="1" count="5"/>
-        <line num="14" type="stmt" count="5"/>
-        <line num="15" type="stmt" count="5"/>
+        <line num="12" type="method" name="__construct" crap="1" count="6"/>
+        <line num="14" type="stmt" count="6"/>
+        <line num="15" type="stmt" count="6"/>
         <metrics loc="16" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Reader/Exception/ServiceUnavailableException.php">
@@ -816,170 +820,193 @@
     <package name="Icecave\Siphon\Reader">
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Reader/RequestFactory.php">
         <class name="RequestFactory" namespace="Icecave\Siphon\Reader">
-          <metrics methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="151" coveredstatements="151" elements="161" coveredelements="161"/>
+          <metrics methods="11" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="173" coveredstatements="173" elements="184" coveredelements="184"/>
         </class>
-        <line num="33" type="method" name="create" crap="11" count="17"/>
-        <line num="35" type="stmt" count="17"/>
-        <line num="37" type="stmt" count="17"/>
-        <line num="38" type="stmt" count="5"/>
-        <line num="40" type="stmt" count="5"/>
+        <line num="34" type="method" name="create" crap="12" count="19"/>
+        <line num="36" type="stmt" count="19"/>
+        <line num="38" type="stmt" count="19"/>
+        <line num="39" type="stmt" count="5"/>
         <line num="41" type="stmt" count="5"/>
-        <line num="43" type="stmt" count="5"/>
-        <line num="45" type="stmt" count="5"/>
+        <line num="42" type="stmt" count="5"/>
+        <line num="44" type="stmt" count="5"/>
         <line num="46" type="stmt" count="5"/>
-        <line num="47" type="stmt" count="12"/>
-        <line num="50" type="stmt" count="17"/>
-        <line num="51" type="stmt" count="5"/>
-        <line num="52" type="stmt" count="12"/>
-        <line num="53" type="stmt" count="3"/>
-        <line num="54" type="stmt" count="9"/>
-        <line num="55" type="stmt" count="1"/>
-        <line num="56" type="stmt" count="8"/>
-        <line num="57" type="stmt" count="1"/>
-        <line num="58" type="stmt" count="7"/>
-        <line num="59" type="stmt" count="2"/>
-        <line num="60" type="stmt" count="5"/>
-        <line num="61" type="stmt" count="1"/>
-        <line num="62" type="stmt" count="4"/>
-        <line num="63" type="stmt" count="1"/>
-        <line num="64" type="stmt" count="3"/>
-        <line num="65" type="stmt" count="1"/>
-        <line num="66" type="stmt" count="2"/>
-        <line num="67" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="5"/>
+        <line num="48" type="stmt" count="14"/>
+        <line num="51" type="stmt" count="19"/>
+        <line num="52" type="stmt" count="5"/>
+        <line num="53" type="stmt" count="14"/>
+        <line num="54" type="stmt" count="3"/>
+        <line num="55" type="stmt" count="11"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="57" type="stmt" count="10"/>
+        <line num="58" type="stmt" count="2"/>
+        <line num="59" type="stmt" count="8"/>
+        <line num="60" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="7"/>
+        <line num="62" type="stmt" count="2"/>
+        <line num="63" type="stmt" count="5"/>
+        <line num="64" type="stmt" count="1"/>
+        <line num="65" type="stmt" count="4"/>
+        <line num="66" type="stmt" count="1"/>
+        <line num="67" type="stmt" count="3"/>
+        <line num="68" type="stmt" count="1"/>
+        <line num="69" type="stmt" count="2"/>
         <line num="70" type="stmt" count="1"/>
-        <line num="80" type="method" name="createAtomRequest" crap="7" count="17"/>
-        <line num="82" type="stmt" count="17"/>
-        <line num="83" type="stmt" count="12"/>
-        <line num="86" type="stmt" count="5"/>
-        <line num="87" type="stmt" count="5"/>
-        <line num="88" type="stmt" count="5"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="83" type="method" name="createAtomRequest" crap="7" count="19"/>
+        <line num="85" type="stmt" count="19"/>
+        <line num="86" type="stmt" count="14"/>
+        <line num="89" type="stmt" count="5"/>
         <line num="90" type="stmt" count="5"/>
-        <line num="91" type="stmt" count="1"/>
-        <line num="94" type="stmt" count="5"/>
-        <line num="95" type="stmt" count="1"/>
-        <line num="98" type="stmt" count="5"/>
-        <line num="99" type="stmt" count="2"/>
-        <line num="101" type="stmt" count="2"/>
-        <line num="102" type="stmt" count="1"/>
-        <line num="103" type="stmt" count="2"/>
-        <line num="104" type="stmt" count="1"/>
-        <line num="107" type="stmt" count="2"/>
-        <line num="110" type="stmt" count="5"/>
-        <line num="120" type="method" name="createScheduleRequest" crap="4" count="12"/>
-        <line num="122" type="stmt" count="12"/>
-        <line num="125" type="stmt" count="12"/>
-        <line num="126" type="stmt" count="12"/>
-        <line num="127" type="stmt" count="12"/>
-        <line num="129" type="stmt" count="12"/>
-        <line num="130" type="stmt" count="1"/>
-        <line num="131" type="stmt" count="1"/>
-        <line num="134" type="stmt" count="12"/>
-        <line num="135" type="stmt" count="11"/>
-        <line num="136" type="stmt" count="11"/>
-        <line num="138" type="stmt" count="11"/>
-        <line num="139" type="stmt" count="1"/>
-        <line num="140" type="stmt" count="1"/>
-        <line num="143" type="stmt" count="11"/>
-        <line num="144" type="stmt" count="10"/>
-        <line num="145" type="stmt" count="10"/>
-        <line num="147" type="stmt" count="10"/>
-        <line num="148" type="stmt" count="1"/>
-        <line num="149" type="stmt" count="1"/>
-        <line num="150" type="stmt" count="1"/>
-        <line num="151" type="stmt" count="9"/>
-        <line num="154" type="stmt" count="3"/>
-        <line num="164" type="method" name="createTeamRequest" crap="2" count="9"/>
-        <line num="166" type="stmt" count="9"/>
-        <line num="168" type="stmt" count="9"/>
-        <line num="169" type="stmt" count="9"/>
-        <line num="170" type="stmt" count="9"/>
-        <line num="172" type="stmt" count="9"/>
-        <line num="173" type="stmt" count="1"/>
-        <line num="174" type="stmt" count="1"/>
-        <line num="175" type="stmt" count="1"/>
+        <line num="91" type="stmt" count="5"/>
+        <line num="93" type="stmt" count="5"/>
+        <line num="94" type="stmt" count="1"/>
+        <line num="97" type="stmt" count="5"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="101" type="stmt" count="5"/>
+        <line num="102" type="stmt" count="2"/>
+        <line num="104" type="stmt" count="2"/>
+        <line num="105" type="stmt" count="1"/>
+        <line num="106" type="stmt" count="2"/>
+        <line num="107" type="stmt" count="1"/>
+        <line num="110" type="stmt" count="2"/>
+        <line num="113" type="stmt" count="5"/>
+        <line num="123" type="method" name="createScheduleRequest" crap="4" count="14"/>
+        <line num="125" type="stmt" count="14"/>
+        <line num="128" type="stmt" count="14"/>
+        <line num="129" type="stmt" count="14"/>
+        <line num="130" type="stmt" count="14"/>
+        <line num="132" type="stmt" count="14"/>
+        <line num="133" type="stmt" count="1"/>
+        <line num="134" type="stmt" count="1"/>
+        <line num="137" type="stmt" count="14"/>
+        <line num="138" type="stmt" count="13"/>
+        <line num="139" type="stmt" count="13"/>
+        <line num="141" type="stmt" count="13"/>
+        <line num="142" type="stmt" count="1"/>
+        <line num="143" type="stmt" count="1"/>
+        <line num="146" type="stmt" count="13"/>
+        <line num="147" type="stmt" count="12"/>
+        <line num="148" type="stmt" count="12"/>
+        <line num="150" type="stmt" count="12"/>
+        <line num="151" type="stmt" count="1"/>
+        <line num="152" type="stmt" count="1"/>
+        <line num="153" type="stmt" count="1"/>
+        <line num="154" type="stmt" count="11"/>
+        <line num="157" type="stmt" count="3"/>
+        <line num="167" type="method" name="createTeamRequest" crap="2" count="11"/>
+        <line num="169" type="stmt" count="11"/>
+        <line num="171" type="stmt" count="11"/>
+        <line num="172" type="stmt" count="11"/>
+        <line num="173" type="stmt" count="11"/>
+        <line num="175" type="stmt" count="11"/>
         <line num="176" type="stmt" count="1"/>
-        <line num="179" type="stmt" count="8"/>
-        <line num="189" type="method" name="createPlayerRequest" crap="2" count="8"/>
-        <line num="191" type="stmt" count="8"/>
-        <line num="193" type="stmt" count="8"/>
-        <line num="194" type="stmt" count="8"/>
-        <line num="195" type="stmt" count="8"/>
-        <line num="197" type="stmt" count="8"/>
-        <line num="198" type="stmt" count="1"/>
-        <line num="199" type="stmt" count="1"/>
-        <line num="200" type="stmt" count="1"/>
+        <line num="177" type="stmt" count="1"/>
+        <line num="178" type="stmt" count="1"/>
+        <line num="179" type="stmt" count="1"/>
+        <line num="182" type="stmt" count="10"/>
+        <line num="192" type="method" name="createTeamStatisticsRequest" crap="3" count="10"/>
+        <line num="194" type="stmt" count="10"/>
+        <line num="196" type="stmt" count="10"/>
+        <line num="197" type="stmt" count="10"/>
+        <line num="198" type="stmt" count="10"/>
+        <line num="200" type="stmt" count="10"/>
         <line num="201" type="stmt" count="1"/>
         <line num="202" type="stmt" count="1"/>
-        <line num="205" type="stmt" count="7"/>
-        <line num="215" type="method" name="createPlayerStatisticsRequest" crap="3" count="7"/>
-        <line num="217" type="stmt" count="7"/>
-        <line num="219" type="stmt" count="7"/>
-        <line num="220" type="stmt" count="7"/>
-        <line num="221" type="stmt" count="7"/>
-        <line num="223" type="stmt" count="7"/>
-        <line num="224" type="stmt" count="1"/>
-        <line num="225" type="stmt" count="1"/>
-        <line num="226" type="stmt" count="1"/>
-        <line num="227" type="stmt" count="1"/>
-        <line num="228" type="stmt" count="1"/>
-        <line num="229" type="stmt" count="1"/>
-        <line num="230" type="stmt" count="6"/>
-        <line num="231" type="stmt" count="6"/>
-        <line num="232" type="stmt" count="6"/>
-        <line num="234" type="stmt" count="6"/>
-        <line num="235" type="stmt" count="1"/>
-        <line num="236" type="stmt" count="1"/>
+        <line num="203" type="stmt" count="1"/>
+        <line num="204" type="stmt" count="1"/>
+        <line num="205" type="stmt" count="1"/>
+        <line num="206" type="stmt" count="9"/>
+        <line num="207" type="stmt" count="9"/>
+        <line num="208" type="stmt" count="9"/>
+        <line num="210" type="stmt" count="9"/>
+        <line num="211" type="stmt" count="1"/>
+        <line num="212" type="stmt" count="1"/>
+        <line num="213" type="stmt" count="1"/>
+        <line num="214" type="stmt" count="1"/>
+        <line num="215" type="stmt" count="1"/>
+        <line num="218" type="stmt" count="8"/>
+        <line num="228" type="method" name="createPlayerRequest" crap="2" count="8"/>
+        <line num="230" type="stmt" count="8"/>
+        <line num="232" type="stmt" count="8"/>
+        <line num="233" type="stmt" count="8"/>
+        <line num="234" type="stmt" count="8"/>
+        <line num="236" type="stmt" count="8"/>
         <line num="237" type="stmt" count="1"/>
         <line num="238" type="stmt" count="1"/>
         <line num="239" type="stmt" count="1"/>
         <line num="240" type="stmt" count="1"/>
-        <line num="243" type="stmt" count="5"/>
-        <line num="253" type="method" name="createImageRequest" crap="2" count="5"/>
-        <line num="255" type="stmt" count="5"/>
-        <line num="257" type="stmt" count="5"/>
-        <line num="258" type="stmt" count="5"/>
-        <line num="259" type="stmt" count="5"/>
-        <line num="261" type="stmt" count="5"/>
-        <line num="262" type="stmt" count="1"/>
+        <line num="241" type="stmt" count="1"/>
+        <line num="244" type="stmt" count="7"/>
+        <line num="254" type="method" name="createPlayerStatisticsRequest" crap="3" count="7"/>
+        <line num="256" type="stmt" count="7"/>
+        <line num="258" type="stmt" count="7"/>
+        <line num="259" type="stmt" count="7"/>
+        <line num="260" type="stmt" count="7"/>
+        <line num="262" type="stmt" count="7"/>
         <line num="263" type="stmt" count="1"/>
         <line num="264" type="stmt" count="1"/>
         <line num="265" type="stmt" count="1"/>
         <line num="266" type="stmt" count="1"/>
-        <line num="269" type="stmt" count="4"/>
-        <line num="279" type="method" name="createInjuryRequest" crap="2" count="4"/>
-        <line num="281" type="stmt" count="4"/>
-        <line num="283" type="stmt" count="4"/>
-        <line num="284" type="stmt" count="4"/>
-        <line num="285" type="stmt" count="4"/>
-        <line num="287" type="stmt" count="4"/>
-        <line num="288" type="stmt" count="1"/>
-        <line num="289" type="stmt" count="1"/>
-        <line num="290" type="stmt" count="1"/>
-        <line num="293" type="stmt" count="3"/>
-        <line num="303" type="method" name="createLiveScoreRequest" crap="2" count="3"/>
-        <line num="305" type="stmt" count="3"/>
-        <line num="307" type="stmt" count="3"/>
-        <line num="308" type="stmt" count="3"/>
-        <line num="309" type="stmt" count="3"/>
-        <line num="311" type="stmt" count="3"/>
-        <line num="312" type="stmt" count="1"/>
-        <line num="313" type="stmt" count="1"/>
-        <line num="314" type="stmt" count="1"/>
-        <line num="315" type="stmt" count="1"/>
-        <line num="318" type="stmt" count="2"/>
-        <line num="328" type="method" name="createBoxScoreRequest" crap="2" count="2"/>
-        <line num="330" type="stmt" count="2"/>
-        <line num="332" type="stmt" count="2"/>
-        <line num="333" type="stmt" count="2"/>
-        <line num="334" type="stmt" count="2"/>
-        <line num="336" type="stmt" count="2"/>
-        <line num="337" type="stmt" count="1"/>
-        <line num="338" type="stmt" count="1"/>
-        <line num="339" type="stmt" count="1"/>
-        <line num="340" type="stmt" count="1"/>
-        <line num="341" type="stmt" count="1"/>
-        <line num="344" type="stmt" count="1"/>
-        <metrics loc="346" ncloc="266" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="151" coveredstatements="151" elements="161" coveredelements="161"/>
+        <line num="267" type="stmt" count="1"/>
+        <line num="268" type="stmt" count="1"/>
+        <line num="269" type="stmt" count="6"/>
+        <line num="270" type="stmt" count="6"/>
+        <line num="271" type="stmt" count="6"/>
+        <line num="273" type="stmt" count="6"/>
+        <line num="274" type="stmt" count="1"/>
+        <line num="275" type="stmt" count="1"/>
+        <line num="276" type="stmt" count="1"/>
+        <line num="277" type="stmt" count="1"/>
+        <line num="278" type="stmt" count="1"/>
+        <line num="279" type="stmt" count="1"/>
+        <line num="282" type="stmt" count="5"/>
+        <line num="292" type="method" name="createImageRequest" crap="2" count="5"/>
+        <line num="294" type="stmt" count="5"/>
+        <line num="296" type="stmt" count="5"/>
+        <line num="297" type="stmt" count="5"/>
+        <line num="298" type="stmt" count="5"/>
+        <line num="300" type="stmt" count="5"/>
+        <line num="301" type="stmt" count="1"/>
+        <line num="302" type="stmt" count="1"/>
+        <line num="303" type="stmt" count="1"/>
+        <line num="304" type="stmt" count="1"/>
+        <line num="305" type="stmt" count="1"/>
+        <line num="308" type="stmt" count="4"/>
+        <line num="318" type="method" name="createInjuryRequest" crap="2" count="4"/>
+        <line num="320" type="stmt" count="4"/>
+        <line num="322" type="stmt" count="4"/>
+        <line num="323" type="stmt" count="4"/>
+        <line num="324" type="stmt" count="4"/>
+        <line num="326" type="stmt" count="4"/>
+        <line num="327" type="stmt" count="1"/>
+        <line num="328" type="stmt" count="1"/>
+        <line num="329" type="stmt" count="1"/>
+        <line num="332" type="stmt" count="3"/>
+        <line num="342" type="method" name="createLiveScoreRequest" crap="2" count="3"/>
+        <line num="344" type="stmt" count="3"/>
+        <line num="346" type="stmt" count="3"/>
+        <line num="347" type="stmt" count="3"/>
+        <line num="348" type="stmt" count="3"/>
+        <line num="350" type="stmt" count="3"/>
+        <line num="351" type="stmt" count="1"/>
+        <line num="352" type="stmt" count="1"/>
+        <line num="353" type="stmt" count="1"/>
+        <line num="354" type="stmt" count="1"/>
+        <line num="357" type="stmt" count="2"/>
+        <line num="367" type="method" name="createBoxScoreRequest" crap="2" count="2"/>
+        <line num="369" type="stmt" count="2"/>
+        <line num="371" type="stmt" count="2"/>
+        <line num="372" type="stmt" count="2"/>
+        <line num="373" type="stmt" count="2"/>
+        <line num="375" type="stmt" count="2"/>
+        <line num="376" type="stmt" count="1"/>
+        <line num="377" type="stmt" count="1"/>
+        <line num="378" type="stmt" count="1"/>
+        <line num="379" type="stmt" count="1"/>
+        <line num="380" type="stmt" count="1"/>
+        <line num="383" type="stmt" count="1"/>
+        <metrics loc="385" ncloc="298" classes="1" methods="11" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="173" coveredstatements="173" elements="184" coveredelements="184"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Reader/UrlBuilder.php">
         <class name="UrlBuilder" namespace="Icecave\Siphon\Reader">
@@ -1318,13 +1345,13 @@
         <class name="Season" namespace="Icecave\Siphon\Schedule">
           <metrics methods="11" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="33" coveredelements="33"/>
         </class>
-        <line num="21" type="method" name="__construct" crap="1" count="37"/>
-        <line num="27" type="stmt" count="37"/>
-        <line num="28" type="stmt" count="37"/>
-        <line num="29" type="stmt" count="37"/>
-        <line num="30" type="stmt" count="37"/>
-        <line num="31" type="stmt" count="37"/>
-        <line num="32" type="stmt" count="37"/>
+        <line num="21" type="method" name="__construct" crap="1" count="42"/>
+        <line num="27" type="stmt" count="42"/>
+        <line num="28" type="stmt" count="42"/>
+        <line num="29" type="stmt" count="42"/>
+        <line num="30" type="stmt" count="42"/>
+        <line num="31" type="stmt" count="42"/>
+        <line num="32" type="stmt" count="42"/>
         <line num="39" type="method" name="id" crap="1" count="7"/>
         <line num="41" type="stmt" count="7"/>
         <line num="49" type="method" name="name" crap="1" count="1"/>
@@ -1357,17 +1384,17 @@
         <class name="SeasonFactoryTrait" namespace="Icecave\Siphon\Schedule">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="11" coveredelements="11"/>
         </class>
-        <line num="12" type="method" name="createSeason" crap="1" count="12"/>
-        <line num="14" type="stmt" count="12"/>
-        <line num="15" type="stmt" count="12"/>
-        <line num="16" type="stmt" count="12"/>
-        <line num="17" type="stmt" count="12"/>
-        <line num="18" type="stmt" count="12"/>
-        <line num="19" type="stmt" count="12"/>
-        <line num="20" type="stmt" count="12"/>
-        <line num="21" type="stmt" count="12"/>
-        <line num="22" type="stmt" count="12"/>
-        <line num="23" type="stmt" count="12"/>
+        <line num="12" type="method" name="createSeason" crap="1" count="14"/>
+        <line num="14" type="stmt" count="14"/>
+        <line num="15" type="stmt" count="14"/>
+        <line num="16" type="stmt" count="14"/>
+        <line num="17" type="stmt" count="14"/>
+        <line num="18" type="stmt" count="14"/>
+        <line num="19" type="stmt" count="14"/>
+        <line num="20" type="stmt" count="14"/>
+        <line num="21" type="stmt" count="14"/>
+        <line num="22" type="stmt" count="14"/>
+        <line num="23" type="stmt" count="14"/>
         <metrics loc="25" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="11" coveredelements="11"/>
       </file>
     </package>
@@ -1948,15 +1975,15 @@
         <class name="StatisticsCollection" namespace="Icecave\Siphon\Statistics">
           <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
         </class>
-        <line num="15" type="method" name="__construct" crap="3" count="26"/>
-        <line num="17" type="stmt" count="26"/>
-        <line num="19" type="stmt" count="26"/>
-        <line num="20" type="stmt" count="13"/>
+        <line num="15" type="method" name="__construct" crap="3" count="28"/>
+        <line num="17" type="stmt" count="28"/>
+        <line num="19" type="stmt" count="28"/>
+        <line num="20" type="stmt" count="15"/>
         <line num="21" type="stmt" count="1"/>
         <line num="23" type="stmt" count="1"/>
-        <line num="26" type="stmt" count="13"/>
-        <line num="27" type="stmt" count="26"/>
-        <line num="28" type="stmt" count="26"/>
+        <line num="26" type="stmt" count="15"/>
+        <line num="27" type="stmt" count="28"/>
+        <line num="28" type="stmt" count="28"/>
         <line num="35" type="method" name="isEmpty" crap="1" count="1"/>
         <line num="37" type="stmt" count="1"/>
         <line num="45" type="method" name="count" crap="1" count="1"/>
@@ -1972,62 +1999,62 @@
         <class name="StatisticsFactoryTrait" namespace="Icecave\Siphon\Statistics">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="24" coveredelements="24"/>
         </class>
-        <line num="11" type="method" name="createStatisticsCollection" crap="5" count="4"/>
-        <line num="13" type="stmt" count="4"/>
-        <line num="15" type="stmt" count="4"/>
-        <line num="16" type="stmt" count="4"/>
-        <line num="17" type="stmt" count="4"/>
-        <line num="19" type="stmt" count="4"/>
-        <line num="20" type="stmt" count="2"/>
-        <line num="21" type="stmt" count="2"/>
-        <line num="23" type="stmt" count="2"/>
-        <line num="24" type="stmt" count="4"/>
-        <line num="26" type="stmt" count="4"/>
-        <line num="27" type="stmt" count="4"/>
-        <line num="28" type="stmt" count="4"/>
-        <line num="30" type="stmt" count="4"/>
-        <line num="31" type="stmt" count="4"/>
-        <line num="32" type="stmt" count="4"/>
+        <line num="11" type="method" name="createStatisticsCollection" crap="5" count="6"/>
+        <line num="13" type="stmt" count="6"/>
+        <line num="15" type="stmt" count="6"/>
+        <line num="16" type="stmt" count="6"/>
+        <line num="17" type="stmt" count="6"/>
+        <line num="19" type="stmt" count="6"/>
+        <line num="20" type="stmt" count="4"/>
+        <line num="21" type="stmt" count="4"/>
+        <line num="23" type="stmt" count="4"/>
+        <line num="24" type="stmt" count="6"/>
+        <line num="26" type="stmt" count="6"/>
+        <line num="27" type="stmt" count="6"/>
+        <line num="28" type="stmt" count="6"/>
+        <line num="30" type="stmt" count="6"/>
+        <line num="31" type="stmt" count="6"/>
+        <line num="32" type="stmt" count="6"/>
         <line num="33" type="stmt" count="3"/>
-        <line num="35" type="stmt" count="4"/>
-        <line num="37" type="stmt" count="4"/>
-        <line num="38" type="stmt" count="4"/>
-        <line num="39" type="stmt" count="4"/>
-        <line num="41" type="stmt" count="4"/>
-        <line num="42" type="stmt" count="4"/>
-        <line num="44" type="stmt" count="4"/>
+        <line num="35" type="stmt" count="6"/>
+        <line num="37" type="stmt" count="6"/>
+        <line num="38" type="stmt" count="6"/>
+        <line num="39" type="stmt" count="6"/>
+        <line num="41" type="stmt" count="6"/>
+        <line num="42" type="stmt" count="6"/>
+        <line num="44" type="stmt" count="6"/>
         <metrics loc="46" ncloc="43" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="24" coveredelements="24"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Statistics/StatisticsGroup.php">
         <class name="StatisticsGroup" namespace="Icecave\Siphon\Statistics">
           <metrics methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="44" elements="53" coveredelements="53"/>
         </class>
-        <line num="15" type="method" name="__construct" crap="9" count="28"/>
-        <line num="17" type="stmt" count="28"/>
+        <line num="15" type="method" name="__construct" crap="9" count="30"/>
+        <line num="17" type="stmt" count="30"/>
         <line num="18" type="stmt" count="1"/>
         <line num="20" type="stmt" count="1"/>
-        <line num="23" type="stmt" count="28"/>
-        <line num="24" type="stmt" count="21"/>
+        <line num="23" type="stmt" count="30"/>
+        <line num="24" type="stmt" count="23"/>
         <line num="25" type="stmt" count="1"/>
         <line num="27" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="21"/>
+        <line num="28" type="stmt" count="23"/>
         <line num="29" type="stmt" count="1"/>
         <line num="31" type="stmt" count="1"/>
-        <line num="33" type="stmt" count="28"/>
-        <line num="35" type="stmt" count="28"/>
-        <line num="36" type="stmt" count="21"/>
+        <line num="33" type="stmt" count="30"/>
+        <line num="35" type="stmt" count="30"/>
+        <line num="36" type="stmt" count="23"/>
         <line num="37" type="stmt" count="1"/>
         <line num="39" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="21"/>
+        <line num="40" type="stmt" count="23"/>
         <line num="41" type="stmt" count="1"/>
         <line num="43" type="stmt" count="1"/>
-        <line num="45" type="stmt" count="28"/>
-        <line num="47" type="stmt" count="28"/>
-        <line num="48" type="stmt" count="28"/>
-        <line num="49" type="stmt" count="28"/>
-        <line num="50" type="stmt" count="28"/>
-        <line num="57" type="method" name="key" crap="1" count="14"/>
-        <line num="59" type="stmt" count="14"/>
+        <line num="45" type="stmt" count="30"/>
+        <line num="47" type="stmt" count="30"/>
+        <line num="48" type="stmt" count="30"/>
+        <line num="49" type="stmt" count="30"/>
+        <line num="50" type="stmt" count="30"/>
+        <line num="57" type="method" name="key" crap="1" count="16"/>
+        <line num="59" type="stmt" count="16"/>
         <line num="67" type="method" name="scopes" crap="1" count="6"/>
         <line num="69" type="stmt" count="6"/>
         <line num="79" type="method" name="scopeByType" crap="2" count="1"/>
@@ -2064,6 +2091,118 @@
         <metrics loc="10" ncloc="10" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
+    <package name="Icecave\Siphon\Team\Statistics">
+      <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/Statistics/TeamStatisticsReader.php">
+        <class name="TeamStatisticsReader" namespace="Icecave\Siphon\Team\Statistics">
+          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="41" coveredelements="41"/>
+        </class>
+        <line num="25" type="method" name="__construct" crap="1" count="6"/>
+        <line num="27" type="stmt" count="6"/>
+        <line num="28" type="stmt" count="6"/>
+        <line num="38" type="method" name="read" crap="5" count="4"/>
+        <line num="40" type="stmt" count="4"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="43" type="stmt" count="2"/>
+        <line num="44" type="stmt" count="2"/>
+        <line num="45" type="stmt" count="2"/>
+        <line num="46" type="stmt" count="2"/>
+        <line num="47" type="stmt" count="2"/>
+        <line num="48" type="stmt" count="2"/>
+        <line num="49" type="stmt" count="2"/>
+        <line num="50" type="stmt" count="2"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="54" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="57" type="stmt" count="1"/>
+        <line num="60" type="stmt" count="3"/>
+        <line num="62" type="stmt" count="3"/>
+        <line num="63" type="stmt" count="3"/>
+        <line num="68" type="stmt" count="3"/>
+        <line num="69" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="2"/>
+        <line num="73" type="stmt" count="2"/>
+        <line num="74" type="stmt" count="2"/>
+        <line num="75" type="stmt" count="2"/>
+        <line num="76" type="stmt" count="2"/>
+        <line num="78" type="stmt" count="2"/>
+        <line num="79" type="stmt" count="2"/>
+        <line num="80" type="stmt" count="2"/>
+        <line num="81" type="stmt" count="2"/>
+        <line num="82" type="stmt" count="2"/>
+        <line num="83" type="stmt" count="2"/>
+        <line num="85" type="stmt" count="2"/>
+        <line num="93" type="method" name="isSupported" crap="1" count="5"/>
+        <line num="95" type="stmt" count="5"/>
+        <metrics loc="99" ncloc="75" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="41" coveredelements="41"/>
+      </file>
+      <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/Statistics/TeamStatisticsRequest.php">
+        <class name="TeamStatisticsRequest" namespace="Icecave\Siphon\Team\Statistics">
+          <metrics methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="27" elements="35" coveredelements="35"/>
+        </class>
+        <line num="25" type="method" name="__construct" crap="2" count="13"/>
+        <line num="30" type="stmt" count="13"/>
+        <line num="31" type="stmt" count="11"/>
+        <line num="34" type="stmt" count="13"/>
+        <line num="35" type="stmt" count="13"/>
+        <line num="36" type="stmt" count="13"/>
+        <line num="43" type="method" name="type" crap="1" count="4"/>
+        <line num="45" type="stmt" count="4"/>
+        <line num="53" type="method" name="setType" crap="1" count="13"/>
+        <line num="55" type="stmt" count="13"/>
+        <line num="56" type="stmt" count="13"/>
+        <line num="65" type="method" name="accept" crap="1" count="2"/>
+        <line num="67" type="stmt" count="2"/>
+        <line num="75" type="method" name="serialize" crap="1" count="1"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="78" type="stmt" count="1"/>
+        <line num="79" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="90" type="method" name="unserialize" crap="1" count="1"/>
+        <line num="92" type="stmt" count="1"/>
+        <line num="93" type="stmt" count="1"/>
+        <line num="94" type="method" name="anonymous function" crap="1" count="1"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="99" type="stmt" count="1"/>
+        <line num="100" type="stmt" count="1"/>
+        <line num="105" type="method" name="__toString" crap="1" count="1"/>
+        <line num="107" type="stmt" count="1"/>
+        <line num="108" type="stmt" count="1"/>
+        <line num="109" type="stmt" count="1"/>
+        <line num="110" type="stmt" count="1"/>
+        <line num="111" type="stmt" count="1"/>
+        <line num="112" type="stmt" count="1"/>
+        <metrics loc="116" ncloc="76" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="37" coveredelements="37"/>
+      </file>
+      <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/Statistics/TeamStatisticsResponse.php">
+        <class name="TeamStatisticsResponse" namespace="Icecave\Siphon\Team\Statistics">
+          <metrics methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+        </class>
+        <line num="33" type="method" name="__construct" crap="1" count="17"/>
+        <line num="38" type="stmt" count="17"/>
+        <line num="39" type="stmt" count="17"/>
+        <line num="40" type="stmt" count="17"/>
+        <line num="47" type="method" name="type" crap="1" count="1"/>
+        <line num="49" type="stmt" count="1"/>
+        <line num="57" type="method" name="setType" crap="1" count="17"/>
+        <line num="59" type="stmt" count="17"/>
+        <line num="60" type="stmt" count="17"/>
+        <line num="68" type="method" name="add" crap="1" count="10"/>
+        <line num="70" type="stmt" count="10"/>
+        <line num="71" type="stmt" count="10"/>
+        <line num="80" type="method" name="accept" crap="1" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <metrics loc="86" ncloc="55" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="14" coveredelements="14"/>
+      </file>
+    </package>
     <package name="Icecave\Siphon\Team">
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/Team.php">
         <class name="Team" namespace="Icecave\Siphon\Team">
@@ -2093,15 +2232,15 @@
         <class name="TeamFactoryTrait" namespace="Icecave\Siphon\Team">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="14" coveredelements="14"/>
         </class>
-        <line num="12" type="method" name="createTeam" crap="3" count="17"/>
-        <line num="14" type="stmt" count="17"/>
-        <line num="15" type="stmt" count="17"/>
-        <line num="16" type="stmt" count="17"/>
-        <line num="18" type="stmt" count="17"/>
-        <line num="19" type="stmt" count="14"/>
-        <line num="20" type="stmt" count="14"/>
-        <line num="21" type="stmt" count="14"/>
-        <line num="22" type="stmt" count="14"/>
+        <line num="12" type="method" name="createTeam" crap="3" count="19"/>
+        <line num="14" type="stmt" count="19"/>
+        <line num="15" type="stmt" count="19"/>
+        <line num="16" type="stmt" count="19"/>
+        <line num="18" type="stmt" count="19"/>
+        <line num="19" type="stmt" count="16"/>
+        <line num="20" type="stmt" count="16"/>
+        <line num="21" type="stmt" count="16"/>
+        <line num="22" type="stmt" count="16"/>
         <line num="25" type="stmt" count="3"/>
         <line num="26" type="stmt" count="3"/>
         <line num="27" type="stmt" count="3"/>
@@ -2148,99 +2287,111 @@
         <class name="TeamRef" namespace="Icecave\Siphon\Team">
           <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
         </class>
-        <line num="15" type="method" name="__construct" crap="1" count="28"/>
-        <line num="17" type="stmt" count="28"/>
-        <line num="18" type="stmt" count="28"/>
-        <line num="19" type="stmt" count="28"/>
-        <line num="26" type="method" name="id" crap="1" count="1"/>
-        <line num="28" type="stmt" count="1"/>
+        <line num="15" type="method" name="__construct" crap="1" count="30"/>
+        <line num="17" type="stmt" count="30"/>
+        <line num="18" type="stmt" count="30"/>
+        <line num="19" type="stmt" count="30"/>
+        <line num="26" type="method" name="id" crap="1" count="3"/>
+        <line num="28" type="stmt" count="3"/>
         <line num="36" type="method" name="name" crap="1" count="1"/>
         <line num="38" type="stmt" count="1"/>
         <metrics loc="43" ncloc="24" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/TeamRequest.php">
         <class name="TeamRequest" namespace="Icecave\Siphon\Team">
-          <metrics methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="25" elements="35" coveredelements="35"/>
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
         </class>
-        <line num="18" type="method" name="__construct" crap="1" count="11"/>
-        <line num="20" type="stmt" count="11"/>
-        <line num="21" type="stmt" count="11"/>
-        <line num="22" type="stmt" count="11"/>
-        <line num="29" type="method" name="sport" crap="1" count="5"/>
-        <line num="31" type="stmt" count="5"/>
-        <line num="39" type="method" name="setSport" crap="1" count="11"/>
-        <line num="41" type="stmt" count="11"/>
-        <line num="42" type="stmt" count="11"/>
-        <line num="49" type="method" name="seasonName" crap="1" count="4"/>
-        <line num="51" type="stmt" count="4"/>
-        <line num="59" type="method" name="setSeasonName" crap="1" count="11"/>
-        <line num="61" type="stmt" count="11"/>
-        <line num="62" type="stmt" count="11"/>
-        <line num="71" type="method" name="accept" crap="1" count="2"/>
-        <line num="73" type="stmt" count="2"/>
-        <line num="81" type="method" name="serialize" crap="1" count="1"/>
-        <line num="83" type="stmt" count="1"/>
-        <line num="84" type="stmt" count="1"/>
-        <line num="85" type="stmt" count="1"/>
+        <line num="23" type="method" name="accept" crap="1" count="2"/>
+        <line num="25" type="stmt" count="2"/>
+        <line num="31" type="method" name="__toString" crap="1" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <metrics loc="39" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+      </file>
+      <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/TeamRequestTrait.php">
+        <class name="TeamRequestTrait" namespace="Icecave\Siphon\Team">
+          <metrics methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="27" coveredelements="27"/>
+        </class>
+        <line num="17" type="method" name="__construct" crap="1" count="24"/>
+        <line num="21" type="stmt" count="24"/>
+        <line num="22" type="stmt" count="24"/>
+        <line num="23" type="stmt" count="24"/>
+        <line num="30" type="method" name="sport" crap="1" count="10"/>
+        <line num="32" type="stmt" count="10"/>
+        <line num="40" type="method" name="setSport" crap="1" count="24"/>
+        <line num="42" type="stmt" count="24"/>
+        <line num="43" type="stmt" count="24"/>
+        <line num="50" type="method" name="seasonName" crap="1" count="8"/>
+        <line num="52" type="stmt" count="8"/>
+        <line num="60" type="method" name="setSeasonName" crap="1" count="24"/>
+        <line num="62" type="stmt" count="24"/>
+        <line num="63" type="stmt" count="24"/>
+        <line num="70" type="method" name="serialize" crap="1" count="1"/>
+        <line num="72" type="stmt" count="1"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="84" type="method" name="unserialize" crap="1" count="1"/>
         <line num="86" type="stmt" count="1"/>
         <line num="87" type="stmt" count="1"/>
-        <line num="95" type="method" name="unserialize" crap="1" count="1"/>
-        <line num="97" type="stmt" count="1"/>
-        <line num="98" type="stmt" count="1"/>
-        <line num="99" type="method" name="anonymous function" crap="1" count="1"/>
-        <line num="100" type="stmt" count="1"/>
-        <line num="101" type="stmt" count="1"/>
-        <line num="102" type="stmt" count="1"/>
-        <line num="103" type="stmt" count="1"/>
-        <line num="104" type="stmt" count="1"/>
-        <line num="109" type="method" name="__toString" crap="1" count="1"/>
-        <line num="111" type="stmt" count="1"/>
-        <line num="112" type="stmt" count="1"/>
-        <line num="113" type="stmt" count="1"/>
-        <line num="114" type="stmt" count="1"/>
-        <line num="115" type="stmt" count="1"/>
-        <metrics loc="120" ncloc="71" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="27" elements="37" coveredelements="37"/>
+        <line num="88" type="method" name="anonymous function" crap="1" count="1"/>
+        <line num="89" type="stmt" count="1"/>
+        <line num="90" type="stmt" count="1"/>
+        <line num="91" type="stmt" count="1"/>
+        <line num="92" type="stmt" count="1"/>
+        <line num="93" type="stmt" count="1"/>
+        <metrics loc="97" ncloc="58" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="29" coveredelements="29"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/TeamResponse.php">
         <class name="TeamResponse" namespace="Icecave\Siphon\Team">
-          <metrics methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="35" coveredelements="35"/>
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
         </class>
-        <line num="19" type="method" name="__construct" crap="1" count="16"/>
-        <line num="21" type="stmt" count="16"/>
-        <line num="22" type="stmt" count="16"/>
-        <line num="23" type="stmt" count="16"/>
-        <line num="24" type="stmt" count="16"/>
-        <line num="31" type="method" name="sport" crap="1" count="1"/>
-        <line num="33" type="stmt" count="1"/>
-        <line num="41" type="method" name="setSport" crap="1" count="16"/>
-        <line num="43" type="stmt" count="16"/>
-        <line num="44" type="stmt" count="16"/>
-        <line num="51" type="method" name="season" crap="1" count="1"/>
-        <line num="53" type="stmt" count="1"/>
-        <line num="61" type="method" name="setSeason" crap="1" count="16"/>
-        <line num="63" type="stmt" count="16"/>
-        <line num="64" type="stmt" count="16"/>
-        <line num="71" type="method" name="isEmpty" crap="1" count="2"/>
-        <line num="73" type="stmt" count="2"/>
-        <line num="81" type="method" name="count" crap="1" count="1"/>
-        <line num="83" type="stmt" count="1"/>
-        <line num="91" type="method" name="getIterator" crap="2" count="5"/>
-        <line num="93" type="stmt" count="5"/>
-        <line num="94" type="stmt" count="3"/>
-        <line num="95" type="stmt" count="5"/>
-        <line num="96" type="stmt" count="5"/>
-        <line num="103" type="method" name="add" crap="1" count="13"/>
-        <line num="105" type="stmt" count="13"/>
-        <line num="106" type="stmt" count="13"/>
-        <line num="113" type="method" name="remove" crap="1" count="2"/>
-        <line num="115" type="stmt" count="2"/>
-        <line num="116" type="stmt" count="2"/>
-        <line num="121" type="method" name="clear" crap="1" count="3"/>
-        <line num="123" type="stmt" count="3"/>
-        <line num="124" type="stmt" count="3"/>
-        <line num="133" type="method" name="accept" crap="1" count="1"/>
-        <line num="135" type="stmt" count="1"/>
-        <metrics loc="141" ncloc="83" classes="1" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="23" elements="35" coveredelements="35"/>
+        <line num="26" type="method" name="add" crap="1" count="13"/>
+        <line num="28" type="stmt" count="13"/>
+        <line num="29" type="stmt" count="13"/>
+        <line num="38" type="method" name="accept" crap="1" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <metrics loc="42" ncloc="27" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+      </file>
+      <file name="/home/travis/build/IcecaveStudios/siphon/src/Team/TeamResponseTrait.php">
+        <class name="TeamResponseTrait" namespace="Icecave\Siphon\Team">
+          <metrics methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="30" coveredelements="30"/>
+        </class>
+        <line num="16" type="method" name="__construct" crap="1" count="33"/>
+        <line num="20" type="stmt" count="33"/>
+        <line num="21" type="stmt" count="33"/>
+        <line num="23" type="stmt" count="33"/>
+        <line num="24" type="stmt" count="33"/>
+        <line num="31" type="method" name="sport" crap="1" count="2"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="41" type="method" name="setSport" crap="1" count="33"/>
+        <line num="43" type="stmt" count="33"/>
+        <line num="44" type="stmt" count="33"/>
+        <line num="51" type="method" name="season" crap="1" count="2"/>
+        <line num="53" type="stmt" count="2"/>
+        <line num="61" type="method" name="setSeason" crap="1" count="33"/>
+        <line num="63" type="stmt" count="33"/>
+        <line num="64" type="stmt" count="33"/>
+        <line num="71" type="method" name="isEmpty" crap="1" count="4"/>
+        <line num="73" type="stmt" count="4"/>
+        <line num="81" type="method" name="count" crap="1" count="2"/>
+        <line num="83" type="stmt" count="2"/>
+        <line num="91" type="method" name="getIterator" crap="2" count="10"/>
+        <line num="93" type="stmt" count="10"/>
+        <line num="94" type="stmt" count="7"/>
+        <line num="95" type="stmt" count="10"/>
+        <line num="96" type="stmt" count="10"/>
+        <line num="103" type="method" name="remove" crap="1" count="4"/>
+        <line num="105" type="stmt" count="4"/>
+        <line num="106" type="stmt" count="4"/>
+        <line num="111" type="method" name="clear" crap="1" count="4"/>
+        <line num="113" type="stmt" count="4"/>
+        <line num="114" type="stmt" count="4"/>
+        <metrics loc="118" ncloc="72" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="30" coveredelements="30"/>
       </file>
     </package>
     <package name="Icecave\Siphon\Util">
@@ -2269,27 +2420,27 @@
         <class name="Serialization" namespace="Icecave\Siphon\Util">
           <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="21" coveredelements="21"/>
         </class>
-        <line num="15" type="method" name="serialize" crap="3" count="21"/>
-        <line num="17" type="stmt" count="21"/>
+        <line num="15" type="method" name="serialize" crap="3" count="22"/>
+        <line num="17" type="stmt" count="22"/>
         <line num="18" type="stmt" count="2"/>
-        <line num="21" type="stmt" count="19"/>
-        <line num="28" type="method" name="unserialize" crap="4" count="27"/>
-        <line num="30" type="stmt" count="27"/>
-        <line num="32" type="stmt" count="27"/>
+        <line num="21" type="stmt" count="20"/>
+        <line num="28" type="method" name="unserialize" crap="4" count="28"/>
+        <line num="30" type="stmt" count="28"/>
+        <line num="32" type="stmt" count="28"/>
         <line num="33" type="stmt" count="2"/>
         <line num="35" type="stmt" count="2"/>
-        <line num="38" type="stmt" count="25"/>
-        <line num="39" type="stmt" count="25"/>
-        <line num="41" type="stmt" count="25"/>
+        <line num="38" type="stmt" count="26"/>
+        <line num="39" type="stmt" count="26"/>
+        <line num="41" type="stmt" count="26"/>
         <line num="42" type="stmt" count="1"/>
         <line num="43" type="stmt" count="1"/>
         <line num="44" type="stmt" count="1"/>
         <line num="45" type="stmt" count="1"/>
         <line num="47" type="stmt" count="1"/>
         <line num="48" type="stmt" count="1"/>
-        <line num="51" type="stmt" count="24"/>
-        <line num="52" type="stmt" count="24"/>
-        <line num="54" type="stmt" count="24"/>
+        <line num="51" type="stmt" count="25"/>
+        <line num="52" type="stmt" count="25"/>
+        <line num="54" type="stmt" count="25"/>
         <metrics loc="56" ncloc="43" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="21" coveredelements="21"/>
       </file>
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Util/URL.php">
@@ -2316,21 +2467,21 @@
         <line num="16" type="stmt" count="2"/>
         <line num="17" type="stmt" count="1"/>
         <line num="20" type="stmt" count="1"/>
-        <line num="23" type="method" name="elementOrNull" crap="2" count="31"/>
-        <line num="25" type="stmt" count="31"/>
-        <line num="27" type="stmt" count="31"/>
-        <line num="28" type="stmt" count="25"/>
-        <line num="31" type="stmt" count="21"/>
-        <line num="34" type="method" name="string" crap="2" count="17"/>
-        <line num="36" type="stmt" count="17"/>
-        <line num="38" type="stmt" count="17"/>
+        <line num="23" type="method" name="elementOrNull" crap="2" count="33"/>
+        <line num="25" type="stmt" count="33"/>
+        <line num="27" type="stmt" count="33"/>
+        <line num="28" type="stmt" count="27"/>
+        <line num="31" type="stmt" count="23"/>
+        <line num="34" type="method" name="string" crap="2" count="19"/>
+        <line num="36" type="stmt" count="19"/>
+        <line num="38" type="stmt" count="19"/>
         <line num="39" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="16"/>
-        <line num="45" type="method" name="stringOrNull" crap="2" count="27"/>
-        <line num="47" type="stmt" count="27"/>
-        <line num="49" type="stmt" count="27"/>
-        <line num="50" type="stmt" count="19"/>
-        <line num="53" type="stmt" count="23"/>
+        <line num="42" type="stmt" count="18"/>
+        <line num="45" type="method" name="stringOrNull" crap="2" count="29"/>
+        <line num="47" type="stmt" count="29"/>
+        <line num="49" type="stmt" count="29"/>
+        <line num="50" type="stmt" count="21"/>
+        <line num="53" type="stmt" count="25"/>
         <line num="56" type="method" name="number" crap="2" count="3"/>
         <line num="58" type="stmt" count="3"/>
         <line num="60" type="stmt" count="2"/>
@@ -2352,6 +2503,6 @@
         <metrics loc="88" ncloc="85" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="38" coveredelements="38"/>
       </file>
     </package>
-    <metrics files="65" loc="6148" ncloc="4139" classes="65" methods="351" coveredmethods="351" conditionals="0" coveredconditionals="0" statements="1580" coveredstatements="1580" elements="1931" coveredelements="1931"/>
+    <metrics files="70" loc="6543" ncloc="4417" classes="70" methods="369" coveredmethods="369" conditionals="0" coveredconditionals="0" statements="1681" coveredstatements="1681" elements="2050" coveredelements="2050"/>
   </project>
 </coverage>

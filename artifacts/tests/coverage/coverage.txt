@@ -1,15 +1,15 @@
 
 
 Code Coverage Report:         
-  2015-07-22 04:58:01         
+  2015-09-09 03:03:37         
                               
  Summary:                     
-  Classes: 100.00% (65/65)    
-  Methods: 100.00% (351/351)  
-  Lines:   100.00% (1580/1580)
+  Classes: 100.00% (70/70)    
+  Methods: 100.00% (369/369)  
+  Lines:   100.00% (1681/1681)
 
 \Icecave\Siphon::Dispatcher
-  Methods: 100.00% (15/15)   Lines: 100.00% ( 42/ 42)
+  Methods: 100.00% (16/16)   Lines: 100.00% ( 45/ 45)
 \Icecave\Siphon::Sport
   Methods: 100.00% ( 4/ 4)   Lines: 100.00% (  5/  5)
 \Icecave\Siphon\Atom::AtomReader
@@ -55,7 +55,7 @@ Code Coverage Report:
 \Icecave\Siphon\Player\Statistics::PlayerStatisticsResponse
   Methods: 100.00% ( 5/ 5)   Lines: 100.00% (  9/  9)
 \Icecave\Siphon\Reader::RequestFactory
-  Methods: 100.00% (10/10)   Lines: 100.00% (151/151)
+  Methods: 100.00% (11/11)   Lines: 100.00% (173/173)
 \Icecave\Siphon\Reader::UrlBuilder
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 29/ 29)
 \Icecave\Siphon\Reader::XmlReader
@@ -117,9 +117,19 @@ Code Coverage Report:
 \Icecave\Siphon\Team::TeamRef
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  5/  5)
 \Icecave\Siphon\Team::TeamRequest
-  Methods: 100.00% (10/10)   Lines: 100.00% ( 25/ 25)
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  6/  6)
+\Icecave\Siphon\Team::TeamRequestTrait
+  Methods: 100.00% ( 8/ 8)   Lines: 100.00% ( 19/ 19)
 \Icecave\Siphon\Team::TeamResponse
-  Methods: 100.00% (12/12)   Lines: 100.00% ( 23/ 23)
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  3/  3)
+\Icecave\Siphon\Team::TeamResponseTrait
+  Methods: 100.00% (10/10)   Lines: 100.00% ( 20/ 20)
+\Icecave\Siphon\Team\Statistics::TeamStatisticsReader
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 38/ 38)
+\Icecave\Siphon\Team\Statistics::TeamStatisticsRequest
+  Methods: 100.00% ( 8/ 8)   Lines: 100.00% ( 27/ 27)
+\Icecave\Siphon\Team\Statistics::TeamStatisticsResponse
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% (  9/  9)
 \Icecave\Siphon\Util::IdParser
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 14/ 14)
 \Icecave\Siphon\Util::Serialization
