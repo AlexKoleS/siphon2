@@ -13,6 +13,7 @@ use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
 use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsRequest;
 use Icecave\Siphon\Team\TeamRequest;
 use InvalidArgumentException;
 use stdClass;
@@ -52,6 +53,8 @@ class RequestFactory implements RequestFactoryInterface
         } elseif ($request = $this->createScheduleRequest($components)) {
             return $request;
         } elseif ($request = $this->createTeamRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createTeamStatisticsRequest($components)) {
             return $request;
         } elseif ($request = $this->createPlayerRequest($components)) {
             return $request;
@@ -173,6 +176,42 @@ class RequestFactory implements RequestFactoryInterface
             return new TeamRequest(
                 Sport::findByComponents($matches[1], $matches[2]),
                 $matches[3]
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a TeamStatisticsRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return TeamStatisticsRequest|null
+     */
+    private function createTeamStatisticsRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/team-stats/([^/]+)/team_stats_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new TeamStatisticsRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                StatisticsType::COMBINED()
+            );
+        } elseif (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/team-split-stats/([^/]+)/team_split_stats_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new TeamStatisticsRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                StatisticsType::SPLIT()
             );
         }
 
