@@ -1,11 +1,11 @@
 <?php
 namespace Icecave\Siphon\Team\Statistics;
 
-use Icecave\Siphon\Team\TeamRequestTrait;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Reader\SportRequestInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
+use Icecave\Siphon\Team\TeamRequestTrait;
 use Icecave\Siphon\Util\Serialization;
 
 /**

@@ -4,7 +4,6 @@ namespace Icecave\Siphon\Team;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Reader\SportRequestInterface;
 use Icecave\Siphon\Sport;
-use Icecave\Siphon\Util\Serialization;
 
 /**
  * A request to the team feed.

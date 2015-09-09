@@ -2,7 +2,6 @@
 namespace Icecave\Siphon\Team;
 
 use Icecave\Siphon\Sport;
-use Icecave\Siphon\Util\IdParser;
 use Icecave\Siphon\Util\Serialization;
 
 /**
@@ -11,8 +10,8 @@ use Icecave\Siphon\Util\Serialization;
 trait TeamRequestTrait
 {
     /**
-     * @param Sport          $sport      The sport to request.
-     * @param string         $seasonName The season name.
+     * @param Sport  $sport      The sport to request.
+     * @param string $seasonName The season name.
      */
     public function __construct(
         Sport $sport,

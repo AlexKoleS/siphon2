@@ -3,7 +3,6 @@ namespace Icecave\Siphon\Team\Statistics;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
-use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
@@ -57,31 +56,31 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
                         [
-                            'games_won' => 2,
+                            'games_won'  => 2,
                             'games_lost' => 2,
                         ]
                     ),
                     new StatisticsGroup(
                         'pre-season-home-stats',
                         [
-                            'home-away' => 'home',
+                            'home-away'         => 'home',
                             'season-phase-from' => 'Pre-Season Hall-of-Fame Week',
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
                         [
-                            'games_won' => 1,
+                            'games_won'  => 1,
                             'games_lost' => 1,
                         ]
                     ),
                     new StatisticsGroup(
                         'pre-season-away-stats',
                         [
-                            'home-away' => 'away',
+                            'home-away'         => 'away',
                             'season-phase-from' => 'Pre-Season Hall-of-Fame Week',
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
                         [
-                            'games_won' => 1,
+                            'games_won'  => 1,
                             'games_lost' => 1,
                         ]
                     ),
@@ -106,7 +105,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                     new StatisticsGroup(
                         'pre-season-home-stats',
                         [
-                            'home-away' => 'home',
+                            'home-away'         => 'home',
                             'season-phase-from' => 'Pre-Season Hall-of-Fame Week',
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
@@ -117,7 +116,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                     new StatisticsGroup(
                         'pre-season-away-stats',
                         [
-                            'home-away' => 'away',
+                            'home-away'         => 'away',
                             'season-phase-from' => 'Pre-Season Hall-of-Fame Week',
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
@@ -140,7 +139,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
                         [
-                            'games_won' => 1,
+                            'games_won'  => 1,
                             'games_lost' => 3,
                         ]
                     ),
@@ -159,7 +158,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                             'season-phase-to'   => 'Pre-Season Week 4',
                         ],
                         [
-                            'games_won' => 3,
+                            'games_won'  => 3,
                             'games_lost' => 1,
                         ]
                     ),
@@ -212,8 +211,8 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 8,
-                            'games_won' => 1,
-                            'games_lost' => 7,
+                            'games_won'     => 1,
+                            'games_lost'    => 7,
                         ]
                     ),
                     new StatisticsGroup(
@@ -226,7 +225,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 1,
-                            'games_lost' => 1,
+                            'games_lost'    => 1,
                         ]
                     ),
                 ]
@@ -246,8 +245,8 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 8,
-                            'games_won' => 6,
-                            'games_lost' => 2,
+                            'games_won'     => 6,
+                            'games_lost'    => 2,
                         ]
                     ),
                     new StatisticsGroup(
@@ -259,8 +258,8 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 8,
-                            'games_won' => 5,
-                            'games_lost' => 3,
+                            'games_won'     => 5,
+                            'games_lost'    => 3,
                         ]
                     ),
                     new StatisticsGroup(
@@ -272,7 +271,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 1,
-                            'games_won' => 1,
+                            'games_won'     => 1,
                         ]
                     ),
                 ]
@@ -292,8 +291,8 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 8,
-                            'games_won' => 6,
-                            'games_lost' => 2,
+                            'games_won'     => 6,
+                            'games_lost'    => 2,
                         ]
                     ),
                     new StatisticsGroup(
@@ -305,8 +304,8 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 8,
-                            'games_won' => 3,
-                            'games_lost' => 5,
+                            'games_won'     => 3,
+                            'games_lost'    => 5,
                         ]
                     ),
                 ]
@@ -326,8 +325,8 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
                         ],
                         [
                             'games_played'  => 8,
-                            'games_won' => 3,
-                            'games_lost' => 5,
+                            'games_won'     => 3,
+                            'games_lost'    => 5,
                         ]
                     ),
                 ]

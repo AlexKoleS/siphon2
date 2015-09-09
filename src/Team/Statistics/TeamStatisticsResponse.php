@@ -2,8 +2,6 @@
 namespace Icecave\Siphon\Team\Statistics;
 
 use Countable;
-use Icecave\Siphon\Player\Player;
-use Icecave\Siphon\Team\TeamResponseTrait;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
@@ -11,6 +9,7 @@ use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
 use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamInterface;
+use Icecave\Siphon\Team\TeamResponseTrait;
 use IteratorAggregate;
 
 /**

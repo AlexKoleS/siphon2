@@ -4,8 +4,6 @@ namespace Icecave\Siphon\Team;
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
-use Icecave\Siphon\Schedule\Season;
-use Icecave\Siphon\Sport;
 use IteratorAggregate;
 
 /**
