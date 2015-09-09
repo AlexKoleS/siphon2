@@ -13,6 +13,7 @@ use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
 use Icecave\Siphon\Score\LiveScore\LiveScoreRequest;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsType;
+use Icecave\Siphon\Team\Statistics\TeamStatisticsRequest;
 use Icecave\Siphon\Team\TeamRequest;
 use PHPUnit_Framework_TestCase;
 
@@ -125,6 +126,24 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                     Sport::MLB(),
                     '2015',
                     12345
+                ),
+            ],
+
+            'team statistics (combined)' => [
+                '/sport/v2/baseball/MLB/team-stats/2015/team_stats_MLB.xml',
+                new TeamStatisticsRequest(
+                    Sport::MLB(),
+                    '2015',
+                    StatisticsType::COMBINED()
+                ),
+            ],
+
+            'team statistics (split)' => [
+                '/sport/v2/baseball/MLB/team-split-stats/2015/team_split_stats_MLB.xml',
+                new TeamStatisticsRequest(
+                    Sport::MLB(),
+                    '2015',
+                    StatisticsType::SPLIT()
                 ),
             ],
 
