@@ -54,9 +54,9 @@ class RequestFactory implements RequestFactoryInterface
             return $request;
         } elseif ($request = $this->createTeamRequest($components)) {
             return $request;
-        } elseif ($request = $this->createPlayerRequest($components)) {
-            return $request;
         } elseif ($request = $this->createTeamStatisticsRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createPlayerRequest($components)) {
             return $request;
         } elseif ($request = $this->createPlayerStatisticsRequest($components)) {
             return $request;

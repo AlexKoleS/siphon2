@@ -120,15 +120,6 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                 ),
             ],
 
-            'player' => [
-                '/sport/v2/baseball/MLB/players/2015/players_12345_MLB.xml',
-                new PlayerRequest(
-                    Sport::MLB(),
-                    '2015',
-                    12345
-                ),
-            ],
-
             'team statistics (combined)' => [
                 '/sport/v2/baseball/MLB/team-stats/2015/team_stats_MLB.xml',
                 new TeamStatisticsRequest(
@@ -144,6 +135,15 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                     Sport::MLB(),
                     '2015',
                     StatisticsType::SPLIT()
+                ),
+            ],
+
+            'player' => [
+                '/sport/v2/baseball/MLB/players/2015/players_12345_MLB.xml',
+                new PlayerRequest(
+                    Sport::MLB(),
+                    '2015',
+                    12345
                 ),
             ],
 
