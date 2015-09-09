@@ -183,32 +183,6 @@ class RequestFactory implements RequestFactoryInterface
     }
 
     /**
-     * Attempt to create a PlayerRequest.
-     *
-     * @param stdClass $components The URL components.
-     *
-     * @return PlayerRequest|null
-     */
-    private function createPlayerRequest(stdClass $components)
-    {
-        $matches = [];
-
-        if (preg_match(
-            '{^/sport/v2/([a-z]+)/([A-Z]+)/players/([^/]+)/players_(\d+)_\2\.xml$}',
-            $components->path,
-            $matches
-        )) {
-            return new PlayerRequest(
-                Sport::findByComponents($matches[1], $matches[2]),
-                $matches[3],
-                $matches[4]
-            );
-        }
-
-        return null;
-    }
-
-    /**
      * Attempt to create a TeamStatisticsRequest.
      *
      * @param stdClass $components The URL components.
@@ -238,6 +212,32 @@ class RequestFactory implements RequestFactoryInterface
                 Sport::findByComponents($matches[1], $matches[2]),
                 $matches[3],
                 StatisticsType::SPLIT()
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a PlayerRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return PlayerRequest|null
+     */
+    private function createPlayerRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/players/([^/]+)/players_(\d+)_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new PlayerRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3],
+                $matches[4]
             );
         }
 
