@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file has been trimmed to reduce the size of the test suite. -->
+
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/football</id>
+            <name>football</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/football/league:1</id>
+                <name>National Football League</name>
+                <name type="nick">NFL</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/football/season:96</id>
+                    <name>2014-2015</name>
+                    <details>
+                        <start-date>2014-08-01</start-date>
+                        <end-date>2015-02-09</end-date>
+                    </details>
+                </season>
+                <conference-content>
+                    <conference>
+                        <id>/sport/football/conference:1</id>
+                        <name>American Football Conference</name>
+                        <name type="short">AFC</name>
+                    </conference>
+                    <division-content>
+                        <division>
+                            <id>/sport/football/division:11</id>
+                            <name>AFC South</name>
+                            <active>true</active>
+                        </division>
+                    </division-content>
+                </conference-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>

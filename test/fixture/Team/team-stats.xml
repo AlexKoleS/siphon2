@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file has been trimmed to reduce the size of the test suite. -->
+
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+    <team-sport-content>
+        <sport>
+            <id>/sport/football</id>
+            <name>football</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/football/league:1</id>
+                <name>National Football League</name>
+                <name type="nick">NFL</name>
+            </league>
+            <season-content>
+                <season>
+                    <id>/sport/football/season:96</id>
+                    <name>2014-2015</name>
+                    <details>
+                        <start-date>2014-08-01</start-date>
+                        <end-date>2015-02-09</end-date>
+                    </details>
+                </season>
+                <conference-content>
+                    <conference>
+                        <id>/sport/football/conference:1</id>
+                        <name>American Football Conference</name>
+                        <name type="short">AFC</name>
+                    </conference>
+                    <division-content>
+                        <division>
+                            <id>/sport/football/division:11</id>
+                            <name>AFC South</name>
+                            <active>true</active>
+                        </division>
+                        <team-content>
+                            <team>
+                                <id>/sport/football/team:10</id>
+                                <name>Tennessee</name>
+                            </team>
+                            <stat-group>
+                                <key>pre-season-stats</key>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="2" type="games_won"/>
+                                <stat num="2" type="games_lost"/>
+                            </stat-group>
+                            <stat-group>
+                                <key>pre-season-home-stats</key>
+                                <scope type="home-away" str="home"/>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="1" type="games_won"/>
+                                <stat num="1" type="games_lost"/>
+                            </stat-group>
+                            <stat-group>
+                                <key>pre-season-away-stats</key>
+                                <scope type="home-away" str="away"/>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="1" type="games_won"/>
+                                <stat num="1" type="games_lost"/>
+                            </stat-group>
+                        </team-content>
+                        <team-content>
+                            <team>
+                                <id>/sport/football/team:13</id>
+                                <name>Indianapolis</name>
+                            </team>
+                            <stat-group>
+                                <key>pre-season-stats</key>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="4" type="games_lost"/>
+                            </stat-group>
+                            <stat-group>
+                                <key>pre-season-home-stats</key>
+                                <scope type="home-away" str="home"/>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="2" type="games_lost"/>
+                            </stat-group>
+                            <stat-group>
+                                <key>pre-season-away-stats</key>
+                                <scope type="home-away" str="away"/>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="2" type="games_lost"/>
+                            </stat-group>
+                        </team-content>
+                    </division-content>
+                    <division-content>
+                        <division>
+                            <id>/sport/football/division:12</id>
+                            <name>AFC West</name>
+                            <active>true</active>
+                        </division>
+                        <team-content>
+                            <team>
+                                <id>/sport/football/team:3</id>
+                                <name>Kansas City</name>
+                            </team>
+                            <stat-group>
+                                <key>pre-season-stats</key>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="1" type="games_won"/>
+                                <stat num="3" type="games_lost"/>
+                            </stat-group>
+                        </team-content>
+                    </division-content>
+                </conference-content>
+                <conference-content>
+                    <conference>
+                        <id>/sport/football/conference:2</id>
+                        <name>National Football Conference</name>
+                        <name type="short">NFC</name>
+                    </conference>
+                    <division-content>
+                        <division>
+                            <id>/sport/football/division:6</id>
+                            <name>NFC East</name>
+                            <active>true</active>
+                        </division>
+                        <team-content>
+                            <team>
+                                <id>/sport/football/team:27</id>
+                                <name>Washington</name>
+                            </team>
+                            <stat-group>
+                                <key>pre-season-stats</key>
+                                <scope type="season-phase-from" str="Pre-Season Hall-of-Fame Week"/>
+                                <scope type="season-phase-to" str="Pre-Season Week 4"/>
+                                <stat num="3" type="games_won"/>
+                                <stat num="1" type="games_lost"/>
+                            </stat-group>
+                        </team-content>
+                    </division-content>
+                </conference-content>
+                <team-content>
+                    <meta>
+                        <property name="team-type">all-star</property>
+                    </meta>
+                    <team>
+                        <id>/sport/football/team:967</id>
+                        <name>Team Irvin</name>
+                    </team>
+                </team-content>
+                <team-content>
+                    <meta>
+                        <property name="team-type">all-star</property>
+                    </meta>
+                    <team>
+                        <id>/sport/football/team:968</id>
+                        <name>Team Carter</name>
+                    </team>
+                </team-content>
+            </season-content>
+        </league-content>
+    </team-sport-content>
+</sport:content>
