@@ -1,5 +1,9 @@
 # Siphon Changelog
 
+### 1.1.0 (2015-09-15)
+
+* **[NEW]** Added support for team statistics
+
 ### 1.0.0 (2015-07-22)
 
 * **[NEW]** Added `isFinalized` flag to `BoxScoreResponse`
