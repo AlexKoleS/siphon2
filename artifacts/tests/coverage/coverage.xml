@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1442277745">
-  <project timestamp="1442277745">
+<coverage generated="1442888278">
+  <project timestamp="1442888278">
     <package name="Icecave\Siphon\Atom">
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Atom/AtomReader.php">
         <class name="AtomReader" namespace="Icecave\Siphon\Atom">
@@ -454,7 +454,7 @@
         <class name="InjuryStatus" namespace="Icecave\Siphon\Player\Injury">
           <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
-        <metrics loc="24" ncloc="10" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        <metrics loc="25" ncloc="11" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
     </package>
     <package name="Icecave\Siphon\Player">
@@ -2503,6 +2503,6 @@
         <metrics loc="88" ncloc="85" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="38" coveredelements="38"/>
       </file>
     </package>
-    <metrics files="70" loc="6534" ncloc="4408" classes="70" methods="369" coveredmethods="369" conditionals="0" coveredconditionals="0" statements="1681" coveredstatements="1681" elements="2050" coveredelements="2050"/>
+    <metrics files="70" loc="6535" ncloc="4409" classes="70" methods="369" coveredmethods="369" conditionals="0" coveredconditionals="0" statements="1681" coveredstatements="1681" elements="2050" coveredelements="2050"/>
   </project>
 </coverage>
