@@ -21,4 +21,5 @@ class InjuryStatus extends AbstractEnumeration
 
     // Canadian Football? ...
     const INJURED_9_WEEK    = 'Nine-Week Injured List';
+    const INJURED_6_GAME    = 'Six-Game Injured List';
 }
