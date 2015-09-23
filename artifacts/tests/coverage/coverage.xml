@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1442888278">
-  <project timestamp="1442888278">
+<coverage generated="1442967060">
+  <project timestamp="1442967060">
     <package name="Icecave\Siphon\Atom">
       <file name="/home/travis/build/IcecaveStudios/siphon/src/Atom/AtomReader.php">
         <class name="AtomReader" namespace="Icecave\Siphon\Atom">
