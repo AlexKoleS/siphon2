@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc406e543272915a80628aefe0a1ae20",
+    "hash": "32ab87c59b46b86128da2dd6e83c187a",
     "packages": [
         {
             "name": "eloquent/enumeration",
@@ -219,12 +219,12 @@
             "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/IcecaveStudios/chrono.git",
+                "url": "git@github.com:IcecaveStudios/chrono.git",
                 "reference": "c276567b9c62befa551353e59b1cffa2bce365bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IcecaveStudios/chrono/zipball/c276567b9c62befa551353e59b1cffa2bce365bf",
+                "url": "https://api.github.com/repos/IcecaveStudios/chrono/zipball/a74484bc7ad632d4f154ddadf44cba7e4f4c6346",
                 "reference": "c276567b9c62befa551353e59b1cffa2bce365bf",
                 "shasum": ""
             },
