@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon;
 
 use GuzzleHttp\Client as HttpClient;
@@ -54,7 +55,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public static function create($apiKey)
     {
         $urlBuilder = new UrlBuilder($apiKey);
-        $httpClient = new HttpClient;
+        $httpClient = new HttpClient();
         $xmlReader  = new XmlReader($urlBuilder, $httpClient);
 
         return new static(

@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Score\BoxScore;
 
 use Eloquent\Phony\Phpunit\Phony;
@@ -14,8 +15,8 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->competition = Phony::mock(CompetitionInterface::class)->mock();
 
-        $this->homeTeamStatistics = new StatisticsCollection;
-        $this->awayTeamStatistics = new StatisticsCollection;
+        $this->homeTeamStatistics = new StatisticsCollection();
+        $this->awayTeamStatistics = new StatisticsCollection();
 
         $this->player1 = Phony::fullMock(Player::class);
         $this->player2 = Phony::fullMock(Player::class);
@@ -57,7 +58,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             $this->response->homeTeamStatistics()
         );
 
-        $statistics = new StatisticsCollection;
+        $statistics = new StatisticsCollection();
 
         $this->response->setHomeTeamStatistics($statistics);
 
@@ -74,7 +75,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             $this->response->awayTeamStatistics()
         );
 
-        $statistics = new StatisticsCollection;
+        $statistics = new StatisticsCollection();
 
         $this->response->setAwayTeamStatistics($statistics);
 

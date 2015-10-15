@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon;
 
 use Icecave\Siphon\Reader\ReaderInterface;

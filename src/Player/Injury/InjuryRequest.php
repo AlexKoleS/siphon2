@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Player\Injury;
 
 use Icecave\Siphon\Reader\RequestVisitorInterface;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
@@ -30,7 +31,7 @@ class UrlBuilderTest extends PHPUnit_Framework_TestCase
                 [
                     'int' => 12,
                     'str' => 'Hi!',
-                    'obj' => new DateTime(2014, 1, 2, 3, 4, 5)
+                    'obj' => new DateTime(2014, 1, 2, 3, 4, 5),
                 ]
             )
         );

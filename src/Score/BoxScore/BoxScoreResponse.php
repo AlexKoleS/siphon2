@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Score\BoxScore;
 
 use Countable;

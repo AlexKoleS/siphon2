@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Player;
 
 use PHPUnit_Framework_TestCase;

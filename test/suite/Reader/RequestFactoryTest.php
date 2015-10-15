@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
@@ -21,7 +22,7 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->factory = new RequestFactory;
+        $this->factory = new RequestFactory();
     }
 
     /**

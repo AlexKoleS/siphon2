@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Statistics;
 
 use PHPUnit_Framework_TestCase;
@@ -7,7 +8,7 @@ class SerializerTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->serializer = new Serializer;
+        $this->serializer = new Serializer();
     }
 
     /**
@@ -80,7 +81,7 @@ class SerializerTest extends PHPUnit_Framework_TestCase
     {
         return [
             'empty' => [
-                new StatisticsCollection,
+                new StatisticsCollection(),
             ],
             'empty group' => [
                 new StatisticsCollection(

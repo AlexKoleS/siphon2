@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Score;
 
 use PHPUnit_Framework_TestCase;
@@ -7,7 +8,7 @@ class SerializerTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->serializer = new Serializer;
+        $this->serializer = new Serializer();
     }
 
     /**
@@ -51,7 +52,7 @@ class SerializerTest extends PHPUnit_Framework_TestCase
     {
         return [
             'empty' => [
-                new Score,
+                new Score(),
             ],
             'single period' => [
                 new Score(

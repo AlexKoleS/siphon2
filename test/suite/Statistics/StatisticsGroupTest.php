@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Statistics;
 
 use PHPUnit_Framework_TestCase;

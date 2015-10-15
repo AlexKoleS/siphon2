@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Util;
 
 use Eloquent\Phony\Phpunit\Phony;
