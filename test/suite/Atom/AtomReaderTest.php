@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Atom;
 
 use Eloquent\Phony\Phpunit\Phony;
@@ -88,7 +89,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
                     'newerThan' => '1970-01-02T00:00:00+00:00',
                     'maxCount'  => 5000,
                     'order'     => 'asc',
-                    'feed'      => '/foo'
+                    'feed'      => '/foo',
                 ]
             );
     }

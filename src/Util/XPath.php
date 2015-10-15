@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Util;
 
 use RuntimeException;
@@ -79,7 +80,7 @@ abstract class XPath
         }
     }
 
-    private static function createException($xpath, $message = 'Path not found')
+    private static function createException($xpath, $message = 'XPath not found')
     {
         throw new RuntimeException(
             $message . ': "' . $xpath . '".'

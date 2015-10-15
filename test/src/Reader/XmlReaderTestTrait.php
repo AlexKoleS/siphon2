@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Reader;
 
 use Eloquent\Phony\Phpunit\Phony;
@@ -23,7 +24,7 @@ trait XmlReaderTestTrait
         $this
             ->xmlReader()
             ->read
-            ->throws(new NotFoundException);
+            ->throws(new NotFoundException());
     }
 
     public function xmlReader()

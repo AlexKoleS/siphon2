@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Statistics;
 
 use Icecave\Siphon\Util\Serialization;

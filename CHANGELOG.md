@@ -1,5 +1,9 @@
 # Siphon Changelog
 
+### 2.0.0 (2015-10-15)
+
+* **[BC, FIXED]** Allow for missing URLs in image feeds
+
 ### 1.1.1 (2015-09-22)
 
 * **[FIXED]** Added "Six-Game Injury List" to injury status enumeration

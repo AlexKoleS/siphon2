@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Team\Statistics;
 
 use Icecave\Siphon\Player\PlayerFactoryTrait;
@@ -66,7 +67,7 @@ class TeamStatisticsReader implements TeamStatisticsReaderInterface
         // this information is required to build a meaningful response, we treat
         // this condition equivalent to a not found error.
         if (!$teamContent = $xml->xpath('.//team-content')) {
-            throw new NotFoundException;
+            throw new NotFoundException();
         }
 
         $response = new TeamStatisticsResponse(

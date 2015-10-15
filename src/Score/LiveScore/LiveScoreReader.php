@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;

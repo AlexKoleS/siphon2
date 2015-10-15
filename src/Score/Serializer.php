@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Score;
 
 use Icecave\Siphon\Util\Serialization;

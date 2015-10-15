@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Statistics;
 
 use PHPUnit_Framework_TestCase;
@@ -34,7 +35,7 @@ class StatisticsCollectionTest extends PHPUnit_Framework_TestCase
             $this->collection->isEmpty()
         );
 
-        $collection = new StatisticsCollection;
+        $collection = new StatisticsCollection();
 
         $this->assertTrue(
             $collection->isEmpty()

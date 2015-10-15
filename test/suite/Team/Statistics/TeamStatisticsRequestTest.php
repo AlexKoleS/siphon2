@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Team\Statistics;
 
 use Eloquent\Phony\Phpunit\Phony;

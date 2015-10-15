@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Player\Image;
 
 use Icecave\Siphon\Reader\ReaderInterface;

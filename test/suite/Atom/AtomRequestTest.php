@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Atom;
 
 use Eloquent\Phony\Phpunit\Phony;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Player;
 
 use Icecave\Siphon\Reader\Exception\NotFoundException;
@@ -55,7 +56,7 @@ class PlayerReader implements PlayerReaderInterface
         // this information is required to build a meaningful response, we treat
         // this condition equivalent to a not found error.
         if (!$xml->{'team-content'}) {
-            throw new NotFoundException;
+            throw new NotFoundException();
         }
 
         $response = new PlayerResponse(
@@ -68,10 +69,10 @@ class PlayerReader implements PlayerReaderInterface
             $response->add(
                 $this->createPlayer($player),
                 new PlayerSeasonDetails(
-                    XPath::stringOrNull($player, "season-details/number"),
+                    XPath::stringOrNull($player, 'season-details/number'),
                     XPath::string($player, "season-details/position[@type='primary']/name[@type='short']"),
                     XPath::string($player, "season-details/position[@type='primary']/name[count(@type)=0]"),
-                    XPath::string($player, "season-details/active") === 'true'
+                    XPath::string($player, 'season-details/active') === 'true'
                 )
             );
         }

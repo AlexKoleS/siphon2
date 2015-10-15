@@ -1,4 +1,5 @@
 <?php
+
 namespace Icecave\Siphon\Team\Statistics;
 
 use Icecave\Siphon\Reader\RequestVisitorInterface;
