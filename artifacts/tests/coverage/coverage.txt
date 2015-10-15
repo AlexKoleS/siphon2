@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:         
-  2015-09-23 00:11:00         
+  2015-10-15 00:33:36         
                               
  Summary:                     
   Classes: 100.00% (70/70)    
   Methods: 100.00% (369/369)  
-  Lines:   100.00% (1681/1681)
+  Lines:   100.00% (1684/1684)
 
 \Icecave\Siphon::Dispatcher
   Methods: 100.00% (16/16)   Lines: 100.00% ( 45/ 45)
@@ -35,7 +35,7 @@ Code Coverage Report:
 \Icecave\Siphon\Player::PlayerSeasonDetails
   Methods: 100.00% ( 5/ 5)   Lines: 100.00% (  9/  9)
 \Icecave\Siphon\Player\Image::ImageReader
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 32/ 32)
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 35/ 35)
 \Icecave\Siphon\Player\Image::ImageRequest
   Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  7/  7)
 \Icecave\Siphon\Player\Image::ImageResponse
