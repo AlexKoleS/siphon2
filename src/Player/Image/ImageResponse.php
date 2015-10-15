@@ -22,8 +22,8 @@ class ImageResponse implements
      * Add a player to the response.
      *
      * @param Player $player     The player to add.
-     * @param string $smallImage The URL of the small (thumbnail) head-shot image.
-     * @param string $largeImage The URL of the large head-shot image.
+     * @param string $smallImage|null The URL of the small (thumbnail) head-shot image.
+     * @param string $largeImage|null The URL of the large head-shot image.
      */
     public function add(Player $player, $smallImage, $largeImage)
     {

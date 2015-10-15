@@ -66,10 +66,17 @@ class ImageReader implements ImageReaderInterface
         );
 
         foreach ($xml->xpath('.//player-content') as $element) {
+            $small = XPath::stringOrNull($element, 'image/thumbnailurl');
+            $large = XPath::stringOrNull($element, 'image/url');
+
+            if (null === $small && null === $large) {
+                continue;
+            }
+
             $response->add(
                 $this->createPlayer($element->player),
-                XPath::string($element, 'image/thumbnailurl'),
-                XPath::string($element, 'image/url')
+                $small,
+                $large
             );
         }
 

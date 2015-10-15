@@ -24,7 +24,7 @@ class XPathTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'RuntimeException',
-            'Path not found: "//not-found".'
+            'XPath not found: "//not-found".'
         );
 
         XPath::element($this->xml, '//not-found');
@@ -57,7 +57,7 @@ class XPathTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'RuntimeException',
-            'Path not found: "//not-found".'
+            'XPath not found: "//not-found".'
         );
 
         XPath::string($this->xml, '//not-found');
@@ -95,7 +95,7 @@ class XPathTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'RuntimeException',
-            'Path not found: "//not-found".'
+            'XPath not found: "//not-found".'
         );
 
         XPath::number($this->xml, '//not-found');
