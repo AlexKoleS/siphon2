@@ -80,8 +80,17 @@ class BoxScoreReader implements BoxScoreReaderInterface
             $response->setIsFinalized(true);
         }
 
-        foreach ($xml->xpath('.//player-content') as $element) {
+        foreach ($xml->xpath('.//home-team-content/player-content') as $element) {
             $response->add(
+                $competition->homeTeam(),
+                $this->createPlayer($element->player),
+                $this->createStatisticsCollection($element)
+            );
+        }
+
+        foreach ($xml->xpath('.//away-team-content/player-content') as $element) {
+            $response->add(
+                $competition->awayTeam(),
                 $this->createPlayer($element->player),
                 $this->createStatisticsCollection($element)
             );

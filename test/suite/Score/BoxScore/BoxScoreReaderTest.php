@@ -15,6 +15,7 @@ use Icecave\Siphon\Score\Score;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
 use Icecave\Siphon\Statistics\StatisticsGroup;
+use Icecave\Siphon\Team\Team;
 use Icecave\Siphon\Team\TeamRef;
 use PHPUnit_Framework_TestCase;
 
@@ -48,6 +49,16 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
             ->read
             ->calledWith('/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml');
 
+        $homeTeam = new TeamRef(
+            '/sport/baseball/team:2958',
+            'Philadelphia'
+        );
+
+        $awayTeam = new TeamRef(
+            '/sport/baseball/team:2967',
+            'LA Dodgers'
+        );
+
         $expected = new BoxScoreResponse(
             new Competition(
                 '/sport/baseball/competition:291828',
@@ -60,8 +71,8 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                     Date::fromIsoString('2009-02-24'),
                     Date::fromIsoString('2009-11-05')
                 ),
-                new TeamRef('/sport/baseball/team:2958', 'Philadelphia'),
-                new TeamRef('/sport/baseball/team:2967', 'LA Dodgers')
+                $homeTeam,
+                $awayTeam
             ),
             new StatisticsCollection(
                 [
@@ -160,6 +171,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $expected->add(
+            $homeTeam,
             new Player('/sport/baseball/player:42863', 'Cole', 'Hamels'),
             new StatisticsCollection(
                 [
@@ -197,6 +209,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $expected->add(
+            $homeTeam,
             new Player('/sport/baseball/player:43078', 'J.A.', 'Happ'),
             new StatisticsCollection(
                 [
@@ -221,6 +234,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $expected->add(
+            $awayTeam,
             new Player('/sport/baseball/player:40838', 'Vicente', 'Padilla'),
             new StatisticsCollection(
                 [
@@ -256,6 +270,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $expected->add(
+            $awayTeam,
             new Player('/sport/baseball/player:43419', 'Ramon', 'Troncoso'),
             new StatisticsCollection(
                 [

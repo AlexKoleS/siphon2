@@ -1,5 +1,9 @@
 # Siphon Changelog
 
+### Next Version (prediction: 3.0.0)
+
+* **[BC, IMPROVED]** Added team information to player statistics in `BoxScoreResponse`
+
 ### 2.0.0 (2015-10-15)
 
 * **[BC, FIXED]** Allow for missing URLs in image feeds

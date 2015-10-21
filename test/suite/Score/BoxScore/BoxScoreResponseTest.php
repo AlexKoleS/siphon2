@@ -7,13 +7,20 @@ use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Statistics\StatisticsCollection;
+use Icecave\Siphon\Team\TeamInterface;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 
 class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->competition = Phony::mock(CompetitionInterface::class)->mock();
+        $this->competition = Phony::fullMock(CompetitionInterface::class);
+        $this->homeTeam = Phony::fullMock(TeamInterface::class)->mock();
+        $this->awayTeam = Phony::fullMock(TeamInterface::class)->mock();
+
+        $this->competition->homeTeam->returns($this->homeTeam);
+        $this->competition->awayTeam->returns($this->awayTeam);
 
         $this->homeTeamStatistics = new StatisticsCollection();
         $this->awayTeamStatistics = new StatisticsCollection();
@@ -28,7 +35,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
         $this->statistics2 = Phony::fullMock(StatisticsCollection::class)->mock();
 
         $this->response = new BoxScoreResponse(
-            $this->competition,
+            $this->competition->mock(),
             $this->homeTeamStatistics,
             $this->awayTeamStatistics
         );
@@ -37,7 +44,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     public function testCompetition()
     {
         $this->assertSame(
-            $this->competition,
+            $this->competition->mock(),
             $this->response->competition()
         );
 
@@ -85,13 +92,152 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testIsFinalized()
+    {
+        $this->assertFalse(
+            $this->response->isFinalized()
+        );
+
+        $this->response->setIsFinalized(true);
+
+        $this->assertTrue(
+            $this->response->isFinalized()
+        );
+    }
+
+    public function testAddWithHomeTeam()
+    {
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->assertEquals(
+            [
+                [$this->homeTeam, $this->player1->mock(), $this->statistics1],
+            ],
+            iterator_to_array($this->response)
+        );
+    }
+
+    public function testAddWithAwayTeam()
+    {
+        $this->response->add(
+            $this->awayTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->assertEquals(
+            [
+                [$this->awayTeam, $this->player1->mock(), $this->statistics1],
+            ],
+            iterator_to_array($this->response)
+        );
+    }
+
+    public function testAddWithUnknownTeam()
+    {
+        $this->setExpectedException(
+            InvalidArgumentException::class,
+            'The team object must be one of the ' . TeamInterface::class . ' instances from the competition object.'
+        );
+
+        $this->response->add(
+            Phony::fullMock(TeamInterface::class)->mock(),
+            $this->player1->mock(),
+            $this->statistics1
+        );
+    }
+
+    public function testAddDoesNotDuplicate()
+    {
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->assertEquals(
+            [
+                [$this->homeTeam, $this->player1->mock(), $this->statistics1],
+            ],
+            iterator_to_array($this->response)
+        );
+    }
+
+    public function testRemove()
+    {
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->remove($this->player1->mock());
+
+        $this->assertEquals(
+            [],
+            iterator_to_array($this->response)
+        );
+    }
+
+    public function testRemoveUnknownPlayer()
+    {
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->remove($this->player1->mock());
+        $this->response->remove($this->player1->mock());
+
+        $this->assertEquals(
+            [],
+            iterator_to_array($this->response)
+        );
+    }
+
+    public function testClear()
+    {
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->add(
+            $this->homeTeam,
+            $this->player2->mock(),
+            $this->statistics2
+        );
+
+        $this->response->clear();
+
+        $this->assertTrue(
+            $this->response->isEmpty()
+        );
+    }
+
     public function testIsEmpty()
     {
         $this->assertTrue(
             $this->response->isEmpty()
         );
 
-        $this->response->add($this->player1->mock(), $this->statistics1);
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
 
         $this->assertFalse(
             $this->response->isEmpty()
@@ -105,7 +251,11 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             count($this->response)
         );
 
-        $this->response->add($this->player1->mock(), $this->statistics1);
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
 
         $this->assertSame(
             1,
@@ -120,75 +270,68 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             iterator_to_array($this->response)
         );
 
-        $this->response->add($this->player1->mock(), $this->statistics1);
-        $this->response->add($this->player2->mock(), $this->statistics2);
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->add(
+            $this->homeTeam,
+            $this->player2->mock(),
+            $this->statistics2
+        );
 
         $this->assertEquals(
             [
-                [$this->player1->mock(), $this->statistics1],
-                [$this->player2->mock(), $this->statistics2],
+                [$this->homeTeam, $this->player1->mock(), $this->statistics1],
+                [$this->homeTeam, $this->player2->mock(), $this->statistics2],
             ],
             iterator_to_array($this->response)
         );
     }
 
-    public function testAdd()
+    public function testHomeTeamPlayers()
     {
-        $this->response->add($this->player1->mock(), $this->statistics1);
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->add(
+            $this->awayTeam,
+            $this->player2->mock(),
+            $this->statistics2
+        );
 
         $this->assertEquals(
             [
-                [$this->player1->mock(), $this->statistics1],
+                [$this->homeTeam, $this->player1->mock(), $this->statistics1],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->response->homeTeamPlayers())
         );
     }
 
-    public function testAddDoesNotDuplicate()
+    public function testAwayTeamPlayers()
     {
-        $this->response->add($this->player1->mock(), $this->statistics1);
-        $this->response->add($this->player1->mock(), $this->statistics1);
+        $this->response->add(
+            $this->homeTeam,
+            $this->player1->mock(),
+            $this->statistics1
+        );
+
+        $this->response->add(
+            $this->awayTeam,
+            $this->player2->mock(),
+            $this->statistics2
+        );
 
         $this->assertEquals(
             [
-                [$this->player1->mock(), $this->statistics1],
+                [$this->awayTeam, $this->player2->mock(), $this->statistics2],
             ],
-            iterator_to_array($this->response)
-        );
-    }
-
-    public function testRemove()
-    {
-        $this->response->add($this->player1->mock(), $this->statistics1);
-        $this->response->remove($this->player1->mock());
-
-        $this->assertEquals(
-            [],
-            iterator_to_array($this->response)
-        );
-    }
-
-    public function testRemoveUnknownPlayer()
-    {
-        $this->response->add($this->player1->mock(), $this->statistics1);
-        $this->response->remove($this->player1->mock());
-        $this->response->remove($this->player1->mock());
-
-        $this->assertEquals(
-            [],
-            iterator_to_array($this->response)
-        );
-    }
-
-    public function testClear()
-    {
-        $this->response->add($this->player1->mock(), $this->statistics1);
-        $this->response->add($this->player2->mock(), $this->statistics2);
-
-        $this->response->clear();
-
-        $this->assertTrue(
-            $this->response->isEmpty()
+            iterator_to_array($this->response->awayTeamPlayers())
         );
     }
 

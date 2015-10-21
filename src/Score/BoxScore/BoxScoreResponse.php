@@ -9,6 +9,8 @@ use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Score;
 use Icecave\Siphon\Statistics\StatisticsCollection;
+use Icecave\Siphon\Team\TeamInterface;
+use InvalidArgumentException;
 use IteratorAggregate;
 
 /**
@@ -115,12 +117,26 @@ class BoxScoreResponse implements
     /**
      * Add a player to the response.
      *
+     * @param TeamInterface        $team       The player's team.
      * @param Player               $player     The player to add.
      * @param StatisticsCollection $statistics The player's statistics.
      */
-    public function add(Player $player, StatisticsCollection $statistics)
-    {
-        $this->playerStatistics[$player->id()] = [$player, $statistics];
+    public function add(
+        TeamInterface $team,
+        Player $player,
+        StatisticsCollection $statistics
+    ) {
+        if ($team === $this->competition->homeTeam()) {
+            // same instance
+        } elseif ($team === $this->competition->awayTeam()) {
+            // same instance
+        } else {
+            throw new InvalidArgumentException(
+                'The team object must be one of the ' . TeamInterface::class . ' instances from the competition object.'
+            );
+        }
+
+        $this->playerStatistics[$player->id()] = [$team, $player, $statistics];
     }
 
     /**
@@ -164,13 +180,41 @@ class BoxScoreResponse implements
     /**
      * Iterate the players.
      *
-     * @return mixed<tuple<Player, mixed>>
+     * @param TeamInterface|hull $team Limit results to players from the given team, or null for all players.
+     *
+     * @return mixed<tuple<TeamInterface, Player, StatisticsCollection>>
      */
-    public function getIterator()
+    public function getIterator(TeamInterface $team = null)
     {
         foreach ($this->playerStatistics as $entry) {
-            yield $entry;
+            if ($team === null || $entry[0] === $team) {
+                yield $entry;
+            }
         }
+    }
+
+    /**
+     * Iterate the home team players.
+     *
+     * @return mixed<tuple<TeamInterface, Player, StatisticsCollection>>
+     */
+    public function homeTeamPlayers()
+    {
+        return $this->getIterator(
+            $this->competition->homeTeam()
+        );
+    }
+
+    /**
+     * Iterate the away team players.
+     *
+     * @return mixed<tuple<TeamInterface, Player, StatisticsCollection>>
+     */
+    public function awayTeamPlayers()
+    {
+        return $this->getIterator(
+            $this->competition->awayTeam()
+        );
     }
 
     /**
@@ -188,6 +232,6 @@ class BoxScoreResponse implements
     private $competition;
     private $homeTeamStatistics;
     private $awayTeamStatistics;
-    private $isFinalized;
     private $playerStatistics;
+    private $isFinalized;
 }
