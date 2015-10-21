@@ -50,6 +50,18 @@ class StatisticsCollectionTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testFindGroupByKey()
+    {
+        $this->assertSame(
+            $this->group1,
+            $this->collection->findGroupByKey('<key 1>')
+        );
+
+        $this->assertNull(
+            $this->collection->findGroupByKey('<unknown key>')
+        );
+    }
+
     public function testGetIterator()
     {
         $this->assertEquals(

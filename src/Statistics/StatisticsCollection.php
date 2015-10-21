@@ -49,9 +49,25 @@ class StatisticsCollection implements
     }
 
     /**
+     * Fetch a statistics group by key, if it exists.
+     *
+     * @param string $key The group key.
+     *
+     * @return StatisticsGroup|null The statistics group with the given key, or null if the group is not present.
+     */
+    public function findGroupByKey($key)
+    {
+        if (isset($this->groups[$key])) {
+            return $this->groups[$key];
+        }
+
+        return null;
+    }
+
+    /**
      * Iterate the statistics.
      *
-     * @return mixed<string, integer|float> A sequence of statistics.
+     * @return mixed<string, StatisticsGroup> A sequence of statistics groups.
      */
     public function getIterator()
     {
