@@ -236,168 +236,173 @@ ok 234 - Icecave\Siphon\Score\BoxScore\BoxScoreRequestTest::testToString
 ok 235 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testCompetition
 ok 236 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testHomeTeamStatistics
 ok 237 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAwayTeamStatistics
-ok 238 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testIsEmpty
-ok 239 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testCount
-ok 240 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testGetIterator
-ok 241 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAdd
+ok 238 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testIsFinalized
+ok 239 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAddWithHomeTeam
+ok 240 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAddWithAwayTeam
+ok 241 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAddWithUnknownTeam
 ok 242 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAddDoesNotDuplicate
 ok 243 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testRemove
 ok 244 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testRemoveUnknownPlayer
 ok 245 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testClear
-ok 246 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAccept
-ok 247 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testRead
-ok 248 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadBaseball
-ok 249 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadSetsCurrentPeriodBasedOnNormalizedPeriodType
-ok 250 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded
-ok 251 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadNormalizesPeriodType
-ok 252 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadWithUnsupportedRequest
-ok 253 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testIsSupported
-ok 254 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testSport
-ok 255 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testCompetitionId
-ok 256 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testCompetitionIdWithString
-ok 257 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testAccept
-ok 258 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testSerialize
-ok 259 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testToString
-ok 260 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testCompetition
-ok 261 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testScore
-ok 262 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testCurrentPeriod
-ok 263 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testGameTime
-ok 264 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testAccept
-ok 265 - Icecave\Siphon\Score\PeriodTest::testType
-ok 266 - Icecave\Siphon\Score\PeriodTest::testNumber
-ok 267 - Icecave\Siphon\Score\PeriodTest::testHomeScore
-ok 268 - Icecave\Siphon\Score\PeriodTest::testAwayScore
-ok 269 - Icecave\Siphon\Score\PeriodTypeTest::testMemberBySport
-ok 270 - Icecave\Siphon\Score\PeriodTypeTest::testMemberBySportAndValue
-ok 271 - Icecave\Siphon\Score\PeriodTypeTest::testMemberBySportAndValueFailure
-ok 272 - Icecave\Siphon\Score\PeriodTypeTest::testMemberByCode
-ok 273 - Icecave\Siphon\Score\PeriodTypeTest::testMemberByCodeFailure
-ok 274 - Icecave\Siphon\Score\PeriodTypeTest::testCode
-ok 275 - Icecave\Siphon\Score\PeriodTypeTest::testCodesAreUnique
-ok 276 - Icecave\Siphon\Score\PeriodTypeTest::testUsedBy
-ok 277 - Icecave\Siphon\Score\ScoreTest::testScore
-ok 278 - Icecave\Siphon\Score\ScoreTest::testCount
-ok 279 - Icecave\Siphon\Score\ScoreTest::testGetIterator
-ok 280 - Icecave\Siphon\Score\SerializerTest::testSerialize with data set "empty" (Icecave\Siphon\Score\Score Object (...))
-ok 281 - Icecave\Siphon\Score\SerializerTest::testSerialize with data set "single period" (Icecave\Siphon\Score\Score Object (...))
-ok 282 - Icecave\Siphon\Score\SerializerTest::testSerialize with data set "multiple periods" (Icecave\Siphon\Score\Score Object (...))
-ok 283 - Icecave\Siphon\Score\SerializerTest::testUnserializeWithInvalidDataArray
-ok 284 - Icecave\Siphon\Score\SerializerTest::testUnserializeWithInvalidDataArrayPacking
-ok 285 - Icecave\Siphon\SportTest::testFindByComponents
-ok 286 - Icecave\Siphon\SportTest::testSportAndLeague
-ok 287 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "empty" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
-ok 288 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "empty group" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
-ok 289 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "single group" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
-ok 290 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "multiple groups" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
-ok 291 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "numeric scope value (regression)" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
-ok 292 - Icecave\Siphon\Statistics\SerializerTest::testNumericStringsAreSerializedAsNumbers
-ok 293 - Icecave\Siphon\Statistics\SerializerTest::testUnserializeInvalidStringTable
-ok 294 - Icecave\Siphon\Statistics\SerializerTest::testUnserializeWithInvalidDataArray
-ok 295 - Icecave\Siphon\Statistics\SerializerTest::testUnserializeWithOddDataArray
-ok 296 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testConstructorWithNonGroup
-ok 297 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testIsEmpty
-ok 298 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testCount
-ok 299 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testGetIterator
-ok 300 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidKey
-ok 301 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidScopeType
-ok 302 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidScopeValue
-ok 303 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidStatisticType
-ok 304 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidStatisticValue
-ok 305 - Icecave\Siphon\Statistics\StatisticsGroupTest::testKey
-ok 306 - Icecave\Siphon\Statistics\StatisticsGroupTest::testScopes
-ok 307 - Icecave\Siphon\Statistics\StatisticsGroupTest::testScopeByType
-ok 308 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatistics
-ok 309 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatisticsProjection
-ok 310 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatisticsExpansion
-ok 311 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatisticsExpansionWithExplicitDefault
-ok 312 - Icecave\Siphon\Statistics\StatisticsGroupTest::testIsEmpty
-ok 313 - Icecave\Siphon\Statistics\StatisticsGroupTest::testCount
-ok 314 - Icecave\Siphon\Statistics\StatisticsGroupTest::testGetIterator
-ok 315 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testRead
-ok 316 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testReadSplitStats
-ok 317 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testReadEmpty
-ok 318 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testReadWithUnsupportedRequest
-ok 319 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testIsSupported
-ok 320 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testSport
-ok 321 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testSeasonName
-ok 322 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testType
-ok 323 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testAccept
-ok 324 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testSerialize
-ok 325 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testToString
-ok 326 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testSport
-ok 327 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testSeason
-ok 328 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testType
-ok 329 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testIsEmpty
-ok 330 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testCount
-ok 331 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testGetIterator
-ok 332 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testAdd
-ok 333 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testAddDoesNotDuplicate
-ok 334 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testRemove
-ok 335 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testRemoveUnknownPlayer
-ok 336 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testClear
-ok 337 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testAccept
-ok 338 - Icecave\Siphon\Team\TeamReaderTest::testRead
-ok 339 - Icecave\Siphon\Team\TeamReaderTest::testReadWithoutNickName
-ok 340 - Icecave\Siphon\Team\TeamReaderTest::testReadIncludesTeamsOutsideConference
-ok 341 - Icecave\Siphon\Team\TeamReaderTest::testReadWithUnsupportedRequest
-ok 342 - Icecave\Siphon\Team\TeamReaderTest::testIsSupported
-ok 343 - Icecave\Siphon\Team\TeamRefTest::testId
-ok 344 - Icecave\Siphon\Team\TeamRefTest::testName
-ok 345 - Icecave\Siphon\Team\TeamRequestTest::testSport
-ok 346 - Icecave\Siphon\Team\TeamRequestTest::testSeasonName
-ok 347 - Icecave\Siphon\Team\TeamRequestTest::testAccept
-ok 348 - Icecave\Siphon\Team\TeamRequestTest::testSerialize
-ok 349 - Icecave\Siphon\Team\TeamRequestTest::testToString
-ok 350 - Icecave\Siphon\Team\TeamResponseTest::testSport
-ok 351 - Icecave\Siphon\Team\TeamResponseTest::testSeason
-ok 352 - Icecave\Siphon\Team\TeamResponseTest::testIsEmpty
-ok 353 - Icecave\Siphon\Team\TeamResponseTest::testCount
-ok 354 - Icecave\Siphon\Team\TeamResponseTest::testGetIterator
-ok 355 - Icecave\Siphon\Team\TeamResponseTest::testAdd
-ok 356 - Icecave\Siphon\Team\TeamResponseTest::testAddDoesNotDuplicate
-ok 357 - Icecave\Siphon\Team\TeamResponseTest::testRemove
-ok 358 - Icecave\Siphon\Team\TeamResponseTest::testRemoveUnknownTeam
-ok 359 - Icecave\Siphon\Team\TeamResponseTest::testClear
-ok 360 - Icecave\Siphon\Team\TeamResponseTest::testAccept
-ok 361 - Icecave\Siphon\Team\TeamTest::testId
-ok 362 - Icecave\Siphon\Team\TeamTest::testName
-ok 363 - Icecave\Siphon\Team\TeamTest::testNickname
-ok 364 - Icecave\Siphon\Team\TeamTest::testAbbreviation
-ok 365 - Icecave\Siphon\Team\TeamTest::testDisplayName
-ok 366 - Icecave\Siphon\Team\TeamTest::testDisplayNameWithoutNickname
-ok 367 - Icecave\Siphon\Util\IdParserTest::testParseInt
-ok 368 - Icecave\Siphon\Util\IdParserTest::testParseNumericString
-ok 369 - Icecave\Siphon\Util\IdParserTest::testParseString
-ok 370 - Icecave\Siphon\Util\IdParserTest::testParseStringWithInvalidType
-ok 371 - Icecave\Siphon\Util\IdParserTest::testParseStringWithInvalidSport
-ok 372 - Icecave\Siphon\Util\SerializationTest::testSerialize
-ok 373 - Icecave\Siphon\Util\SerializationTest::testSerializeWithNonIntegerVersion
-ok 374 - Icecave\Siphon\Util\SerializationTest::testSerializeWithInvalidIntegerVersion
-ok 375 - Icecave\Siphon\Util\SerializationTest::testUnserialize
-ok 376 - Icecave\Siphon\Util\SerializationTest::testUnserializeSelectsCorrectVersion
-ok 377 - Icecave\Siphon\Util\SerializationTest::testUnserializeFailureWithUnsupportedVersion
-ok 378 - Icecave\Siphon\Util\SerializationTest::testUnserializeFailureWithNonArray
-ok 379 - Icecave\Siphon\Util\SerializationTest::testUnserializeFailureWithNoVersion
-ok 380 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "not present" ('http://domain/path/?other=true', 'http://domain/path/?other=true')
-ok 381 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "only parameter" ('http://domain/path/?key=value', 'http://domain/path/')
-ok 382 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "only parameter, no value" ('http://domain/path/?key=', 'http://domain/path/')
-ok 383 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "first parameter" ('http://domain/path/?key=value...t=true', 'http://domain/path/?post=true')
-ok 384 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "first parameter, no value" ('http://domain/path/?key=&post=true', 'http://domain/path/?post=true')
-ok 385 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "last parameter" ('http://domain/path/?pre=true&key=value', 'http://domain/path/?pre=true')
-ok 386 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "last parameter, no value" ('http://domain/path/?pre=true&key=', 'http://domain/path/?pre=true')
-ok 387 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "middle parameter" ('http://domain/path/?pre=true&...t=true', 'http://domain/path/?pre=true&post=true')
-ok 388 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "middle parameter, no value" ('http://domain/path/?pre=true&...t=true', 'http://domain/path/?pre=true&post=true')
-ok 389 - Icecave\Siphon\Util\XPathTest::testElement
-ok 390 - Icecave\Siphon\Util\XPathTest::testElementFailure
-ok 391 - Icecave\Siphon\Util\XPathTest::testElementOrNull
-ok 392 - Icecave\Siphon\Util\XPathTest::testElementOrNullFailure
-ok 393 - Icecave\Siphon\Util\XPathTest::testString
-ok 394 - Icecave\Siphon\Util\XPathTest::testStringFailure
-ok 395 - Icecave\Siphon\Util\XPathTest::testStringOrNull
-ok 396 - Icecave\Siphon\Util\XPathTest::testStringOrNullFailure
-ok 397 - Icecave\Siphon\Util\XPathTest::testNumber
-ok 398 - Icecave\Siphon\Util\XPathTest::testNumberFailure
-ok 399 - Icecave\Siphon\Util\XPathTest::testNumberFailureWithNonNumeric
-ok 400 - Icecave\Siphon\Util\XPathTest::testNumberOrNull
-ok 401 - Icecave\Siphon\Util\XPathTest::testNumberOrNullFailure
-1..401
+ok 246 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testIsEmpty
+ok 247 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testCount
+ok 248 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testGetIterator
+ok 249 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testHomeTeamPlayers
+ok 250 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAwayTeamPlayers
+ok 251 - Icecave\Siphon\Score\BoxScore\BoxScoreResponseTest::testAccept
+ok 252 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testRead
+ok 253 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadBaseball
+ok 254 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadSetsCurrentPeriodBasedOnNormalizedPeriodType
+ok 255 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded
+ok 256 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadNormalizesPeriodType
+ok 257 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testReadWithUnsupportedRequest
+ok 258 - Icecave\Siphon\Score\LiveScore\LiveScoreReaderTest::testIsSupported
+ok 259 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testSport
+ok 260 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testCompetitionId
+ok 261 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testCompetitionIdWithString
+ok 262 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testAccept
+ok 263 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testSerialize
+ok 264 - Icecave\Siphon\Score\LiveScore\LiveScoreRequestTest::testToString
+ok 265 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testCompetition
+ok 266 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testScore
+ok 267 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testCurrentPeriod
+ok 268 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testGameTime
+ok 269 - Icecave\Siphon\Score\LiveScore\LiveScoreResponseTest::testAccept
+ok 270 - Icecave\Siphon\Score\PeriodTest::testType
+ok 271 - Icecave\Siphon\Score\PeriodTest::testNumber
+ok 272 - Icecave\Siphon\Score\PeriodTest::testHomeScore
+ok 273 - Icecave\Siphon\Score\PeriodTest::testAwayScore
+ok 274 - Icecave\Siphon\Score\PeriodTypeTest::testMemberBySport
+ok 275 - Icecave\Siphon\Score\PeriodTypeTest::testMemberBySportAndValue
+ok 276 - Icecave\Siphon\Score\PeriodTypeTest::testMemberBySportAndValueFailure
+ok 277 - Icecave\Siphon\Score\PeriodTypeTest::testMemberByCode
+ok 278 - Icecave\Siphon\Score\PeriodTypeTest::testMemberByCodeFailure
+ok 279 - Icecave\Siphon\Score\PeriodTypeTest::testCode
+ok 280 - Icecave\Siphon\Score\PeriodTypeTest::testCodesAreUnique
+ok 281 - Icecave\Siphon\Score\PeriodTypeTest::testUsedBy
+ok 282 - Icecave\Siphon\Score\ScoreTest::testScore
+ok 283 - Icecave\Siphon\Score\ScoreTest::testCount
+ok 284 - Icecave\Siphon\Score\ScoreTest::testGetIterator
+ok 285 - Icecave\Siphon\Score\SerializerTest::testSerialize with data set "empty" (Icecave\Siphon\Score\Score Object (...))
+ok 286 - Icecave\Siphon\Score\SerializerTest::testSerialize with data set "single period" (Icecave\Siphon\Score\Score Object (...))
+ok 287 - Icecave\Siphon\Score\SerializerTest::testSerialize with data set "multiple periods" (Icecave\Siphon\Score\Score Object (...))
+ok 288 - Icecave\Siphon\Score\SerializerTest::testUnserializeWithInvalidDataArray
+ok 289 - Icecave\Siphon\Score\SerializerTest::testUnserializeWithInvalidDataArrayPacking
+ok 290 - Icecave\Siphon\SportTest::testFindByComponents
+ok 291 - Icecave\Siphon\SportTest::testSportAndLeague
+ok 292 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "empty" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
+ok 293 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "empty group" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
+ok 294 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "single group" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
+ok 295 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "multiple groups" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
+ok 296 - Icecave\Siphon\Statistics\SerializerTest::testSerialize with data set "numeric scope value (regression)" (Icecave\Siphon\Statistics\StatisticsCollection Object (...))
+ok 297 - Icecave\Siphon\Statistics\SerializerTest::testNumericStringsAreSerializedAsNumbers
+ok 298 - Icecave\Siphon\Statistics\SerializerTest::testUnserializeInvalidStringTable
+ok 299 - Icecave\Siphon\Statistics\SerializerTest::testUnserializeWithInvalidDataArray
+ok 300 - Icecave\Siphon\Statistics\SerializerTest::testUnserializeWithOddDataArray
+ok 301 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testConstructorWithNonGroup
+ok 302 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testIsEmpty
+ok 303 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testCount
+ok 304 - Icecave\Siphon\Statistics\StatisticsCollectionTest::testGetIterator
+ok 305 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidKey
+ok 306 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidScopeType
+ok 307 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidScopeValue
+ok 308 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidStatisticType
+ok 309 - Icecave\Siphon\Statistics\StatisticsGroupTest::testConstructorWithInvalidStatisticValue
+ok 310 - Icecave\Siphon\Statistics\StatisticsGroupTest::testKey
+ok 311 - Icecave\Siphon\Statistics\StatisticsGroupTest::testScopes
+ok 312 - Icecave\Siphon\Statistics\StatisticsGroupTest::testScopeByType
+ok 313 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatistics
+ok 314 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatisticsProjection
+ok 315 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatisticsExpansion
+ok 316 - Icecave\Siphon\Statistics\StatisticsGroupTest::testStatisticsExpansionWithExplicitDefault
+ok 317 - Icecave\Siphon\Statistics\StatisticsGroupTest::testIsEmpty
+ok 318 - Icecave\Siphon\Statistics\StatisticsGroupTest::testCount
+ok 319 - Icecave\Siphon\Statistics\StatisticsGroupTest::testGetIterator
+ok 320 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testRead
+ok 321 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testReadSplitStats
+ok 322 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testReadEmpty
+ok 323 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testReadWithUnsupportedRequest
+ok 324 - Icecave\Siphon\Team\Statistics\TeamStatisticsReaderTest::testIsSupported
+ok 325 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testSport
+ok 326 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testSeasonName
+ok 327 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testType
+ok 328 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testAccept
+ok 329 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testSerialize
+ok 330 - Icecave\Siphon\Team\Statistics\TeamStatisticsRequestTest::testToString
+ok 331 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testSport
+ok 332 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testSeason
+ok 333 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testType
+ok 334 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testIsEmpty
+ok 335 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testCount
+ok 336 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testGetIterator
+ok 337 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testAdd
+ok 338 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testAddDoesNotDuplicate
+ok 339 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testRemove
+ok 340 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testRemoveUnknownPlayer
+ok 341 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testClear
+ok 342 - Icecave\Siphon\Team\Statistics\TeamStatisticsResponseTest::testAccept
+ok 343 - Icecave\Siphon\Team\TeamReaderTest::testRead
+ok 344 - Icecave\Siphon\Team\TeamReaderTest::testReadWithoutNickName
+ok 345 - Icecave\Siphon\Team\TeamReaderTest::testReadIncludesTeamsOutsideConference
+ok 346 - Icecave\Siphon\Team\TeamReaderTest::testReadWithUnsupportedRequest
+ok 347 - Icecave\Siphon\Team\TeamReaderTest::testIsSupported
+ok 348 - Icecave\Siphon\Team\TeamRefTest::testId
+ok 349 - Icecave\Siphon\Team\TeamRefTest::testName
+ok 350 - Icecave\Siphon\Team\TeamRequestTest::testSport
+ok 351 - Icecave\Siphon\Team\TeamRequestTest::testSeasonName
+ok 352 - Icecave\Siphon\Team\TeamRequestTest::testAccept
+ok 353 - Icecave\Siphon\Team\TeamRequestTest::testSerialize
+ok 354 - Icecave\Siphon\Team\TeamRequestTest::testToString
+ok 355 - Icecave\Siphon\Team\TeamResponseTest::testSport
+ok 356 - Icecave\Siphon\Team\TeamResponseTest::testSeason
+ok 357 - Icecave\Siphon\Team\TeamResponseTest::testIsEmpty
+ok 358 - Icecave\Siphon\Team\TeamResponseTest::testCount
+ok 359 - Icecave\Siphon\Team\TeamResponseTest::testGetIterator
+ok 360 - Icecave\Siphon\Team\TeamResponseTest::testAdd
+ok 361 - Icecave\Siphon\Team\TeamResponseTest::testAddDoesNotDuplicate
+ok 362 - Icecave\Siphon\Team\TeamResponseTest::testRemove
+ok 363 - Icecave\Siphon\Team\TeamResponseTest::testRemoveUnknownTeam
+ok 364 - Icecave\Siphon\Team\TeamResponseTest::testClear
+ok 365 - Icecave\Siphon\Team\TeamResponseTest::testAccept
+ok 366 - Icecave\Siphon\Team\TeamTest::testId
+ok 367 - Icecave\Siphon\Team\TeamTest::testName
+ok 368 - Icecave\Siphon\Team\TeamTest::testNickname
+ok 369 - Icecave\Siphon\Team\TeamTest::testAbbreviation
+ok 370 - Icecave\Siphon\Team\TeamTest::testDisplayName
+ok 371 - Icecave\Siphon\Team\TeamTest::testDisplayNameWithoutNickname
+ok 372 - Icecave\Siphon\Util\IdParserTest::testParseInt
+ok 373 - Icecave\Siphon\Util\IdParserTest::testParseNumericString
+ok 374 - Icecave\Siphon\Util\IdParserTest::testParseString
+ok 375 - Icecave\Siphon\Util\IdParserTest::testParseStringWithInvalidType
+ok 376 - Icecave\Siphon\Util\IdParserTest::testParseStringWithInvalidSport
+ok 377 - Icecave\Siphon\Util\SerializationTest::testSerialize
+ok 378 - Icecave\Siphon\Util\SerializationTest::testSerializeWithNonIntegerVersion
+ok 379 - Icecave\Siphon\Util\SerializationTest::testSerializeWithInvalidIntegerVersion
+ok 380 - Icecave\Siphon\Util\SerializationTest::testUnserialize
+ok 381 - Icecave\Siphon\Util\SerializationTest::testUnserializeSelectsCorrectVersion
+ok 382 - Icecave\Siphon\Util\SerializationTest::testUnserializeFailureWithUnsupportedVersion
+ok 383 - Icecave\Siphon\Util\SerializationTest::testUnserializeFailureWithNonArray
+ok 384 - Icecave\Siphon\Util\SerializationTest::testUnserializeFailureWithNoVersion
+ok 385 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "not present" ('http://domain/path/?other=true', 'http://domain/path/?other=true')
+ok 386 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "only parameter" ('http://domain/path/?key=value', 'http://domain/path/')
+ok 387 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "only parameter, no value" ('http://domain/path/?key=', 'http://domain/path/')
+ok 388 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "first parameter" ('http://domain/path/?key=value...t=true', 'http://domain/path/?post=true')
+ok 389 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "first parameter, no value" ('http://domain/path/?key=&post=true', 'http://domain/path/?post=true')
+ok 390 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "last parameter" ('http://domain/path/?pre=true&key=value', 'http://domain/path/?pre=true')
+ok 391 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "last parameter, no value" ('http://domain/path/?pre=true&key=', 'http://domain/path/?pre=true')
+ok 392 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "middle parameter" ('http://domain/path/?pre=true&...t=true', 'http://domain/path/?pre=true&post=true')
+ok 393 - Icecave\Siphon\Util\URLTest::testStripParameter with data set "middle parameter, no value" ('http://domain/path/?pre=true&...t=true', 'http://domain/path/?pre=true&post=true')
+ok 394 - Icecave\Siphon\Util\XPathTest::testElement
+ok 395 - Icecave\Siphon\Util\XPathTest::testElementFailure
+ok 396 - Icecave\Siphon\Util\XPathTest::testElementOrNull
+ok 397 - Icecave\Siphon\Util\XPathTest::testElementOrNullFailure
+ok 398 - Icecave\Siphon\Util\XPathTest::testString
+ok 399 - Icecave\Siphon\Util\XPathTest::testStringFailure
+ok 400 - Icecave\Siphon\Util\XPathTest::testStringOrNull
+ok 401 - Icecave\Siphon\Util\XPathTest::testStringOrNullFailure
+ok 402 - Icecave\Siphon\Util\XPathTest::testNumber
+ok 403 - Icecave\Siphon\Util\XPathTest::testNumberFailure
+ok 404 - Icecave\Siphon\Util\XPathTest::testNumberFailureWithNonNumeric
+ok 405 - Icecave\Siphon\Util\XPathTest::testNumberOrNull
+ok 406 - Icecave\Siphon\Util\XPathTest::testNumberOrNullFailure
+1..406

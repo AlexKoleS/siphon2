@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:         
-  2015-10-15 00:56:22         
+  2015-10-21 23:08:55         
                               
  Summary:                     
   Classes: 100.00% (70/70)    
-  Methods: 100.00% (369/369)  
-  Lines:   100.00% (1685/1685)
+  Methods: 100.00% (371/371)  
+  Lines:   100.00% (1704/1704)
 
 \Icecave\Siphon::Dispatcher
   Methods: 100.00% (16/16)   Lines: 100.00% ( 46/ 46)
@@ -89,11 +89,11 @@ Code Coverage Report:
 \Icecave\Siphon\Score::Serializer
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 36/ 36)
 \Icecave\Siphon\Score\BoxScore::BoxScoreReader
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 39/ 39)
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 47/ 47)
 \Icecave\Siphon\Score\BoxScore::BoxScoreRequest
   Methods: 100.00% (12/12)   Lines: 100.00% ( 34/ 34)
 \Icecave\Siphon\Score\BoxScore::BoxScoreResponse
-  Methods: 100.00% (16/16)   Lines: 100.00% ( 30/ 30)
+  Methods: 100.00% (18/18)   Lines: 100.00% ( 41/ 41)
 \Icecave\Siphon\Score\LiveScore::LiveScoreReader
   Methods: 100.00% ( 6/ 6)   Lines: 100.00% (105/105)
 \Icecave\Siphon\Score\LiveScore::LiveScoreRequest
