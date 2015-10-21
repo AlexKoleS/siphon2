@@ -117,6 +117,15 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    <a href="../../../Icecave/Siphon/Statistics/StatisticsGroup.html"><abbr title="Icecave\Siphon\Statistics\StatisticsGroup">StatisticsGroup</abbr></a>|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_findGroupByKey">findGroupByKey</a>(string $key)
+                                            <p>Fetch a statistics group by key, if it exists.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <abbr title="Icecave\Siphon\Statistics\mixed&lt;string,">mixed&lt;string,</abbr>
                 </div>
                 <div class="col-md-8 type">
@@ -201,8 +210,44 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_findGroupByKey">
+        <div class="location">at line 58</div>
+        <code>                    <a href="../../../Icecave/Siphon/Statistics/StatisticsGroup.html"><abbr title="Icecave\Siphon\Statistics\StatisticsGroup">StatisticsGroup</abbr></a>|null
+    <strong>findGroupByKey</strong>(string $key)</code>
+    </h3>
+    <div class="details">
+                    <div class="method-description">
+                                    <p>Fetch a statistics group by key, if it exists.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>The group key.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Icecave/Siphon/Statistics/StatisticsGroup.html"><abbr title="Icecave\Siphon\Statistics\StatisticsGroup">StatisticsGroup</abbr></a>|null</td>
+            <td>The statistics group with the given key, or null if the group is not present.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_getIterator">
-        <div class="location">at line 56</div>
+        <div class="location">at line 72</div>
         <code>                    <abbr title="Icecave\Siphon\Statistics\mixed&lt;string,">mixed&lt;string,</abbr>
     <strong>getIterator</strong>()</code>
     </h3>
@@ -216,7 +261,7 @@
                     <table class="table table-condensed">
         <tr>
             <td><abbr title="Icecave\Siphon\Statistics\mixed&lt;string,">mixed&lt;string,</abbr></td>
-            <td>integer|float> A sequence of statistics.</td>
+            <td>StatisticsGroup> A sequence of statistics groups.</td>
         </tr>
     </table>
 

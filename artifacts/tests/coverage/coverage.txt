@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:         
-  2015-10-21 23:08:55         
+  2015-10-21 23:26:51         
                               
  Summary:                     
   Classes: 100.00% (70/70)    
-  Methods: 100.00% (371/371)  
-  Lines:   100.00% (1704/1704)
+  Methods: 100.00% (372/372)  
+  Lines:   100.00% (1707/1707)
 
 \Icecave\Siphon::Dispatcher
   Methods: 100.00% (16/16)   Lines: 100.00% ( 46/ 46)
@@ -103,7 +103,7 @@ Code Coverage Report:
 \Icecave\Siphon\Statistics::Serializer
   Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 57/ 57)
 \Icecave\Siphon\Statistics::StatisticsCollection
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 14/ 14)
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% ( 17/ 17)
 \Icecave\Siphon\Statistics::StatisticsFactoryTrait
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 23/ 23)
 \Icecave\Siphon\Statistics::StatisticsGroup
