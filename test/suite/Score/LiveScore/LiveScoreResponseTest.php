@@ -16,7 +16,7 @@ class LiveScoreResponseTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->competition = Phony::mock(CompetitionInterface::class)->mock();
-        $this->score       = Phony::fullMock(Score::class)->mock();
+        $this->score       = Phony::mock(Score::class)->mock();
 
         $this->response = new LiveScoreResponse(
             $this->competition,
@@ -48,7 +48,7 @@ class LiveScoreResponseTest extends PHPUnit_Framework_TestCase
             $this->response->score()
         );
 
-        $score = Phony::fullMock(Score::class)->mock();
+        $score = Phony::mock(Score::class)->mock();
 
         $this->response->setScore($score);
 

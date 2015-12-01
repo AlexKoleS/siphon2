@@ -2,6 +2,8 @@
 
 namespace Icecave\Siphon\Reader;
 
+use InvalidArgumentException;
+
 /**
  * Interface for readers.
  */
@@ -12,8 +14,8 @@ interface ReaderInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request);
 

@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+use Icecave\Siphon\Dispatcher;
+use Icecave\Siphon\Reader\RequestFactory;
+use React\EventLoop\Factory;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+$loop = Factory::create();
+$dispatcher = Dispatcher::create($loop, $_SERVER['argv'][1]);
+
+$requestFactory = new RequestFactory();
+$request = $requestFactory->create($_SERVER['argv'][2]);
+
+echo "REQUEST:\n\n";
+var_dump($request);
+
+$dispatcher->read($request)->then(
+    function ($response) {
+        echo "\nRESPONSE:\n\n";
+        var_dump($response);
+    }
+);
+
+$loop->run();

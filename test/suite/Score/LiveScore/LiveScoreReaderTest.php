@@ -22,31 +22,17 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new LiveScoreReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new LiveScoreReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
         $this->setUpXmlReader('Score/livescores.xml');
 
-        $response = $this
-            ->reader
-            ->read(
-                new LiveScoreRequest(
-                    Sport::NHL(),
-                    23816
-                )
-            );
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
-
         $currentPeriod = new Period(PeriodType::SHOOTOUT(), 3, 0, 0);
-
         $expected = new LiveScoreResponse(
             new CompetitionRef(
                 '/sport/hockey/competition:23816',
@@ -68,17 +54,16 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
-
         $expected->setCurrentPeriod($currentPeriod);
+        $expected->setGameTime(Duration::fromComponents(0, 0, 0, 2, 55));
 
-        $expected->setGameTime(
-            Duration::fromComponents(0, 0, 0, 2, 55)
-        );
+        $request = new LiveScoreRequest(Sport::NHL(), 23816);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
 
-        $this->assertEquals(
-            $expected,
-            $response
-        );
+        $this->xmlReader->read->calledWith('/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(LiveScoreResponse::class))->argument();
+        $this->assertEquals($expected, $response);
     }
 
     public function testReadBaseball()
@@ -86,7 +71,6 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Score/livescores-baseball.xml');
 
         $currentPeriod = new Period(PeriodType::EXTRA_INNING(), 1, 0, 0);
-
         $expected = new LiveScoreResponse(
             new CompetitionRef(
                 '/sport/baseball/competition:288425',
@@ -111,18 +95,14 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
-
         $expected->setCurrentPeriod($currentPeriod);
 
-        $this->assertEquals(
-            $expected,
-            $this->reader->read(
-                new LiveScoreRequest(
-                    Sport::MLB(),
-                    288425
-                )
-            )
-        );
+        $request = new LiveScoreRequest(Sport::MLB(), 288425);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
+
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(LiveScoreResponse::class))->argument();
+        $this->assertEquals($expected, $response);
     }
 
     /**
@@ -132,87 +112,55 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Score/livescores-current-period.xml');
 
-        $response = $this->reader->read(
-            new LiveScoreRequest(
-                Sport::NBA(),
-                403878
-            )
-        );
+        $request = new LiveScoreRequest(Sport::NBA(), 403878);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
 
-        $this->assertEquals(
-            new Period(PeriodType::QUARTER(), 1, 16, 17),
-            $response->currentPeriod()
-        );
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(LiveScoreResponse::class))->argument();
+        $this->assertEquals(new Period(PeriodType::QUARTER(), 1, 16, 17), $response->currentPeriod());
     }
 
     public function testReadDoesNotSetCurrentPeriodWhenCompetitionHasEnded()
     {
         $this->setUpXmlReader('Score/livescores-complete.xml');
 
-        $response = $this->reader->read(
-            new LiveScoreRequest(
-                Sport::NBA(),
-                778888
-            )
-        );
+        $request = new LiveScoreRequest(Sport::NBA(), 778888);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
 
-        $this->assertSame(
-            CompetitionStatus::COMPLETE(),
-            $response->competition()->status()
-        );
-
-        $this->assertNull(
-            $response->currentPeriod()
-        );
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(LiveScoreResponse::class))->argument();
+        $this->assertSame(CompetitionStatus::COMPLETE(), $response->competition()->status());
+        $this->assertNull($response->currentPeriod());
     }
 
     public function testReadNormalizesPeriodType()
     {
         $this->setUpXmlReader('Score/livescores-complete.xml');
 
-        $response = $this->reader->read(
-            new LiveScoreRequest(
-                Sport::NBA(),
-                778888
-            )
-        );
+        $request = new LiveScoreRequest(Sport::NBA(), 778888);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
+
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(LiveScoreResponse::class))->argument();
 
         // All period types should be quarter (rather than just 'period') ...
         foreach ($response->score() as $period) {
-            $this->assertSame(
-                PeriodType::QUARTER(),
-                $period->type()
-            );
+            $this->assertSame(PeriodType::QUARTER(), $period->type());
         }
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported(
-                new LiveScoreRequest(
-                    Sport::MLB(),
-                    288425
-                )
-            )
-        );
+        $request = new LiveScoreRequest(Sport::NHL(), 23816);
 
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

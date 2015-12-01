@@ -11,6 +11,8 @@ use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamRef;
 use PHPUnit_Framework_TestCase;
+use React\Promise;
+use RuntimeException;
 
 class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 {
@@ -18,14 +20,8 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = new ScheduleRequest(
-            Sport::MLB()
-        );
-
-        $this->response = new ScheduleResponse(
-            Sport::MLB(),
-            ScheduleType::FULL()
-        );
+        $this->request = new ScheduleRequest(Sport::MLB());
+        $this->response = new ScheduleResponse(Sport::MLB(), ScheduleType::FULL());
 
         $season = new Season(
             '/sport/baseball/season:851',
@@ -44,21 +40,8 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             new TeamRef('/sport/baseball/team:2968', 'Arizona')
         );
 
-        $comp1->addNotablePlayer(
-            new Player(
-                '/sport/baseball/player:42675',
-                'Ubaldo',
-                'Jimenez'
-            )
-        );
-
-        $comp1->addNotablePlayer(
-            new Player(
-                '/sport/baseball/player:41499',
-                'Edwin',
-                'Jackson'
-            )
-        );
+        $comp1->addNotablePlayer(new Player('/sport/baseball/player:42675', 'Ubaldo', 'Jimenez'));
+        $comp1->addNotablePlayer(new Player('/sport/baseball/player:41499', 'Edwin', 'Jackson'));
 
         $comp2 = new Competition(
             '/sport/baseball/competition:293835',
@@ -70,21 +53,8 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             new TeamRef('/sport/baseball/team:2980', 'Cleveland')
         );
 
-        $comp2->addNotablePlayer(
-            new Player(
-                '/sport/baseball/player:42548',
-                'Joe',
-                'Saunders'
-            )
-        );
-
-        $comp2->addNotablePlayer(
-            new Player(
-                '/sport/baseball/player:43367',
-                'Mitch',
-                'Talbot'
-            )
-        );
+        $comp2->addNotablePlayer(new Player('/sport/baseball/player:42548', 'Joe', 'Saunders'));
+        $comp2->addNotablePlayer(new Player('/sport/baseball/player:43367', 'Mitch', 'Talbot'));
 
         $comp3 = new Competition(
             '/sport/baseball/competition:295678',
@@ -96,13 +66,7 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
             new TeamRef('/sport/baseball/team:2958', 'Philadelphia')
         );
 
-        $comp3->addNotablePlayer(
-            new Player(
-                '/sport/baseball/player:41429',
-                'Todd',
-                'Wellemeyer'
-            )
-        );
+        $comp3->addNotablePlayer(new Player('/sport/baseball/player:41429', 'Todd', 'Wellemeyer'));
 
         $season->add($comp1);
         $season->add($comp2);
@@ -110,28 +74,22 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
         $this->response->add($season);
 
-        $this->reader = new ScheduleReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new ScheduleReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testReadFullSchedule()
     {
         $this->setUpXmlReader('Schedule/schedule.xml');
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
-
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadLimitedSchedule()
@@ -141,19 +99,13 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         $this->request->setType(ScheduleType::LIMIT_2_DAYS());
         $this->response->setType(ScheduleType::LIMIT_2_DAYS());
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadDeletedSchedule()
@@ -163,64 +115,49 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         $this->request->setType(ScheduleType::DELETED());
         $this->response->setType(ScheduleType::DELETED());
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml');
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
-    }
-
-    public function testReadWithUnsupportedRequest()
-    {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
-
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadNotFound()
     {
         $this->setUpXmlReaderNotFound();
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read($this->request);
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
 
         $this->response->clear();
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
+    }
+
+    public function testReadExceptionPropagation()
+    {
+        $exception = new RuntimeException('You done goofed.');
+        $this->xmlReader()->read->returns(Promise\reject($exception));
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+
+        $this->reject->calledWith($exception);
+        $this->resolve->never()->called();
+    }
+
+    public function testReadWithUnsupportedRequest()
+    {
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
+
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

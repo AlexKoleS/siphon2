@@ -18,11 +18,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = new PlayerRequest(
-            Sport::MLB(),
-            '2009',
-            2970
-        );
+        $this->request = new PlayerRequest(Sport::MLB(), '2009', 2970);
 
         $this->response = new PlayerResponse(
             Sport::MLB(),
@@ -32,10 +28,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
                 Date::fromIsoString('2009-02-24'),
                 Date::fromIsoString('2009-11-05')
             ),
-            new TeamRef(
-                '/sport/baseball/team:2970',
-                'NY Yankees'
-            )
+            new TeamRef('/sport/baseball/team:2970', 'NY Yankees')
         );
 
         $this->response->add(new Player('/sport/baseball/player:43566', 'Alfredo',   'Aceves'),       new PlayerSeasonDetails('91', 'RP', 'Reliever',          true));
@@ -95,28 +88,22 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         // objects instead omit the last name, which is arguably more accurate.
         $this->response->add(new Player('/sport/baseball/player:42341', 'Wang',      null),           new PlayerSeasonDetails('40', 'SP', 'Starter',           true));
 
-        $this->reader = new PlayerReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new PlayerReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
         $this->setUpXmlReader('Player/players.xml');
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/players/2009/players_2970_MLB.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(PlayerResponse::class))->argument();
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/players/2009/players_2970_MLB.xml');
-
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadEmpty()
@@ -124,34 +111,19 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/empty.xml');
 
         $this->setExpectedException(NotFoundException::class);
-
-        $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

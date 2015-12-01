@@ -10,6 +10,7 @@ use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
+use React\Promise;
 
 /**
  * Client for reading player image feeds.
@@ -30,58 +31,63 @@ class ImageReader implements ImageReaderInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request)
     {
         if (!$this->isSupported($request)) {
-            throw new InvalidArgumentException('Unsupported request.');
-        }
-
-        $xml = $this
-            ->xmlReader
-            ->read(
-                sprintf(
-                    '/sport/v2/%s/%s/player-images/%s/player-images_%d_%s.xml',
-                    $request->sport()->sport(),
-                    $request->sport()->league(),
-                    $request->seasonName(),
-                    $request->teamId(),
-                    $request->sport()->league()
-                )
-            )
-            ->xpath('.//season-content')[0];
-
-        // Sometimes the feed contains no team or player information. Since
-        // this information is required to build a meaningful response, we treat
-        // this condition equivalent to a not found error.
-        if (!$xml->{'team-content'}) {
-            throw new NotFoundException();
-        }
-
-        $response = new ImageResponse(
-            $request->sport(),
-            $this->createSeason($xml->season),
-            $this->createTeam($xml->{'team-content'}->team)
-        );
-
-        foreach ($xml->xpath('.//player-content') as $element) {
-            $small = XPath::stringOrNull($element, 'image/thumbnailurl');
-            $large = XPath::stringOrNull($element, 'image/url');
-
-            if (null === $small && null === $large) {
-                continue;
-            }
-
-            $response->add(
-                $this->createPlayer($element->player),
-                $small,
-                $large
+            return Promise\reject(
+                new InvalidArgumentException('Unsupported request.')
             );
         }
 
-        return $response;
+        $resource = sprintf(
+            '/sport/v2/%s/%s/player-images/%s/player-images_%d_%s.xml',
+            $request->sport()->sport(),
+            $request->sport()->league(),
+            $request->seasonName(),
+            $request->teamId(),
+            $request->sport()->league()
+        );
+
+        return $this->xmlReader->read($resource)->then(
+            function ($xml) use ($request) {
+                $xml = $xml->xpath('.//season-content')[0];
+
+                // Sometimes the feed contains no team or player information.
+                // Since this information is required to build a meaningful
+                // response, we treat this condition equivalent to a not found
+                // error.
+                if (!$xml->{'team-content'}) {
+                    throw new NotFoundException();
+                }
+
+                $response = new ImageResponse(
+                    $request->sport(),
+                    $this->createSeason($xml->season),
+                    $this->createTeam($xml->{'team-content'}->team)
+                );
+
+                foreach ($xml->xpath('.//player-content') as $element) {
+                    $small =
+                        XPath::stringOrNull($element, 'image/thumbnailurl');
+                    $large = XPath::stringOrNull($element, 'image/url');
+
+                    if (null === $small && null === $large) {
+                        continue;
+                    }
+
+                    $response->add(
+                        $this->createPlayer($element->player),
+                        $small,
+                        $large
+                    );
+                }
+
+                return $response;
+            }
+        );
     }
 
     /**

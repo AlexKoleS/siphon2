@@ -36,6 +36,7 @@ use Icecave\Siphon\Team\TeamReaderInterface;
 use Icecave\Siphon\Team\TeamRequest;
 use Icecave\Siphon\Team\TeamResponse;
 use PHPUnit_Framework_TestCase;
+use React\EventLoop\LoopInterface;
 
 class DispatcherTest extends PHPUnit_Framework_TestCase
 {
@@ -72,7 +73,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        $this->dispatcher = Dispatcher::create('<api key>');
+        $loop = Phony::mock(LoopInterface::class)->mock();
+        $this->dispatcher = Dispatcher::create($loop, '<api key>');
 
         $this->assertInstanceOf(
             DispatcherInterface::class,
@@ -196,8 +198,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $responseClass,
         $reader
     ) {
-        $request  = Phony::fullMock($requestClass);
-        $response = Phony::fullMock($responseClass);
+        $request  = Phony::mock($requestClass);
+        $response = Phony::mock($responseClass);
 
         $request
             ->accept

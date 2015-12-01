@@ -20,12 +20,21 @@
     "require": {
         "php": ">=5.5",
         "eloquent/enumeration": "^5",
-        "guzzlehttp/guzzle": "^5",
-        "icecave/chrono": "^1.0.3"
+        "guzzlehttp/guzzle": "^6",
+        "icecave/chrono": "^1.0.3",
+        "react/event-loop": "^0.4",
+        "wyrihaximus/react-guzzle-psr7": "^1"
     },
     "require-dev": {
-        "eloquent/phony": "^0.2",
-        "icecave/archer": "^1"
+        "eloquent/phony": "^0.6",
+        "icecave/archer": "dev-develop",
+        "phpunit/phpunit": "^4",
+        "sami/sami": "^3"
+    },
+    "config": {
+        "platform": {
+            "php": "5.5.999"
+        }
     },
     "autoload": {
         "psr-4": {

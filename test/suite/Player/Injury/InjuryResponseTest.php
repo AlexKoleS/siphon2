@@ -12,14 +12,14 @@ class InjuryResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->player1 = Phony::fullMock(Player::class);
-        $this->player2 = Phony::fullMock(Player::class);
+        $this->player1 = Phony::mock(Player::class);
+        $this->player2 = Phony::mock(Player::class);
 
         $this->player1->id->returns('<player 1>');
         $this->player2->id->returns('<player 2>');
 
-        $this->injury1 = Phony::fullMock(Injury::class)->mock();
-        $this->injury2 = Phony::fullMock(Injury::class)->mock();
+        $this->injury1 = Phony::mock(Injury::class)->mock();
+        $this->injury2 = Phony::mock(Injury::class)->mock();
 
         $this->response = new InjuryResponse(
             Sport::NFL()

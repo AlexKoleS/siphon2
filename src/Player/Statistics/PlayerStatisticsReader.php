@@ -12,6 +12,7 @@ use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
+use React\Promise;
 
 /**
  * Client for reading player statistics feeds.
@@ -33,13 +34,15 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request)
     {
         if (!$this->isSupported($request)) {
-            throw new InvalidArgumentException('Unsupported request.');
+            return Promise\reject(
+                new InvalidArgumentException('Unsupported request.')
+            );
         } elseif (StatisticsType::COMBINED() === $request->type()) {
             $resource = sprintf(
                 '/sport/v2/%s/%s/player-stats/%s/player_stats_%d_%s.xml',
@@ -51,7 +54,8 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
             );
         } else { // split stats
             $resource = sprintf(
-                '/sport/v2/%s/%s/player-split-stats/%s/player_split_stats_%d_%s.xml',
+                '/sport/v2/%s/%s/player-split-stats/%s/' .
+                    'player_split_stats_%d_%s.xml',
                 $request->sport()->sport(),
                 $request->sport()->league(),
                 $request->seasonName(),
@@ -60,33 +64,35 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
             );
         }
 
-        $xml = $this
-            ->xmlReader
-            ->read($resource)
-            ->xpath('.//season-content')[0];
+        return $this->xmlReader->read($resource)->then(
+            function ($xml) use ($request) {
+                $xml = $xml->xpath('.//season-content')[0];
 
-        // Sometimes the feed contains no team or player information. Since
-        // this information is required to build a meaningful response, we treat
-        // this condition equivalent to a not found error.
-        if (!$xml->{'team-content'}) {
-            throw new NotFoundException();
-        }
+                // Sometimes the feed contains no team or player information.
+                // Since this information is required to build a meaningful
+                // response, we treat this condition equivalent to a not found
+                // error.
+                if (!$xml->{'team-content'}) {
+                    throw new NotFoundException();
+                }
 
-        $response = new PlayerStatisticsResponse(
-            $request->sport(),
-            $this->createSeason($xml->season),
-            $this->createTeam($xml->{'team-content'}->team),
-            $request->type()
+                $response = new PlayerStatisticsResponse(
+                    $request->sport(),
+                    $this->createSeason($xml->season),
+                    $this->createTeam($xml->{'team-content'}->team),
+                    $request->type()
+                );
+
+                foreach ($xml->xpath('.//player-content') as $element) {
+                    $response->add(
+                        $this->createPlayer($element->player),
+                        $this->createStatisticsCollection($element)
+                    );
+                }
+
+                return $response;
+            }
         );
-
-        foreach ($xml->xpath('.//player-content') as $element) {
-            $response->add(
-                $this->createPlayer($element->player),
-                $this->createStatisticsCollection($element)
-            );
-        }
-
-        return $response;
     }
 
     /**

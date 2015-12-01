@@ -16,7 +16,7 @@ class TeamStatisticsResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->season = Phony::fullMock(Season::class)->mock();
+        $this->season = Phony::mock(Season::class)->mock();
 
         $this->team1 = Phony::mock(TeamInterface::class);
         $this->team2 = Phony::mock(TeamInterface::class);
@@ -24,14 +24,14 @@ class TeamStatisticsResponseTest extends PHPUnit_Framework_TestCase
         $this->team1->id->returns('<team 1>');
         $this->team2->id->returns('<team 2>');
 
-        $this->player1 = Phony::fullMock(Player::class);
-        $this->player2 = Phony::fullMock(Player::class);
+        $this->player1 = Phony::mock(Player::class);
+        $this->player2 = Phony::mock(Player::class);
 
         $this->player1->id->returns('<player 1>');
         $this->player2->id->returns('<player 2>');
 
-        $this->statistics1 = Phony::fullMock(StatisticsCollection::class)->mock();
-        $this->statistics2 = Phony::fullMock(StatisticsCollection::class)->mock();
+        $this->statistics1 = Phony::mock(StatisticsCollection::class)->mock();
+        $this->statistics2 = Phony::mock(StatisticsCollection::class)->mock();
 
         $this->response = new TeamStatisticsResponse(
             Sport::NFL(),
@@ -62,7 +62,7 @@ class TeamStatisticsResponseTest extends PHPUnit_Framework_TestCase
             $this->response->season()
         );
 
-        $season = Phony::fullMock(Season::class)->mock();
+        $season = Phony::mock(Season::class)->mock();
         $this->response->setSeason($season);
 
         $this->assertSame(

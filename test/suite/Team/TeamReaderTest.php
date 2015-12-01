@@ -16,10 +16,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = new TeamRequest(
-            Sport::MLB(),
-            '2009'
-        );
+        $this->request = new TeamRequest(Sport::MLB(), '2009');
 
         $this->response = new TeamResponse(
             Sport::MLB(),
@@ -62,28 +59,22 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
         $this->response->add(new Team('/sport/baseball/team:2984', 'Toronto',       'TOR',   'Blue Jays'));
         $this->response->add(new Team('/sport/baseball/team:2960', 'Tampa Bay',     'TB',    'Rays'));
 
-        $this->reader = new TeamReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new TeamReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
         $this->setUpXmlReader('Team/teams.xml');
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(TeamResponse::class))->argument();
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml');
-
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadWithoutNickName()
@@ -101,14 +92,12 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(TeamResponse::class))->argument();
+
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadIncludesTeamsOutsideConference()
@@ -127,38 +116,24 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(TeamResponse::class))->argument();
+
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

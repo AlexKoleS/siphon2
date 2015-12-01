@@ -2,12 +2,11 @@
 
 namespace Icecave\Siphon\Reader;
 
-use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\XmlParseException;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
+use React\Promise\Deferred;
 use SimpleXMLElement;
 
 /**
@@ -28,35 +27,40 @@ class XmlReader implements XmlReaderInterface
     }
 
     /**
-     * Fetch XML data from a feed.
+     * Read XML data from a feed.
      *
      * @param string               $resource   The path to the feed.
      * @param array<string, mixed> $parameters Additional parameters to pass.
      *
-     * @return SimpleXMLElement The XML response.
+     * @return SimpleXMLElement [via promise] The XML response.
      */
     public function read($resource, array $parameters = [])
     {
         $url = $this->urlBuilder->build($resource, $parameters);
+        $deferred = new Deferred();
 
-        try {
-            $response = $this->httpClient->get($url);
-        } catch (ClientException $e) {
-            if (404 === $e->getCode()) {
-                throw new NotFoundException($e);
+        $this->httpClient->requestAsync('GET', $url)->then(
+            function ($response) use ($deferred) {
+                $deferred->resolve(
+                    new SimpleXMLElement($response->getBody(), LIBXML_NONET)
+                );
             }
-            throw new ServiceUnavailableException($e);
-        } catch (Exception $e) {
-            throw new ServiceUnavailableException($e);
-        }
+        )->otherwise(
+            function ($exception) use ($deferred) {
+                if (
+                    $exception instanceof ClientException &&
+                    404 === $exception->getCode()
+                ) {
+                    $deferred->reject(new NotFoundException($exception));
+                } else {
+                    $deferred->reject(
+                        new ServiceUnavailableException($exception)
+                    );
+                }
+            }
+        );
 
-        try {
-            $xml = $response->xml();
-        } catch (XmlParseException $e) {
-            throw new ServiceUnavailableException($e);
-        }
-
-        return $xml;
+        return $deferred->promise();
     }
 
     private $urlBuilder;

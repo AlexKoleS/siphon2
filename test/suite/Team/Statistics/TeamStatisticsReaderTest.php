@@ -21,10 +21,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = new TeamStatisticsRequest(
-            Sport::NFL(),
-            '2014-2015'
-        );
+        $this->request = new TeamStatisticsRequest(Sport::NFL(), '2014-2015');
 
         $this->response = new TeamStatisticsResponse(
             Sport::NFL(),
@@ -37,9 +34,10 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
             StatisticsType::COMBINED()
         );
 
-        $this->reader = new TeamStatisticsReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new TeamStatisticsReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
@@ -177,19 +175,13 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
             new StatisticsCollection([])
         );
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/football/NFL/team-stats/2014-2015/team_stats_NFL.xml');
+        $this->xmlReader->read->calledWith('/sport/v2/football/NFL/team-stats/2014-2015/team_stats_NFL.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(TeamStatisticsResponse::class))->argument();
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadSplitStats()
@@ -334,19 +326,14 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this
-            ->xmlReader
-            ->read
+        $this->xmlReader->read
             ->calledWith('/sport/v2/football/NFL/team-split-stats/2014-2015/team_split_stats_NFL.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(TeamStatisticsResponse::class))->argument();
 
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadEmpty()
@@ -354,34 +341,19 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Team/empty.xml');
 
         $this->setExpectedException(NotFoundException::class);
-
-        $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

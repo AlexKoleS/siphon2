@@ -8,6 +8,7 @@ use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Util\URL;
 use InvalidArgumentException;
+use React\Promise;
 
 /**
  * Client for reading atom feeds.
@@ -24,32 +25,38 @@ class AtomReader implements AtomReaderInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request)
     {
         if (!$this->isSupported($request)) {
-            throw new InvalidArgumentException('Unsupported request.');
-        }
-
-        $xml = $this->xmlReader->read(
-            '/Atom',
-            $this->buildParameters($request)
-        );
-
-        $response = new AtomResponse(
-            DateTime::fromIsoString($xml->updated)
-        );
-
-        foreach ($xml->entry as $entry) {
-            $response->add(
-                URL::stripParameter(strval($entry->link['href']), 'apiKey'),
-                DateTime::fromIsoString($entry->updated)
+            return Promise\reject(
+                new InvalidArgumentException('Unsupported request.')
             );
         }
 
-        return $response;
+        $parameters = $this->buildParameters($request);
+
+        return $this->xmlReader->read('/Atom', $parameters)->then(
+            function ($xml) {
+                $response = new AtomResponse(
+                    DateTime::fromIsoString($xml->updated)
+                );
+
+                foreach ($xml->entry as $entry) {
+                    $response->add(
+                        URL::stripParameter(
+                            strval($entry->link['href']),
+                            'apiKey'
+                        ),
+                        DateTime::fromIsoString($entry->updated)
+                    );
+                }
+
+                return $response;
+            }
+        );
     }
 
     /**

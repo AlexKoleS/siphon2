@@ -46,52 +46,34 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader = new InjuryReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new InjuryReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
         $this->setUpXmlReader('Player/injuries.xml');
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->xmlReader->read->calledWith('/sport/v2/football/NFL/injuries/injuries_NFL.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(InjuryResponse::class))->argument();
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/football/NFL/injuries/injuries_NFL.xml');
-
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

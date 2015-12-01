@@ -6,12 +6,15 @@ use Eloquent\Phony\Phpunit\Phony;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\XmlParseException;
-use GuzzleHttp\Message\RequestInterface as HttpRequestInterface;
-use GuzzleHttp\Message\ResponseInterface as HttpResponseInterface;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Promise\FulfilledPromise;
+use GuzzleHttp\Promise\RejectedPromise;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
+use Psr\Http\Message\RequestInterface as HttpRequestInterface;
+use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
+use SimpleXMLElement;
 
 class XmlReaderTest extends PHPUnit_Framework_TestCase
 {
@@ -21,135 +24,77 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this->httpClient = Phony::mock(ClientInterface::class);
         $this->response   = Phony::mock(HttpResponseInterface::class);
 
-        $this
-            ->urlBuilder
-            ->build
-            ->returns('<url>');
+        $this->urlBuilder->build->returns('<url>');
+        $this->httpClient->requestAsync->returns(new FulfilledPromise($this->response->mock()));
+        $this->response->getBody->returns('<xml></xml>');
 
-        $this
-            ->httpClient
-            ->get
-            ->returns($this->response->mock());
+        $this->reader = new XmlReader($this->urlBuilder->mock(), $this->httpClient->mock());
 
-        $this
-            ->response
-            ->xml
-            ->returns('<xml>');
-
-        $this->reader = new XmlReader(
-            $this->urlBuilder->mock(),
-            $this->httpClient->mock()
-        );
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
-        $result = $this->reader->read(
-            'path/to/feed',
-            ['foo' => 'bar']
-        );
+        $this->reader->read('path/to/feed', ['foo' => 'bar'])->done($this->resolve, $this->reject);
 
-        $this
-            ->urlBuilder
-            ->build
-            ->calledWith(
-                'path/to/feed',
-                ['foo' => 'bar']
-            );
+        Promise\queue()->run();
 
-        $this
-            ->httpClient
-            ->get
-            ->calledWith('<url>');
-
-        $this->assertEquals(
-            '<xml>',
-            $result
-        );
+        $this->urlBuilder->build->calledWith('path/to/feed', ['foo' => 'bar']);
+        $this->httpClient->requestAsync->calledWith('GET', '<url>');
+        $this->resolve->calledWith(new SimpleXMLElement('<xml></xml>', LIBXML_NONET));
+        $this->reject->never()->called();
     }
 
     public function testReadWithHttpClientException()
     {
-        $exception = Phony::fullMock(ClientException::class)->mock();
+        $exception = Phony::mock(ClientException::class)->mock();
+        $this->httpClient->requestAsync->returns(new RejectedPromise($exception));
+        $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
-        $this
-            ->httpClient
-            ->get
-            ->throws($exception);
+        Promise\queue()->run();
 
-        $this->setExpectedException(
-            ServiceUnavailableException::class,
-            'Service unavailable.'
-        );
-
-        $this->reader->read(
-            'path/to/feed'
-        );
+        $this->reject->calledWith(new ServiceUnavailableException($exception));
+        $this->resolve->never()->called();
     }
 
     public function testReadWithNotFoundException()
     {
-        $this
-            ->response
-            ->getStatusCode
-            ->returns(404);
-
+        $this->response->getStatusCode->returns(404);
         $exception = new ClientException(
             '<message>',
             Phony::mock(HttpRequestInterface::class)->mock(),
             $this->response->mock()
         );
+        $this->httpClient->requestAsync->returns(new RejectedPromise($exception));
+        $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
-        $this
-            ->httpClient
-            ->get
-            ->throws($exception);
+        Promise\queue()->run();
 
-        $this->setExpectedException(
-            NotFoundException::class,
-            'Feed not found.'
-        );
-
-        $this->reader->read(
-            'path/to/feed'
-        );
+        $this->reject->calledWith(new NotFoundException($exception));
+        $this->resolve->never()->called();
     }
 
     public function testReadWithGenericException()
     {
         $exception = new Exception('The exception!');
+        $this->httpClient->requestAsync->returns(new RejectedPromise($exception));
+        $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
-        $this
-            ->httpClient
-            ->get
-            ->throws($exception);
+        Promise\queue()->run();
 
-        $this->setExpectedException(
-            ServiceUnavailableException::class,
-            'Service unavailable.'
-        );
-
-        $this->reader->read(
-            'path/to/feed'
-        );
+        $this->reject->calledWith(new ServiceUnavailableException($exception));
+        $this->resolve->never()->called();
     }
 
     public function testXmlParseErrorWithServiceUnavailableException()
     {
-        $exception = new XmlParseException('The exception!');
+        $this->response->getBody->returns('');
+        $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
-        $this
-            ->response
-            ->xml
-            ->throws($exception);
+        Promise\queue()->run();
 
-        $this->setExpectedException(
-            ServiceUnavailableException::class,
-            'Service unavailable.'
-        );
-
-        $this->reader->read(
-            'path/to/feed'
-        );
+        $this->reject->calledWith($this->isInstanceOf(ServiceUnavailableException::class));
+        $this->resolve->never()->called();
     }
 }

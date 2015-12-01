@@ -16,43 +16,29 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpXmlReader('Atom/atom.xml');
 
-        $this->request = new AtomRequest(
-            DateTime::fromUnixTime(86400)
-        );
+        $this->request = new AtomRequest(DateTime::fromUnixTime(86400));
+        $this->reader = new AtomReader($this->xmlReader()->mock());
 
-        $this->reader = new AtomReader(
-            $this->xmlReader()->mock()
-        );
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith(
-                '/Atom',
-                [
-                    'newerThan' => '1970-01-02T00:00:00+00:00',
-                    'maxCount'  => 5000,
-                    'order'     => 'asc',
-                ]
-            );
-
-        $this->assertInstanceOf(
-            AtomResponse::class,
-            $response
+        $this->xmlReader->read->calledWith(
+            '/Atom',
+            [
+                'newerThan' => '1970-01-02T00:00:00+00:00',
+                'maxCount'  => 5000,
+                'order'     => 'asc',
+            ]
         );
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(AtomResponse::class))->argument();
 
-        $this->assertEquals(
-            DateTime::fromIsoString('2015-02-15T21:11:15.4952-04:00'),
-            $response->updatedTime()
-        );
-
+        $this->assertEquals(DateTime::fromIsoString('2015-02-15T21:11:15.4952-04:00'), $response->updatedTime());
         $this->assertEquals(
             [
                 [
@@ -75,89 +61,59 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
     public function testReadWithSpecificFeed()
     {
         $this->request->setFeed('/foo');
+        $this->reader->read($this->request)->done();
 
-        $response = $this
-            ->reader
-            ->read($this->request);
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith(
-                '/Atom',
-                [
-                    'newerThan' => '1970-01-02T00:00:00+00:00',
-                    'maxCount'  => 5000,
-                    'order'     => 'asc',
-                    'feed'      => '/foo',
-                ]
-            );
+        $this->xmlReader->read->calledWith(
+            '/Atom',
+            [
+                'newerThan' => '1970-01-02T00:00:00+00:00',
+                'maxCount'  => 5000,
+                'order'     => 'asc',
+                'feed'      => '/foo',
+            ]
+        );
     }
 
     public function testReadWithLimit()
     {
         $this->request->setLimit(100);
+        $this->reader->read($this->request)->done();
 
-        $response = $this
-            ->reader
-            ->read($this->request);
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith(
-                '/Atom',
-                [
-                    'newerThan' => '1970-01-02T00:00:00+00:00',
-                    'maxCount'  => 100,
-                    'order'     => 'asc',
-                ]
-            );
+        $this->xmlReader->read->calledWith(
+            '/Atom',
+            [
+                'newerThan' => '1970-01-02T00:00:00+00:00',
+                'maxCount'  => 100,
+                'order'     => 'asc',
+            ]
+        );
     }
 
     public function testReadDescending()
     {
         $this->request->setOrder(SORT_DESC);
+        $this->reader->read($this->request)->done();
 
-        $response = $this
-            ->reader
-            ->read($this->request);
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith(
-                '/Atom',
-                [
-                    'newerThan' => '1970-01-02T00:00:00+00:00',
-                    'maxCount'  => 5000,
-                    'order'     => 'desc',
-                ]
-            );
+        $this->xmlReader->read->calledWith(
+            '/Atom',
+            [
+                'newerThan' => '1970-01-02T00:00:00+00:00',
+                'maxCount'  => 5000,
+                'order'     => 'desc',
+            ]
+        );
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

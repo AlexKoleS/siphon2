@@ -10,12 +10,12 @@ use SimpleXMLElement;
 interface XmlReaderInterface
 {
     /**
-     * Read XML data for the given resource.
+     * Read XML data from a feed.
      *
-     * @param string               $resource   The path to the resource to read.
+     * @param string               $resource   The path to the feed.
      * @param array<string, mixed> $parameters Additional parameters to pass.
      *
-     * @return SimpleXMLElement The XML response.
+     * @return SimpleXMLElement [via promise] The XML response.
      */
     public function read($resource, array $parameters = []);
 }

@@ -13,8 +13,8 @@ class CompetitionRefTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->player1 = Phony::fullMock(Player::class);
-        $this->player2 = Phony::fullMock(Player::class);
+        $this->player1 = Phony::mock(Player::class);
+        $this->player2 = Phony::mock(Player::class);
 
         $this->player1->id->returns('<player 1>');
         $this->player2->id->returns('<player 2>');

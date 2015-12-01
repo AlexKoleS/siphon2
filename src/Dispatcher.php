@@ -3,6 +3,7 @@
 namespace Icecave\Siphon;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\HandlerStack;
 use Icecave\Siphon\Atom\AtomReader;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
@@ -39,6 +40,8 @@ use Icecave\Siphon\Team\Statistics\TeamStatisticsRequest;
 use Icecave\Siphon\Team\TeamReader;
 use Icecave\Siphon\Team\TeamReaderInterface;
 use Icecave\Siphon\Team\TeamRequest;
+use React\EventLoop\LoopInterface;
+use WyriHaximus\React\GuzzlePsr7\HttpClientAdapter;
 
 /**
  * The dispatcher is a facade for easily servicing any Siphon request.
@@ -48,15 +51,20 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     /**
      * Create a factory that uses the given API key.
      *
-     * @param string $apiKey The API key used to authenticate.
+     * @param LoopInterface $loop   The event loop.
+     * @param string        $apiKey The API key used to authenticate.
      *
      * @return FactoryInterface
      */
-    public static function create($apiKey)
+    public static function create(LoopInterface $loop, $apiKey)
     {
         $urlBuilder = new UrlBuilder($apiKey);
-        $httpClient = new HttpClient();
-        $xmlReader  = new XmlReader($urlBuilder, $httpClient);
+        $httpClient = new HttpClient(
+            [
+                'handler' => HandlerStack::create(new HttpClientAdapter($loop)),
+            ]
+        );
+        $xmlReader = new XmlReader($urlBuilder, $httpClient);
 
         return new static(
             $urlBuilder,
@@ -127,8 +135,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request)
     {

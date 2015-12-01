@@ -25,39 +25,18 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new BoxScoreReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new BoxScoreReader($this->xmlReader()->mock());
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
         $this->setUpXmlReader('Score/boxscores.xml');
 
-        $response = $this
-            ->reader
-            ->read(
-                new BoxScoreRequest(
-                    Sport::MLB(),
-                    '2009',
-                    291828
-                )
-            );
-
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml');
-
-        $homeTeam = new TeamRef(
-            '/sport/baseball/team:2958',
-            'Philadelphia'
-        );
-
-        $awayTeam = new TeamRef(
-            '/sport/baseball/team:2967',
-            'LA Dodgers'
-        );
+        $homeTeam = new TeamRef('/sport/baseball/team:2958', 'Philadelphia');
+        $awayTeam = new TeamRef('/sport/baseball/team:2967', 'LA Dodgers');
 
         $expected = new BoxScoreResponse(
             new Competition(
@@ -296,59 +275,38 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertEquals(
-            $expected,
-            $response
-        );
+        $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
+
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(BoxScoreResponse::class))->argument();
+        $this->assertEquals($expected, $response);
     }
 
     public function testReadFinalized()
     {
         $this->setUpXmlReader('Score/boxscores-finalized.xml');
+        $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
+        $this->reader->read($request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read(
-                new BoxScoreRequest(
-                    Sport::MLB(),
-                    '2009',
-                    291828
-                )
-            );
-
-        $this->assertTrue(
-            $response->isFinalized()
-        );
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(BoxScoreResponse::class))->argument();
+        $this->assertTrue($response->isFinalized());
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported(
-                new BoxScoreRequest(
-                    Sport::MLB(),
-                    '<season>',
-                    288425
-                )
-            )
-        );
+        $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
 
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

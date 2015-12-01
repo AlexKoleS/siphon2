@@ -10,6 +10,7 @@ use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use InvalidArgumentException;
+use React\Promise;
 
 /**
  * Client for reading schedule feeds.
@@ -31,13 +32,15 @@ class ScheduleReader implements ScheduleReaderInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request)
     {
         if (!$this->isSupported($request)) {
-            throw new InvalidArgumentException('Unsupported request.');
+            return Promise\reject(
+                new InvalidArgumentException('Unsupported request.')
+            );
         } elseif (ScheduleType::FULL() === $request->type()) {
             $resource = sprintf(
                 '/sport/v2/%s/%s/schedule/schedule_%s.xml',
@@ -62,46 +65,48 @@ class ScheduleReader implements ScheduleReaderInterface
             );
         }
 
-        $response = new ScheduleResponse(
-            $request->sport(),
-            $request->type()
-        );
+        $response = new ScheduleResponse($request->sport(), $request->type());
 
-        try {
-            $xml = $this
-                ->xmlReader
-                ->read($resource)
-                ->xpath('.//season-content');
-        } catch (NotFoundException $e) {
-            // If a well-formed request is not found it appears to means there
-            // are no upcoming seasons within the timeframe given by the request's
-            // schedule type.
-            return $response;
-        }
+        return $this->xmlReader->read($resource)->then(
+            function ($xml) use ($request, $response) {
+                $xml = $xml->xpath('.//season-content');
 
-        foreach ($xml as $element) {
-            $season = $this->createSeason($element->season);
+                foreach ($xml as $element) {
+                    $season = $this->createSeason($element->season);
 
-            foreach ($element->competition as $competitionElement) {
-                $competition = $this->createCompetition(
-                    $competitionElement,
-                    $request->sport(),
-                    $season
-                );
+                    foreach ($element->competition as $competitionElement) {
+                        $competition = $this->createCompetition(
+                            $competitionElement,
+                            $request->sport(),
+                            $season
+                        );
 
-                foreach ($competitionElement->xpath('.//player') as $playerElement) {
-                    $competition->addNotablePlayer(
-                        $this->createPlayer($playerElement)
-                    );
+                        foreach (
+                            $competitionElement->xpath('.//player') as
+                                $playerElement
+                        ) {
+                            $competition->addNotablePlayer(
+                                $this->createPlayer($playerElement)
+                            );
+                        }
+
+                        $season->add($competition);
+                    }
+
+                    $response->add($season);
                 }
 
-                $season->add($competition);
+                return $response;
             }
-
-            $response->add($season);
-        }
-
-        return $response;
+        )->otherwise(
+            function ($exception) use ($response) {
+                if ($exception instanceof NotFoundException) {
+                    return $response;
+                } else {
+                    throw $exception;
+                }
+            }
+        );
     }
 
     /**

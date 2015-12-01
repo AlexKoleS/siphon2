@@ -12,6 +12,7 @@ use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
+use React\Promise;
 
 /**
  * Client for reading team statistics feeds.
@@ -33,13 +34,15 @@ class TeamStatisticsReader implements TeamStatisticsReaderInterface
      *
      * @param RequestInterface The request.
      *
-     * @return ResponseInterface        The response.
-     * @throws InvalidArgumentException if the request is not supported.
+     * @return ResponseInterface        [via promise] The response.
+     * @throws InvalidArgumentException [via promise] If the request is not supported.
      */
     public function read(RequestInterface $request)
     {
         if (!$this->isSupported($request)) {
-            throw new InvalidArgumentException('Unsupported request.');
+            return Promise\reject(
+                new InvalidArgumentException('Unsupported request.')
+            );
         } elseif (StatisticsType::COMBINED() === $request->type()) {
             $resource = sprintf(
                 '/sport/v2/%s/%s/team-stats/%s/team_stats_%s.xml',
@@ -58,32 +61,34 @@ class TeamStatisticsReader implements TeamStatisticsReaderInterface
             );
         }
 
-        $xml = $this
-            ->xmlReader
-            ->read($resource)
-            ->xpath('.//season-content')[0];
+        return $this->xmlReader->read($resource)->then(
+            function ($xml) use ($request) {
+                $xml = $xml->xpath('.//season-content')[0];
 
-        // Sometimes the feed contains no team or player information. Since
-        // this information is required to build a meaningful response, we treat
-        // this condition equivalent to a not found error.
-        if (!$teamContent = $xml->xpath('.//team-content')) {
-            throw new NotFoundException();
-        }
+                // Sometimes the feed contains no team or player information.
+                // Since this information is required to build a meaningful
+                // response, we treat this condition equivalent to a not found
+                // error.
+                if (!$teamContent = $xml->xpath('.//team-content')) {
+                    throw new NotFoundException();
+                }
 
-        $response = new TeamStatisticsResponse(
-            $request->sport(),
-            $this->createSeason($xml->season),
-            $request->type()
+                $response = new TeamStatisticsResponse(
+                    $request->sport(),
+                    $this->createSeason($xml->season),
+                    $request->type()
+                );
+
+                foreach ($teamContent as $element) {
+                    $response->add(
+                        $this->createTeam($element->team),
+                        $this->createStatisticsCollection($element)
+                    );
+                }
+
+                return $response;
+            }
         );
-
-        foreach ($teamContent as $element) {
-            $response->add(
-                $this->createTeam($element->team),
-                $this->createStatisticsCollection($element)
-            );
-        }
-
-        return $response;
     }
 
     /**

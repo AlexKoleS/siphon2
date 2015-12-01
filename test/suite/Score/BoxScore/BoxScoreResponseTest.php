@@ -15,9 +15,9 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->competition = Phony::fullMock(CompetitionInterface::class);
-        $this->homeTeam = Phony::fullMock(TeamInterface::class)->mock();
-        $this->awayTeam = Phony::fullMock(TeamInterface::class)->mock();
+        $this->competition = Phony::mock(CompetitionInterface::class);
+        $this->homeTeam = Phony::mock(TeamInterface::class)->mock();
+        $this->awayTeam = Phony::mock(TeamInterface::class)->mock();
 
         $this->competition->homeTeam->returns($this->homeTeam);
         $this->competition->awayTeam->returns($this->awayTeam);
@@ -25,14 +25,14 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
         $this->homeTeamStatistics = new StatisticsCollection();
         $this->awayTeamStatistics = new StatisticsCollection();
 
-        $this->player1 = Phony::fullMock(Player::class);
-        $this->player2 = Phony::fullMock(Player::class);
+        $this->player1 = Phony::mock(Player::class);
+        $this->player2 = Phony::mock(Player::class);
 
         $this->player1->id->returns('<player 1>');
         $this->player2->id->returns('<player 2>');
 
-        $this->statistics1 = Phony::fullMock(StatisticsCollection::class)->mock();
-        $this->statistics2 = Phony::fullMock(StatisticsCollection::class)->mock();
+        $this->statistics1 = Phony::mock(StatisticsCollection::class)->mock();
+        $this->statistics2 = Phony::mock(StatisticsCollection::class)->mock();
 
         $this->response = new BoxScoreResponse(
             $this->competition->mock(),
@@ -145,7 +145,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
         );
 
         $this->response->add(
-            Phony::fullMock(TeamInterface::class)->mock(),
+            Phony::mock(TeamInterface::class)->mock(),
             $this->player1->mock(),
             $this->statistics1
         );

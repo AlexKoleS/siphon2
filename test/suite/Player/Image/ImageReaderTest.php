@@ -60,25 +60,21 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
         $this->reader = new ImageReader(
             $this->xmlReader()->mock()
         );
+
+        $this->resolve = Phony::spy();
+        $this->reject = Phony::spy();
     }
 
     public function testRead()
     {
         $this->setUpXmlReader('Player/images.xml');
+        $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $response = $this
-            ->reader
-            ->read($this->request);
+        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml');
+        $this->reject->never()->called();
+        $response = $this->resolve->calledWith($this->isInstanceOf(ImageResponse::class))->argument();
 
-        $this
-            ->xmlReader
-            ->read
-            ->calledWith('/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml');
-
-        $this->assertEquals(
-            $this->response,
-            $response
-        );
+        $this->assertEquals($this->response, $response);
     }
 
     public function testReadEmpty()
@@ -86,34 +82,18 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/empty.xml');
 
         $this->setExpectedException(NotFoundException::class);
-
-        $this
-            ->reader
-            ->read($this->request);
+        $this->reader->read($this->request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Unsupported request.'
-        );
-
-        $this->reader->read(
-            Phony::mock(RequestInterface::class)->mock()
-        );
+        $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
+        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue(
-            $this->reader->isSupported($this->request)
-        );
-
-        $this->assertFalse(
-            $this->reader->isSupported(
-                Phony::mock(RequestInterface::class)->mock()
-            )
-        );
+        $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }
