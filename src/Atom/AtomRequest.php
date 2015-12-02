@@ -14,13 +14,13 @@ use InvalidArgumentException;
 class AtomRequest implements RequestInterface
 {
     /**
-     * @param DateTime    $updatedTime Limit results to feeds updated after this time.
-     * @param string|null $feed        Limit results to feeds of the given type, or null for any type.
-     * @param integer     $limit       The maximum number of results to return.
-     * @param integer     $order       The sort order (one of SORT_ASC or SORT_DESC).
+     * @param DateTime|string $updatedTime Limit results to feeds updated after this time.
+     * @param string|null     $feed        Limit results to feeds of the given type, or null for any type.
+     * @param integer         $limit       The maximum number of results to return.
+     * @param integer         $order       The sort order (one of SORT_ASC or SORT_DESC).
      */
     public function __construct(
-        DateTime $updatedTime,
+        $updatedTime,
         $feed = null,
         $limit = 5000,
         $order = SORT_ASC
@@ -36,7 +36,7 @@ class AtomRequest implements RequestInterface
      *
      * Results are limited to feeds updated after this time.
      *
-     * @return DateTime The updated time.
+     * @return string The updated time.
      */
     public function updatedTime()
     {
@@ -48,11 +48,11 @@ class AtomRequest implements RequestInterface
      *
      * Results are limited to feeds updated after this time.
      *
-     * @param DateTime $updatedTime The updated time.
+     * @param DateTime|string $updatedTime The updated time.
      */
-    public function setUpdatedTime(DateTime $updatedTime)
+    public function setUpdatedTime($updatedTime)
     {
-        $this->updatedTime = $updatedTime;
+        $this->updatedTime = strval($updatedTime);
     }
 
     /**
@@ -148,7 +148,7 @@ class AtomRequest implements RequestInterface
     {
         return Serialization::serialize(
             1, // version 1
-            $this->updatedTime->unixTime(),
+            $this->updatedTime,
             $this->feed,
             $this->limit,
             $this->order
@@ -165,7 +165,7 @@ class AtomRequest implements RequestInterface
         Serialization::unserialize(
             $buffer,
             function ($updatedTime, $feed, $limit, $order) {
-                $this->updatedTime = DateTime::fromUnixTime($updatedTime);
+                $this->updatedTime = $updatedTime;
                 $this->feed        = $feed;
                 $this->limit       = $limit;
                 $this->order       = $order;
@@ -180,7 +180,7 @@ class AtomRequest implements RequestInterface
     {
         return sprintf(
             'atom(%s%s limit:%s %s)',
-            $this->updatedTime->isoString(),
+            $this->updatedTime,
             $this->feed ? ' feed:' . $this->feed : '',
             $this->limit,
             $this->order === SORT_ASC ? 'asc' : 'desc'

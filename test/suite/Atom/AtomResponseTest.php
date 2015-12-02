@@ -11,26 +11,18 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->updatedTime = DateTime::fromUnixTime(0);
-
+        $this->updatedTime = 'a';
         $this->response = new AtomResponse($this->updatedTime);
     }
 
     public function testUpdatedTime()
     {
-        $this->assertSame(
-            $this->updatedTime,
-            $this->response->updatedTime()
-        );
+        $this->assertSame($this->updatedTime, $this->response->updatedTime());
 
-        $updatedTime = DateTime::fromUnixTime(1);
-
+        $updatedTime = 'b';
         $this->response->setUpdatedTime($updatedTime);
 
-        $this->assertSame(
-            $updatedTime,
-            $this->response->updatedTime()
-        );
+        $this->assertSame($updatedTime, $this->response->updatedTime());
     }
 
     public function testIsEmpty()

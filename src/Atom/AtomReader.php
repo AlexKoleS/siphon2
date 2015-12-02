@@ -40,9 +40,7 @@ class AtomReader implements AtomReaderInterface
 
         return $this->xmlReader->read('/Atom', $parameters)->then(
             function ($xml) {
-                $response = new AtomResponse(
-                    DateTime::fromIsoString($xml->updated)
-                );
+                $response = new AtomResponse(strval($xml->updated));
 
                 foreach ($xml->entry as $entry) {
                     $response->add(
@@ -79,7 +77,7 @@ class AtomReader implements AtomReaderInterface
     private function buildParameters(AtomRequest $request)
     {
         $parameters = [
-            'newerThan' => $request->updatedTime()->isoString(),
+            'newerThan' => $request->updatedTime(),
             'maxCount'  => $request->limit(),
         ];
 

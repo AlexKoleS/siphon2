@@ -38,7 +38,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(AtomResponse::class))->argument();
 
-        $this->assertEquals(DateTime::fromIsoString('2015-02-15T21:11:15.4952-04:00'), $response->updatedTime());
+        $this->assertEquals('2015-02-15T21:11:15.4952-04:00', $response->updatedTime());
         $this->assertEquals(
             [
                 [

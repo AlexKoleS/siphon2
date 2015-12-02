@@ -16,7 +16,7 @@ class AtomResponse implements
     IteratorAggregate,
     Countable
 {
-    public function __construct(DateTime $updatedTime)
+    public function __construct($updatedTime)
     {
         $this->entries = [];
 
@@ -26,7 +26,7 @@ class AtomResponse implements
     /**
      * Get the time at which the atom response was produced.
      *
-     * @return DateTime The time at which the atom response was produced.
+     * @return string The time at which the atom response was produced.
      */
     public function updatedTime()
     {
@@ -36,9 +36,9 @@ class AtomResponse implements
     /**
      * Set the time at which the atom response was produced.
      *
-     * @param DateTime $updatedTime The time at which the atom response was produced.
+     * @param string $updatedTime The time at which the atom response was produced.
      */
-    public function setUpdatedTime(DateTime $updatedTime)
+    public function setUpdatedTime($updatedTime)
     {
         $this->updatedTime = $updatedTime;
     }

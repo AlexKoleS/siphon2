@@ -12,25 +12,22 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updatedTime = DateTime::fromUnixTime(123);
-
         $this->request = new AtomRequest($this->updatedTime);
     }
 
     public function testUpdatedTime()
     {
-        $this->assertSame(
-            $this->updatedTime,
-            $this->request->updatedTime()
-        );
+        $this->assertSame($this->updatedTime->isoString(), $this->request->updatedTime());
 
         $updatedTime = DateTime::fromUnixTime(1);
 
         $this->request->setUpdatedTime($updatedTime);
 
-        $this->assertSame(
-            $updatedTime,
-            $this->request->updatedTime()
-        );
+        $this->assertSame($updatedTime->isoString(), $this->request->updatedTime());
+
+        $this->request->setUpdatedTime('a');
+
+        $this->assertSame('a', $this->request->updatedTime());
     }
 
     public function testFeed()
