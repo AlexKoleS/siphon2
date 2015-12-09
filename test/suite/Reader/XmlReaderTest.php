@@ -12,9 +12,8 @@ use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
 use Psr\Http\Message\RequestInterface as HttpRequestInterface;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
+use React\Promise;
 use SimpleXMLElement;
-use function React\Promise\reject;
-use function React\Promise\resolve;
 
 class XmlReaderTest extends PHPUnit_Framework_TestCase
 {
@@ -25,7 +24,7 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this->response   = Phony::mock(Response::class);
 
         $this->urlBuilder->build->returns('<url>');
-        $this->httpClient->get->returns(resolve($this->response->mock()));
+        $this->httpClient->get->returns(Promise\resolve($this->response->mock()));
         $this->response->getBody->returns('<xml></xml>');
 
         $this->reader = new XmlReader($this->urlBuilder->mock(), $this->httpClient->mock());
@@ -47,7 +46,7 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
     public function testReadWithHttpClientException()
     {
         $exception = new ResponseException($this->response->mock());
-        $this->httpClient->get->returns(reject($exception));
+        $this->httpClient->get->returns(Promise\reject($exception));
         $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
         $this->reject->calledWith(new ServiceUnavailableException($exception));
@@ -58,7 +57,7 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
     {
         $exception = new ResponseException($this->response->mock());
         $this->response->getCode->returns(404);
-        $this->httpClient->get->returns(reject($exception));
+        $this->httpClient->get->returns(Promise\reject($exception));
         $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
         $this->reject->calledWith(new NotFoundException($exception));
@@ -68,7 +67,7 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
     public function testReadWithGenericException()
     {
         $exception = new Exception('The exception!');
-        $this->httpClient->get->returns(reject($exception));
+        $this->httpClient->get->returns(Promise\reject($exception));
         $this->reader->read('path/to/feed')->done($this->resolve, $this->reject);
 
         $this->reject->calledWith(new ServiceUnavailableException($exception));
