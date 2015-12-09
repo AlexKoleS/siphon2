@@ -2,8 +2,10 @@
 
 ### Next Version (prediction: 3.0.0)
 
+* **[BC]** Changed to asynchronous/promise-based implementation
 * **[BC, IMPROVED]** Added team information to player statistics in `BoxScoreResponse`
 * **[NEW]** Added `StatisticsCollection::findGroupByKey()`
+
 
 ### 2.0.0 (2015-10-15)
 

@@ -2,8 +2,9 @@
 
 namespace Icecave\Siphon\Reader;
 
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\ClientException;
+use Clue\React\Buzz\Browser;
+use Clue\React\Buzz\Message\Request;
+use Clue\React\Buzz\Message\ResponseException;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use React\Promise\Deferred;
@@ -20,7 +21,7 @@ class XmlReader implements XmlReaderInterface
      */
     public function __construct(
         UrlBuilderInterface $urlBuilder,
-        ClientInterface $httpClient
+        Browser $httpClient
     ) {
         $this->urlBuilder = $urlBuilder;
         $this->httpClient = $httpClient;
@@ -37,30 +38,24 @@ class XmlReader implements XmlReaderInterface
     public function read($resource, array $parameters = [])
     {
         $url = $this->urlBuilder->build($resource, $parameters);
-        $deferred = new Deferred();
 
-        $this->httpClient->requestAsync('GET', $url)->then(
-            function ($response) use ($deferred) {
-                $deferred->resolve(
-                    new SimpleXMLElement($response->getBody(), LIBXML_NONET)
-                );
-            }
-        )->otherwise(
-            function ($exception) use ($deferred) {
-                if (
-                    $exception instanceof ClientException &&
-                    404 === $exception->getCode()
-                ) {
-                    $deferred->reject(new NotFoundException($exception));
-                } else {
-                    $deferred->reject(
-                        new ServiceUnavailableException($exception)
-                    );
+        return $this->httpClient->get($url)
+            ->then(
+                function ($response) {
+                    return new SimpleXMLElement($response->getBody(), LIBXML_NONET);
                 }
-            }
-        );
+            )->otherwise(
+                function ($exception) {
+                    if (
+                        $exception instanceof ResponseException &&
+                        404 === $exception->getResponse()->getCode()
+                    ) {
+                       throw new NotFoundException($exception);
+                    }
 
-        return $deferred->promise();
+                    throw new ServiceUnavailableException($exception);
+                }
+            );
     }
 
     private $urlBuilder;

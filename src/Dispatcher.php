@@ -2,8 +2,7 @@
 
 namespace Icecave\Siphon;
 
-use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\HandlerStack;
+use Clue\React\Buzz\Browser;
 use Icecave\Siphon\Atom\AtomReader;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
@@ -41,7 +40,6 @@ use Icecave\Siphon\Team\TeamReader;
 use Icecave\Siphon\Team\TeamReaderInterface;
 use Icecave\Siphon\Team\TeamRequest;
 use React\EventLoop\LoopInterface;
-use WyriHaximus\React\GuzzlePsr7\HttpClientAdapter;
 
 /**
  * The dispatcher is a facade for easily servicing any Siphon request.
@@ -59,11 +57,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public static function create(LoopInterface $loop, $apiKey)
     {
         $urlBuilder = new UrlBuilder($apiKey);
-        $httpClient = new HttpClient(
-            [
-                'handler' => HandlerStack::create(new HttpClientAdapter($loop)),
-            ]
-        );
+        $httpClient = new Browser($loop);
         $xmlReader = new XmlReader($urlBuilder, $httpClient);
 
         return new static(

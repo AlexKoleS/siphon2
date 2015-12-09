@@ -19,11 +19,10 @@
     ],
     "require": {
         "php": ">=5.5",
+        "clue/buzz-react": "^0.4",
         "eloquent/enumeration": "^5",
-        "guzzlehttp/guzzle": "^6",
         "icecave/chrono": "^1.0.3",
-        "react/event-loop": "^0.4",
-        "wyrihaximus/react-guzzle-psr7": "^1"
+        "react/event-loop": "^0.4"
     },
     "require-dev": {
         "eloquent/phony": "^0.6",
