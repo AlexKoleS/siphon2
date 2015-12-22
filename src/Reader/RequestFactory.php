@@ -8,6 +8,7 @@ use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
+use Icecave\Siphon\Result\ResultRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
@@ -52,6 +53,8 @@ class RequestFactory implements RequestFactoryInterface
         if ($request = $this->createAtomRequest($components)) {
             return $request;
         } elseif ($request = $this->createScheduleRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createResultRequest($components)) {
             return $request;
         } elseif ($request = $this->createTeamRequest($components)) {
             return $request;
@@ -156,6 +159,31 @@ class RequestFactory implements RequestFactoryInterface
         }
 
         return new ScheduleRequest($sport, $type);
+    }
+
+    /**
+     * Attempt to create a ResultRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return ResultRequest|null
+     */
+    private function createResultRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/results/([^/]+)/results_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new ResultRequest(
+                Sport::findByComponents($matches[1], $matches[2]),
+                $matches[3]
+            );
+        }
+
+        return null;
     }
 
     /**

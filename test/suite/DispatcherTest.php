@@ -20,6 +20,9 @@ use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsResponse;
 use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
+use Icecave\Siphon\Result\ResultReaderInterface;
+use Icecave\Siphon\Result\ResultRequest;
+use Icecave\Siphon\Result\ResultResponse;
 use Icecave\Siphon\Schedule\ScheduleReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleResponse;
@@ -46,6 +49,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->xmlReader         = Phony::mock(XmlReaderInterface::class);
         $this->atomReader        = Phony::mock(AtomReaderInterface::class);
         $this->scheduleReader    = Phony::mock(ScheduleReaderInterface::class);
+        $this->resultReader      = Phony::mock(ResultReaderInterface::class);
         $this->teamReader        = Phony::mock(TeamReaderInterface::class);
         $this->teamStatsReader   = Phony::mock(TeamStatisticsReaderInterface::class);
         $this->playerReader      = Phony::mock(PlayerReaderInterface::class);
@@ -60,6 +64,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->xmlReader->mock(),
             $this->atomReader->mock(),
             $this->scheduleReader->mock(),
+            $this->resultReader->mock(),
             $this->teamReader->mock(),
             $this->teamStatsReader->mock(),
             $this->playerReader->mock(),
@@ -118,6 +123,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             ScheduleRequest::class,
             ScheduleResponse::class,
             $this->scheduleReader
+        );
+    }
+
+    public function testResultRequest()
+    {
+        $this->dispatchTest(
+            ResultRequest::class,
+            ResultResponse::class,
+            $this->resultReader
         );
     }
 

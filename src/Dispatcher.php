@@ -25,6 +25,9 @@ use Icecave\Siphon\Reader\UrlBuilder;
 use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReader;
 use Icecave\Siphon\Reader\XmlReaderInterface;
+use Icecave\Siphon\Result\ResultReader;
+use Icecave\Siphon\Result\ResultReaderInterface;
+use Icecave\Siphon\Result\ResultRequest;
 use Icecave\Siphon\Schedule\ScheduleReader;
 use Icecave\Siphon\Schedule\ScheduleReaderInterface;
 use Icecave\Siphon\Schedule\ScheduleRequest;
@@ -71,6 +74,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             $xmlReader,
             new AtomReader($xmlReader),
             new ScheduleReader($xmlReader),
+            new ResultReader($xmlReader),
             new TeamReader($xmlReader),
             new TeamStatisticsReader($xmlReader),
             new PlayerReader($xmlReader),
@@ -87,6 +91,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         XmlReaderInterface $xmlReader,
         AtomReaderInterface $atomReader,
         ScheduleReaderInterface $scheduleReader,
+        ResultReaderInterface $resultReader,
         TeamReaderInterface $teamReader,
         TeamStatisticsReaderInterface $teamStatisticsReader,
         PlayerReaderInterface $playerReader,
@@ -100,6 +105,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         $this->xmlReader              = $xmlReader;
         $this->atomReader             = $atomReader;
         $this->scheduleReader         = $scheduleReader;
+        $this->resultReader           = $resultReader;
         $this->teamReader             = $teamReader;
         $this->teamStatisticsReader   = $teamStatisticsReader;
         $this->playerReader           = $playerReader;
@@ -179,6 +185,20 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public function visitScheduleRequest(ScheduleRequest $request)
     {
         return $this->scheduleReader->read($request);
+    }
+
+    /**
+     * Visit the given request.
+     *
+     * @access private
+     *
+     * @param ResultRequest $request
+     *
+     * @return mixed
+     */
+    public function visitResultRequest(ResultRequest $request)
+    {
+        return $this->resultReader->read($request);
     }
 
     /**
@@ -291,6 +311,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     private $xmlReader;
     private $atomReader;
     private $scheduleReader;
+    private $resultReader;
     private $teamReader;
     private $playerReader;
     private $imageReader;

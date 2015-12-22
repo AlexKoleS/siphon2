@@ -8,6 +8,7 @@ use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
+use Icecave\Siphon\Result\ResultRequest;
 use Icecave\Siphon\Schedule\ScheduleRequest;
 use Icecave\Siphon\Schedule\ScheduleType;
 use Icecave\Siphon\Score\BoxScore\BoxScoreRequest;
@@ -110,6 +111,14 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                 new ScheduleRequest(
                     Sport::MLB(),
                     ScheduleType::DELETED()
+                ),
+            ],
+
+            'result' => [
+                '/sport/v2/baseball/MLB/results/2015/results_MLB.xml',
+                new ResultRequest(
+                    Sport::MLB(),
+                    '2015'
                 ),
             ],
 
