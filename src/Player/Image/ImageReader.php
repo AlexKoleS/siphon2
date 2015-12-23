@@ -5,7 +5,6 @@ namespace Icecave\Siphon\Player\Image;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
-use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Team\TeamFactoryTrait;
@@ -22,11 +21,8 @@ class ImageReader implements ImageReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(
-        UrlBuilderInterface $urlBuilder,
-        XmlReaderInterface $xmlReader
-    ) {
-        $this->urlBuilder = $urlBuilder;
+    public function __construct(XmlReaderInterface $xmlReader)
+    {
         $this->xmlReader = $xmlReader;
     }
 
@@ -54,10 +50,9 @@ class ImageReader implements ImageReaderInterface
             $request->teamId(),
             $request->sport()->league()
         );
-        $url = $this->urlBuilder->build($resource, array(), false);
 
         return $this->xmlReader->read($resource)->then(
-            function ($xml) use ($request, $url) {
+            function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content')[0];
 
                 // Sometimes the feed contains no team or player information.
@@ -73,7 +68,6 @@ class ImageReader implements ImageReaderInterface
                     $this->createSeason($xml->season),
                     $this->createTeam($xml->{'team-content'}->team)
                 );
-                $response->setUrl($url);
 
                 foreach ($xml->xpath('.//player-content') as $element) {
                     $small =
@@ -105,7 +99,4 @@ class ImageReader implements ImageReaderInterface
     {
         return $request instanceof ImageRequest;
     }
-
-    private $urlBuilder;
-    private $xmlReader;
 }

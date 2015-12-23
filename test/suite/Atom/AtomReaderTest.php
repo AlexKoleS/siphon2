@@ -17,7 +17,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Atom/atom.xml');
 
         $this->request = new AtomRequest(DateTime::fromUnixTime(86400));
-        $this->reader = new AtomReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new AtomReader($this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -38,11 +38,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(AtomResponse::class))->argument();
 
-        $this->assertSame(
-            'http://sdi.example.org/Atom?newerThan=1970-01-02T00%3A00%3A00%2B00%3A00&maxCount=5000&order=asc',
-            $response->url()
-        );
-        $this->assertSame('2015-02-15T21:11:15.4952-04:00', $response->updatedTime());
+        $this->assertEquals('2015-02-15T21:11:15.4952-04:00', $response->updatedTime());
         $this->assertEquals(
             [
                 [

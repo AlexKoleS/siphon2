@@ -20,15 +20,6 @@ trait XmlReaderTestTrait
         $this->xmlReader()->read->returns(Promise\reject(new NotFoundException()));
     }
 
-    public function urlBuilder()
-    {
-        if (null === $this->urlBuilder) {
-            $this->urlBuilder = new UrlBuilder('00000000-0000-0000-0000-000000000000', 'http://sdi.example.org');
-        }
-
-        return $this->urlBuilder;
-    }
-
     public function xmlReader()
     {
         if (null === $this->xmlReader) {
@@ -38,6 +29,5 @@ trait XmlReaderTestTrait
         return $this->xmlReader;
     }
 
-    private $urlBuilder;
     private $xmlReader;
 }

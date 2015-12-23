@@ -3,7 +3,6 @@
 namespace Icecave\Siphon\Result;
 
 use Icecave\Siphon\Reader\RequestInterface;
-use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
@@ -22,11 +21,8 @@ class ResultReader implements ResultReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(
-        UrlBuilderInterface $urlBuilder,
-        XmlReaderInterface $xmlReader
-    ) {
-        $this->urlBuilder = $urlBuilder;
+    public function __construct(XmlReaderInterface $xmlReader)
+    {
         $this->xmlReader = $xmlReader;
     }
 
@@ -57,14 +53,12 @@ class ResultReader implements ResultReaderInterface
             $seasonName,
             $league
         );
-        $url = $this->urlBuilder->build($resource, array(), false);
 
         return $this->xmlReader->read($resource)->then(
-            function ($xml) use ($request, $sport, $url) {
+            function ($xml) use ($request, $sport) {
                 $xml = $xml->xpath('.//season-content')[0];
                 $season = $this->createSeason($xml->season);
                 $response = new ResultResponse($sport, $season);
-                $response->setUrl($url);
 
                 foreach ($xml->xpath('.//competition') as $competition) {
                     $qaStatus = XPath::stringOrNull(
@@ -93,6 +87,5 @@ class ResultReader implements ResultReaderInterface
         return $request instanceof ResultRequest;
     }
 
-    private $urlBuilder;
     private $xmlReader;
 }

@@ -66,17 +66,17 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         return new static(
             $urlBuilder,
             $xmlReader,
-            new AtomReader($urlBuilder, $xmlReader),
-            new ScheduleReader($urlBuilder, $xmlReader),
-            new ResultReader($urlBuilder, $xmlReader),
-            new TeamReader($urlBuilder, $xmlReader),
-            new TeamStatisticsReader($urlBuilder, $xmlReader),
-            new PlayerReader($urlBuilder, $xmlReader),
-            new PlayerStatisticsReader($urlBuilder, $xmlReader),
-            new ImageReader($urlBuilder, $xmlReader),
-            new InjuryReader($urlBuilder, $xmlReader),
-            new LiveScoreReader($urlBuilder, $xmlReader),
-            new BoxScoreReader($urlBuilder, $xmlReader)
+            new AtomReader($xmlReader),
+            new ScheduleReader($xmlReader),
+            new ResultReader($xmlReader),
+            new TeamReader($xmlReader),
+            new TeamStatisticsReader($xmlReader),
+            new PlayerReader($xmlReader),
+            new PlayerStatisticsReader($xmlReader),
+            new ImageReader($xmlReader),
+            new InjuryReader($xmlReader),
+            new LiveScoreReader($xmlReader),
+            new BoxScoreReader($xmlReader)
         );
     }
 

@@ -27,7 +27,6 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
                 Date::fromIsoString('2009-11-05')
             )
         );
-        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml');
 
         $this->response->add(new Team('/sport/baseball/team:2976', 'Milwaukee',     'MIL',   'Brewers'));
         $this->response->add(new Team('/sport/baseball/team:2982', 'Chicago',       'CHC',   'Cubs'));
@@ -60,7 +59,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
         $this->response->add(new Team('/sport/baseball/team:2984', 'Toronto',       'TOR',   'Blue Jays'));
         $this->response->add(new Team('/sport/baseball/team:2960', 'Tampa Bay',     'TB',    'Rays'));
 
-        $this->reader = new TeamReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new TeamReader($this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();

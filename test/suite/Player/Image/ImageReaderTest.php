@@ -38,7 +38,6 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
                 'San Diego'
             )
         );
-        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml');
 
         $this->response->add(
             new Player('/sport/baseball/player:41227',  'Joaquin',   'Benoit'),
@@ -58,7 +57,9 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
             'http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466883.jpg'
         );
 
-        $this->reader = new ImageReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new ImageReader(
+            $this->xmlReader()->mock()
+        );
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();

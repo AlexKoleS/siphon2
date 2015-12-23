@@ -34,7 +34,7 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
             StatisticsType::COMBINED()
         );
 
-        $this->reader = new TeamStatisticsReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new TeamStatisticsReader($this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -43,8 +43,6 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
     public function testRead()
     {
         $this->setUpXmlReader('Team/team-stats.xml');
-
-        $this->response->setUrl('http://sdi.example.org/sport/v2/football/NFL/team-stats/2014-2015/team_stats_NFL.xml');
 
         $this->response->add(
             new TeamRef('/sport/football/team:10', 'Tennessee'),
@@ -189,10 +187,6 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
     public function testReadSplitStats()
     {
         $this->setUpXmlReader('Team/team-split-stats.xml');
-
-        $this->response->setUrl(
-            'http://sdi.example.org/sport/v2/football/NFL/team-split-stats/2014-2015/team_split_stats_NFL.xml'
-        );
 
         $this->request->setType(StatisticsType::SPLIT());
         $this->response->setType(StatisticsType::SPLIT());

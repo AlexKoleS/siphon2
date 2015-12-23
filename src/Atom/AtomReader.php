@@ -5,7 +5,6 @@ namespace Icecave\Siphon\Atom;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
-use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Util\URL;
 use InvalidArgumentException;
@@ -16,11 +15,8 @@ use React\Promise;
  */
 class AtomReader implements AtomReaderInterface
 {
-    public function __construct(
-        UrlBuilderInterface $urlBuilder,
-        XmlReaderInterface $xmlReader
-    ) {
-        $this->urlBuilder = $urlBuilder;
+    public function __construct(XmlReaderInterface $xmlReader)
+    {
         $this->xmlReader = $xmlReader;
     }
 
@@ -40,14 +36,11 @@ class AtomReader implements AtomReaderInterface
             );
         }
 
-        $resource = '/Atom';
         $parameters = $this->buildParameters($request);
-        $url = $this->urlBuilder->build($resource, $parameters, false);
 
-        return $this->xmlReader->read($resource, $parameters)->then(
-            function ($xml) use ($url) {
+        return $this->xmlReader->read('/Atom', $parameters)->then(
+            function ($xml) {
                 $response = new AtomResponse(strval($xml->updated));
-                $response->setUrl($url);
 
                 foreach ($xml->entry as $entry) {
                     $response->add(
@@ -101,6 +94,5 @@ class AtomReader implements AtomReaderInterface
         return $parameters;
     }
 
-    private $urlBuilder;
     private $xmlReader;
 }

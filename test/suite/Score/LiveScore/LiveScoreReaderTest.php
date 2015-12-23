@@ -22,7 +22,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new LiveScoreReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new LiveScoreReader($this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -54,7 +54,6 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
-        $expected->setUrl('http://sdi.example.org/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
         $expected->setCurrentPeriod($currentPeriod);
         $expected->setGameTime(Duration::fromComponents(0, 0, 0, 2, 55));
 
@@ -96,7 +95,6 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
-        $expected->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/livescores/livescores_288425.xml');
         $expected->setCurrentPeriod($currentPeriod);
 
         $request = new LiveScoreRequest(Sport::MLB(), 288425);

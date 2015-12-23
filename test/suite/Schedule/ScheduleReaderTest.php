@@ -74,7 +74,7 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
         $this->response->add($season);
 
-        $this->reader = new ScheduleReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new ScheduleReader($this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -83,9 +83,7 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
     public function testReadFullSchedule()
     {
         $this->setUpXmlReader('Schedule/schedule.xml');
-
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
-        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
 
         $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
         $this->reject->never()->called();
@@ -102,7 +100,6 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         $this->response->setType(ScheduleType::LIMIT_2_DAYS());
 
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
-        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
 
         $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
         $this->reject->never()->called();
@@ -119,7 +116,6 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         $this->response->setType(ScheduleType::DELETED());
 
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
-        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml');
 
         $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml');
         $this->reject->never()->called();
@@ -131,9 +127,7 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
     public function testReadNotFound()
     {
         $this->setUpXmlReaderNotFound();
-
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
-        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
 
         $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
         $this->reject->never()->called();

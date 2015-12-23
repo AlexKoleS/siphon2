@@ -4,7 +4,6 @@ namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\ResponseInterface;
-use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Period;
@@ -15,8 +14,6 @@ use Icecave\Siphon\Score\Score;
  */
 class LiveScoreResponse implements ResponseInterface
 {
-    use ResponseTrait;
-
     public function __construct(
         CompetitionInterface $competition,
         Score $score

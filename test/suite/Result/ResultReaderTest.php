@@ -31,7 +31,6 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
                 Date::fromIsoString('2016-06-30')
             )
         );
-        $this->response->setUrl('http://sdi.example.org/sport/v2/hockey/NHL/results/2015-2016/results_NHL.xml');
 
         $this->response->add(
             new Competition(
@@ -70,7 +69,7 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
             true
         );
 
-        $this->reader = new ResultReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->reader = new ResultReader($this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();

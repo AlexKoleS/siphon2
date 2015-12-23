@@ -5,7 +5,6 @@ namespace Icecave\Siphon\Score\BoxScore;
 use Countable;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseInterface;
-use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Score;
@@ -22,8 +21,6 @@ class BoxScoreResponse implements
     Countable,
     IteratorAggregate
 {
-    use ResponseTrait;
-
     public function __construct(
         CompetitionInterface $competition,
         StatisticsCollection $homeTeamStatistics,

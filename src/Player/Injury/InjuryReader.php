@@ -6,7 +6,6 @@ use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\RequestInterface;
-use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
@@ -19,11 +18,8 @@ class InjuryReader implements InjuryReaderInterface
 {
     use PlayerFactoryTrait;
 
-    public function __construct(
-        UrlBuilderInterface $urlBuilder,
-        XmlReaderInterface $xmlReader
-    ) {
-        $this->urlBuilder = $urlBuilder;
+    public function __construct(XmlReaderInterface $xmlReader)
+    {
         $this->xmlReader = $xmlReader;
     }
 
@@ -49,13 +45,11 @@ class InjuryReader implements InjuryReaderInterface
             $request->sport()->league(),
             $request->sport()->league()
         );
-        $url = $this->urlBuilder->build($resource, array(), false);
 
         return $this->xmlReader->read($resource)->then(
-            function ($xml) use ($request, $url) {
+            function ($xml) use ($request) {
                 $xml = $xml->xpath('.//player-content');
                 $response = new InjuryResponse($request->sport());
-                $response->setUrl($url);
 
                 foreach ($xml as $element) {
                     $injury = $element->injury;
@@ -99,7 +93,4 @@ class InjuryReader implements InjuryReaderInterface
     {
         return $request instanceof InjuryRequest;
     }
-
-    private $urlBuilder;
-    private $xmlReader;
 }
