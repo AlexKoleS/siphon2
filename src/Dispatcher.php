@@ -19,6 +19,7 @@ use Icecave\Siphon\Player\Statistics\PlayerStatisticsReader;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsReaderInterface;
 use Icecave\Siphon\Player\Statistics\PlayerStatisticsRequest;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilder;
 use Icecave\Siphon\Reader\RequestVisitorInterface;
 use Icecave\Siphon\Reader\UrlBuilder;
 use Icecave\Siphon\Reader\UrlBuilderInterface;
@@ -60,23 +61,24 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     public static function create(LoopInterface $loop, $apiKey)
     {
         $urlBuilder = new UrlBuilder($apiKey);
+        $requestUrlBuilder = new RequestUrlBuilder($urlBuilder);
         $httpClient = new Browser($loop);
-        $xmlReader = new XmlReader($urlBuilder, $httpClient);
+        $xmlReader = new XmlReader($httpClient);
 
         return new static(
             $urlBuilder,
             $xmlReader,
-            new AtomReader($xmlReader),
-            new ScheduleReader($xmlReader),
-            new ResultReader($xmlReader),
-            new TeamReader($xmlReader),
-            new TeamStatisticsReader($xmlReader),
-            new PlayerReader($xmlReader),
-            new PlayerStatisticsReader($xmlReader),
-            new ImageReader($xmlReader),
-            new InjuryReader($xmlReader),
-            new LiveScoreReader($xmlReader),
-            new BoxScoreReader($xmlReader)
+            new AtomReader($requestUrlBuilder, $xmlReader),
+            new ScheduleReader($requestUrlBuilder, $xmlReader),
+            new ResultReader($requestUrlBuilder, $xmlReader),
+            new TeamReader($requestUrlBuilder, $xmlReader),
+            new TeamStatisticsReader($requestUrlBuilder, $xmlReader),
+            new PlayerReader($requestUrlBuilder, $xmlReader),
+            new PlayerStatisticsReader($requestUrlBuilder, $xmlReader),
+            new ImageReader($requestUrlBuilder, $xmlReader),
+            new InjuryReader($requestUrlBuilder, $xmlReader),
+            new LiveScoreReader($requestUrlBuilder, $xmlReader),
+            new BoxScoreReader($requestUrlBuilder, $xmlReader)
         );
     }
 

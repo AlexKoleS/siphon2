@@ -4,8 +4,8 @@ namespace Icecave\Siphon\Schedule;
 
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
-use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamFactoryTrait;
@@ -22,8 +22,11 @@ class ScheduleReader implements ScheduleReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -41,35 +44,13 @@ class ScheduleReader implements ScheduleReaderInterface
             return Promise\reject(
                 new InvalidArgumentException('Unsupported request.')
             );
-        } elseif (ScheduleType::FULL() === $request->type()) {
-            $resource = sprintf(
-                '/sport/v2/%s/%s/schedule/schedule_%s.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->sport()->league()
-            );
-        } elseif (ScheduleType::DELETED() === $request->type()) {
-            $resource = sprintf(
-                '/sport/v2/%s/%s/games-deleted/games_deleted_%s.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->sport()->league()
-            );
-        } else {
-            $resource = sprintf(
-                '/sport/v2/%s/%s/schedule/schedule_%s_%d_days.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->sport()->league(),
-                $request->type()->value()
-            );
         }
 
-        $response = new ScheduleResponse($request->sport(), $request->type());
-
-        return $this->xmlReader->read($resource)->then(
-            function ($xml) use ($request, $response) {
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
+            function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content');
+                $response =
+                    new ScheduleResponse($request->sport(), $request->type());
 
                 foreach ($xml as $element) {
                     $season = $this->createSeason($element->season);
@@ -98,14 +79,6 @@ class ScheduleReader implements ScheduleReaderInterface
 
                 return $response;
             }
-        )->otherwise(
-            function ($exception) use ($response) {
-                if ($exception instanceof NotFoundException) {
-                    return $response;
-                } else {
-                    throw $exception;
-                }
-            }
         );
     }
 
@@ -119,5 +92,6 @@ class ScheduleReader implements ScheduleReaderInterface
         return $request instanceof ScheduleRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

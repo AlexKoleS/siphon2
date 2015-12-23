@@ -35,7 +35,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             StatisticsType::COMBINED()
         );
 
-        $this->reader = new PlayerStatisticsReader($this->xmlReader()->mock());
+        $this->reader = new PlayerStatisticsReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -111,7 +111,9 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
 
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/football/NFL/player-stats/2014-2015/player_stats_23_NFL.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/football/NFL/player-stats/2014-2015/player_stats_23_NFL.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(PlayerStatisticsResponse::class))->argument();
 
@@ -160,8 +162,10 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
 
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read
-            ->calledWith('/sport/v2/football/NFL/player-split-stats/2014-2015/player_split_stats_23_NFL.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example' .
+                '/sport/v2/football/NFL/player-split-stats/2014-2015/player_split_stats_23_NFL.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(PlayerStatisticsResponse::class))->argument();
 

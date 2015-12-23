@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Score\BoxScore;
 
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
@@ -25,11 +26,11 @@ class BoxScoreReader implements BoxScoreReaderInterface
     use StatisticsFactoryTrait;
     use TeamFactoryTrait;
 
-    /**
-     * @param XMLReaderInterface $xmlReader
-     */
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -49,16 +50,7 @@ class BoxScoreReader implements BoxScoreReaderInterface
             );
         }
 
-        $resource = sprintf(
-            '/sport/v2/%s/%s/boxscores/%s/boxscore_%s_%d.xml',
-            $request->sport()->sport(),
-            $request->sport()->league(),
-            $request->seasonName(),
-            $request->sport()->league(),
-            $request->competitionId()
-        );
-
-        return $this->xmlReader->read($resource)->then(
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content')[0];
 
@@ -124,5 +116,6 @@ class BoxScoreReader implements BoxScoreReaderInterface
         return $request instanceof BoxScoreRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

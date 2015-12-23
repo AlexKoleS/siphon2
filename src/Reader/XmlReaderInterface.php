@@ -5,17 +5,16 @@ namespace Icecave\Siphon\Reader;
 use SimpleXMLElement;
 
 /**
- * Read XML data based on a resource name.
+ * Reads XML data.
  */
 interface XmlReaderInterface
 {
     /**
-     * Read XML data from a feed.
+     * Read XML data from a URL.
      *
-     * @param string               $resource   The path to the feed.
-     * @param array<string, mixed> $parameters Additional parameters to pass.
+     * @param string $url The URL.
      *
      * @return SimpleXMLElement [via promise] The XML response.
      */
-    public function read($resource, array $parameters = []);
+    public function read($url);
 }

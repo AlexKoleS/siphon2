@@ -69,7 +69,7 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
             true
         );
 
-        $this->reader = new ResultReader($this->xmlReader()->mock());
+        $this->reader = new ResultReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -80,7 +80,9 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Result/results.xml');
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/hockey/NHL/results/2015-2016/results_NHL.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/hockey/NHL/results/2015-2016/results_NHL.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(ResultResponse::class))->argument();
 

@@ -25,7 +25,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new BoxScoreReader($this->xmlReader()->mock());
+        $this->reader = new BoxScoreReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -278,7 +278,9 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
         $this->reader->read($request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(BoxScoreResponse::class))->argument();
         $this->assertEquals($expected, $response);

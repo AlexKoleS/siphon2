@@ -5,10 +5,10 @@ namespace Icecave\Siphon\Player\Statistics;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Statistics\StatisticsFactoryTrait;
-use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
@@ -24,8 +24,11 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
     use StatisticsFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -43,28 +46,9 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
             return Promise\reject(
                 new InvalidArgumentException('Unsupported request.')
             );
-        } elseif (StatisticsType::COMBINED() === $request->type()) {
-            $resource = sprintf(
-                '/sport/v2/%s/%s/player-stats/%s/player_stats_%d_%s.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->seasonName(),
-                $request->teamId(),
-                $request->sport()->league()
-            );
-        } else { // split stats
-            $resource = sprintf(
-                '/sport/v2/%s/%s/player-split-stats/%s/' .
-                    'player_split_stats_%d_%s.xml',
-                $request->sport()->sport(),
-                $request->sport()->league(),
-                $request->seasonName(),
-                $request->teamId(),
-                $request->sport()->league()
-            );
         }
 
-        return $this->xmlReader->read($resource)->then(
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content')[0];
 
@@ -105,5 +89,6 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
         return $request instanceof PlayerStatisticsRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
 use Icecave\Siphon\Schedule\CompetitionStatus;
@@ -25,11 +26,11 @@ class LiveScoreReader implements LiveScoreReaderInterface
     use CompetitionFactoryTrait;
     use TeamFactoryTrait;
 
-    /**
-     * @param XMLReaderInterface $xmlReader
-     */
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -49,14 +50,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
             );
         }
 
-        $resource = sprintf(
-            '/sport/v2/%s/%s/livescores/livescores_%d.xml',
-            $request->sport()->sport(),
-            $request->sport()->league(),
-            $request->competitionId()
-        );
-
-        return $this->xmlReader->read($resource)->then(
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($xml) use ($request) {
                 $xml = $xml->xpath('.//competition')[0];
 
@@ -229,5 +223,6 @@ class LiveScoreReader implements LiveScoreReaderInterface
         return PeriodType::memberBySportAndValue($sport, $type);
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

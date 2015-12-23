@@ -88,7 +88,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         // objects instead omit the last name, which is arguably more accurate.
         $this->response->add(new Player('/sport/baseball/player:42341', 'Wang',      null),           new PlayerSeasonDetails('40', 'SP', 'Starter',           true));
 
-        $this->reader = new PlayerReader($this->xmlReader()->mock());
+        $this->reader = new PlayerReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -99,7 +99,9 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/players.xml');
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/players/2009/players_2970_MLB.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/baseball/MLB/players/2009/players_2970_MLB.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(PlayerResponse::class))->argument();
 

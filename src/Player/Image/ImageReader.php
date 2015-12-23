@@ -5,6 +5,7 @@ namespace Icecave\Siphon\Player\Image;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Team\TeamFactoryTrait;
@@ -21,8 +22,11 @@ class ImageReader implements ImageReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -42,16 +46,7 @@ class ImageReader implements ImageReaderInterface
             );
         }
 
-        $resource = sprintf(
-            '/sport/v2/%s/%s/player-images/%s/player-images_%d_%s.xml',
-            $request->sport()->sport(),
-            $request->sport()->league(),
-            $request->seasonName(),
-            $request->teamId(),
-            $request->sport()->league()
-        );
-
-        return $this->xmlReader->read($resource)->then(
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content')[0];
 
@@ -99,4 +94,7 @@ class ImageReader implements ImageReaderInterface
     {
         return $request instanceof ImageRequest;
     }
+
+    private $urlBuilder;
+    private $xmlReader;
 }

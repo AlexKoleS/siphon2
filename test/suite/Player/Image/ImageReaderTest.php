@@ -57,9 +57,7 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
             'http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466883.jpg'
         );
 
-        $this->reader = new ImageReader(
-            $this->xmlReader()->mock()
-        );
+        $this->reader = new ImageReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -70,7 +68,9 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/images.xml');
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(ImageResponse::class))->argument();
 

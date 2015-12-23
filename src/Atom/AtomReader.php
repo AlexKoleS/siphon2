@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Atom;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Util\URL;
@@ -15,8 +16,11 @@ use React\Promise;
  */
 class AtomReader implements AtomReaderInterface
 {
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -36,9 +40,7 @@ class AtomReader implements AtomReaderInterface
             );
         }
 
-        $parameters = $this->buildParameters($request);
-
-        return $this->xmlReader->read('/Atom', $parameters)->then(
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($xml) {
                 $response = new AtomResponse(strval($xml->updated));
 
@@ -67,32 +69,6 @@ class AtomReader implements AtomReaderInterface
         return $request instanceof AtomRequest;
     }
 
-    /**
-     * Build the URL parameters for the given request.
-     *
-     * @param AtomRequest $request
-     *
-     * @return array
-     */
-    private function buildParameters(AtomRequest $request)
-    {
-        $parameters = [
-            'newerThan' => $request->updatedTime(),
-            'maxCount'  => $request->limit(),
-        ];
-
-        if (SORT_ASC === $request->order()) {
-            $parameters['order'] = 'asc';
-        } else {
-            $parameters['order'] = 'desc';
-        }
-
-        if (null !== $request->feed()) {
-            $parameters['feed'] = $request->feed();
-        }
-
-        return $parameters;
-    }
-
+    private $urlBuilder;
     private $xmlReader;
 }

@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Result;
 
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
@@ -21,8 +22,11 @@ class ResultReader implements ResultReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -42,22 +46,11 @@ class ResultReader implements ResultReaderInterface
             );
         }
 
-        $sport = $request->sport();
-        $league = $sport->league();
-        $seasonName = $request->seasonName();
-
-        $resource = sprintf(
-            '/sport/v2/%s/%s/results/%s/results_%s.xml',
-            $sport->sport(),
-            $league,
-            $seasonName,
-            $league
-        );
-
-        return $this->xmlReader->read($resource)->then(
-            function ($xml) use ($request, $sport) {
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
+            function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content')[0];
                 $season = $this->createSeason($xml->season);
+                $sport = $request->sport();
                 $response = new ResultResponse($sport, $season);
 
                 foreach ($xml->xpath('.//competition') as $competition) {
@@ -87,5 +80,6 @@ class ResultReader implements ResultReaderInterface
         return $request instanceof ResultRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

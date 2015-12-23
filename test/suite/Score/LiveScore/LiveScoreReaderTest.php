@@ -22,7 +22,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new LiveScoreReader($this->xmlReader()->mock());
+        $this->reader = new LiveScoreReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -60,7 +60,9 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         $request = new LiveScoreRequest(Sport::NHL(), 23816);
         $this->reader->read($request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/hockey/NHL/livescores/livescores_23816.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/hockey/NHL/livescores/livescores_23816.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(LiveScoreResponse::class))->argument();
         $this->assertEquals($expected, $response);

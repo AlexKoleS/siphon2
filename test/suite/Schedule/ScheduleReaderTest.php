@@ -74,7 +74,7 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
         $this->response->add($season);
 
-        $this->reader = new ScheduleReader($this->xmlReader()->mock());
+        $this->reader = new ScheduleReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -85,55 +85,11 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Schedule/schedule.xml');
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/baseball/MLB/schedule/schedule_MLB.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
-
-        $this->assertEquals($this->response, $response);
-    }
-
-    public function testReadLimitedSchedule()
-    {
-        $this->setUpXmlReader('Schedule/schedule.xml');
-
-        $this->request->setType(ScheduleType::LIMIT_2_DAYS());
-        $this->response->setType(ScheduleType::LIMIT_2_DAYS());
-
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
-
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB_2_days.xml');
-        $this->reject->never()->called();
-        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
-
-        $this->assertEquals($this->response, $response);
-    }
-
-    public function testReadDeletedSchedule()
-    {
-        $this->setUpXmlReader('Schedule/schedule.xml');
-
-        $this->request->setType(ScheduleType::DELETED());
-        $this->response->setType(ScheduleType::DELETED());
-
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
-
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/games-deleted/games_deleted_MLB.xml');
-        $this->reject->never()->called();
-        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
-
-        $this->assertEquals($this->response, $response);
-    }
-
-    public function testReadNotFound()
-    {
-        $this->setUpXmlReaderNotFound();
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
-
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/schedule/schedule_MLB.xml');
-        $this->reject->never()->called();
-        $response = $this->resolve->calledWith($this->isInstanceOf(ScheduleResponse::class))->argument();
-
-        $this->response->clear();
 
         $this->assertEquals($this->response, $response);
     }

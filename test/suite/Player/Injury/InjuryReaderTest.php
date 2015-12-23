@@ -46,7 +46,7 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader = new InjuryReader($this->xmlReader()->mock());
+        $this->reader = new InjuryReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -57,7 +57,9 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/injuries.xml');
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/football/NFL/injuries/injuries_NFL.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/football/NFL/injuries/injuries_NFL.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(InjuryResponse::class))->argument();
 

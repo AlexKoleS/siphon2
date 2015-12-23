@@ -17,7 +17,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Atom/atom.xml');
 
         $this->request = new AtomRequest(DateTime::fromUnixTime(86400));
-        $this->reader = new AtomReader($this->xmlReader()->mock());
+        $this->reader = new AtomReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -28,12 +28,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
-            '/Atom',
-            [
-                'newerThan' => '1970-01-02T00:00:00+00:00',
-                'maxCount'  => 5000,
-                'order'     => 'asc',
-            ]
+            'http://sdi.example/Atom?apiKey=xxx&newerThan=1970-01-02T00%3A00%3A00%2B00%3A00&maxCount=5000&order=asc'
         );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(AtomResponse::class))->argument();
@@ -55,52 +50,6 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
                 ],
             ],
             iterator_to_array($response)
-        );
-    }
-
-    public function testReadWithSpecificFeed()
-    {
-        $this->request->setFeed('/foo');
-        $this->reader->read($this->request)->done();
-
-        $this->xmlReader->read->calledWith(
-            '/Atom',
-            [
-                'newerThan' => '1970-01-02T00:00:00+00:00',
-                'maxCount'  => 5000,
-                'order'     => 'asc',
-                'feed'      => '/foo',
-            ]
-        );
-    }
-
-    public function testReadWithLimit()
-    {
-        $this->request->setLimit(100);
-        $this->reader->read($this->request)->done();
-
-        $this->xmlReader->read->calledWith(
-            '/Atom',
-            [
-                'newerThan' => '1970-01-02T00:00:00+00:00',
-                'maxCount'  => 100,
-                'order'     => 'asc',
-            ]
-        );
-    }
-
-    public function testReadDescending()
-    {
-        $this->request->setOrder(SORT_DESC);
-        $this->reader->read($this->request)->done();
-
-        $this->xmlReader->read->calledWith(
-            '/Atom',
-            [
-                'newerThan' => '1970-01-02T00:00:00+00:00',
-                'maxCount'  => 5000,
-                'order'     => 'desc',
-            ]
         );
     }
 

@@ -59,7 +59,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
         $this->response->add(new Team('/sport/baseball/team:2984', 'Toronto',       'TOR',   'Blue Jays'));
         $this->response->add(new Team('/sport/baseball/team:2960', 'Tampa Bay',     'TB',    'Rays'));
 
-        $this->reader = new TeamReader($this->xmlReader()->mock());
+        $this->reader = new TeamReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -70,7 +70,9 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Team/teams.xml');
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
-        $this->xmlReader->read->calledWith('/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml');
+        $this->xmlReader->read->calledWith(
+            'http://sdi.example/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml?apiKey=xxx'
+        );
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(TeamResponse::class))->argument();
 

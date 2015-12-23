@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Team;
 
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
 use Icecave\Siphon\Util\XPath;
@@ -17,8 +18,11 @@ class TeamReader implements TeamReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        RequestUrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -38,15 +42,7 @@ class TeamReader implements TeamReaderInterface
             );
         }
 
-        $resource = sprintf(
-            '/sport/v2/%s/%s/teams/%s/teams_%s.xml',
-            $request->sport()->sport(),
-            $request->sport()->league(),
-            $request->seasonName(),
-            $request->sport()->league()
-        );
-
-        return $this->xmlReader->read($resource)->then(
+        return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($xml) use ($request) {
                 $xml = $xml->xpath('.//season-content')[0];
                 $response = new TeamResponse(
@@ -73,5 +69,6 @@ class TeamReader implements TeamReaderInterface
         return $request instanceof TeamRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

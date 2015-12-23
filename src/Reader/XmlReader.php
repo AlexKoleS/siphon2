@@ -9,38 +9,34 @@ use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
 
 /**
- * Reads XML from a feed.
+ * Reads XML data.
  */
 class XmlReader implements XmlReaderInterface
 {
     /**
-     * @param UrlBuilderInterface $urlBuilder The URL builder used to resolve feed URLs.
-     * @param ClientInterface     $httpClient The HTTP client used to fetch XML data.
+     * @param ClientInterface $httpClient The HTTP client used to fetch XML data.
      */
-    public function __construct(
-        UrlBuilderInterface $urlBuilder,
-        Browser $httpClient
-    ) {
-        $this->urlBuilder = $urlBuilder;
+    public function __construct(Browser $httpClient)
+    {
         $this->httpClient = $httpClient;
     }
 
     /**
-     * Read XML data from a feed.
+     * Read XML data from a URL.
      *
-     * @param string               $resource   The path to the feed.
-     * @param array<string, mixed> $parameters Additional parameters to pass.
+     * @param string $url The URL.
      *
      * @return SimpleXMLElement [via promise] The XML response.
      */
-    public function read($resource, array $parameters = [])
+    public function read($url)
     {
-        $url = $this->urlBuilder->build($resource, $parameters);
-
         return $this->httpClient->get($url)
             ->then(
                 function ($response) {
-                    return new SimpleXMLElement($response->getBody(), LIBXML_NONET);
+                    return new SimpleXMLElement(
+                        $response->getBody(),
+                        LIBXML_NONET
+                    );
                 }
             )->otherwise(
                 function ($exception) {
@@ -56,6 +52,5 @@ class XmlReader implements XmlReaderInterface
             );
     }
 
-    private $urlBuilder;
     private $httpClient;
 }
