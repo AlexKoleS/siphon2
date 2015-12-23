@@ -14,6 +14,26 @@ class Season implements
     IteratorAggregate
 {
     /**
+     * Get the previous season name for a given season name.
+     *
+     * @param string $seasonName A season name.
+     *
+     * @return string The previous season name.
+     */
+    public static function previousSeasonName($seasonName)
+    {
+        if (preg_match('/^(\d+)-(\d+)$/', $seasonName, $matches)) {
+            return sprintf(
+                '%d-%d',
+                intval($matches[1]) - 1,
+                intval($matches[2]) - 1
+            );
+        }
+
+        return strval(intval($seasonName) - 1);
+    }
+
+    /**
      * @param string $id        The season ID.
      * @param string $name      The season name.
      * @param Date   $startDate The start date of the season.

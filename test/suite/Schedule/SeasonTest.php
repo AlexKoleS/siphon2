@@ -27,6 +27,12 @@ class SeasonTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testPreviousSeasonName()
+    {
+        $this->assertSame('2014', Season::previousSeasonName('2015'));
+        $this->assertSame('2014-2015', Season::previousSeasonName('2015-2016'));
+    }
+
     public function testId()
     {
         $this->assertSame(
