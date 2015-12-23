@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Score\BoxScore;
 
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
@@ -25,11 +26,11 @@ class BoxScoreReader implements BoxScoreReaderInterface
     use StatisticsFactoryTrait;
     use TeamFactoryTrait;
 
-    /**
-     * @param XMLReaderInterface $xmlReader
-     */
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        UrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -57,9 +58,10 @@ class BoxScoreReader implements BoxScoreReaderInterface
             $request->sport()->league(),
             $request->competitionId()
         );
+        $url = $this->urlBuilder->build($resource, array(), false);
 
         return $this->xmlReader->read($resource)->then(
-            function ($xml) use ($request) {
+            function ($xml) use ($request, $url) {
                 $xml = $xml->xpath('.//season-content')[0];
 
                 $competition = $this->createCompetition(
@@ -77,6 +79,7 @@ class BoxScoreReader implements BoxScoreReaderInterface
                         $xml->competition->{'away-team-content'}
                     )
                 );
+                $response->setUrl($url);
 
                 $qaStatus = XPath::stringOrNull(
                     $xml,
@@ -124,5 +127,6 @@ class BoxScoreReader implements BoxScoreReaderInterface
         return $request instanceof BoxScoreRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

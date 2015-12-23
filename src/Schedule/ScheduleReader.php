@@ -6,6 +6,7 @@ use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerFactoryTrait;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
+use Icecave\Siphon\Reader\UrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamFactoryTrait;
@@ -22,8 +23,11 @@ class ScheduleReader implements ScheduleReaderInterface
     use SeasonFactoryTrait;
     use TeamFactoryTrait;
 
-    public function __construct(XmlReaderInterface $xmlReader)
-    {
+    public function __construct(
+        UrlBuilderInterface $urlBuilder,
+        XmlReaderInterface $xmlReader
+    ) {
+        $this->urlBuilder = $urlBuilder;
         $this->xmlReader = $xmlReader;
     }
 
@@ -66,6 +70,7 @@ class ScheduleReader implements ScheduleReaderInterface
         }
 
         $response = new ScheduleResponse($request->sport(), $request->type());
+        $response->setUrl($this->urlBuilder->build($resource, [], false));
 
         return $this->xmlReader->read($resource)->then(
             function ($xml) use ($request, $response) {
@@ -119,5 +124,6 @@ class ScheduleReader implements ScheduleReaderInterface
         return $request instanceof ScheduleRequest;
     }
 
+    private $urlBuilder;
     private $xmlReader;
 }

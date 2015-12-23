@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Result;
 
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Schedule\Season;
@@ -15,6 +16,8 @@ use IteratorAggregate;
  */
 class ResultResponse implements ResponseInterface, Countable, IteratorAggregate
 {
+    use ResponseTrait;
+
     public function __construct(Sport $sport, Season $season)
     {
         $this->setSport($sport);

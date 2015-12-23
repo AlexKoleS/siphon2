@@ -5,6 +5,7 @@ namespace Icecave\Siphon\Atom;
 use Countable;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use IteratorAggregate;
 
@@ -16,6 +17,8 @@ class AtomResponse implements
     IteratorAggregate,
     Countable
 {
+    use ResponseTrait;
+
     public function __construct($updatedTime)
     {
         $this->entries = [];

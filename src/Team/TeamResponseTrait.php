@@ -2,6 +2,7 @@
 
 namespace Icecave\Siphon\Team;
 
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 
@@ -10,6 +11,8 @@ use Icecave\Siphon\Sport;
  */
 trait TeamResponseTrait
 {
+    use ResponseTrait;
+
     public function __construct(
         Sport $sport,
         Season $season

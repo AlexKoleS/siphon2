@@ -30,6 +30,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
             ),
             new TeamRef('/sport/baseball/team:2970', 'NY Yankees')
         );
+        $this->response->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/players/2009/players_2970_MLB.xml');
 
         $this->response->add(new Player('/sport/baseball/player:43566', 'Alfredo',   'Aceves'),       new PlayerSeasonDetails('91', 'RP', 'Reliever',          true));
         $this->response->add(new Player('/sport/baseball/player:43263', 'Jonathan',  'Albaladejo'),   new PlayerSeasonDetails('63', 'RP', 'Reliever',          true));
@@ -88,7 +89,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         // objects instead omit the last name, which is arguably more accurate.
         $this->response->add(new Player('/sport/baseball/player:42341', 'Wang',      null),           new PlayerSeasonDetails('40', 'SP', 'Starter',           true));
 
-        $this->reader = new PlayerReader($this->xmlReader()->mock());
+        $this->reader = new PlayerReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();

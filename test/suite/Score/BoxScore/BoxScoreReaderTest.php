@@ -25,7 +25,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new BoxScoreReader($this->xmlReader()->mock());
+        $this->reader = new BoxScoreReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -148,6 +148,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
+        $expected->setUrl('http://sdi.example.org/sport/v2/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml');
 
         $expected->add(
             $homeTeam,

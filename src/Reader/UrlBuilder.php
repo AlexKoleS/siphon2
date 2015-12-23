@@ -24,31 +24,38 @@ class UrlBuilder implements UrlBuilderInterface
     /**
      * Build a feed URL.
      *
-     * @param string               $resource   The path to the feed.
-     * @param array<string, mixed> $parameters Additional parameters to pass.
+     * @param string               $resource           The path to the feed.
+     * @param array<string, mixed> $parameters         Additional parameters to pass.
+     * @param boolean              $includeCredentials True if credentials should be included.
      *
      * @return string The fully-qualified feed URL.
      */
-    public function build($resource, array $parameters = [])
-    {
+    public function build(
+        $resource,
+        array $parameters = [],
+        $includeCredentials = true
+    ) {
         if ($resource[0] !== '/') {
             throw new InvalidArgumentException(
                 'Resource must begin with a slash.'
             );
         }
 
-        $url = sprintf(
-            '%s%s?apiKey=%s',
-            $this->base,
-            $resource,
-            urlencode($this->apiKey)
-        );
+        $query = [];
 
-        foreach ($parameters as $key => $value) {
-            $url .= '&' . urlencode($key) . '=' . urlencode($value);
+        if ($includeCredentials) {
+            $query[] = 'apiKey=' . urlencode($this->apiKey);
         }
 
-        return $url;
+        foreach ($parameters as $key => $value) {
+            $query[] = urlencode($key) . '=' . urlencode($value);
+        }
+
+        if ($query) {
+            return $this->base . $resource . '?' . implode('&', $query);
+        }
+
+        return $this->base . $resource;
     }
 
     /**

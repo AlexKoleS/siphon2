@@ -21,6 +21,8 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
         $this->request  = new InjuryRequest(Sport::NFL());
         $this->response = new InjuryResponse(Sport::NFL());
 
+        $this->response->setUrl('http://sdi.example.org/sport/v2/football/NFL/injuries/injuries_NFL.xml');
+
         $this->response->add(
             new Player('/sport/football/player:1633', 'Rod', 'Coleman'),
             new Injury(
@@ -46,7 +48,7 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader = new InjuryReader($this->xmlReader()->mock());
+        $this->reader = new InjuryReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();

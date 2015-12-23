@@ -35,7 +35,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             StatisticsType::COMBINED()
         );
 
-        $this->reader = new PlayerStatisticsReader($this->xmlReader()->mock());
+        $this->reader = new PlayerStatisticsReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -44,6 +44,9 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
     public function testRead()
     {
         $this->setUpXmlReader('Player/stats.xml');
+
+        $this->response
+            ->setUrl('http://sdi.example.org/sport/v2/football/NFL/player-stats/2014-2015/player_stats_23_NFL.xml');
 
         $this->response->add(
             new Player('/sport/football/player:338', 'John', 'Abraham'),
@@ -121,6 +124,10 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
     public function testReadSplitStats()
     {
         $this->setUpXmlReader('Player/split-stats.xml');
+
+        $this->response->setUrl(
+            'http://sdi.example.org/sport/v2/football/NFL/player-split-stats/2014-2015/player_split_stats_23_NFL.xml'
+        );
 
         $this->request->setType(StatisticsType::SPLIT());
         $this->response->setType(StatisticsType::SPLIT());
