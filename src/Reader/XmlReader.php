@@ -3,11 +3,9 @@
 namespace Icecave\Siphon\Reader;
 
 use Clue\React\Buzz\Browser;
-use Clue\React\Buzz\Message\Request;
 use Clue\React\Buzz\Message\ResponseException;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
-use React\Promise\Deferred;
 use SimpleXMLElement;
 
 /**
@@ -50,7 +48,7 @@ class XmlReader implements XmlReaderInterface
                         $exception instanceof ResponseException &&
                         404 === $exception->getResponse()->getCode()
                     ) {
-                       throw new NotFoundException($exception);
+                        throw new NotFoundException($exception);
                     }
 
                     throw new ServiceUnavailableException($exception);

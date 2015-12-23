@@ -10,8 +10,6 @@ use Exception;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
-use Psr\Http\Message\RequestInterface as HttpRequestInterface;
-use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 use React\Promise;
 use SimpleXMLElement;
 
