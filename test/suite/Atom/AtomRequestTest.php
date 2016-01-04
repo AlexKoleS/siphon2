@@ -12,41 +12,41 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updatedTime = DateTime::fromUnixTime(123);
-        $this->request = new AtomRequest($this->updatedTime);
+        $this->subject = new AtomRequest($this->updatedTime);
     }
 
     public function testUpdatedTime()
     {
-        $this->assertSame($this->updatedTime->isoString(), $this->request->updatedTime());
+        $this->assertSame($this->updatedTime->isoString(), $this->subject->updatedTime());
 
         $updatedTime = DateTime::fromUnixTime(1);
 
-        $this->request->setUpdatedTime($updatedTime);
+        $this->subject->setUpdatedTime($updatedTime);
 
-        $this->assertSame($updatedTime->isoString(), $this->request->updatedTime());
+        $this->assertSame($updatedTime->isoString(), $this->subject->updatedTime());
 
-        $this->request->setUpdatedTime('a');
+        $this->subject->setUpdatedTime('a');
 
-        $this->assertSame('a', $this->request->updatedTime());
+        $this->assertSame('a', $this->subject->updatedTime());
     }
 
     public function testFeed()
     {
         $this->assertNull(
-            $this->request->feed()
+            $this->subject->feed()
         );
 
-        $this->request->setFeed('/foo/bar');
+        $this->subject->setFeed('/foo/bar');
 
         $this->assertSame(
             '/foo/bar',
-            $this->request->feed()
+            $this->subject->feed()
         );
 
-        $this->request->setFeed(null);
+        $this->subject->setFeed(null);
 
         $this->assertNull(
-            $this->request->feed()
+            $this->subject->feed()
         );
     }
 
@@ -54,14 +54,14 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             5000,
-            $this->request->limit()
+            $this->subject->limit()
         );
 
-        $this->request->setLimit(1000);
+        $this->subject->setLimit(1000);
 
         $this->assertSame(
             1000,
-            $this->request->limit()
+            $this->subject->limit()
         );
     }
 
@@ -72,21 +72,21 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
             'Limit must be a positive integer.'
         );
 
-        $this->request->setLimit(-1);
+        $this->subject->setLimit(-1);
     }
 
     public function testOrder()
     {
         $this->assertSame(
             SORT_ASC,
-            $this->request->order()
+            $this->subject->order()
         );
 
-        $this->request->setOrder(SORT_DESC);
+        $this->subject->setOrder(SORT_DESC);
 
         $this->assertSame(
             SORT_DESC,
-            $this->request->order()
+            $this->subject->order()
         );
     }
 
@@ -97,16 +97,16 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
             'Sort order must be SORT_ASC or SORT_DESC.'
         );
 
-        $this->request->setOrder('<invalid>');
+        $this->subject->setOrder('<invalid>');
     }
 
     public function testSerialize()
     {
-        $buffer  = serialize($this->request);
+        $buffer  = serialize($this->subject);
         $request = unserialize($buffer);
 
         $this->assertEquals(
-            $this->request,
+            $this->subject,
             $request
         );
     }
@@ -115,26 +115,26 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
-        $this->request->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitAtomRequest->calledWith($this->request);
+        $visitor->visitAtomRequest->calledWith($this->subject);
     }
 
     public function testRateLimitGroup()
     {
         $this->assertSame(
             'atom',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
 
-        $this->request = new AtomRequest(
+        $this->subject = new AtomRequest(
             $this->updatedTime,
             '/foo'
         );
 
         $this->assertSame(
             'atom(/foo)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
     }
 
@@ -142,10 +142,10 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'atom(1970-01-01T00:02:03+00:00 limit:5000 asc)',
-            strval($this->request)
+            strval($this->subject)
         );
 
-        $this->request = new AtomRequest(
+        $this->subject = new AtomRequest(
             $this->updatedTime,
             '/foo',
             1234,
@@ -154,7 +154,7 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(
             'atom(1970-01-01T00:02:03+00:00 feed:/foo limit:1234 desc)',
-            strval($this->request)
+            strval($this->subject)
         );
     }
 }

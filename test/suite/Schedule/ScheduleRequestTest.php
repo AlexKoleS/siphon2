@@ -11,7 +11,7 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->request = new ScheduleRequest(
+        $this->subject = new ScheduleRequest(
             Sport::NFL()
         );
     }
@@ -20,14 +20,14 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->request->sport()
+            $this->subject->sport()
         );
 
-        $this->request->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->request->sport()
+            $this->subject->sport()
         );
     }
 
@@ -35,24 +35,24 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             ScheduleType::FULL(),
-            $this->request->type()
+            $this->subject->type()
         );
 
-        $this->request->setType(ScheduleType::DELETED());
+        $this->subject->setType(ScheduleType::DELETED());
 
         $this->assertSame(
             ScheduleType::DELETED(),
-            $this->request->type()
+            $this->subject->type()
         );
     }
 
     public function testSerialize()
     {
-        $buffer  = serialize($this->request);
+        $buffer  = serialize($this->subject);
         $request = unserialize($buffer);
 
         $this->assertEquals(
-            $this->request,
+            $this->subject,
             $request
         );
 
@@ -72,30 +72,30 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
-        $this->request->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitScheduleRequest->calledWith($this->request);
+        $visitor->visitScheduleRequest->calledWith($this->subject);
     }
 
     public function testRateLimitGroup()
     {
         $this->assertSame(
             'schedule(NFL)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
 
-        $this->request->setType(ScheduleType::DELETED());
+        $this->subject->setType(ScheduleType::DELETED());
 
         $this->assertSame(
             'schedule(NFL)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
 
-        $this->request->setType(ScheduleType::LIMIT_2_DAYS());
+        $this->subject->setType(ScheduleType::LIMIT_2_DAYS());
 
         $this->assertSame(
             'schedule(NFL)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
     }
 
@@ -103,21 +103,21 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'schedule(NFL)',
-            strval($this->request)
+            strval($this->subject)
         );
 
-        $this->request->setType(ScheduleType::DELETED());
+        $this->subject->setType(ScheduleType::DELETED());
 
         $this->assertSame(
             'schedule(NFL deleted)',
-            strval($this->request)
+            strval($this->subject)
         );
 
-        $this->request->setType(ScheduleType::LIMIT_2_DAYS());
+        $this->subject->setType(ScheduleType::LIMIT_2_DAYS());
 
         $this->assertSame(
             'schedule(NFL 2 days)',
-            strval($this->request)
+            strval($this->subject)
         );
     }
 }

@@ -11,7 +11,7 @@ class PlayerRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->request = new PlayerRequest(
+        $this->subject = new PlayerRequest(
             Sport::NFL(),
             '<season>',
             123
@@ -22,14 +22,14 @@ class PlayerRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->request->sport()
+            $this->subject->sport()
         );
 
-        $this->request->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->request->sport()
+            $this->subject->sport()
         );
     }
 
@@ -37,14 +37,14 @@ class PlayerRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             '<season>',
-            $this->request->seasonName()
+            $this->subject->seasonName()
         );
 
-        $this->request->setSeasonName('<other>');
+        $this->subject->setSeasonName('<other>');
 
         $this->assertSame(
             '<other>',
-            $this->request->seasonName()
+            $this->subject->seasonName()
         );
     }
 
@@ -52,34 +52,34 @@ class PlayerRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             123,
-            $this->request->teamId()
+            $this->subject->teamId()
         );
 
-        $this->request->setTeamId(456);
+        $this->subject->setTeamId(456);
 
         $this->assertSame(
             456,
-            $this->request->teamId()
+            $this->subject->teamId()
         );
     }
 
     public function testTeamIdWithString()
     {
-        $this->request->setTeamId('/sport/football/team:123');
+        $this->subject->setTeamId('/sport/football/team:123');
 
         $this->assertSame(
             123,
-            $this->request->teamId()
+            $this->subject->teamId()
         );
     }
 
     public function testSerialize()
     {
-        $buffer  = serialize($this->request);
+        $buffer  = serialize($this->subject);
         $request = unserialize($buffer);
 
         $this->assertEquals(
-            $this->request,
+            $this->subject,
             $request
         );
 
@@ -94,16 +94,16 @@ class PlayerRequestTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
-        $this->request->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitPlayerRequest->calledWith($this->request);
+        $visitor->visitPlayerRequest->calledWith($this->subject);
     }
 
     public function testRateLimitGroup()
     {
         $this->assertSame(
             'player(NFL)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
     }
 
@@ -111,7 +111,7 @@ class PlayerRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'player(NFL <season> team:123)',
-            strval($this->request)
+            strval($this->subject)
         );
     }
 }

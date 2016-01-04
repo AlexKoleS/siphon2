@@ -11,7 +11,7 @@ class InjuryRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->request = new InjuryRequest(
+        $this->subject = new InjuryRequest(
             Sport::NFL()
         );
     }
@@ -20,24 +20,24 @@ class InjuryRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->request->sport()
+            $this->subject->sport()
         );
 
-        $this->request->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->request->sport()
+            $this->subject->sport()
         );
     }
 
     public function testSerialize()
     {
-        $buffer  = serialize($this->request);
+        $buffer  = serialize($this->subject);
         $request = unserialize($buffer);
 
         $this->assertEquals(
-            $this->request,
+            $this->subject,
             $request
         );
 
@@ -52,16 +52,16 @@ class InjuryRequestTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
-        $this->request->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitInjuryRequest->calledWith($this->request);
+        $visitor->visitInjuryRequest->calledWith($this->subject);
     }
 
     public function testRateLimitGroup()
     {
         $this->assertSame(
             'injury(NFL)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
     }
 
@@ -69,7 +69,7 @@ class InjuryRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'injury(NFL)',
-            strval($this->request)
+            strval($this->subject)
         );
     }
 }

@@ -11,7 +11,7 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->request = new BoxScoreRequest(
+        $this->subject = new BoxScoreRequest(
             Sport::NFL(),
             '<season>',
             123
@@ -22,14 +22,14 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->request->sport()
+            $this->subject->sport()
         );
 
-        $this->request->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->request->sport()
+            $this->subject->sport()
         );
     }
 
@@ -37,14 +37,14 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             '<season>',
-            $this->request->seasonName()
+            $this->subject->seasonName()
         );
 
-        $this->request->setSeasonName('<other>');
+        $this->subject->setSeasonName('<other>');
 
         $this->assertSame(
             '<other>',
-            $this->request->seasonName()
+            $this->subject->seasonName()
         );
     }
 
@@ -52,34 +52,34 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             123,
-            $this->request->competitionId()
+            $this->subject->competitionId()
         );
 
-        $this->request->setCompetitionId(456);
+        $this->subject->setCompetitionId(456);
 
         $this->assertSame(
             456,
-            $this->request->competitionId()
+            $this->subject->competitionId()
         );
     }
 
     public function testCompetitionIdWithString()
     {
-        $this->request->setCompetitionId('/sport/football/competition:123');
+        $this->subject->setCompetitionId('/sport/football/competition:123');
 
         $this->assertSame(
             123,
-            $this->request->competitionId()
+            $this->subject->competitionId()
         );
     }
 
     public function testSerialize()
     {
-        $buffer  = serialize($this->request);
+        $buffer  = serialize($this->subject);
         $request = unserialize($buffer);
 
         $this->assertEquals(
-            $this->request,
+            $this->subject,
             $request
         );
 
@@ -94,16 +94,16 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
 
-        $this->request->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitBoxScoreRequest->calledWith($this->request);
+        $visitor->visitBoxScoreRequest->calledWith($this->subject);
     }
 
     public function testRateLimitGroup()
     {
         $this->assertSame(
             'box-score(NFL)',
-            $this->request->rateLimitGroup()
+            $this->subject->rateLimitGroup()
         );
     }
 
@@ -111,7 +111,7 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             'box-score(NFL competition:123)',
-            strval($this->request)
+            strval($this->subject)
         );
     }
 }
