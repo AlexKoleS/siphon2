@@ -85,7 +85,7 @@ class ResultResponse implements ResponseInterface, Countable, IteratorAggregate
     /**
      * Iterate the seasons.
      *
-     * @return mixed<Season>
+     * @return mixed<CompetitionInterface>
      */
     public function getIterator()
     {
@@ -98,11 +98,10 @@ class ResultResponse implements ResponseInterface, Countable, IteratorAggregate
      * Add a competition to the response.
      *
      * @param CompetitionInterface $competition The competition to add.
-     * @param boolean              $isFinalized True if finalized.
      */
-    public function add(CompetitionInterface $competition, $isFinalized)
+    public function add(CompetitionInterface $competition)
     {
-        $this->competitions[$competition->id()] = [$competition, $isFinalized];
+        $this->competitions[$competition->id()] = $competition;
     }
 
     /**

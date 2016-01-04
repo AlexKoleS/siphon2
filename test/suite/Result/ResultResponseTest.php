@@ -21,7 +21,7 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
         $this->competition1->id->returns('<team 1>');
         $this->competition2->id->returns('<team 2>');
 
-        $this->response = new ResultResponse(
+        $this->subject = new ResultResponse(
             Sport::NFL(),
             $this->season
         );
@@ -31,14 +31,14 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->response->sport()
+            $this->subject->sport()
         );
 
-        $this->response->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->response->sport()
+            $this->subject->sport()
         );
     }
 
@@ -46,28 +46,28 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->season,
-            $this->response->season()
+            $this->subject->season()
         );
 
         $season = Phony::mock(Season::class)->mock();
-        $this->response->setSeason($season);
+        $this->subject->setSeason($season);
 
         $this->assertSame(
             $season,
-            $this->response->season()
+            $this->subject->season()
         );
     }
 
     public function testIsEmpty()
     {
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
 
-        $this->response->add($this->competition1->mock(), true);
+        $this->subject->add($this->competition1->mock());
 
         $this->assertFalse(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -75,14 +75,14 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            count($this->response)
+            count($this->subject)
         );
 
-        $this->response->add($this->competition1->mock(), true);
+        $this->subject->add($this->competition1->mock());
 
         $this->assertSame(
             1,
-            count($this->response)
+            count($this->subject)
         );
     }
 
@@ -90,78 +90,78 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
 
-        $this->response->add($this->competition1->mock(), true);
-        $this->response->add($this->competition2->mock(), false);
+        $this->subject->add($this->competition1->mock());
+        $this->subject->add($this->competition2->mock());
 
         $this->assertEquals(
             [
-                [$this->competition1->mock(), true],
-                [$this->competition2->mock(), false],
+                $this->competition1->mock(),
+                $this->competition2->mock(),
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAdd()
     {
-        $this->response->add($this->competition1->mock(), true);
+        $this->subject->add($this->competition1->mock());
 
         $this->assertEquals(
             [
-                [$this->competition1->mock(), true],
+                $this->competition1->mock(),
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->competition1->mock(), false);
-        $this->response->add($this->competition1->mock(), true);
+        $this->subject->add($this->competition1->mock());
+        $this->subject->add($this->competition1->mock());
 
         $this->assertEquals(
             [
-                [$this->competition1->mock(), true],
+                $this->competition1->mock(),
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemove()
     {
-        $this->response->add($this->competition1->mock(), true);
-        $this->response->remove($this->competition1->mock());
+        $this->subject->add($this->competition1->mock());
+        $this->subject->remove($this->competition1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemoveUnknownCompetition()
     {
-        $this->response->add($this->competition1->mock(), true);
-        $this->response->remove($this->competition1->mock());
-        $this->response->remove($this->competition1->mock());
+        $this->subject->add($this->competition1->mock());
+        $this->subject->remove($this->competition1->mock());
+        $this->subject->remove($this->competition1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testClear()
     {
-        $this->response->add($this->competition1->mock(), true);
-        $this->response->add($this->competition2->mock(), false);
+        $this->subject->add($this->competition1->mock());
+        $this->subject->add($this->competition2->mock());
 
-        $this->response->clear();
+        $this->subject->clear();
 
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -169,8 +169,8 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(ResponseVisitorInterface::class);
 
-        $this->response->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitResultResponse->calledWith($this->response);
+        $visitor->visitResultResponse->calledWith($this->subject);
     }
 }
