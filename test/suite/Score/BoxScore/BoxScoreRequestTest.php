@@ -73,15 +73,6 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAccept()
-    {
-        $visitor = Phony::mock(RequestVisitorInterface::class);
-
-        $this->request->accept($visitor->mock());
-
-        $visitor->visitBoxScoreRequest->calledWith($this->request);
-    }
-
     public function testSerialize()
     {
         $buffer  = serialize($this->request);
@@ -96,6 +87,23 @@ class BoxScoreRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             Sport::NFL(),
             $request->sport()
+        );
+    }
+
+    public function testAccept()
+    {
+        $visitor = Phony::mock(RequestVisitorInterface::class);
+
+        $this->request->accept($visitor->mock());
+
+        $visitor->visitBoxScoreRequest->calledWith($this->request);
+    }
+
+    public function testRateLimitGroup()
+    {
+        $this->assertSame(
+            'box-score(NFL)',
+            $this->request->rateLimitGroup()
         );
     }
 

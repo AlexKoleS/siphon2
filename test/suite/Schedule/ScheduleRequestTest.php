@@ -46,15 +46,6 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAccept()
-    {
-        $visitor = Phony::mock(RequestVisitorInterface::class);
-
-        $this->request->accept($visitor->mock());
-
-        $visitor->visitScheduleRequest->calledWith($this->request);
-    }
-
     public function testSerialize()
     {
         $buffer  = serialize($this->request);
@@ -74,6 +65,37 @@ class ScheduleRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             ScheduleType::FULL(),
             $request->type()
+        );
+    }
+
+    public function testAccept()
+    {
+        $visitor = Phony::mock(RequestVisitorInterface::class);
+
+        $this->request->accept($visitor->mock());
+
+        $visitor->visitScheduleRequest->calledWith($this->request);
+    }
+
+    public function testRateLimitGroup()
+    {
+        $this->assertSame(
+            'schedule(NFL)',
+            $this->request->rateLimitGroup()
+        );
+
+        $this->request->setType(ScheduleType::DELETED());
+
+        $this->assertSame(
+            'schedule(NFL)',
+            $this->request->rateLimitGroup()
+        );
+
+        $this->request->setType(ScheduleType::LIMIT_2_DAYS());
+
+        $this->assertSame(
+            'schedule(NFL)',
+            $this->request->rateLimitGroup()
         );
     }
 

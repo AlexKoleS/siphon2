@@ -47,15 +47,6 @@ class TeamRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAccept()
-    {
-        $visitor = Phony::mock(RequestVisitorInterface::class);
-
-        $this->request->accept($visitor->mock());
-
-        $visitor->visitTeamRequest->calledWith($this->request);
-    }
-
     public function testSerialize()
     {
         $buffer  = serialize($this->request);
@@ -70,6 +61,23 @@ class TeamRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             Sport::NFL(),
             $request->sport()
+        );
+    }
+
+    public function testAccept()
+    {
+        $visitor = Phony::mock(RequestVisitorInterface::class);
+
+        $this->request->accept($visitor->mock());
+
+        $visitor->visitTeamRequest->calledWith($this->request);
+    }
+
+    public function testRateLimitGroup()
+    {
+        $this->assertSame(
+            'team(NFL)',
+            $this->request->rateLimitGroup()
         );
     }
 

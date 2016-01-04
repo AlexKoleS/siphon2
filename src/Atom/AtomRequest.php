@@ -128,18 +128,6 @@ class AtomRequest implements RequestInterface
     }
 
     /**
-     * Dispatch a call to the given visitor.
-     *
-     * @param RequestVisitorInterface $visitor
-     *
-     * @return mixed
-     */
-    public function accept(RequestVisitorInterface $visitor)
-    {
-        return $visitor->visitAtomRequest($this);
-    }
-
-    /**
      * Serialize the request to a buffer.
      *
      * @return string
@@ -171,6 +159,38 @@ class AtomRequest implements RequestInterface
                 $this->order       = $order;
             }
         );
+    }
+
+    /**
+     * Dispatch a call to the given visitor.
+     *
+     * @param RequestVisitorInterface $visitor
+     *
+     * @return mixed
+     */
+    public function accept(RequestVisitorInterface $visitor)
+    {
+        return $visitor->visitAtomRequest($this);
+    }
+
+    /**
+     * Fetch the request's "rate-limit group".
+     *
+     * If the request is rate-limited, any other requests that are in the same
+     * rate-limit group are also rate limited.
+     *
+     * @return string The rate-limit group.
+     */
+    public function rateLimitGroup()
+    {
+        if ($this->feed) {
+            return sprintf(
+                'atom(%s)',
+                $this->feed
+            );
+        }
+
+        return 'atom';
     }
 
     /**

@@ -100,6 +100,17 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
         $this->request->setOrder('<invalid>');
     }
 
+    public function testSerialize()
+    {
+        $buffer  = serialize($this->request);
+        $request = unserialize($buffer);
+
+        $this->assertEquals(
+            $this->request,
+            $request
+        );
+    }
+
     public function testAccept()
     {
         $visitor = Phony::mock(RequestVisitorInterface::class);
@@ -109,14 +120,21 @@ class AtomRequestTest extends PHPUnit_Framework_TestCase
         $visitor->visitAtomRequest->calledWith($this->request);
     }
 
-    public function testSerialize()
+    public function testRateLimitGroup()
     {
-        $buffer  = serialize($this->request);
-        $request = unserialize($buffer);
+        $this->assertSame(
+            'atom',
+            $this->request->rateLimitGroup()
+        );
 
-        $this->assertEquals(
-            $this->request,
-            $request
+        $this->request = new AtomRequest(
+            $this->updatedTime,
+            '/foo'
+        );
+
+        $this->assertSame(
+            'atom(/foo)',
+            $this->request->rateLimitGroup()
         );
     }
 

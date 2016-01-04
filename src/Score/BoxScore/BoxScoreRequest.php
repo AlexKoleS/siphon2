@@ -93,18 +93,6 @@ class BoxScoreRequest implements SportRequestInterface
     }
 
     /**
-     * Dispatch a call to the given visitor.
-     *
-     * @param RequestVisitorInterface $visitor
-     *
-     * @return mixed
-     */
-    public function accept(RequestVisitorInterface $visitor)
-    {
-        return $visitor->visitBoxScoreRequest($this);
-    }
-
-    /**
      * Serialize the request to a buffer.
      *
      * @return string
@@ -133,6 +121,34 @@ class BoxScoreRequest implements SportRequestInterface
                 $this->seasonName    = $seasonName;
                 $this->competitionId = $competitionId;
             }
+        );
+    }
+
+    /**
+     * Dispatch a call to the given visitor.
+     *
+     * @param RequestVisitorInterface $visitor
+     *
+     * @return mixed
+     */
+    public function accept(RequestVisitorInterface $visitor)
+    {
+        return $visitor->visitBoxScoreRequest($this);
+    }
+
+    /**
+     * Fetch the request's "rate-limit group".
+     *
+     * If the request is rate-limited, any other requests that are in the same
+     * rate-limit group are also rate limited.
+     *
+     * @return string The rate-limit group.
+     */
+    public function rateLimitGroup()
+    {
+        return sprintf(
+            'box-score(%s)',
+            $this->sport->key()
         );
     }
 

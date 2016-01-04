@@ -63,15 +63,6 @@ class TeamStatisticsRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAccept()
-    {
-        $visitor = Phony::mock(RequestVisitorInterface::class);
-
-        $this->subject->accept($visitor->mock());
-
-        $visitor->visitTeamStatisticsRequest->calledWith($this->subject);
-    }
-
     public function testSerialize()
     {
         $buffer  = serialize($this->subject);
@@ -86,6 +77,23 @@ class TeamStatisticsRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             Sport::NFL(),
             $request->sport()
+        );
+    }
+
+    public function testAccept()
+    {
+        $visitor = Phony::mock(RequestVisitorInterface::class);
+
+        $this->subject->accept($visitor->mock());
+
+        $visitor->visitTeamStatisticsRequest->calledWith($this->subject);
+    }
+
+    public function testRateLimitGroup()
+    {
+        $this->assertSame(
+            'team-statistics(NFL)',
+            $this->subject->rateLimitGroup()
         );
     }
 

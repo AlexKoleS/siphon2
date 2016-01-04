@@ -67,18 +67,6 @@ class ScheduleRequest implements SportRequestInterface
     }
 
     /**
-     * Dispatch a call to the given visitor.
-     *
-     * @param RequestVisitorInterface $visitor
-     *
-     * @return mixed
-     */
-    public function accept(RequestVisitorInterface $visitor)
-    {
-        return $visitor->visitScheduleRequest($this);
-    }
-
-    /**
      * Serialize the request to a buffer.
      *
      * @return string
@@ -105,6 +93,34 @@ class ScheduleRequest implements SportRequestInterface
                 $this->sport = Sport::memberByKey($sport);
                 $this->type  = ScheduleType::memberByKey($type);
             }
+        );
+    }
+
+    /**
+     * Dispatch a call to the given visitor.
+     *
+     * @param RequestVisitorInterface $visitor
+     *
+     * @return mixed
+     */
+    public function accept(RequestVisitorInterface $visitor)
+    {
+        return $visitor->visitScheduleRequest($this);
+    }
+
+    /**
+     * Fetch the request's "rate-limit group".
+     *
+     * If the request is rate-limited, any other requests that are in the same
+     * rate-limit group are also rate limited.
+     *
+     * @return string The rate-limit group.
+     */
+    public function rateLimitGroup()
+    {
+        return sprintf(
+            'schedule(%s)',
+            $this->sport->key()
         );
     }
 

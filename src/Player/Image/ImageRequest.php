@@ -26,6 +26,22 @@ class ImageRequest implements SportRequestInterface
     }
 
     /**
+     * Fetch the request's "rate-limit group".
+     *
+     * If the request is rate-limited, any other requests that are in the same
+     * rate-limit group are also rate limited.
+     *
+     * @return string The rate-limit group.
+     */
+    public function rateLimitGroup()
+    {
+        return sprintf(
+            'image(%s)',
+            $this->sport->key()
+        );
+    }
+
+    /**
      * @return string
      */
     public function __toString()

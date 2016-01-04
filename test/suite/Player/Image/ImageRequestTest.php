@@ -73,15 +73,6 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testAccept()
-    {
-        $visitor = Phony::mock(RequestVisitorInterface::class);
-
-        $this->request->accept($visitor->mock());
-
-        $visitor->visitImageRequest->calledWith($this->request);
-    }
-
     public function testSerialize()
     {
         $buffer  = serialize($this->request);
@@ -96,6 +87,23 @@ class ImageRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             Sport::NFL(),
             $request->sport()
+        );
+    }
+
+    public function testAccept()
+    {
+        $visitor = Phony::mock(RequestVisitorInterface::class);
+
+        $this->request->accept($visitor->mock());
+
+        $visitor->visitImageRequest->calledWith($this->request);
+    }
+
+    public function testRateLimitGroup()
+    {
+        $this->assertSame(
+            'image(NFL)',
+            $this->request->rateLimitGroup()
         );
     }
 
