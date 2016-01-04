@@ -35,7 +35,10 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             StatisticsType::COMBINED()
         );
 
-        $this->reader = new PlayerStatisticsReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->subject = new PlayerStatisticsReader(
+            $this->urlBuilder(),
+            $this->xmlReader()->mock()
+        );
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -109,7 +112,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
             'http://sdi.example/sport/v2/football/NFL/player-stats/2014-2015/player_stats_23_NFL.xml?apiKey=xxx'
@@ -160,7 +163,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
             'http://sdi.example' .
@@ -177,19 +180,54 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/empty.xml');
 
         $this->setExpectedException(NotFoundException::class);
-        $this->reader->read($this->request)->done();
+        $this->subject->read($this->request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
+        $this->subject->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
-    public function testIsSupported()
+    /**
+     * @dataProvider isSupportedTestVectors
+     */
+    public function testIsSupported(Sport $sport, StatisticsType $type, $isSupported)
     {
-        $this->assertTrue($this->reader->isSupported($this->request));
-        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
+        $this->request->setSport($sport);
+        $this->request->setType($type);
+
+        $this->assertSame(
+            $isSupported,
+            $this->subject->isSupported($this->request)
+        );
+    }
+
+    public function isSupportedTestVectors()
+    {
+        $result = [];
+
+        foreach (Sport::members() as $sport) {
+            foreach (StatisticsType::members() as $type) {
+                $result[$sport->league() . '-' . $type->value()] = [
+                    $sport,
+                    $type,
+                    true,
+                ];
+            }
+        }
+
+        $result['NCAAF-split'][2] = false;
+        $result['NCAAB-split'][2] = false;
+
+        return $result;
+    }
+
+    public function testIsSupportedWithUnknownType()
+    {
+        $this->assertFalse(
+            $this->subject->isSupported(Phony::mock(RequestInterface::class)->mock())
+        );
     }
 }

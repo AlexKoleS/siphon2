@@ -142,6 +142,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function read(RequestInterface $request)
     {
+        $this->operation = __FUNCTION__;
+
         return $request->accept($this);
     }
 
@@ -152,7 +154,9 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function isSupported(RequestInterface $request)
     {
-        return true;
+        $this->operation = __FUNCTION__;
+
+        return $request->accept($this);
     }
 
     /**
@@ -166,7 +170,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitAtomRequest(AtomRequest $request)
     {
-        return $this->atomReader->read($request);
+        return $this->atomReader->{$this->operation}($request);
     }
 
     /**
@@ -180,7 +184,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitScheduleRequest(ScheduleRequest $request)
     {
-        return $this->scheduleReader->read($request);
+        return $this->scheduleReader->{$this->operation}($request);
     }
 
     /**
@@ -194,7 +198,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitResultRequest(ResultRequest $request)
     {
-        return $this->resultReader->read($request);
+        return $this->resultReader->{$this->operation}($request);
     }
 
     /**
@@ -208,7 +212,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitTeamRequest(TeamRequest $request)
     {
-        return $this->teamReader->read($request);
+        return $this->teamReader->{$this->operation}($request);
     }
 
     /**
@@ -222,7 +226,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitTeamStatisticsRequest(TeamStatisticsRequest $request)
     {
-        return $this->teamStatisticsReader->read($request);
+        return $this->teamStatisticsReader->{$this->operation}($request);
     }
 
     /**
@@ -236,7 +240,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitPlayerRequest(PlayerRequest $request)
     {
-        return $this->playerReader->read($request);
+        return $this->playerReader->{$this->operation}($request);
     }
 
     /**
@@ -250,7 +254,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitPlayerStatisticsRequest(PlayerStatisticsRequest $request)
     {
-        return $this->playerStatisticsReader->read($request);
+        return $this->playerStatisticsReader->{$this->operation}($request);
     }
 
     /**
@@ -264,7 +268,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitImageRequest(ImageRequest $request)
     {
-        return $this->imageReader->read($request);
+        return $this->imageReader->{$this->operation}($request);
     }
 
     /**
@@ -276,7 +280,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitInjuryRequest(InjuryRequest $request)
     {
-        return $this->injuryReader->read($request);
+        return $this->injuryReader->{$this->operation}($request);
     }
 
     /**
@@ -288,7 +292,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitLiveScoreRequest(LiveScoreRequest $request)
     {
-        return $this->liveScoreReader->read($request);
+        return $this->liveScoreReader->{$this->operation}($request);
     }
 
     /**
@@ -300,7 +304,7 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
      */
     public function visitBoxScoreRequest(BoxScoreRequest $request)
     {
-        return $this->boxScoreReader->read($request);
+        return $this->boxScoreReader->{$this->operation}($request);
     }
 
     private $urlBuilder;
@@ -314,4 +318,5 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     private $injuryReader;
     private $liveScoreReader;
     private $boxScoreReader;
+    private $operation;
 }

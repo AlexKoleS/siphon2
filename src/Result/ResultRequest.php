@@ -92,7 +92,6 @@ class ResultRequest implements SportRequestInterface
         );
     }
 
-
     /**
      * Dispatch a call to the given visitor.
      *

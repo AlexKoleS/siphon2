@@ -8,6 +8,7 @@ use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
+use Icecave\Siphon\Sport;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
@@ -92,7 +93,13 @@ class ImageReader implements ImageReaderInterface
      */
     public function isSupported(RequestInterface $request)
     {
-        return $request instanceof ImageRequest;
+        if (!$request instanceof ImageRequest) {
+            return false;
+        } elseif ($request->sport()->anyOf(Sport::NCAAF(), Sport::NCAAB())) {
+            return false;
+        }
+
+        return true;
     }
 
     private $urlBuilder;

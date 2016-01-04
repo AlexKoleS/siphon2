@@ -45,21 +45,43 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->urlBuilder        = Phony::mock(UrlBuilderInterface::class);
-        $this->xmlReader         = Phony::mock(XmlReaderInterface::class);
-        $this->atomReader        = Phony::mock(AtomReaderInterface::class);
-        $this->scheduleReader    = Phony::mock(ScheduleReaderInterface::class);
-        $this->resultReader      = Phony::mock(ResultReaderInterface::class);
-        $this->teamReader        = Phony::mock(TeamReaderInterface::class);
-        $this->teamStatsReader   = Phony::mock(TeamStatisticsReaderInterface::class);
-        $this->playerReader      = Phony::mock(PlayerReaderInterface::class);
-        $this->playerStatsReader = Phony::mock(PlayerStatisticsReaderInterface::class);
-        $this->imageReader       = Phony::mock(ImageReaderInterface::class);
-        $this->injuryReader      = Phony::mock(InjuryReaderInterface::class);
-        $this->liveScoreReader   = Phony::mock(LiveScoreReaderInterface::class);
-        $this->boxScoreReader    = Phony::mock(BoxScoreReaderInterface::class);
+        $this->urlBuilder = Phony::mock(UrlBuilderInterface::class);
+        $this->xmlReader = Phony::mock(XmlReaderInterface::class);
 
-        $this->dispatcher = new Dispatcher(
+        $this->atomReader = Phony::mock(AtomReaderInterface::class);
+        $this->atomReader->isSupported->returns(true);
+
+        $this->scheduleReader = Phony::mock(ScheduleReaderInterface::class);
+        $this->scheduleReader->isSupported->returns(true);
+
+        $this->resultReader = Phony::mock(ResultReaderInterface::class);
+        $this->resultReader->isSupported->returns(true);
+
+        $this->teamReader = Phony::mock(TeamReaderInterface::class);
+        $this->teamReader->isSupported->returns(true);
+
+        $this->teamStatsReader = Phony::mock(TeamStatisticsReaderInterface::class);
+        $this->teamStatsReader->isSupported->returns(true);
+
+        $this->playerReader = Phony::mock(PlayerReaderInterface::class);
+        $this->playerReader->isSupported->returns(true);
+
+        $this->playerStatsReader = Phony::mock(PlayerStatisticsReaderInterface::class);
+        $this->playerStatsReader->isSupported->returns(true);
+
+        $this->imageReader = Phony::mock(ImageReaderInterface::class);
+        $this->imageReader->isSupported->returns(true);
+
+        $this->injuryReader = Phony::mock(InjuryReaderInterface::class);
+        $this->injuryReader->isSupported->returns(true);
+
+        $this->liveScoreReader = Phony::mock(LiveScoreReaderInterface::class);
+        $this->liveScoreReader->isSupported->returns(true);
+
+        $this->boxScoreReader = Phony::mock(BoxScoreReaderInterface::class);
+        $this->boxScoreReader->isSupported->returns(true);
+
+        $this->subject = new Dispatcher(
             $this->urlBuilder->mock(),
             $this->xmlReader->mock(),
             $this->atomReader->mock(),
@@ -79,16 +101,16 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $loop = Phony::mock(LoopInterface::class)->mock();
-        $this->dispatcher = Dispatcher::create($loop, '<api key>');
+        $this->subject = Dispatcher::create($loop, '<api key>');
 
         $this->assertInstanceOf(
             DispatcherInterface::class,
-            $this->dispatcher
+            $this->subject
         );
 
         $this->assertContains(
             '%3Capi+key%3E',
-            $this->dispatcher->urlBuilder()->build('/')
+            $this->subject->urlBuilder()->build('/')
         );
     }
 
@@ -96,7 +118,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->urlBuilder->mock(),
-            $this->dispatcher->urlBuilder()
+            $this->subject->urlBuilder()
         );
     }
 
@@ -104,7 +126,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->xmlReader->mock(),
-            $this->dispatcher->xmlReader()
+            $this->subject->xmlReader()
         );
     }
 
@@ -224,7 +246,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             ->returns($response->mock());
 
         $result = $this
-            ->dispatcher
+            ->subject
             ->read(
                 $request->mock()
             );
@@ -241,9 +263,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue(
-            $this->dispatcher->isSupported(
+            $this->subject->isSupported(
                 $request->mock()
             )
         );
+
+        $reader
+            ->isSupported
+            ->calledWith(
+                $this->identicalTo($request->mock())
+            );
     }
 }

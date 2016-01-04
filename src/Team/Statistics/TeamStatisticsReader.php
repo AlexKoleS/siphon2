@@ -8,7 +8,9 @@ use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
+use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsFactoryTrait;
+use Icecave\Siphon\Statistics\StatisticsType;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
 use InvalidArgumentException;
@@ -85,7 +87,13 @@ class TeamStatisticsReader implements TeamStatisticsReaderInterface
      */
     public function isSupported(RequestInterface $request)
     {
-        return $request instanceof TeamStatisticsRequest;
+        if (!$request instanceof TeamStatisticsRequest) {
+            return false;
+        } elseif ($request->sport()->anyOf(Sport::NCAAF(), Sport::NCAAB())) {
+            return StatisticsType::SPLIT() !== $request->type();
+        }
+
+        return true;
     }
 
     private $urlBuilder;

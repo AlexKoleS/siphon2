@@ -57,7 +57,7 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
             'http://thumb.usatodaysportsimages.com/image/thumb/650-650nw/8466883.jpg'
         );
 
-        $this->reader = new ImageReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->subject = new ImageReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -66,7 +66,7 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
     public function testRead()
     {
         $this->setUpXmlReader('Player/images.xml');
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
             'http://sdi.example/sport/v2/baseball/MLB/player-images/2015/player-images_2955_MLB.xml?apiKey=xxx'
@@ -82,18 +82,24 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/empty.xml');
 
         $this->setExpectedException(NotFoundException::class);
-        $this->reader->read($this->request)->done();
+        $this->subject->read($this->request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
-        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
+        $this->subject->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue($this->reader->isSupported($this->request));
-        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
+        $this->assertTrue($this->subject->isSupported($this->request));
+        $this->assertFalse($this->subject->isSupported(Phony::mock(RequestInterface::class)->mock()));
+
+        $this->request->setSport(Sport::NCAAF());
+        $this->assertFalse($this->subject->isSupported($this->request));
+
+        $this->request->setSport(Sport::NCAAB());
+        $this->assertFalse($this->subject->isSupported($this->request));
     }
 }
