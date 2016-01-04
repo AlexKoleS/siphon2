@@ -60,7 +60,7 @@ class ResultReader implements ResultReaderInterface
                     );
 
                     $response->add(
-                        $this->createCompetition($competition, $sport, $season),
+                        $this->createCompetition($competition, $sport),
                         'finalized' === $qaStatus
                     );
                 }

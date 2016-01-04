@@ -8,6 +8,7 @@ use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Competition;
+use Icecave\Siphon\Schedule\CompetitionRef;
 use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
@@ -33,36 +34,33 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
         );
 
         $this->response->add(
-            new Competition(
+            new CompetitionRef(
                 '/sport/hockey/competition:72767',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2015-09-20T16:30:00-04:00'),
                 Sport::NHL(),
-                $this->response->season(),
                 new TeamRef('/sport/hockey/team:27', 'Nashville'),
                 new TeamRef('/sport/hockey/team:14', 'Florida')
             ),
             true
         );
         $this->response->add(
-            new Competition(
+            new CompetitionRef(
                 '/sport/hockey/competition:72768',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2015-09-20T19:00:00-04:00'),
                 Sport::NHL(),
-                $this->response->season(),
                 new TeamRef('/sport/hockey/team:3', 'Boston'),
                 new TeamRef('/sport/hockey/team:13', 'New Jersey')
             ),
             true
         );
         $this->response->add(
-            new Competition(
+            new CompetitionRef(
                 '/sport/hockey/competition:72769',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2015-09-20T20:00:00-04:00'),
                 Sport::NHL(),
-                $this->response->season(),
                 new TeamRef('/sport/hockey/team:27', 'Nashville'),
                 new TeamRef('/sport/hockey/team:14', 'Florida')
             ),
