@@ -43,7 +43,8 @@ class TeamReader implements TeamReaderInterface
         }
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
-            function ($xml) use ($request) {
+            function ($result) use ($request) {
+                list($xml, $lastModified) = $result;
                 $xml = $xml->xpath('.//season-content')[0];
                 $response = new TeamResponse(
                     $request->sport(),

@@ -51,7 +51,8 @@ class TeamStatisticsReader implements TeamStatisticsReaderInterface
         }
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
-            function ($xml) use ($request) {
+            function ($result) use ($request) {
+                list($xml, $lastModified) = $result;
                 $xml = $xml->xpath('.//season-content')[0];
 
                 // Sometimes the feed contains no team or player information.

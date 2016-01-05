@@ -41,7 +41,8 @@ class AtomReader implements AtomReaderInterface
         }
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
-            function ($xml) {
+            function ($result) use ($request) {
+                list($xml, $lastModified) = $result;
                 $response = new AtomResponse(strval($xml->updated));
 
                 foreach ($xml->entry as $entry) {

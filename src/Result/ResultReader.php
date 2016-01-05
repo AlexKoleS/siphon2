@@ -47,7 +47,8 @@ class ResultReader implements ResultReaderInterface
         }
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
-            function ($xml) use ($request) {
+            function ($result) use ($request) {
+                list($xml, $lastModified) = $result;
                 $xml = $xml->xpath('.//season-content')[0];
                 $season = $this->createSeason($xml->season);
                 $sport = $request->sport();

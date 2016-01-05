@@ -47,7 +47,8 @@ class ScheduleReader implements ScheduleReaderInterface
         }
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
-            function ($xml) use ($request) {
+            function ($result) use ($request) {
+                list($xml, $lastModified) = $result;
                 $xml = $xml->xpath('.//season-content');
                 $response =
                     new ScheduleResponse($request->sport(), $request->type());

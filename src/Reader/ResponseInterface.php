@@ -2,6 +2,8 @@
 
 namespace Icecave\Siphon\Reader;
 
+use Icecave\Chrono\DateTime;
+
 /**
  * Interface for responses.
  */
@@ -15,4 +17,11 @@ interface ResponseInterface
      * @return mixed
      */
     public function accept(ResponseVisitorInterface $visitor);
+
+    /**
+     * Get the time at which the data was last modified, if known.
+     *
+     * @return DateTime|null
+     */
+    // public function lastModified();
 }

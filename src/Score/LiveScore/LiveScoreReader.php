@@ -51,7 +51,8 @@ class LiveScoreReader implements LiveScoreReaderInterface
         }
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
-            function ($xml) use ($request) {
+            function ($result) use ($request) {
+                list($xml, $lastModified) = $result;
                 $xml = $xml->xpath('.//competition')[0];
 
                 $competition =

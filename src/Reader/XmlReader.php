@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 
 use Clue\React\Buzz\Browser;
 use Clue\React\Buzz\Message\ResponseException;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
@@ -26,17 +27,27 @@ class XmlReader implements XmlReaderInterface
      *
      * @param string $url The URL.
      *
-     * @return SimpleXMLElement [via promise] The XML response.
+     * @return tuple<SimpleXMLElement, DateTime|null> [via promise] A 2-tuple of the XML responser and the last modification time, if available.
      */
     public function read($url)
     {
         return $this->httpClient->get($url)
             ->then(
                 function ($response) {
-                    return new SimpleXMLElement(
+                    $lastModified = $response->getHeader('Last-Modified');
+
+                    if ($lastModified) {
+                        $lastModified = DateTime::fromUnixTime(
+                            strtotime($lastModified)
+                        );
+                    }
+
+                    $xml = new SimpleXMLElement(
                         $response->getBody(),
                         LIBXML_NONET
                     );
+
+                    return [$xml, $lastModified];
                 }
             )->otherwise(
                 function ($exception) {

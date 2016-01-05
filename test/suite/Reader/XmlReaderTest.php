@@ -7,6 +7,7 @@ use Clue\React\Buzz\Message\Response;
 use Clue\React\Buzz\Message\ResponseException;
 use Eloquent\Phony\Phpunit\Phony;
 use Exception;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
@@ -34,8 +35,27 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this->reader->read('url')->done($this->resolve, $this->reject);
 
         $this->httpClient->get->calledWith('url');
-        $this->resolve->calledWith(new SimpleXMLElement('<xml></xml>', LIBXML_NONET));
+        $this->resolve->calledWith(
+            [
+                new SimpleXMLElement('<xml></xml>', LIBXML_NONET),
+                null,
+            ]
+        );
         $this->reject->never()->called();
+    }
+
+    public function testReadWithLastModified()
+    {
+        $this->response->getHeader->with('Last-Modified')->returns('Wed, 13 May 2015 17:37:44 GMT');
+
+        $this->reader->read('url')->done($this->resolve, $this->reject);
+
+        $this->resolve->calledWith(
+            [
+                new SimpleXMLElement('<xml></xml>', LIBXML_NONET),
+                new DateTime(2015, 05, 13, 17, 37, 44),
+            ]
+        );
     }
 
     public function testReadWithHttpClientException()

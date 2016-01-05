@@ -3,15 +3,21 @@
 namespace Icecave\Siphon\Reader;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use React\Promise;
 
 trait XmlReaderTestTrait
 {
-    protected function setUpXmlReader($path)
+    protected function setUpXmlReader($path, DateTime $lastModified = null)
     {
         $this->xmlReader()->read->returns(
-            Promise\resolve(simplexml_load_string(file_get_contents(__DIR__ . '/../../fixture/' . $path)))
+            Promise\resolve(
+                [
+                    simplexml_load_string(file_get_contents(__DIR__ . '/../../fixture/' . $path)),
+                    null
+                ]
+            )
         );
     }
 

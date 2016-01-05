@@ -14,7 +14,7 @@ interface XmlReaderInterface
      *
      * @param string $url The URL.
      *
-     * @return SimpleXMLElement [via promise] The XML response.
+     * @return tuple<SimpleXMLElement, DateTime|null> [via promise] A 2-tuple of the XML responser and the last modification time, if available.
      */
     public function read($url);
 }
