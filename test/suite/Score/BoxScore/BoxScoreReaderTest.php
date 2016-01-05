@@ -6,6 +6,7 @@ use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Competition;
@@ -303,6 +304,15 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(BoxScoreResponse::class))->argument();
         $this->assertTrue($response->isFinalized());
+    }
+
+    public function testReadEmpty()
+    {
+        $this->setUpXmlReader('Score/boxscores-empty.xml');
+
+        $this->setExpectedException(NotFoundException::class);
+        $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
+        $this->reader->read($request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
