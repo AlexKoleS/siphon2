@@ -49,23 +49,24 @@ class ResultReader implements ResultReaderInterface
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
                 list($xml, $modifiedTime) = $result;
+
                 $xml = $xml->xpath('.//season-content')[0];
-                $season = $this->createSeason($xml->season);
+
                 $sport = $request->sport();
-                $response = new ResultResponse($sport, $season);
-                $response->setModifiedTime($modifiedTime);
+                $season = $this->createSeason($xml->season);
 
-                foreach ($xml->xpath('.//competition') as $competition) {
-                    $qaStatus = XPath::stringOrNull(
-                        $competition,
-                        "//meta/property[@name='qa-status']"
-                    );
-
-                    $response->add(
-                        $this->createCompetition($competition, $sport),
-                        'finalized' === $qaStatus
+                foreach ($xml->competition as $competitionElement) {
+                    $season->add(
+                        $this->createCompetition(
+                            $competitionElement,
+                            $sport,
+                            $season
+                        )
                     );
                 }
+
+                $response = new ResultResponse($sport, $season);
+                $response->setModifiedTime($modifiedTime);
 
                 return $response;
             }

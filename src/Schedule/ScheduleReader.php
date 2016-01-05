@@ -49,11 +49,11 @@ class ScheduleReader implements ScheduleReaderInterface
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
                 list($xml, $modifiedTime) = $result;
+
                 $xml = $xml->xpath('.//season-content');
-                $response = new ScheduleResponse(
-                    $request->sport(),
-                    $request->type()
-                );
+
+                $sport = $request->sport();
+                $response = new ScheduleResponse($sport, $request->type());
                 $response->setModifiedTime($modifiedTime);
 
                 foreach ($xml as $element) {
@@ -62,14 +62,13 @@ class ScheduleReader implements ScheduleReaderInterface
                     foreach ($element->competition as $competitionElement) {
                         $competition = $this->createCompetition(
                             $competitionElement,
-                            $request->sport(),
+                            $sport,
                             $season
                         );
 
-                        foreach (
-                            $competitionElement->xpath('.//player') as
-                                $playerElement
-                        ) {
+                        $playerElements = $competitionElement->xpath('.//player');
+
+                        foreach ($playerElements as $playerElement) {
                             $competition->addNotablePlayer(
                                 $this->createPlayer($playerElement)
                             );

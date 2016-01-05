@@ -8,7 +8,6 @@ use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Competition;
-use Icecave\Siphon\Schedule\CompetitionRef;
 use Icecave\Siphon\Schedule\CompetitionStatus;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
@@ -25,50 +24,57 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
 
         $this->request = new ResultRequest(Sport::NHL(), '2015-2016');
 
+        $this->season = new Season(
+            '/sport/hockey/season:69',
+            '2015-2016',
+            Date::fromIsoString('2015-09-01'),
+            Date::fromIsoString('2016-06-30')
+        );
+
         $this->response = new ResultResponse(
             Sport::NHL(),
-            new Season(
-                '/sport/hockey/season:69',
-                '2015-2016',
-                Date::fromIsoString('2015-09-01'),
-                Date::fromIsoString('2016-06-30')
-            )
+            $this->season
         );
 
         $this->response->setModifiedTime($this->modifiedTime);
 
-        $this->response->add(
-            new CompetitionRef(
+        $this->season->add(
+            new Competition(
                 '/sport/hockey/competition:72767',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2015-09-20T16:30:00-04:00'),
+                DateTime::fromIsoString('2015-09-20T19:06:31-04:00'),
                 Sport::NHL(),
+                $this->season,
                 new TeamRef('/sport/hockey/team:27', 'Nashville'),
                 new TeamRef('/sport/hockey/team:14', 'Florida')
-            ),
-            true
+            )
         );
-        $this->response->add(
-            new CompetitionRef(
+
+        $this->season->add(
+            new Competition(
                 '/sport/hockey/competition:72768',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2015-09-20T19:00:00-04:00'),
+                DateTime::fromIsoString('2015-09-20T22:02:30-04:00'),
                 Sport::NHL(),
+                $this->season,
                 new TeamRef('/sport/hockey/team:3', 'Boston'),
                 new TeamRef('/sport/hockey/team:13', 'New Jersey')
-            ),
-            true
+            )
         );
-        $this->response->add(
-            new CompetitionRef(
+
+        $this->season->add(
+            new Competition(
                 '/sport/hockey/competition:72769',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2015-09-20T20:00:00-04:00'),
+                DateTime::fromIsoString('2015-09-20T22:37:40-04:00'),
                 Sport::NHL(),
+                $this->season,
                 new TeamRef('/sport/hockey/team:27', 'Nashville'),
                 new TeamRef('/sport/hockey/team:14', 'Florida')
-            ),
-            true
+            )
         );
 
         $this->reader = new ResultReader($this->urlBuilder(), $this->xmlReader()->mock());

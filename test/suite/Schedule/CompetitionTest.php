@@ -20,6 +20,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         $this->player2->id->returns('<player 2>');
 
         $this->startTime = DateTime::fromUnixTime(0);
+        $this->endTime   = DateTime::fromUnixTime(1);
         $this->season    = Phony::mock(Season::class)->mock();
         $this->homeTeam  = Phony::mock(TeamInterface::class)->mock();
         $this->awayTeam  = Phony::mock(TeamInterface::class)->mock();
@@ -28,6 +29,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
             '<id>',
             CompetitionStatus::IN_PROGRESS(),
             $this->startTime,
+            $this->endTime,
             Sport::NFL(),
             $this->season,
             $this->homeTeam,
@@ -56,6 +58,14 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $this->startTime,
             $this->competition->startTime()
+        );
+    }
+
+    public function testEndTime()
+    {
+        $this->assertSame(
+            $this->endTime,
+            $this->competition->endTime()
         );
     }
 

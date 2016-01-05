@@ -48,6 +48,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                 '/sport/baseball/competition:291828',
                 CompetitionStatus::COMPLETE(),
                 DateTime::fromIsoString('2009-10-21T20:05:00-04:00'),
+                null,
                 Sport::MLB(),
                 new Season(
                     '/sport/baseball/season:850',

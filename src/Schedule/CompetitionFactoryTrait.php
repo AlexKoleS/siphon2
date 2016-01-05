@@ -26,6 +26,14 @@ trait CompetitionFactoryTrait
             $element->{'start-date'}
         );
 
+        if ($element->{'result-scope'}->{'completed-date'}) {
+            $endTime = DateTime::fromIsoString(
+                $element->{'result-scope'}->{'completed-date'}
+            );
+        } else {
+            $endTime = null;
+        };
+
         $homeTeam = $this->createTeam(
             $element->{'home-team-content'}->team
         );
@@ -39,6 +47,7 @@ trait CompetitionFactoryTrait
                 $id,
                 $status,
                 $startTime,
+                $endTime,
                 $sport,
                 $season,
                 $homeTeam,

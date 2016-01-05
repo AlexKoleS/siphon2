@@ -16,6 +16,7 @@ class Competition implements CompetitionInterface
      * @param string            $id        The competition ID.
      * @param CompetitionStatus $status    The status of the competition.
      * @param DateTime          $startTime The time at which the competition begins.
+     * @param DateTime|null     $endTime   The time at which the competition ended, if known.
      * @param Sport             $sport     The sport (eg, baseball, football, etc).
      * @param Season            $season    The season in which the compeititon is played.
      * @param TeamInterface     $homeTeam  The home team.
@@ -25,6 +26,7 @@ class Competition implements CompetitionInterface
         $id,
         CompetitionStatus $status,
         DateTime $startTime,
+        DateTime $endTime = null,
         Sport $sport,
         Season $season,
         TeamInterface $homeTeam,
@@ -33,6 +35,7 @@ class Competition implements CompetitionInterface
         $this->id             = $id;
         $this->status         = $status;
         $this->startTime      = $startTime;
+        $this->endTime        = $endTime;
         $this->sport          = $sport;
         $this->season         = $season;
         $this->homeTeam       = $homeTeam;
@@ -68,6 +71,16 @@ class Competition implements CompetitionInterface
     public function startTime()
     {
         return $this->startTime;
+    }
+
+    /**
+     * Get the time at which the competition ended, if known.
+     *
+     * @return DateTime The competition end time.
+     */
+    public function endTime()
+    {
+        return $this->endTime;
     }
 
     /**
@@ -146,6 +159,7 @@ class Competition implements CompetitionInterface
     private $id;
     private $status;
     private $startTime;
+    private $endTime;
     private $sport;
     private $season;
     private $homeTeam;
