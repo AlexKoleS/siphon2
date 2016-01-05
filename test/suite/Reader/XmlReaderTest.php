@@ -9,6 +9,7 @@ use Eloquent\Phony\Phpunit\Phony;
 use Exception;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
+use Icecave\Siphon\Reader\Exception\RateLimitException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use PHPUnit_Framework_TestCase;
 use React\Promise;
@@ -76,6 +77,17 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this->reader->read('url')->done($this->resolve, $this->reject);
 
         $this->reject->calledWith(new NotFoundException($exception));
+        $this->resolve->never()->called();
+    }
+
+    public function testReadWithRateLimitException()
+    {
+        $exception = new ResponseException($this->response->mock());
+        $this->response->getCode->returns(429);
+        $this->httpClient->get->returns(Promise\reject($exception));
+        $this->reader->read('url')->done($this->resolve, $this->reject);
+
+        $this->reject->calledWith(new RateLimitException($exception));
         $this->resolve->never()->called();
     }
 

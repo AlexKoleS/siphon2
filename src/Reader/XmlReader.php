@@ -6,6 +6,7 @@ use Clue\React\Buzz\Browser;
 use Clue\React\Buzz\Message\ResponseException;
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
+use Icecave\Siphon\Reader\Exception\RateLimitException;
 use Icecave\Siphon\Reader\Exception\ServiceUnavailableException;
 use SimpleXMLElement;
 
@@ -51,11 +52,11 @@ class XmlReader implements XmlReaderInterface
                 }
             )->otherwise(
                 function ($exception) {
-                    if (
-                        $exception instanceof ResponseException &&
-                        404 === $exception->getResponse()->getCode()
-                    ) {
-                        throw new NotFoundException($exception);
+                    if ($exception instanceof ResponseException) {
+                        switch ($exception->getResponse()->getCode()) {
+                            case 404: throw new NotFoundException($exception);
+                            case 429: throw new RateLimitException($exception);
+                        }
                     }
 
                     throw new ServiceUnavailableException($exception);
