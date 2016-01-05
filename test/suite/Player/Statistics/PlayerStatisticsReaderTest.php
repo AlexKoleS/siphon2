@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Player\Statistics;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
@@ -22,7 +23,14 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = new PlayerStatisticsRequest(Sport::NFL(), '2014-2015', 23);
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
+        $this->request = new PlayerStatisticsRequest(
+            Sport::NFL(),
+            '2014-2015',
+            23
+        );
+
         $this->response = new PlayerStatisticsResponse(
             Sport::NFL(),
             new Season(
@@ -35,6 +43,8 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
             StatisticsType::COMBINED()
         );
 
+        $this->response->setModifiedTime($this->modifiedTime);
+
         $this->subject = new PlayerStatisticsReader(
             $this->urlBuilder(),
             $this->xmlReader()->mock()
@@ -46,7 +56,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Player/stats.xml');
+        $this->setUpXmlReader('Player/stats.xml', $this->modifiedTime);
 
         $this->response->add(
             new Player('/sport/football/player:338', 'John', 'Abraham'),
@@ -125,7 +135,7 @@ class PlayerStatisticsReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadSplitStats()
     {
-        $this->setUpXmlReader('Player/split-stats.xml');
+        $this->setUpXmlReader('Player/split-stats.xml', $this->modifiedTime);
 
         $this->request->setType(StatisticsType::SPLIT());
         $this->response->setType(StatisticsType::SPLIT());

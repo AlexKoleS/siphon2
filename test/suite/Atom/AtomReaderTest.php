@@ -14,7 +14,8 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->setUpXmlReader('Atom/atom.xml');
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+        $this->setUpXmlReader('Atom/atom.xml', $this->modifiedTime);
 
         $this->request = new AtomRequest(DateTime::fromUnixTime(86400));
         $this->reader = new AtomReader($this->urlBuilder(), $this->xmlReader()->mock());
@@ -51,6 +52,7 @@ class AtomReaderTest extends PHPUnit_Framework_TestCase
             ],
             iterator_to_array($response)
         );
+        $this->assertSame($this->modifiedTime, $response->modifiedTime());
     }
 
     public function testReadWithUnsupportedRequest()

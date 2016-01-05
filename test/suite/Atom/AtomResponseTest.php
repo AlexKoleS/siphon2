@@ -12,29 +12,29 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->updatedTime = 'a';
-        $this->response = new AtomResponse($this->updatedTime);
+        $this->subject = new AtomResponse($this->updatedTime);
     }
 
     public function testUpdatedTime()
     {
-        $this->assertSame($this->updatedTime, $this->response->updatedTime());
+        $this->assertSame($this->updatedTime, $this->subject->updatedTime());
 
         $updatedTime = 'b';
-        $this->response->setUpdatedTime($updatedTime);
+        $this->subject->setUpdatedTime($updatedTime);
 
-        $this->assertSame($updatedTime, $this->response->updatedTime());
+        $this->assertSame($updatedTime, $this->subject->updatedTime());
     }
 
     public function testIsEmpty()
     {
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
 
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
 
         $this->assertFalse(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -42,14 +42,14 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            count($this->response)
+            count($this->subject)
         );
 
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
 
         $this->assertSame(
             1,
-            count($this->response)
+            count($this->subject)
         );
     }
 
@@ -57,11 +57,11 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
 
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
-        $this->response->add('<url 2>', DateTime::fromUnixTime(2));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 2>', DateTime::fromUnixTime(2));
 
         $this->assertEquals(
             [
@@ -74,13 +74,13 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
                     DateTime::fromUnixTime(2),
                 ],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAdd()
     {
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
 
         $this->assertEquals(
             [
@@ -89,14 +89,14 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
                     DateTime::fromUnixTime(1),
                 ],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
 
         $this->assertEquals(
             [
@@ -105,42 +105,42 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
                     DateTime::fromUnixTime(1),
                 ],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemove()
     {
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
-        $this->response->remove('<url 1>');
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->remove('<url 1>');
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemoveUnknownRequest()
     {
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
-        $this->response->remove('<url 1>');
-        $this->response->remove('<url 1>');
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->remove('<url 1>');
+        $this->subject->remove('<url 1>');
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testClear()
     {
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
-        $this->response->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
+        $this->subject->add('<url 1>', DateTime::fromUnixTime(1));
 
-        $this->response->clear();
+        $this->subject->clear();
 
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -148,8 +148,29 @@ class AtomResponseTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(ResponseVisitorInterface::class);
 
-        $this->response->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitAtomResponse->calledWith($this->response);
+        $visitor->visitAtomResponse->calledWith($this->subject);
+    }
+
+    public function testModifiedTime()
+    {
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
+
+        $modifiedTime = DateTime::fromUnixTime(123);
+        $this->subject->setModifiedTime($modifiedTime);
+
+        $this->assertSame(
+            $modifiedTime,
+            $this->subject->modifiedTime()
+        );
+
+        $this->subject->setModifiedTime(null);
+
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
     }
 }

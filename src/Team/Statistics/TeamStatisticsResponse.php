@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Team\Statistics;
 
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
@@ -21,6 +22,7 @@ class TeamStatisticsResponse implements
     Countable,
     IteratorAggregate
 {
+    use ResponseTrait;
     use TeamResponseTrait {
         __construct as private initialize;
     }

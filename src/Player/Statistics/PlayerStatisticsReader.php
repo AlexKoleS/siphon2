@@ -52,7 +52,7 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
-                list($xml, $lastModified) = $result;
+                list($xml, $modifiedTime) = $result;
                 $xml = $xml->xpath('.//season-content')[0];
 
                 // Sometimes the feed contains no team or player information.
@@ -69,6 +69,7 @@ class PlayerStatisticsReader implements PlayerStatisticsReaderInterface
                     $this->createTeam($xml->{'team-content'}->team),
                     $request->type()
                 );
+                $response->setModifiedTime($modifiedTime);
 
                 foreach ($xml->xpath('.//player-content') as $element) {
                     $response->add(

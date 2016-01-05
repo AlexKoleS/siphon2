@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Player\Image;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
@@ -23,7 +24,7 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
         $this->player1->id->returns('<player 1>');
         $this->player2->id->returns('<player 2>');
 
-        $this->response = new ImageResponse(
+        $this->subject = new ImageResponse(
             Sport::NFL(),
             $this->season,
             $this->team
@@ -34,14 +35,14 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->response->sport()
+            $this->subject->sport()
         );
 
-        $this->response->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->response->sport()
+            $this->subject->sport()
         );
     }
 
@@ -49,15 +50,15 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->season,
-            $this->response->season()
+            $this->subject->season()
         );
 
         $season = Phony::mock(Season::class)->mock();
-        $this->response->setSeason($season);
+        $this->subject->setSeason($season);
 
         $this->assertSame(
             $season,
-            $this->response->season()
+            $this->subject->season()
         );
     }
 
@@ -65,28 +66,28 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->team,
-            $this->response->team()
+            $this->subject->team()
         );
 
         $team = Phony::mock(TeamInterface::class)->mock();
-        $this->response->setTeam($team);
+        $this->subject->setTeam($team);
 
         $this->assertSame(
             $team,
-            $this->response->team()
+            $this->subject->team()
         );
     }
 
     public function testIsEmpty()
     {
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
 
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
 
         $this->assertFalse(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -94,14 +95,14 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            count($this->response)
+            count($this->subject)
         );
 
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
 
         $this->assertSame(
             1,
-            count($this->response)
+            count($this->subject)
         );
     }
 
@@ -109,78 +110,78 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
 
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
-        $this->response->add($this->player2->mock(), '<small 2>', '<large 2>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player2->mock(), '<small 2>', '<large 2>');
 
         $this->assertEquals(
             [
                 [$this->player1->mock(), '<small 1>', '<large 1>'],
                 [$this->player2->mock(), '<small 2>', '<large 2>'],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAdd()
     {
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
 
         $this->assertEquals(
             [
                 [$this->player1->mock(), '<small 1>', '<large 1>'],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
 
         $this->assertEquals(
             [
                 [$this->player1->mock(), '<small 1>', '<large 1>'],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemove()
     {
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
-        $this->response->remove($this->player1->mock());
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->remove($this->player1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemoveUnknownPlayer()
     {
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
-        $this->response->remove($this->player1->mock());
-        $this->response->remove($this->player1->mock());
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->remove($this->player1->mock());
+        $this->subject->remove($this->player1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testClear()
     {
-        $this->response->add($this->player1->mock(), '<small 1>', '<large 1>');
-        $this->response->add($this->player1->mock(), '<small 2>', '<large 2>');
+        $this->subject->add($this->player1->mock(), '<small 1>', '<large 1>');
+        $this->subject->add($this->player1->mock(), '<small 2>', '<large 2>');
 
-        $this->response->clear();
+        $this->subject->clear();
 
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -188,8 +189,29 @@ class ImageResponseTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(ResponseVisitorInterface::class);
 
-        $this->response->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitImageResponse->calledWith($this->response);
+        $visitor->visitImageResponse->calledWith($this->subject);
+    }
+
+    public function testModifiedTime()
+    {
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
+
+        $modifiedTime = DateTime::fromUnixTime(123);
+        $this->subject->setModifiedTime($modifiedTime);
+
+        $this->assertSame(
+            $modifiedTime,
+            $this->subject->modifiedTime()
+        );
+
+        $this->subject->setModifiedTime(null);
+
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
     }
 }

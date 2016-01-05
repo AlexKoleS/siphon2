@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Score\BoxScore;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
@@ -34,7 +35,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
         $this->statistics1 = Phony::mock(StatisticsCollection::class)->mock();
         $this->statistics2 = Phony::mock(StatisticsCollection::class)->mock();
 
-        $this->response = new BoxScoreResponse(
+        $this->subject = new BoxScoreResponse(
             $this->competition->mock(),
             $this->homeTeamStatistics,
             $this->awayTeamStatistics
@@ -45,16 +46,16 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->competition->mock(),
-            $this->response->competition()
+            $this->subject->competition()
         );
 
         $competition = Phony::mock(CompetitionInterface::class)->mock();
 
-        $this->response->setCompetition($competition);
+        $this->subject->setCompetition($competition);
 
         $this->assertSame(
             $competition,
-            $this->response->competition()
+            $this->subject->competition()
         );
     }
 
@@ -62,16 +63,16 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->homeTeamStatistics,
-            $this->response->homeTeamStatistics()
+            $this->subject->homeTeamStatistics()
         );
 
         $statistics = new StatisticsCollection();
 
-        $this->response->setHomeTeamStatistics($statistics);
+        $this->subject->setHomeTeamStatistics($statistics);
 
         $this->assertSame(
             $statistics,
-            $this->response->homeTeamStatistics()
+            $this->subject->homeTeamStatistics()
         );
     }
 
@@ -79,35 +80,35 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $this->awayTeamStatistics,
-            $this->response->awayTeamStatistics()
+            $this->subject->awayTeamStatistics()
         );
 
         $statistics = new StatisticsCollection();
 
-        $this->response->setAwayTeamStatistics($statistics);
+        $this->subject->setAwayTeamStatistics($statistics);
 
         $this->assertSame(
             $statistics,
-            $this->response->awayTeamStatistics()
+            $this->subject->awayTeamStatistics()
         );
     }
 
     public function testIsFinalized()
     {
         $this->assertFalse(
-            $this->response->isFinalized()
+            $this->subject->isFinalized()
         );
 
-        $this->response->setIsFinalized(true);
+        $this->subject->setIsFinalized(true);
 
         $this->assertTrue(
-            $this->response->isFinalized()
+            $this->subject->isFinalized()
         );
     }
 
     public function testAddWithHomeTeam()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
@@ -117,13 +118,13 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             [
                 [$this->homeTeam, $this->player1->mock(), $this->statistics1],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAddWithAwayTeam()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->awayTeam,
             $this->player1->mock(),
             $this->statistics1
@@ -133,7 +134,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             [
                 [$this->awayTeam, $this->player1->mock(), $this->statistics1],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
@@ -144,7 +145,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             'The team object must be one of the ' . TeamInterface::class . ' instances from the competition object.'
         );
 
-        $this->response->add(
+        $this->subject->add(
             Phony::mock(TeamInterface::class)->mock(),
             $this->player1->mock(),
             $this->statistics1
@@ -153,13 +154,13 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
@@ -169,78 +170,78 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             [
                 [$this->homeTeam, $this->player1->mock(), $this->statistics1],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemove()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->remove($this->player1->mock());
+        $this->subject->remove($this->player1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemoveUnknownPlayer()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->remove($this->player1->mock());
-        $this->response->remove($this->player1->mock());
+        $this->subject->remove($this->player1->mock());
+        $this->subject->remove($this->player1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testClear()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player2->mock(),
             $this->statistics2
         );
 
-        $this->response->clear();
+        $this->subject->clear();
 
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
     public function testIsEmpty()
     {
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
         $this->assertFalse(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -248,10 +249,10 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            count($this->response)
+            count($this->subject)
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
@@ -259,7 +260,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(
             1,
-            count($this->response)
+            count($this->subject)
         );
     }
 
@@ -267,16 +268,16 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player2->mock(),
             $this->statistics2
@@ -287,19 +288,19 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
                 [$this->homeTeam, $this->player1->mock(), $this->statistics1],
                 [$this->homeTeam, $this->player2->mock(), $this->statistics2],
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testHomeTeamPlayers()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->awayTeam,
             $this->player2->mock(),
             $this->statistics2
@@ -309,19 +310,19 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             [
                 [$this->homeTeam, $this->player1->mock(), $this->statistics1],
             ],
-            iterator_to_array($this->response->homeTeamPlayers())
+            iterator_to_array($this->subject->homeTeamPlayers())
         );
     }
 
     public function testAwayTeamPlayers()
     {
-        $this->response->add(
+        $this->subject->add(
             $this->homeTeam,
             $this->player1->mock(),
             $this->statistics1
         );
 
-        $this->response->add(
+        $this->subject->add(
             $this->awayTeam,
             $this->player2->mock(),
             $this->statistics2
@@ -331,7 +332,7 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             [
                 [$this->awayTeam, $this->player2->mock(), $this->statistics2],
             ],
-            iterator_to_array($this->response->awayTeamPlayers())
+            iterator_to_array($this->subject->awayTeamPlayers())
         );
     }
 
@@ -339,8 +340,29 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(ResponseVisitorInterface::class);
 
-        $this->response->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitBoxScoreResponse->calledWith($this->response);
+        $visitor->visitBoxScoreResponse->calledWith($this->subject);
+    }
+
+    public function testModifiedTime()
+    {
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
+
+        $modifiedTime = DateTime::fromUnixTime(123);
+        $this->subject->setModifiedTime($modifiedTime);
+
+        $this->assertSame(
+            $modifiedTime,
+            $this->subject->modifiedTime()
+        );
+
+        $this->subject->setModifiedTime(null);
+
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
     }
 }

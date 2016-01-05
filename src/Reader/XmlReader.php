@@ -34,11 +34,11 @@ class XmlReader implements XmlReaderInterface
         return $this->httpClient->get($url)
             ->then(
                 function ($response) {
-                    $lastModified = $response->getHeader('Last-Modified');
+                    $modifiedTime = $response->getHeader('Last-Modified');
 
-                    if ($lastModified) {
-                        $lastModified = DateTime::fromUnixTime(
-                            strtotime($lastModified)
+                    if ($modifiedTime) {
+                        $modifiedTime = DateTime::fromUnixTime(
+                            strtotime($modifiedTime)
                         );
                     }
 
@@ -47,7 +47,7 @@ class XmlReader implements XmlReaderInterface
                         LIBXML_NONET
                     );
 
-                    return [$xml, $lastModified];
+                    return [$xml, $modifiedTime];
                 }
             )->otherwise(
                 function ($exception) {

@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Player;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
@@ -18,6 +19,8 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
         $this->request = new PlayerRequest(Sport::MLB(), '2009', 2970);
 
         $this->response = new PlayerResponse(
@@ -30,6 +33,8 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
             ),
             new TeamRef('/sport/baseball/team:2970', 'NY Yankees')
         );
+
+        $this->response->setModifiedTime($this->modifiedTime);
 
         $this->response->add(new Player('/sport/baseball/player:43566', 'Alfredo',   'Aceves'),       new PlayerSeasonDetails('91', 'RP', 'Reliever',          true));
         $this->response->add(new Player('/sport/baseball/player:43263', 'Jonathan',  'Albaladejo'),   new PlayerSeasonDetails('63', 'RP', 'Reliever',          true));
@@ -96,7 +101,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Player/players.xml');
+        $this->setUpXmlReader('Player/players.xml', $this->modifiedTime);
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(

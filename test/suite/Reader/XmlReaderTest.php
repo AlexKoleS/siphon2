@@ -44,7 +44,7 @@ class XmlReaderTest extends PHPUnit_Framework_TestCase
         $this->reject->never()->called();
     }
 
-    public function testReadWithLastModified()
+    public function testReadWithModifiedTime()
     {
         $this->response->getHeader->with('Last-Modified')->returns('Wed, 13 May 2015 17:37:44 GMT');
 

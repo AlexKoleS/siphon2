@@ -21,6 +21,8 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
         $this->request = new ResultRequest(Sport::NHL(), '2015-2016');
 
         $this->response = new ResultResponse(
@@ -32,6 +34,8 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
                 Date::fromIsoString('2016-06-30')
             )
         );
+
+        $this->response->setModifiedTime($this->modifiedTime);
 
         $this->response->add(
             new CompetitionRef(
@@ -75,7 +79,7 @@ class ResultReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Result/results.xml');
+        $this->setUpXmlReader('Result/results.xml', $this->modifiedTime);
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(

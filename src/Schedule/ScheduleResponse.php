@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Schedule;
 
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Sport;
 use IteratorAggregate;
@@ -16,6 +17,8 @@ class ScheduleResponse implements
     Countable,
     IteratorAggregate
 {
+    use ResponseTrait;
+
     public function __construct(Sport $sport, ScheduleType $type)
     {
         $this->setSport($sport);

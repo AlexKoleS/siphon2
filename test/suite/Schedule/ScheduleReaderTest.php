@@ -20,8 +20,13 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
         $this->request = new ScheduleRequest(Sport::MLB());
+
         $this->response = new ScheduleResponse(Sport::MLB(), ScheduleType::FULL());
+
+        $this->response->setModifiedTime($this->modifiedTime);
 
         $season = new Season(
             '/sport/baseball/season:851',
@@ -82,7 +87,7 @@ class ScheduleReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadFullSchedule()
     {
-        $this->setUpXmlReader('Schedule/schedule.xml');
+        $this->setUpXmlReader('Schedule/schedule.xml', $this->modifiedTime);
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(

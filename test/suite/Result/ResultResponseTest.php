@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Result;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Schedule\Season;
@@ -172,5 +173,26 @@ class ResultResponseTest extends PHPUnit_Framework_TestCase
         $this->subject->accept($visitor->mock());
 
         $visitor->visitResultResponse->calledWith($this->subject);
+    }
+
+    public function testModifiedTime()
+    {
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
+
+        $modifiedTime = DateTime::fromUnixTime(123);
+        $this->subject->setModifiedTime($modifiedTime);
+
+        $this->assertSame(
+            $modifiedTime,
+            $this->subject->modifiedTime()
+        );
+
+        $this->subject->setModifiedTime(null);
+
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
     }
 }

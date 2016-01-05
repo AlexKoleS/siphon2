@@ -18,7 +18,10 @@ class InjuryReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
         $this->request  = new InjuryRequest(Sport::NFL());
+
         $this->response = new InjuryResponse(Sport::NFL());
 
         $this->response->add(

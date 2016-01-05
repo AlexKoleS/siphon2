@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Schedule;
 
 use Eloquent\Phony\Phpunit\Phony;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Sport;
 use PHPUnit_Framework_TestCase;
@@ -17,7 +18,7 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
         $this->season1->id->returns('<season 1>');
         $this->season2->id->returns('<season 2>');
 
-        $this->response = new ScheduleResponse(
+        $this->subject = new ScheduleResponse(
             Sport::NFL(),
             ScheduleType::FULL()
         );
@@ -27,14 +28,14 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             Sport::NFL(),
-            $this->response->sport()
+            $this->subject->sport()
         );
 
-        $this->response->setSport(Sport::NBA());
+        $this->subject->setSport(Sport::NBA());
 
         $this->assertSame(
             Sport::NBA(),
-            $this->response->sport()
+            $this->subject->sport()
         );
     }
 
@@ -42,27 +43,27 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             ScheduleType::FULL(),
-            $this->response->type()
+            $this->subject->type()
         );
 
-        $this->response->setType(ScheduleType::DELETED());
+        $this->subject->setType(ScheduleType::DELETED());
 
         $this->assertSame(
             ScheduleType::DELETED(),
-            $this->response->type()
+            $this->subject->type()
         );
     }
 
     public function testIsEmpty()
     {
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
 
-        $this->response->add($this->season1->mock());
+        $this->subject->add($this->season1->mock());
 
         $this->assertFalse(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -70,14 +71,14 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             0,
-            count($this->response)
+            count($this->subject)
         );
 
-        $this->response->add($this->season1->mock());
+        $this->subject->add($this->season1->mock());
 
         $this->assertSame(
             1,
-            count($this->response)
+            count($this->subject)
         );
     }
 
@@ -85,78 +86,78 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
 
-        $this->response->add($this->season1->mock());
-        $this->response->add($this->season2->mock());
+        $this->subject->add($this->season1->mock());
+        $this->subject->add($this->season2->mock());
 
         $this->assertEquals(
             [
                 $this->season1->mock(),
                 $this->season2->mock(),
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAdd()
     {
-        $this->response->add($this->season1->mock());
+        $this->subject->add($this->season1->mock());
 
         $this->assertEquals(
             [
                 $this->season1->mock(),
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testAddDoesNotDuplicate()
     {
-        $this->response->add($this->season1->mock());
-        $this->response->add($this->season1->mock());
+        $this->subject->add($this->season1->mock());
+        $this->subject->add($this->season1->mock());
 
         $this->assertEquals(
             [
                 $this->season1->mock(),
             ],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemove()
     {
-        $this->response->add($this->season1->mock());
-        $this->response->remove($this->season1->mock());
+        $this->subject->add($this->season1->mock());
+        $this->subject->remove($this->season1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testRemoveUnknownSeason()
     {
-        $this->response->add($this->season1->mock());
-        $this->response->remove($this->season1->mock());
-        $this->response->remove($this->season1->mock());
+        $this->subject->add($this->season1->mock());
+        $this->subject->remove($this->season1->mock());
+        $this->subject->remove($this->season1->mock());
 
         $this->assertEquals(
             [],
-            iterator_to_array($this->response)
+            iterator_to_array($this->subject)
         );
     }
 
     public function testClear()
     {
-        $this->response->add($this->season1->mock());
-        $this->response->add($this->season2->mock());
+        $this->subject->add($this->season1->mock());
+        $this->subject->add($this->season2->mock());
 
-        $this->response->clear();
+        $this->subject->clear();
 
         $this->assertTrue(
-            $this->response->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -164,8 +165,29 @@ class ScheduleResponseTest extends PHPUnit_Framework_TestCase
     {
         $visitor = Phony::mock(ResponseVisitorInterface::class);
 
-        $this->response->accept($visitor->mock());
+        $this->subject->accept($visitor->mock());
 
-        $visitor->visitScheduleResponse->calledWith($this->response);
+        $visitor->visitScheduleResponse->calledWith($this->subject);
+    }
+
+    public function testModifiedTime()
+    {
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
+
+        $modifiedTime = DateTime::fromUnixTime(123);
+        $this->subject->setModifiedTime($modifiedTime);
+
+        $this->assertSame(
+            $modifiedTime,
+            $this->subject->modifiedTime()
+        );
+
+        $this->subject->setModifiedTime(null);
+
+        $this->assertNull(
+            $this->subject->modifiedTime()
+        );
     }
 }

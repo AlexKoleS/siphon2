@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Player\Image;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
@@ -19,6 +20,8 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
         $this->request = new ImageRequest(
             Sport::MLB(),
             '2015',
@@ -38,6 +41,8 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
                 'San Diego'
             )
         );
+
+        $this->response->setModifiedTime($this->modifiedTime);
 
         $this->response->add(
             new Player('/sport/baseball/player:41227',  'Joaquin',   'Benoit'),
@@ -65,7 +70,7 @@ class ImageReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Player/images.xml');
+        $this->setUpXmlReader('Player/images.xml', $this->modifiedTime);
         $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(

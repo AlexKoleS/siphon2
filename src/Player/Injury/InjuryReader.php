@@ -45,9 +45,10 @@ class InjuryReader implements InjuryReaderInterface
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
-                list($xml, $lastModified) = $result;
+                list($xml, $modifiedTime) = $result;
                 $xml = $xml->xpath('.//player-content');
                 $response = new InjuryResponse($request->sport());
+                $response->setModifiedTime($modifiedTime);
 
                 foreach ($xml as $element) {
                     $injury = $element->injury;

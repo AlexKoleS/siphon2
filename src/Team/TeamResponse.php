@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Team;
 
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use IteratorAggregate;
 
@@ -15,6 +16,7 @@ class TeamResponse implements
     Countable,
     IteratorAggregate
 {
+    use ResponseTrait;
     use TeamResponseTrait;
 
     /**

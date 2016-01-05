@@ -25,7 +25,12 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new BoxScoreReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
+        $this->reader = new BoxScoreReader(
+            $this->urlBuilder(),
+            $this->xmlReader()->mock()
+        );
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -33,7 +38,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Score/boxscores.xml');
+        $this->setUpXmlReader('Score/boxscores.xml', $this->modifiedTime);
 
         $homeTeam = new TeamRef('/sport/baseball/team:2958', 'Philadelphia');
         $awayTeam = new TeamRef('/sport/baseball/team:2967', 'LA Dodgers');
@@ -148,6 +153,8 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
+
+        $expected->setModifiedTime($this->modifiedTime);
 
         $expected->add(
             $homeTeam,

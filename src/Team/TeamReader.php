@@ -44,12 +44,13 @@ class TeamReader implements TeamReaderInterface
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
-                list($xml, $lastModified) = $result;
+                list($xml, $modifiedTime) = $result;
                 $xml = $xml->xpath('.//season-content')[0];
                 $response = new TeamResponse(
                     $request->sport(),
                     $this->createSeason($xml->season)
                 );
+                $response->setModifiedTime($modifiedTime);
 
                 foreach ($xml->xpath('.//team') as $team) {
                     $response->add($this->createTeam($team));

@@ -52,15 +52,17 @@ class LiveScoreReader implements LiveScoreReaderInterface
 
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
-                list($xml, $lastModified) = $result;
+                list($xml, $modifiedTime) = $result;
                 $xml = $xml->xpath('.//competition')[0];
 
-                $competition =
-                    $this->createCompetition($xml, $request->sport());
+                $competition = $this->createCompetition($xml, $request->sport());
                 $periods = $this->createPeriods($xml, $request->sport());
 
-                $response =
-                    new LiveScoreResponse($competition, new Score($periods));
+                $response = new LiveScoreResponse(
+                    $competition,
+                    new Score($periods)
+                );
+                $response->setModifiedTime($modifiedTime);
 
                 if (
                     !$competition->status()->anyOf(

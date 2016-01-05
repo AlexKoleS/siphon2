@@ -9,13 +9,13 @@ use React\Promise;
 
 trait XmlReaderTestTrait
 {
-    protected function setUpXmlReader($path, DateTime $lastModified = null)
+    protected function setUpXmlReader($path, DateTime $modifiedTime = null)
     {
         $this->xmlReader()->read->returns(
             Promise\resolve(
                 [
                     simplexml_load_string(file_get_contents(__DIR__ . '/../../fixture/' . $path)),
-                    null
+                    $modifiedTime,
                 ]
             )
         );

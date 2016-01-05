@@ -23,5 +23,5 @@ interface ResponseInterface
      *
      * @return DateTime|null
      */
-    // public function lastModified();
+    public function modifiedTime();
 }

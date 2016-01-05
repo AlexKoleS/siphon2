@@ -22,7 +22,12 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->reader = new LiveScoreReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
+        $this->reader = new LiveScoreReader(
+            $this->urlBuilder(),
+            $this->xmlReader()->mock()
+        );
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -30,7 +35,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Score/livescores.xml');
+        $this->setUpXmlReader('Score/livescores.xml', $this->modifiedTime);
 
         $currentPeriod = new Period(PeriodType::SHOOTOUT(), 3, 0, 0);
         $expected = new LiveScoreResponse(
@@ -54,6 +59,7 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 ]
             )
         );
+        $expected->setModifiedTime($this->modifiedTime);
         $expected->setCurrentPeriod($currentPeriod);
         $expected->setGameTime(Duration::fromComponents(0, 0, 0, 2, 55));
 

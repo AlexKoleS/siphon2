@@ -6,6 +6,7 @@ use Countable;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerResponseTrait;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use IteratorAggregate;
 
@@ -17,6 +18,7 @@ class ImageResponse implements
     Countable,
     IteratorAggregate
 {
+    use ResponseTrait;
     use PlayerResponseTrait;
 
     /**

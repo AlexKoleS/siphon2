@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Player;
 
 use Countable;
 use Icecave\Siphon\Reader\ResponseInterface;
+use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\Season;
 use IteratorAggregate;
@@ -16,6 +17,7 @@ class PlayerResponse implements
     Countable,
     IteratorAggregate
 {
+    use ResponseTrait;
     use PlayerResponseTrait;
 
     /**

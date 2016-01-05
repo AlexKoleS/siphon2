@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Team;
 
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
+use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Season;
@@ -16,6 +17,8 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->modifiedTime = DateTime::fromUnixTime(43200);
+
         $this->request = new TeamRequest(Sport::MLB(), '2009');
 
         $this->response = new TeamResponse(
@@ -27,6 +30,8 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
                 Date::fromIsoString('2009-11-05')
             )
         );
+
+        $this->response->setModifiedTime($this->modifiedTime);
 
         $this->response->add(new Team('/sport/baseball/team:2976', 'Milwaukee',     'MIL',   'Brewers'));
         $this->response->add(new Team('/sport/baseball/team:2982', 'Chicago',       'CHC',   'Cubs'));
@@ -67,7 +72,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $this->setUpXmlReader('Team/teams.xml');
+        $this->setUpXmlReader('Team/teams.xml', $this->modifiedTime);
         $this->reader->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
@@ -81,7 +86,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadWithoutNickName()
     {
-        $this->setUpXmlReader('Team/teams-without-nickname.xml');
+        $this->setUpXmlReader('Team/teams-without-nickname.xml', $this->modifiedTime);
 
         $this->response->clear();
         $this->response->add(new Team('/sport/basketball/team:665163', 'North Dakota', 'UND'));
@@ -104,7 +109,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
 
     public function testReadIncludesTeamsOutsideConference()
     {
-        $this->setUpXmlReader('Team/teams-outside-conference.xml');
+        $this->setUpXmlReader('Team/teams-outside-conference.xml', $this->modifiedTime);
 
         $this->response->clear();
         $this->response->add(new Team('/sport/basketball/team:2369', 'Southern Utah',     'SUU',   'Thunderbirds'));
