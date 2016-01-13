@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
 use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -207,6 +208,13 @@ class RequestFactoryTest extends PHPUnit_Framework_TestCase
                     Sport::MLB(),
                     '2015',
                     12345
+                ),
+            ],
+
+            'hockey probable goalies' => [
+                '/sport/v2/hockey/NHL/probable-goalies/probable_goalies_NHL.xml',
+                new HockeyProbableGoaliesRequest(
+                    Sport::NHL()
                 ),
             ],
         ];

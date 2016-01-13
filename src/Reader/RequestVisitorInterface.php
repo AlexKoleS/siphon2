@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
 use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -117,4 +118,13 @@ interface RequestVisitorInterface
      * @return mixed
      */
     public function visitBoxScoreRequest(BoxScoreRequest $request);
+
+    /**
+     * Visit the given request.
+     *
+     * @param HockeyProbableGoaliesRequest $request
+     *
+     * @return mixed
+     */
+    public function visitHockeyProbableGoaliesRequest(HockeyProbableGoaliesRequest $request);
 }

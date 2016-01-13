@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
 use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -146,6 +147,14 @@ class RequestUrlBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(
             $this->apiBase . '/baseball/MLB/boxscores/2009/boxscore_MLB_291828.xml?apiKey=xxx',
             $this->subject->build(new BoxScoreRequest(Sport::MLB(), '2009', 291828))
+        );
+    }
+
+    public function testBuildWithHockeyProbableGoaliesRequest()
+    {
+        $this->assertSame(
+            $this->apiBase . '/hockey/NHL/probable-goalies/probable_goalies_NHL.xml?apiKey=xxx',
+            $this->subject->build(new HockeyProbableGoaliesRequest(Sport::NHL()))
         );
     }
 }

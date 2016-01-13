@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xml.sportsdirectinc.com/sport/v2 sport.xsd">
+<team-sport-content>
+    <sport>
+        <id>/sport/hockey</id>
+        <name>hockey</name>
+    </sport>
+    <league-content>
+        <league>
+            <id>/sport/hockey/league:1</id>
+            <name>National Hockey League</name>
+            <name type="nick">NHL</name>
+        </league>
+        <season-content>
+            <season>
+                <id>/sport/hockey/season:69</id>
+                <name>2015-2016</name>
+                <details>
+                    <start-date>2015-09-01</start-date>
+                    <end-date>2016-06-30</end-date>
+                </details>
+            </season>
+            <competition xsi:type="sport:hockey-competition">
+                <meta>
+                    <property name="event-key">2</property>
+                </meta>
+                <id>/sport/hockey/competition:70147</id>
+                <start-date>2016-01-12T19:00:00-05:00</start-date>
+                <result-scope>
+                    <competition-status>scheduled</competition-status>
+                </result-scope>
+                <home-team-content>
+                    <team>
+                        <id>/sport/hockey/team:4</id>
+                        <name>NY Islanders</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/hockey/player:2049</id>
+                            <name type="first">Thomas</name>
+                            <name type="last">Greiss</name>
+                        </player>
+                    </player-content>
+                </home-team-content>
+                <away-team-content>
+                    <team>
+                        <id>/sport/hockey/team:30</id>
+                        <name>Columbus</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/hockey/player:4556</id>
+                            <name type="first">Anton</name>
+                            <name type="last">Forsberg</name>
+                        </player>
+                    </player-content>
+                </away-team-content>
+                <details>
+                    <competition-type>Regular Season</competition-type>
+                    <day>false</day>
+                    <neutral-site>false</neutral-site>
+                    <date-tbd>false</date-tbd>
+                    <venue>
+                        <id>/sport/hockey/venue:256</id>
+                        <name>Barclays Center</name>
+                        <name type="short">BARCL</name>
+                        <location>
+                            <city>Brooklyn</city>
+                            <state>New York</state>
+                            <country>USA</country>
+                            <timezone>Canada/Eastern</timezone>
+                        </location>
+                        <season-details>
+                            <capacity>18103</capacity>
+                        </season-details>
+                    </venue>
+                </details>
+                <betting>
+                    <home-rotation-number>54</home-rotation-number>
+                    <away-rotation-number>53</away-rotation-number>
+                </betting>
+            </competition>
+            <competition xsi:type="sport:hockey-competition">
+                <meta>
+                    <property name="event-key">3</property>
+                </meta>
+                <id>/sport/hockey/competition:70148</id>
+                <start-date>2016-01-12T19:00:00-05:00</start-date>
+                <result-scope>
+                    <competition-status>scheduled</competition-status>
+                </result-scope>
+                <home-team-content>
+                    <team>
+                        <id>/sport/hockey/team:5</id>
+                        <name>Carolina</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/hockey/player:1224</id>
+                            <name type="first">Cam</name>
+                            <name type="last">Ward</name>
+                        </player>
+                    </player-content>
+                </home-team-content>
+                <away-team-content>
+                    <team>
+                        <id>/sport/hockey/team:7</id>
+                        <name>Pittsburgh</name>
+                    </team>
+                    <player-content>
+                        <player>
+                            <id>/sport/hockey/player:164</id>
+                            <name type="first">Marc-Andre</name>
+                            <name type="last">Fleury</name>
+                        </player>
+                    </player-content>
+                </away-team-content>
+                <details>
+                    <competition-type>Regular Season</competition-type>
+                    <day>false</day>
+                    <neutral-site>false</neutral-site>
+                    <date-tbd>false</date-tbd>
+                    <venue>
+                        <id>/sport/hockey/venue:14</id>
+                        <name>PNC Arena</name>
+                        <location>
+                            <city>Raleigh</city>
+                            <state>North Carolina</state>
+                            <country>USA</country>
+                            <timezone>US/Eastern</timezone>
+                        </location>
+                        <season-details>
+                            <capacity>18680</capacity>
+                        </season-details>
+                    </venue>
+                </details>
+                <betting>
+                    <home-rotation-number>52</home-rotation-number>
+                    <away-rotation-number>51</away-rotation-number>
+                </betting>
+            </competition>
+        </season-content>
+    </league-content>
+</team-sport-content>
+</sport:content>

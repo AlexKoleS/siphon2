@@ -6,6 +6,9 @@ use Clue\React\Buzz\Browser;
 use Icecave\Siphon\Atom\AtomReader;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesReader;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesReaderInterface;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
 use Icecave\Siphon\Player\Image\ImageReader;
 use Icecave\Siphon\Player\Image\ImageReaderInterface;
 use Icecave\Siphon\Player\Image\ImageRequest;
@@ -78,7 +81,8 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
             new ImageReader($requestUrlBuilder, $xmlReader),
             new InjuryReader($requestUrlBuilder, $xmlReader),
             new LiveScoreReader($requestUrlBuilder, $xmlReader),
-            new BoxScoreReader($requestUrlBuilder, $xmlReader)
+            new BoxScoreReader($requestUrlBuilder, $xmlReader),
+            new HockeyProbableGoaliesReader($requestUrlBuilder, $xmlReader)
         );
     }
 
@@ -95,21 +99,23 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         ImageReaderInterface $imageReader,
         InjuryReaderInterface $injuryReader,
         LiveScoreReaderInterface $liveScoreReader,
-        BoxScoreReaderInterface $boxScoreReader
+        BoxScoreReaderInterface $boxScoreReader,
+        HockeyProbableGoaliesReaderInterface $hockeyProbableGoaliesReader
     ) {
-        $this->urlBuilder             = $urlBuilder;
-        $this->xmlReader              = $xmlReader;
-        $this->atomReader             = $atomReader;
-        $this->scheduleReader         = $scheduleReader;
-        $this->resultReader           = $resultReader;
-        $this->teamReader             = $teamReader;
+        $this->urlBuilder = $urlBuilder;
+        $this->xmlReader = $xmlReader;
+        $this->atomReader = $atomReader;
+        $this->scheduleReader = $scheduleReader;
+        $this->resultReader = $resultReader;
+        $this->teamReader = $teamReader;
         $this->teamStatisticsReader   = $teamStatisticsReader;
-        $this->playerReader           = $playerReader;
+        $this->playerReader = $playerReader;
         $this->playerStatisticsReader = $playerStatisticsReader;
-        $this->imageReader            = $imageReader;
-        $this->injuryReader           = $injuryReader;
-        $this->liveScoreReader        = $liveScoreReader;
-        $this->boxScoreReader         = $boxScoreReader;
+        $this->imageReader = $imageReader;
+        $this->injuryReader = $injuryReader;
+        $this->liveScoreReader = $liveScoreReader;
+        $this->boxScoreReader = $boxScoreReader;
+        $this->hockeyProbableGoaliesReader = $hockeyProbableGoaliesReader;
     }
 
     /**
@@ -307,6 +313,18 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
         return $this->boxScoreReader->{$this->operation}($request);
     }
 
+    /**
+     * Visit the given request.
+     *
+     * @param HockeyProbableGoaliesRequest $request
+     *
+     * @return mixed
+     */
+    public function visitHockeyProbableGoaliesRequest(HockeyProbableGoaliesRequest $request)
+    {
+        return $this->hockeyProbableGoaliesReader->{$this->operation}($request);
+    }
+
     private $urlBuilder;
     private $xmlReader;
     private $atomReader;
@@ -318,5 +336,6 @@ class Dispatcher implements DispatcherInterface, RequestVisitorInterface
     private $injuryReader;
     private $liveScoreReader;
     private $boxScoreReader;
+    private $hockeyProbableGoaliesReader;
     private $operation;
 }

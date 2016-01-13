@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Reader;
 
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
 use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -345,6 +346,29 @@ class RequestUrlBuilder implements RequestUrlBuilderInterface,
                 $request->seasonName(),
                 $league,
                 $request->competitionId()
+            )
+        );
+    }
+
+    /**
+     * Visit the given request.
+     *
+     * @param HockeyProbableGoaliesRequest $request
+     *
+     * @return mixed
+     */
+    public function visitHockeyProbableGoaliesRequest(HockeyProbableGoaliesRequest $request)
+    {
+        $sport = $request->sport();
+        $league = $sport->league();
+        $sport = $sport->sport(); // not a typo
+
+        return $this->urlBuilder->build(
+            sprintf(
+                '/sport/v2/%s/%s/probable-goalies/probable_goalies_%s.xml',
+                $sport,
+                $league,
+                $league
             )
         );
     }

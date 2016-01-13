@@ -4,6 +4,7 @@ namespace Icecave\Siphon\Reader;
 
 use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Atom\AtomRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
 use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Injury\InjuryRequest;
 use Icecave\Siphon\Player\PlayerRequest;
@@ -71,6 +72,8 @@ class RequestFactory implements RequestFactoryInterface
         } elseif ($request = $this->createLiveScoreRequest($components)) {
             return $request;
         } elseif ($request = $this->createBoxScoreRequest($components)) {
+            return $request;
+        } elseif ($request = $this->createHockeyProbableGoaliesRequest($components)) {
             return $request;
         }
 
@@ -406,6 +409,30 @@ class RequestFactory implements RequestFactoryInterface
                 Sport::findByComponents($matches[1], $matches[2]),
                 $matches[3],
                 $matches[4]
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempt to create a HockeyProbableGoaliesRequest.
+     *
+     * @param stdClass $components The URL components.
+     *
+     * @return HockeyProbableGoaliesRequest|null
+     */
+    private function createHockeyProbableGoaliesRequest(stdClass $components)
+    {
+        $matches = [];
+
+        if (preg_match(
+            '{^/sport/v2/([a-z]+)/([A-Z]+)/probable-goalies/probable_goalies_\2\.xml$}',
+            $components->path,
+            $matches
+        )) {
+            return new HockeyProbableGoaliesRequest(
+                Sport::findByComponents($matches[1], $matches[2])
             );
         }
 

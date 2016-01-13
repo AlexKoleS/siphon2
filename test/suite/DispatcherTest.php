@@ -6,6 +6,9 @@ use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Siphon\Atom\AtomReaderInterface;
 use Icecave\Siphon\Atom\AtomRequest;
 use Icecave\Siphon\Atom\AtomResponse;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesReaderInterface;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesRequest;
+use Icecave\Siphon\Hockey\ProbableGoalies\HockeyProbableGoaliesResponse;
 use Icecave\Siphon\Player\Image\ImageReaderInterface;
 use Icecave\Siphon\Player\Image\ImageRequest;
 use Icecave\Siphon\Player\Image\ImageResponse;
@@ -81,6 +84,9 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $this->boxScoreReader = Phony::mock(BoxScoreReaderInterface::class);
         $this->boxScoreReader->isSupported->returns(true);
 
+        $this->hockeyProbableGoaliesReader = Phony::mock(HockeyProbableGoaliesReaderInterface::class);
+        $this->hockeyProbableGoaliesReader->isSupported->returns(true);
+
         $this->subject = new Dispatcher(
             $this->urlBuilder->mock(),
             $this->xmlReader->mock(),
@@ -94,7 +100,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             $this->imageReader->mock(),
             $this->injuryReader->mock(),
             $this->liveScoreReader->mock(),
-            $this->boxScoreReader->mock()
+            $this->boxScoreReader->mock(),
+            $this->hockeyProbableGoaliesReader->mock()
         );
     }
 
@@ -226,6 +233,15 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             BoxScoreRequest::class,
             BoxScoreResponse::class,
             $this->boxScoreReader
+        );
+    }
+
+    public function testHockeyProbableGoaliesRequest()
+    {
+        $this->dispatchTest(
+            HockeyProbableGoaliesRequest::class,
+            HockeyProbableGoaliesResponse::class,
+            $this->hockeyProbableGoaliesReader
         );
     }
 

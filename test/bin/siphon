@@ -21,6 +21,10 @@ $dispatcher->read($request)->then(
         echo "\nRESPONSE:\n\n";
         var_dump($response);
     }
+)->otherwise(
+    function ($e) {
+        echo "\nERROR:\n\n$e\n";
+    }
 );
 
 $loop->run();

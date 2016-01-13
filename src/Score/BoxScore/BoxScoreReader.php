@@ -17,7 +17,7 @@ use InvalidArgumentException;
 use React\Promise;
 
 /**
- * Client for reading live score feeds.
+ * Client for reading box score feeds.
  */
 class BoxScoreReader implements BoxScoreReaderInterface
 {
