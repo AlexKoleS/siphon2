@@ -93,7 +93,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         // objects instead omit the last name, which is arguably more accurate.
         $this->response->add(new Player('/sport/baseball/player:42341', 'Wang',      null),           new PlayerSeasonDetails('40', 'SP', 'Starter',           true));
 
-        $this->reader = new PlayerReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->subject = new PlayerReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -102,7 +102,7 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
     public function testRead()
     {
         $this->setUpXmlReader('Player/players.xml', $this->modifiedTime);
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
             'http://sdi.example/sport/v2/baseball/MLB/players/2009/players_2970_MLB.xml?apiKey=xxx'
@@ -118,19 +118,27 @@ class PlayerReaderTest extends PHPUnit_Framework_TestCase
         $this->setUpXmlReader('Player/empty.xml');
 
         $this->setExpectedException(NotFoundException::class);
-        $this->reader->read($this->request)->done();
+        $this->subject->read($this->request)->done();
+    }
+
+    public function testReadEmptyNoSeason()
+    {
+        $this->setUpXmlReader('Player/empty-no-season.xml');
+
+        $this->setExpectedException(NotFoundException::class);
+        $this->subject->read($this->request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
+        $this->subject->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue($this->reader->isSupported($this->request));
-        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
+        $this->assertTrue($this->subject->isSupported($this->request));
+        $this->assertFalse($this->subject->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

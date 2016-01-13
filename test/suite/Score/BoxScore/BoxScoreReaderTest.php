@@ -309,9 +309,9 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
     public function testReadEmpty()
     {
         $this->setUpXmlReader('Score/boxscores-empty.xml');
+        $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
 
         $this->setExpectedException(NotFoundException::class);
-        $request = new BoxScoreRequest(Sport::MLB(), '2009', 291828);
         $this->reader->read($request)->done();
     }
 

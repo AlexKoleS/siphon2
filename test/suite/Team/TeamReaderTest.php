@@ -5,6 +5,7 @@ namespace Icecave\Siphon\Team;
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\Date;
 use Icecave\Chrono\DateTime;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\Season;
@@ -64,7 +65,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
         $this->response->add(new Team('/sport/baseball/team:2984', 'Toronto',       'TOR',   'Blue Jays'));
         $this->response->add(new Team('/sport/baseball/team:2960', 'Tampa Bay',     'TB',    'Rays'));
 
-        $this->reader = new TeamReader($this->urlBuilder(), $this->xmlReader()->mock());
+        $this->subject = new TeamReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
         $this->reject = Phony::spy();
@@ -73,7 +74,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
     public function testRead()
     {
         $this->setUpXmlReader('Team/teams.xml', $this->modifiedTime);
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->xmlReader->read->calledWith(
             'http://sdi.example/sport/v2/baseball/MLB/teams/2009/teams_MLB.xml?apiKey=xxx'
@@ -99,7 +100,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(TeamResponse::class))->argument();
@@ -123,7 +124,7 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->reader->read($this->request)->done($this->resolve, $this->reject);
+        $this->subject->read($this->request)->done($this->resolve, $this->reject);
 
         $this->reject->never()->called();
         $response = $this->resolve->calledWith($this->isInstanceOf(TeamResponse::class))->argument();
@@ -131,16 +132,32 @@ class TeamReaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->response, $response);
     }
 
+    public function testReadEmpty()
+    {
+        $this->setUpXmlReader('Team/empty.xml');
+        $response = $this->subject->read($this->request)->done();
+
+        $this->assertSame(0, count($response));
+    }
+
+    public function testReadEmptyNoSeason()
+    {
+        $this->setUpXmlReader('Team/empty-no-season.xml');
+
+        $this->setExpectedException(NotFoundException::class);
+        $this->subject->read($this->request)->done();
+    }
+
     public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');
 
-        $this->reader->read(Phony::mock(RequestInterface::class)->mock())->done();
+        $this->subject->read(Phony::mock(RequestInterface::class)->mock())->done();
     }
 
     public function testIsSupported()
     {
-        $this->assertTrue($this->reader->isSupported($this->request));
-        $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
+        $this->assertTrue($this->subject->isSupported($this->request));
+        $this->assertFalse($this->subject->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

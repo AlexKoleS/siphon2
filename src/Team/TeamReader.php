@@ -2,6 +2,7 @@
 
 namespace Icecave\Siphon\Team;
 
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
@@ -45,7 +46,20 @@ class TeamReader implements TeamReaderInterface
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
                 list($xml, $modifiedTime) = $result;
-                $xml = $xml->xpath('.//season-content')[0];
+
+                // Sometimes the feed contains no team or player information.
+                // Since this information is required to build a meaningful
+                // response, we treat this condition equivalent to a not found
+                // error.
+
+                $xml = $xml->xpath('.//season-content');
+
+                if (!$xml) {
+                    throw new NotFoundException();
+                }
+
+                $xml = $xml[0];
+
                 $response = new TeamResponse(
                     $request->sport(),
                     $this->createSeason($xml->season)

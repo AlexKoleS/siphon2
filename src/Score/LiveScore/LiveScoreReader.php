@@ -3,6 +3,7 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
@@ -53,7 +54,18 @@ class LiveScoreReader implements LiveScoreReaderInterface
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
                 list($xml, $modifiedTime) = $result;
-                $xml = $xml->xpath('.//competition')[0];
+
+                $xml = $xml->xpath('.//competition');
+
+                // Sometimes the feed contains no information at all.
+                // Since this information is required to build a meaningful
+                // response, we treat this condition equivalent to a not found
+                // error.
+                if (!$xml) {
+                    throw new NotFoundException();
+                }
+
+                $xml = $xml[0];
 
                 $competition = $this->createCompetition($xml, $request->sport());
                 $periods = $this->createPeriods($xml, $request->sport());

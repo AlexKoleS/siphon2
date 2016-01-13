@@ -53,12 +53,20 @@ class TeamStatisticsReader implements TeamStatisticsReaderInterface
         return $this->xmlReader->read($this->urlBuilder->build($request))->then(
             function ($result) use ($request) {
                 list($xml, $modifiedTime) = $result;
-                $xml = $xml->xpath('.//season-content')[0];
 
                 // Sometimes the feed contains no team or player information.
                 // Since this information is required to build a meaningful
                 // response, we treat this condition equivalent to a not found
                 // error.
+
+                $xml = $xml->xpath('.//season-content');
+
+                if (!$xml) {
+                    throw new NotFoundException();
+                }
+
+                $xml = $xml[0];
+
                 if (!$teamContent = $xml->xpath('.//team-content')) {
                     throw new NotFoundException();
                 }

@@ -355,6 +355,14 @@ class TeamStatisticsReaderTest extends PHPUnit_Framework_TestCase
         $this->subject->read($this->request)->done();
     }
 
+    public function testReadEmptyNoSeason()
+    {
+        $this->setUpXmlReader('Team/empty-no-season.xml');
+
+        $this->setExpectedException(NotFoundException::class);
+        $this->subject->read($this->request)->done();
+    }
+
     public function testReadWithUnsupportedRequest()
     {
         $this->setExpectedException('InvalidArgumentException', 'Unsupported request.');

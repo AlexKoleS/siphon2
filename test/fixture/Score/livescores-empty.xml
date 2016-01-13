@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sport:content xmlns:sport="http://xml.sportsdirectinc.com/sport/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <team-sport-content>
+        <sport>
+            <id>/sport/hockey</id>
+            <name>hockey</name>
+        </sport>
+        <league-content>
+            <league>
+                <id>/sport/hockey/league:1</id>
+                <name>National Hockey League</name>
+                <name type="nick">NHL</name>
+            </league>
+        </league-content>
+    </team-sport-content>
+</sport:content>

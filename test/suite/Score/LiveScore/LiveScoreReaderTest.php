@@ -5,6 +5,7 @@ namespace Icecave\Siphon\Score\LiveScore;
 use Eloquent\Phony\Phpunit\Phony;
 use Icecave\Chrono\DateTime;
 use Icecave\Chrono\TimeSpan\Duration;
+use Icecave\Siphon\Reader\Exception\NotFoundException;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\XmlReaderTestTrait;
 use Icecave\Siphon\Schedule\CompetitionRef;
@@ -155,6 +156,15 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
         foreach ($response->score() as $period) {
             $this->assertSame(PeriodType::QUARTER(), $period->type());
         }
+    }
+
+    public function testReadEmpty()
+    {
+        $this->setUpXmlReader('Score/livescores-empty.xml');
+        $request = new LiveScoreRequest(Sport::NHL(), 23816);
+
+        $this->setExpectedException(NotFoundException::class);
+        $this->reader->read($request)->done();
     }
 
     public function testReadWithUnsupportedRequest()
