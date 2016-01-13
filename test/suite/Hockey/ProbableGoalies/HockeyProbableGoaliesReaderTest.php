@@ -100,6 +100,7 @@ class HockeyProbableGoaliesReaderTest extends PHPUnit_Framework_TestCase
     public function testIsSupported()
     {
         $this->assertTrue($this->reader->isSupported($this->request));
+        $this->assertFalse($this->reader->isSupported(new HockeyProbableGoaliesRequest(Sport::NBA())));
         $this->assertFalse($this->reader->isSupported(Phony::mock(RequestInterface::class)->mock()));
     }
 }

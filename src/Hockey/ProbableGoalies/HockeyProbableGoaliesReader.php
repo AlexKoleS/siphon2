@@ -102,7 +102,8 @@ class HockeyProbableGoaliesReader implements HockeyProbableGoaliesReaderInterfac
      */
     public function isSupported(RequestInterface $request)
     {
-        return $request instanceof HockeyProbableGoaliesRequest;
+        return $request instanceof HockeyProbableGoaliesRequest &&
+            Sport::NHL() === $request->sport();
     }
 
     private $urlBuilder;
