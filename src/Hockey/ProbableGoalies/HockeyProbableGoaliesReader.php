@@ -68,25 +68,31 @@ class HockeyProbableGoaliesReader implements HockeyProbableGoaliesReaderInterfac
                             $season
                         );
 
-                        $homePlayer = $this->createPlayer(
-                            $competitionElement->{'home-team-content'}
-                                ->{'player-content'}->player
-                        );
-                        $response->add(
-                            $competition,
-                            $competition->homeTeam(),
-                            $homePlayer
-                        );
+                        $homePlayers = $competitionElement
+                            ->{'home-team-content'}->{'player-content'}->player;
 
-                        $awayPlayer = $this->createPlayer(
-                            $competitionElement->{'away-team-content'}
-                                ->{'player-content'}->player
-                        );
-                        $response->add(
-                            $competition,
-                            $competition->awayTeam(),
-                            $awayPlayer
-                        );
+                        if ($homePlayers) {
+                            foreach ($homePlayers as $player) {
+                                $response->add(
+                                    $competition,
+                                    $competition->homeTeam(),
+                                    $this->createPlayer($player)
+                                );
+                            }
+                        }
+
+                        $awayPlayers = $competitionElement
+                            ->{'away-team-content'}->{'player-content'}->player;
+
+                        if ($awayPlayers) {
+                            foreach ($awayPlayers as $player) {
+                                $response->add(
+                                    $competition,
+                                    $competition->awayTeam(),
+                                    $this->createPlayer($player)
+                                );
+                            }
+                        }
                     }
                 }
 

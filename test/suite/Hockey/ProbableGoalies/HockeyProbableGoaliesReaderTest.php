@@ -70,6 +70,24 @@ class HockeyProbableGoaliesReaderTest extends PHPUnit_Framework_TestCase
         $this->response->add($competition, $homeTeam, $homePlayer);
         $this->response->add($competition, $awayTeam, $awayPlayer);
 
+        $homeTeam = new TeamRef('/sport/hockey/team:4', 'NY Islanders');
+        $homePlayerA = new Player('/sport/hockey/player:1337', 'Leet', 'Hacksaw');
+        $homePlayerB = new Player('/sport/hockey/player:455', 'Ass', 'Masters');
+        $awayTeam = new TeamRef('/sport/hockey/team:6', 'NY Rangers');
+        $competition = new Competition(
+            '/sport/hockey/competition:70159',
+            CompetitionStatus::SCHEDULED(),
+            DateTime::fromIsoString('2016-01-14T19:00:00-05:00'),
+            null,
+            Sport::NHL(),
+            $season,
+            $homeTeam,
+            $awayTeam
+        );
+
+        $this->response->add($competition, $homeTeam, $homePlayerA);
+        $this->response->add($competition, $homeTeam, $homePlayerB);
+
         $this->reader = new HockeyProbableGoaliesReader($this->urlBuilder(), $this->xmlReader()->mock());
 
         $this->resolve = Phony::spy();
