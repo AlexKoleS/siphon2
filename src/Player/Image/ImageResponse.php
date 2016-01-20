@@ -5,16 +5,16 @@ namespace Icecave\Siphon\Player\Image;
 use Countable;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerResponseTrait;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use IteratorAggregate;
 
 /**
  * The response from a player image feed.
  */
 class ImageResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {

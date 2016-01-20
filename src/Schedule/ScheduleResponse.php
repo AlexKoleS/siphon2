@@ -3,9 +3,9 @@
 namespace Icecave\Siphon\Schedule;
 
 use Countable;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Sport;
 use IteratorAggregate;
 
@@ -13,7 +13,7 @@ use IteratorAggregate;
  * The response from a schedule feed.
  */
 class ScheduleResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {

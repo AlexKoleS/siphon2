@@ -3,16 +3,16 @@
 namespace Icecave\Siphon\Team;
 
 use Countable;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use IteratorAggregate;
 
 /**
  * The response from a team feed.
  */
 class TeamResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {

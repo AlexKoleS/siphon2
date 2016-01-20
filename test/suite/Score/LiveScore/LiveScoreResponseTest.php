@@ -10,18 +10,30 @@ use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\PeriodType;
 use Icecave\Siphon\Score\Score;
+use Icecave\Siphon\Sport;
 use PHPUnit_Framework_TestCase;
 
 class LiveScoreResponseTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->competition = Phony::mock(CompetitionInterface::class)->mock();
-        $this->score       = Phony::mock(Score::class)->mock();
+        $competition = Phony::mock(CompetitionInterface::class);
+        $competition->sport->returns(Sport::NFL());
+        $this->competition = $competition->mock();
+
+        $this->score = Phony::mock(Score::class)->mock();
 
         $this->subject = new LiveScoreResponse(
             $this->competition,
             $this->score
+        );
+    }
+
+    public function testSport()
+    {
+        $this->assertSame(
+            Sport::NFL(),
+            $this->subject->sport()
         );
     }
 

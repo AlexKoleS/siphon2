@@ -5,9 +5,9 @@ namespace Icecave\Siphon\Player\Statistics;
 use Countable;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Player\PlayerResponseTrait;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
@@ -19,7 +19,7 @@ use IteratorAggregate;
  * The response from a player statistics feed.
  */
 class PlayerStatisticsResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {

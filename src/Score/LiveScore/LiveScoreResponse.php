@@ -3,9 +3,9 @@
 namespace Icecave\Siphon\Score\LiveScore;
 
 use Icecave\Chrono\TimeSpan\Duration;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Period;
 use Icecave\Siphon\Score\Score;
@@ -13,7 +13,7 @@ use Icecave\Siphon\Score\Score;
 /**
  * The response from a live score feed.
  */
-class LiveScoreResponse implements ResponseInterface
+class LiveScoreResponse implements SportResponseInterface
 {
     use ResponseTrait;
 
@@ -23,6 +23,16 @@ class LiveScoreResponse implements ResponseInterface
     ) {
         $this->setCompetition($competition);
         $this->setScore($score);
+    }
+
+    /**
+     * Get the sport.
+     *
+     * @return Sport The sport.
+     */
+    public function sport()
+    {
+        return $this->competition->sport();
     }
 
     /**

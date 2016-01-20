@@ -7,6 +7,7 @@ use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Player\Player;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
+use Icecave\Siphon\Sport;
 use Icecave\Siphon\Statistics\StatisticsCollection;
 use Icecave\Siphon\Team\TeamInterface;
 use InvalidArgumentException;
@@ -17,6 +18,8 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->competition = Phony::mock(CompetitionInterface::class);
+        $this->competition->sport->returns(Sport::NFL());
+
         $this->homeTeam = Phony::mock(TeamInterface::class)->mock();
         $this->awayTeam = Phony::mock(TeamInterface::class)->mock();
 
@@ -39,6 +42,14 @@ class BoxScoreResponseTest extends PHPUnit_Framework_TestCase
             $this->competition->mock(),
             $this->homeTeamStatistics,
             $this->awayTeamStatistics
+        );
+    }
+
+    public function testSport()
+    {
+        $this->assertSame(
+            Sport::NFL(),
+            $this->subject->sport()
         );
     }
 

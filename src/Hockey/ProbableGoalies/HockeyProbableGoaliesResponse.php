@@ -4,9 +4,9 @@ namespace Icecave\Siphon\Hockey\ProbableGoalies;
 
 use Countable;
 use Icecave\Siphon\Player\Player;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Schedule\Competition;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Sport;
@@ -19,7 +19,7 @@ use IteratorAggregate;
  * The response from a hockey probable goalies feed.
  */
 class HockeyProbableGoaliesResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {

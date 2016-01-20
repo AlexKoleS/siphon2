@@ -2,16 +2,16 @@
 
 namespace Icecave\Siphon\Result;
 
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Schedule\Season;
 use Icecave\Siphon\Sport;
 
 /**
  * The response from a result feed.
  */
-class ResultResponse implements ResponseInterface
+class ResultResponse implements SportResponseInterface
 {
     use ResponseTrait;
 

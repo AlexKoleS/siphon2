@@ -4,9 +4,9 @@ namespace Icecave\Siphon\Score\BoxScore;
 
 use Countable;
 use Icecave\Siphon\Player\Player;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Schedule\CompetitionInterface;
 use Icecave\Siphon\Score\Score;
 use Icecave\Siphon\Statistics\StatisticsCollection;
@@ -18,7 +18,7 @@ use IteratorAggregate;
  * The response from a box score feed.
  */
 class BoxScoreResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {
@@ -35,6 +35,16 @@ class BoxScoreResponse implements
         $this->setIsFinalized(false);
 
         $this->playerStatistics = [];
+    }
+
+    /**
+     * Get the sport.
+     *
+     * @return Sport The sport.
+     */
+    public function sport()
+    {
+        return $this->competition->sport();
     }
 
     /**

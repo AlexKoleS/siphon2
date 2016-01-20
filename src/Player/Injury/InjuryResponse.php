@@ -4,9 +4,9 @@ namespace Icecave\Siphon\Player\Injury;
 
 use Countable;
 use Icecave\Siphon\Player\Player;
-use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
+use Icecave\Siphon\Reader\SportResponseInterface;
 use Icecave\Siphon\Sport;
 use IteratorAggregate;
 
@@ -14,7 +14,7 @@ use IteratorAggregate;
  * A response from the player injury feed.
  */
 class InjuryResponse implements
-    ResponseInterface,
+    SportResponseInterface,
     Countable,
     IteratorAggregate
 {
