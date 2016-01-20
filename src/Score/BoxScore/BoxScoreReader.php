@@ -9,7 +9,9 @@ use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\XmlReaderInterface;
 use Icecave\Siphon\Schedule\CompetitionFactoryTrait;
 use Icecave\Siphon\Schedule\SeasonFactoryTrait;
+use Icecave\Siphon\Score\Score;
 use Icecave\Siphon\Sport;
+use Icecave\Siphon\Statistics\StatisticsCollection;
 use Icecave\Siphon\Statistics\StatisticsFactoryTrait;
 use Icecave\Siphon\Team\TeamFactoryTrait;
 use Icecave\Siphon\Util\XPath;
@@ -73,14 +75,19 @@ class BoxScoreReader implements BoxScoreReaderInterface
                     $this->createSeason($xml->season)
                 );
 
+                $homeTeamStatistics = $this->createStatisticsCollection(
+                    $xml->competition->{'home-team-content'}
+                );
+
+                $awayTeamStatistics = $this->createStatisticsCollection(
+                    $xml->competition->{'away-team-content'}
+                );
+
                 $response = new BoxScoreResponse(
                     $competition,
-                    $this->createStatisticsCollection(
-                        $xml->competition->{'home-team-content'}
-                    ),
-                    $this->createStatisticsCollection(
-                        $xml->competition->{'away-team-content'}
-                    )
+                    $this->createScore($homeTeamStatistics, $awayTeamStatistics),
+                    $homeTeamStatistics,
+                    $awayTeamStatistics
                 );
                 $response->setModifiedTime($modifiedTime);
 
@@ -128,6 +135,11 @@ class BoxScoreReader implements BoxScoreReaderInterface
     public function isSupported(RequestInterface $request)
     {
         return $request instanceof BoxScoreRequest;
+    }
+
+    private function createScore(StatisticsCollection $home, StatisticsCollection $away)
+    {
+        return new Score();
     }
 
     private $urlBuilder;

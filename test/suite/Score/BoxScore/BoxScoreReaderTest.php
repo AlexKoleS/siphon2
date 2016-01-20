@@ -60,6 +60,7 @@ class BoxScoreReaderTest extends PHPUnit_Framework_TestCase
                 $homeTeam,
                 $awayTeam
             ),
+            new Score(),
             new StatisticsCollection(
                 [
                     new StatisticsGroup(

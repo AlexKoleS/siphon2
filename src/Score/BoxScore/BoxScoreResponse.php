@@ -26,10 +26,12 @@ class BoxScoreResponse implements
 
     public function __construct(
         CompetitionInterface $competition,
+        Score $score,
         StatisticsCollection $homeTeamStatistics,
         StatisticsCollection $awayTeamStatistics
     ) {
         $this->setCompetition($competition);
+        $this->setScore($score);
         $this->setHomeTeamStatistics($homeTeamStatistics);
         $this->setAwayTeamStatistics($awayTeamStatistics);
         $this->setIsFinalized(false);
@@ -65,6 +67,26 @@ class BoxScoreResponse implements
     public function setCompetition(CompetitionInterface $competition)
     {
         $this->competition = $competition;
+    }
+
+    /**
+     * Get the competition score.
+     *
+     * @return Score
+     */
+    public function score()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Set the score.
+     *
+     * @param Score $score
+     */
+    public function setScore(Score $score)
+    {
+        $this->score = $score;
     }
 
     /**
@@ -243,6 +265,7 @@ class BoxScoreResponse implements
     }
 
     private $competition;
+    private $score;
     private $homeTeamStatistics;
     private $awayTeamStatistics;
     private $playerStatistics;
