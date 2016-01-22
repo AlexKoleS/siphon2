@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "19e8470592d55ef7fff3233e9c52631a",
-    "content-hash": "c87ca62837150d17e250fd66cee5e330",
+    "hash": "5fe20de11f50c5a84d32dfc4c90e86eb",
+    "content-hash": "c1dd5b5f4955cf5b21be5e0ef451011c",
     "packages": [
         {
             "name": "clue/buzz-react",
@@ -214,16 +214,16 @@
         },
         {
             "name": "icecave/chrono",
-            "version": "1.0.3",
+            "version": "dev-feature/partial-second-parser",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IcecaveStudios/chrono.git",
-                "reference": "c276567b9c62befa551353e59b1cffa2bce365bf"
+                "reference": "0cef4dfd3a2824decb8f9cbfafcf36a8c26915ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IcecaveStudios/chrono/zipball/c276567b9c62befa551353e59b1cffa2bce365bf",
-                "reference": "c276567b9c62befa551353e59b1cffa2bce365bf",
+                "url": "https://api.github.com/repos/IcecaveStudios/chrono/zipball/0cef4dfd3a2824decb8f9cbfafcf36a8c26915ae",
+                "reference": "0cef4dfd3a2824decb8f9cbfafcf36a8c26915ae",
                 "shasum": ""
             },
             "require": {
@@ -233,7 +233,9 @@
             },
             "require-dev": {
                 "eloquent/liberator": "~1",
-                "icecave/archer": "~1"
+                "icecave/archer": "dev-develop",
+                "phake/phake": "^2",
+                "phpunit/phpunit": "^4"
             },
             "type": "library",
             "extra": {
@@ -272,7 +274,7 @@
                 "time",
                 "timer"
             ],
-            "time": "2015-02-16 04:02:56"
+            "time": "2016-01-22 02:32:26"
         },
         {
             "name": "icecave/isolator",
@@ -981,16 +983,16 @@
         },
         {
             "name": "eloquent/phony",
-            "version": "0.6.1",
+            "version": "0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/phony.git",
-                "reference": "9fceaa2d9b51b4fcd530ecb64ff5a97fe81cdeca"
+                "reference": "20bea229f389b6d3eaf50565fb58a0ba6bc4c6d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/phony/zipball/9fceaa2d9b51b4fcd530ecb64ff5a97fe81cdeca",
-                "reference": "9fceaa2d9b51b4fcd530ecb64ff5a97fe81cdeca",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/20bea229f389b6d3eaf50565fb58a0ba6bc4c6d9",
+                "reference": "20bea229f389b6d3eaf50565fb58a0ba6bc4c6d9",
                 "shasum": ""
             },
             "require": {
@@ -1004,21 +1006,21 @@
                 "hamcrest/hamcrest-php": "^1",
                 "icecave/archer": "dev-develop",
                 "icecave/isolator": "^3",
-                "mockery/mockery": "^0",
+                "icecave/woodhouse": "dev-develop",
+                "mockery/mockery": "^0.9",
                 "peridot-php/leo": "^1",
                 "peridot-php/peridot": "^1",
                 "phake/phake": "^2",
                 "phpspec/prophecy": "^1",
                 "phpunit/php-code-coverage": "^2",
                 "phpunit/phpunit": "^4",
-                "sami/sami": "^2",
-                "sebastian/comparator": "^1",
-                "simpletest/simpletest": "dev-master"
+                "sami/sami": "^3",
+                "simpletest/simpletest": "^1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.6.x-dev"
+                    "dev-develop": "0.7.x-dev"
                 }
             },
             "autoload": {
@@ -1056,7 +1058,7 @@
                 "stubbing",
                 "test"
             ],
-            "time": "2015-11-16 02:27:16"
+            "time": "2015-12-19 04:06:21"
         },
         {
             "name": "icecave/archer",
@@ -1136,16 +1138,16 @@
         },
         {
             "name": "michelf/php-markdown",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michelf/php-markdown.git",
-                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9"
+                "reference": "156e56ee036505ec637d761ee62dc425d807183c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/e1aabe18173231ebcefc90e615565742fc1c7fd9",
-                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9",
+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/156e56ee036505ec637d761ee62dc425d807183c",
+                "reference": "156e56ee036505ec637d761ee62dc425d807183c",
                 "shasum": ""
             },
             "require": {
@@ -1168,14 +1170,14 @@
             ],
             "authors": [
                 {
-                    "name": "John Gruber",
-                    "homepage": "http://daringfireball.net/"
-                },
-                {
                     "name": "Michel Fortin",
                     "email": "michel.fortin@michelf.ca",
                     "homepage": "https://michelf.ca/",
                     "role": "Developer"
+                },
+                {
+                    "name": "John Gruber",
+                    "homepage": "https://daringfireball.net/"
                 }
             ],
             "description": "PHP Markdown",
@@ -1183,7 +1185,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2015-03-01 12:03:08"
+            "time": "2015-12-24 01:37:31"
         },
         {
             "name": "nikic/php-parser",
@@ -1581,16 +1583,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.19",
+            "version": "4.8.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b2caaf8947aba5e002d42126723e9d69795f32b4"
+                "reference": "ea76b17bced0500a28098626b84eda12dbcf119c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b2caaf8947aba5e002d42126723e9d69795f32b4",
-                "reference": "b2caaf8947aba5e002d42126723e9d69795f32b4",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ea76b17bced0500a28098626b84eda12dbcf119c",
+                "reference": "ea76b17bced0500a28098626b84eda12dbcf119c",
                 "shasum": ""
             },
             "require": {
@@ -1649,7 +1651,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-11-30 08:18:59"
+            "time": "2015-12-12 07:45:58"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -2184,16 +2186,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d232bfc100dfd32b18ccbcab4bcc8f28697b7e41"
+                "reference": "d0239fb42f98dd02e7d342f793c5d2cdee0c478d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d232bfc100dfd32b18ccbcab4bcc8f28697b7e41",
-                "reference": "d232bfc100dfd32b18ccbcab4bcc8f28697b7e41",
+                "url": "https://api.github.com/repos/symfony/console/zipball/d0239fb42f98dd02e7d342f793c5d2cdee0c478d",
+                "reference": "d0239fb42f98dd02e7d342f793c5d2cdee0c478d",
                 "shasum": ""
             },
             "require": {
@@ -2240,20 +2242,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:35:10"
+            "time": "2016-01-14 08:33:16"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "3e661a0d521ac67496515fa6e6704bd61bcfff60"
+                "reference": "637b64d0ee10f44ae98dbad651b1ecdf35a11e8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/3e661a0d521ac67496515fa6e6704bd61bcfff60",
-                "reference": "3e661a0d521ac67496515fa6e6704bd61bcfff60",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/637b64d0ee10f44ae98dbad651b1ecdf35a11e8c",
+                "reference": "637b64d0ee10f44ae98dbad651b1ecdf35a11e8c",
                 "shasum": ""
             },
             "require": {
@@ -2289,20 +2291,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-23 10:19:46"
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "ead9b07af4ba77b6507bee697396a5c79e633f08"
+                "reference": "c90fabdd97e431ee19b6383999cf35334dff27da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/ead9b07af4ba77b6507bee697396a5c79e633f08",
-                "reference": "ead9b07af4ba77b6507bee697396a5c79e633f08",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/c90fabdd97e431ee19b6383999cf35334dff27da",
+                "reference": "c90fabdd97e431ee19b6383999cf35334dff27da",
                 "shasum": ""
             },
             "require": {
@@ -2338,24 +2340,27 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2016-01-14 08:26:52"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
+                "reference": "49ff736bd5d41f45240cec77b44967d76e0c3d25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0b6a8940385311a24e060ec1fe35680e17c74497",
-                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/49ff736bd5d41f45240cec77b44967d76e0c3d25",
+                "reference": "49ff736bd5d41f45240cec77b44967d76e0c3d25",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
             },
             "type": "library",
             "extra": {
@@ -2394,20 +2399,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2015-11-04 20:28:58"
+            "time": "2015-11-20 09:19:13"
         },
         {
             "name": "symfony/process",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "1b988a88e3551102f3c2d9e1d47a18c3a78d6312"
+                "reference": "6f1979c3b0f4c22c77a8a8971afaa7dd07f082ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/1b988a88e3551102f3c2d9e1d47a18c3a78d6312",
-                "reference": "1b988a88e3551102f3c2d9e1d47a18c3a78d6312",
+                "url": "https://api.github.com/repos/symfony/process/zipball/6f1979c3b0f4c22c77a8a8971afaa7dd07f082ac",
+                "reference": "6f1979c3b0f4c22c77a8a8971afaa7dd07f082ac",
                 "shasum": ""
             },
             "require": {
@@ -2443,20 +2448,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:35:10"
+            "time": "2016-01-06 09:59:23"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f79824187de95064a2f5038904c4d7f0227fedb5"
+                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f79824187de95064a2f5038904c4d7f0227fedb5",
-                "reference": "f79824187de95064a2f5038904c4d7f0227fedb5",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/34c8a4b51e751e7ea869b8262f883d008a2b81b8",
+                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8",
                 "shasum": ""
             },
             "require": {
@@ -2492,20 +2497,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:35:10"
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "twig/twig",
-            "version": "v1.23.1",
+            "version": "v1.23.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6"
+                "reference": "ae53fc2c312fdee63773b75cb570304f85388b08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
-                "reference": "d9b6333ae8dd2c8e3fd256e127548def0bc614c6",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ae53fc2c312fdee63773b75cb570304f85388b08",
+                "reference": "ae53fc2c312fdee63773b75cb570304f85388b08",
                 "shasum": ""
             },
             "require": {
@@ -2553,12 +2558,13 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-11-05 12:49:06"
+            "time": "2016-01-11 14:02:19"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "icecave/chrono": 20,
         "icecave/archer": 20
     },
     "prefer-stable": false,

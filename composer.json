@@ -21,7 +21,7 @@
         "php": ">=5.5",
         "clue/buzz-react": "^0.4",
         "eloquent/enumeration": "^5",
-        "icecave/chrono": "^1.0.3",
+        "icecave/chrono": "dev-feature/partial-second-parser",
         "react/event-loop": "^0.4"
     },
     "require-dev": {

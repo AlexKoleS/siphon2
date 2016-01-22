@@ -3,7 +3,6 @@
 namespace Icecave\Siphon\Atom;
 
 use Countable;
-use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\ResponseInterface;
 use Icecave\Siphon\Reader\ResponseTrait;
 use Icecave\Siphon\Reader\ResponseVisitorInterface;
@@ -71,7 +70,7 @@ class AtomResponse implements
      *
      * An entry is a 2-tuple of URL and modification time.
      *
-     * @return mixed<tuple<string, DateTime>> A sequence of entries.
+     * @return mixed<tuple<string,string>> A sequence of entries.
      */
     public function getIterator()
     {
@@ -83,10 +82,10 @@ class AtomResponse implements
     /**
      * Add an entry to the response.
      *
-     * @param string   $url         The feed URL.
-     * @param DateTime $updatedTime The last modification time of the feed.
+     * @param string $url         The feed URL.
+     * @param string $updatedTime The last modification time of the feed.
      */
-    public function add($url, DateTime $updatedTime)
+    public function add($url, $updatedTime)
     {
         $this->entries[$url] = [$url, $updatedTime];
     }

@@ -2,7 +2,6 @@
 
 namespace Icecave\Siphon\Atom;
 
-use Icecave\Chrono\DateTime;
 use Icecave\Siphon\Reader\RequestInterface;
 use Icecave\Siphon\Reader\RequestUrlBuilderInterface;
 use Icecave\Siphon\Reader\ResponseInterface;
@@ -52,7 +51,7 @@ class AtomReader implements AtomReaderInterface
                             strval($entry->link['href']),
                             'apiKey'
                         ),
-                        DateTime::fromIsoString($entry->updated)
+                        strval($entry->updated)
                     );
                 }
 
