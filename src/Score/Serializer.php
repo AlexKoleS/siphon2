@@ -20,7 +20,7 @@ class Serializer implements SerializerInterface
     public function serialize(Score $score)
     {
         $code = null;
-        $data = [];
+        $data = $score->score();
 
         foreach ($score as $period) {
             if ($code !== $period->type()->code()) {
@@ -33,7 +33,7 @@ class Serializer implements SerializerInterface
         }
 
         return Serialization::serialize(
-            1, // version 1
+            2, // version 1
             $data
         );
     }
@@ -51,37 +51,82 @@ class Serializer implements SerializerInterface
         return Serialization::unserialize(
             $buffer,
             function ($data) {
-                if (!is_array($data)) {
-                    throw new InvalidArgumentException(
-                        'Invalid score format: Period data must be an array.'
-                    );
-                }
-
-                $index   = 0;
-                $type    = null;
-                $number  = 1;
-                $periods = [];
-
-                while ($index < count($data)) {
-                    if (is_string($data[$index])) {
-                        $type   = PeriodType::memberByCode($data[$index++]);
-                        $number = 1;
-                    } elseif (null === $type) {
-                        throw new InvalidArgumentException(
-                            'Invalid score format: No period type provided.'
-                        );
-                    }
-
-                    $periods[] = new Period(
-                        $type,
-                        $number++,
-                        $data[$index++],
-                        $data[$index++]
-                    );
-                }
-
-                return new Score($periods);
+                return $this->unserializeVersion1($data);
+            },
+            function ($data) {
+                return $this->unserializeVersion2($data);
             }
+        );
+    }
+
+    private function unserializePeriods(array $data, $index)
+    {
+        $type    = null;
+        $number  = 1;
+        $periods = [];
+        $length  = count($data);
+
+        while ($index < $length) {
+            if (is_string($data[$index])) {
+                $type   = PeriodType::memberByCode($data[$index++]);
+                $number = 1;
+            } elseif (null === $type) {
+                throw new InvalidArgumentException(
+                    'Invalid score format: No period type provided.'
+                );
+            }
+
+            $periods[] = new Period(
+                $type,
+                $number++,
+                $data[$index++],
+                $data[$index++]
+            );
+        }
+
+        return $periods;
+    }
+
+    private function unserializeVersion1($data)
+    {
+        if (!is_array($data)) {
+            throw new InvalidArgumentException(
+                'Invalid score format: Period data must be an array.'
+            );
+        }
+
+        $periods = $this->unserializePeriods($data, 0);
+        $homeTotal = 0;
+        $awayTotal = 0;
+
+        foreach ($periods as $period) {
+            $homeTotal += $period->homeScore();
+            $awayTotal += $period->awayScore();
+        }
+
+        return new Score(
+            $homeTotal,
+            $awayTotal,
+            $periods
+        );
+    }
+
+    private function unserializeVersion2($data)
+    {
+        if (!is_array($data)) {
+            throw new InvalidArgumentException(
+                'Invalid score format: Data must be an array.'
+            );
+        } elseif (count($data) < 2) {
+            throw new InvalidArgumentException(
+                'Invalid score format: Data must contain at least two elements.'
+            );
+        }
+
+        return new Score(
+            $data[0],
+            $data[1],
+            $this->unserializePeriods($data, 2)
         );
     }
 }

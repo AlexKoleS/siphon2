@@ -24,6 +24,38 @@ class SerializerTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testUnserializeVersion1()
+    {
+        $this->assertEquals(
+            new Score(),
+            $this->serializer->unserialize('[1,[]]')
+        );
+
+        $this->assertEquals(
+            new Score(
+                30,
+                50,
+                [
+                    new Period(
+                        PeriodType::QUARTER(),
+                        1,
+                        10,
+                        20
+                    ),
+                    new Period(
+                        PeriodType::QUARTER(),
+                        2,
+                        20,
+                        30
+                    ),
+                ]
+            ),
+            $this->serializer->unserialize(
+                '[1,["Q",10,20,20,30]]'
+            )
+        );
+    }
+
     public function testUnserializeWithInvalidDataArray()
     {
         $this->setExpectedException(
@@ -56,6 +88,8 @@ class SerializerTest extends PHPUnit_Framework_TestCase
             ],
             'single period' => [
                 new Score(
+                    100,
+                    200,
                     [
                         new Period(
                             PeriodType::QUARTER(),
@@ -68,6 +102,8 @@ class SerializerTest extends PHPUnit_Framework_TestCase
             ],
             'multiple periods' => [
                 new Score(
+                    100,
+                    200,
                     [
                         new Period(
                             PeriodType::QUARTER(),

@@ -23,13 +23,17 @@ class ScoreTest extends PHPUnit_Framework_TestCase
             ),
         ];
 
-        $this->score = new Score($this->periods);
+        $this->score = new Score(
+            100,
+            200,
+            $this->periods
+        );
     }
 
     public function testScore()
     {
         $this->assertSame(
-            [40, 60],
+            [100, 200],
             $this->score->score()
         );
     }

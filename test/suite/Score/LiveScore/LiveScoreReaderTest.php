@@ -49,6 +49,8 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 new TeamRef('/sport/hockey/team:6', 'NY Rangers')
             ),
             new Score(
+                3,
+                3,
                 [
                     new Period(PeriodType::PERIOD(),   1, 2, 0),
                     new Period(PeriodType::PERIOD(),   2, 0, 0),
@@ -90,16 +92,18 @@ class LiveScoreReaderTest extends PHPUnit_Framework_TestCase
                 new TeamRef('/sport/baseball/team:2975', 'St. Louis')
             ),
             new Score(
+                7,
+                7,
                 [
-                    new Period(PeriodType::INNING(),       1, 0, 0),
-                    new Period(PeriodType::INNING(),       2, 0, 1),
-                    new Period(PeriodType::INNING(),       3, 0, 0),
-                    new Period(PeriodType::INNING(),       4, 1, 2),
-                    new Period(PeriodType::INNING(),       5, 0, 0),
-                    new Period(PeriodType::INNING(),       6, 0, 0),
-                    new Period(PeriodType::INNING(),       7, 0, 1),
-                    new Period(PeriodType::INNING(),       8, 0, 3),
-                    new Period(PeriodType::INNING(),       9, 6, 0),
+                    new Period(PeriodType::INNING(), 1, 0, 0),
+                    new Period(PeriodType::INNING(), 2, 0, 1),
+                    new Period(PeriodType::INNING(), 3, 0, 0),
+                    new Period(PeriodType::INNING(), 4, 1, 2),
+                    new Period(PeriodType::INNING(), 5, 0, 0),
+                    new Period(PeriodType::INNING(), 6, 0, 0),
+                    new Period(PeriodType::INNING(), 7, 0, 1),
+                    new Period(PeriodType::INNING(), 8, 0, 3),
+                    new Period(PeriodType::INNING(), 9, 6, 0),
                     $currentPeriod,
                 ]
             )

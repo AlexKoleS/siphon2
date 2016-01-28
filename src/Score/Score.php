@@ -7,8 +7,12 @@ use IteratorAggregate;
 
 class Score implements Countable, IteratorAggregate
 {
-    public function __construct(array $periods = [])
-    {
+    public function __construct(
+        $homeTeamScore = 0,
+        $awayTeamScore = 0,
+        array $periods = []
+    ) {
+        $this->score = [$homeTeamScore, $awayTeamScore];
         $this->periods = $periods;
     }
 
@@ -19,18 +23,6 @@ class Score implements Countable, IteratorAggregate
      */
     public function score()
     {
-        if (null === $this->score) {
-            $home = 0;
-            $away = 0;
-
-            foreach ($this->periods as $period) {
-                $home += $period->homeScore();
-                $away += $period->awayScore();
-            }
-
-            $this->score = [$home, $away];
-        }
-
         return $this->score;
     }
 

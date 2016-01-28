@@ -68,11 +68,11 @@ class LiveScoreReader implements LiveScoreReaderInterface
                 $xml = $xml[0];
 
                 $competition = $this->createCompetition($xml, $request->sport());
-                $periods = $this->createPeriods($xml, $request->sport());
+                $score = $this->createScore($xml, $request->sport());
 
                 $response = new LiveScoreResponse(
                     $competition,
-                    new Score($periods)
+                    $score
                 );
                 $response->setModifiedTime($modifiedTime);
 
@@ -86,7 +86,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
                 ) {
                     $scope = $xml->{'result-scope'}->scope;
 
-                    foreach ($periods as $period) {
+                    foreach ($score as $period) {
                         $number = intval($scope['num']);
                         $type = $this->createPeriodType(
                             $request->sport(),
@@ -136,22 +136,25 @@ class LiveScoreReader implements LiveScoreReaderInterface
     }
 
     /**
-     * Create periods from statistics data.
+     * Create score from statistics data.
      *
      * @param SimpleXMLElement $element The competition element.
      * @param Sport            $sport
      *
-     * @return array<Period>
+     * @return Score
      */
-    private function createPeriods(
+    private function createScore(
         SimpleXMLElement $element,
         Sport $sport
     ) {
         $periods = [];
+        $homeScore = 0;
+        $awayScore = 0;
 
         $this->extractScores(
             $element->{'home-team-content'},
             $sport,
+            $homeScore,
             $periods,
             'home'
         );
@@ -159,6 +162,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
         $this->extractScores(
             $element->{'away-team-content'},
             $sport,
+            $awayScore,
             $periods,
             'away'
         );
@@ -174,7 +178,7 @@ class LiveScoreReader implements LiveScoreReaderInterface
             );
         }
 
-        return $result;
+        return new Score($homeScore, $awayScore, $result);
     }
 
     /**
@@ -182,12 +186,14 @@ class LiveScoreReader implements LiveScoreReaderInterface
      *
      * @param SimpleXMLElement      $element The home team or away team content element.
      * @param Sport                 $sport
+     * @param integer               &$competitionScore
      * @param array<string, object> &$result The result array which scores are pushed into.
      * @param string                $team    One of 'home' or 'away'
      */
     private function extractScores(
         SimpleXMLElement $element,
         Sport $sport,
+        &$competitionScore,
         array &$result,
         $team
     ) {
@@ -201,29 +207,31 @@ class LiveScoreReader implements LiveScoreReaderInterface
 
         // Iterate over the stats and yield scores for each period-type / number ...
         foreach ($element->{'stat-group'} as $group) {
-            // The 'competition' scope is not a period ...
-            if ('competition' === strval($group->scope['type'])) {
-                continue;
-            }
-
-            $key = $group->scope['type'] . $group->scope['num'];
-
-            if (!isset($result[$key])) {
-                $result[$key] = (object) [
-                    'type' => $this->createPeriodType(
-                        $sport,
-                        strval($group->scope['type'])
-                    ),
-                    'number' => intval($group->scope['num']),
-                    'home'   => 0,
-                    'away'   => 0,
-                ]; // @codeCoverageIgnore
-            }
-
             // Look for the appropriate score statistic ...
             $score = XPath::elementOrNull($group, $statPath);
 
-            if ($score) {
+            if (null === $score) {
+                continue;
+            }
+
+            // The 'competition' scope is not a period ...
+            if ('competition' === strval($group->scope['type'])) {
+                $competitionScore = intval($score['num']);
+            } else {
+                $key = $group->scope['type'] . $group->scope['num'];
+
+                if (!isset($result[$key])) {
+                    $result[$key] = (object) [
+                        'type' => $this->createPeriodType(
+                            $sport,
+                            strval($group->scope['type'])
+                        ),
+                        'number' => intval($group->scope['num']),
+                        'home'   => 0,
+                        'away'   => 0,
+                    ]; // @codeCoverageIgnore
+                }
+
                 $result[$key]->{$team} += intval($score['num']);
             }
         }
