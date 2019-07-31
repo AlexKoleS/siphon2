@@ -1,5 +1,5 @@
 {
-    "name": "alexkoles/siphon2",
+    "name": "alexkoles/siphon",
     "description": "A client for SDI XML feeds.",
     "keywords": [
         "sports",
@@ -8,7 +8,7 @@
         "feed",
         "sdi"
     ],
-    "homepage": "https://github.com/alexkoles/siphon2",
+    "homepage": "https://github.com/alexkoles/siphon",
     "license": "MIT",
     "authors": [
         {
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Alexkoles\\Siphon2\\": "src"
+            "Alexkoles\\Siphon\\": "src"
         }
     },
     "extra": {
