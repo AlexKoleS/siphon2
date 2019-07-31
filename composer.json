@@ -8,7 +8,7 @@
         "feed",
         "sdi"
     ],
-    "homepage": "https://github.com/IcecaveStudios/siphon",
+    "homepage": "https://github.com/alexkoles/siphon2",
     "license": "MIT",
     "authors": [
         {
@@ -21,11 +21,11 @@
         "php": ">=5.5",
         "eloquent/enumeration": "^5",
         "guzzlehttp/guzzle": "^5",
-        "icecave/chrono": "^1.0.3"
+        "alexkoles/chrono": "^1.0.3"
     },
     "require-dev": {
         "eloquent/phony": "^0.2",
-        "icecave/archer": "^1"
+        "alexkoles/archer": "^1"
     },
     "autoload": {
         "psr-4": {
